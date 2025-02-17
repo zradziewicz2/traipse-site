@@ -1,34 +1,38 @@
-# Reformatted JSON in correct syntax for GitHub compatibility
-
-locations = [
-    {"name": "Dinosaur Ridge", "lat": 39.6766, "lng": -105.1926, "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.", "cost": "free", "type": "outdoor", "family_friendly": True},
-    {"name": "Molly Brown House Museum", "lat": 39.7374, "lng": -104.9807, "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.", "cost": "paid", "type": "indoor", "family_friendly": True},
-    {"name": "Red Rocks Park & Amphitheater", "lat": 39.6654, "lng": -105.2057, "description": "A world-famous concert venue set among stunning natural red rock formations.", "cost": "free", "type": "outdoor", "family_friendly": True},
-    {"name": "Colorado State Capitol", "lat": 39.7392, "lng": -104.9849, "description": "A historic government building with a gold-domed roof and stunning city views.", "cost": "free", "type": "indoor", "family_friendly": True},
-    {"name": "Union Station", "lat": 39.7541, "lng": -105.0005, "description": "A beautifully restored 1914 train station featuring shops, restaurants, and history.", "cost": "free", "type": "indoor", "family_friendly": True},
-    {"name": "Buffalo Bill Museum & Grave", "lat": 39.7310, "lng": -105.2386, "description": "Museum dedicated to Wild West showman Buffalo Bill Cody, with scenic views from Lookout Mountain.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Four Mile Historic Park", "lat": 39.6938, "lng": -104.9247, "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "History Colorado Center", "lat": 39.7377, "lng": -104.9866, "description": "An interactive museum showcasing Colorado’s past through exhibits and artifacts.", "cost": "paid", "type": "indoor", "family_friendly": True},
-    {"name": "Denver Botanic Gardens", "lat": 39.7320, "lng": -104.9610, "description": "A beautiful 23-acre garden featuring diverse plant collections from around the world.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Colorado Railroad Museum", "lat": 39.7778, "lng": -105.1933, "description": "A museum preserving Colorado’s rich railroad history with historic trains and exhibits.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Central City Opera House", "lat": 39.8014, "lng": -105.5142, "description": "A historic 1878 opera house still hosting performances today.", "cost": "paid", "type": "indoor", "family_friendly": False},
-    {"name": "Littleton Museum", "lat": 39.6015, "lng": -105.0177, "description": "A living history museum featuring pioneer-era buildings and artifacts.", "cost": "free", "type": "outdoor", "family_friendly": True},
-    {"name": "Golden History Museum & Park", "lat": 39.7551, "lng": -105.2225, "description": "A museum highlighting the history of Golden, Colorado, with interactive exhibits.", "cost": "paid", "type": "indoor", "family_friendly": True},
-    {"name": "Rocky Mountain Arsenal National Wildlife Refuge", "lat": 39.8186, "lng": -104.8940, "description": "A massive wildlife refuge home to bison, bald eagles, and diverse ecosystems.", "cost": "free", "type": "outdoor", "family_friendly": True},
-    {"name": "Bent’s Old Fort National Historic Site", "lat": 38.0781, "lng": -103.1146, "description": "A reconstructed 19th-century trading post offering historical reenactments.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Byers-Evans House Museum", "lat": 39.7375, "lng": -104.9885, "description": "A historic mansion showcasing Denver’s early aristocracy.", "cost": "paid", "type": "indoor", "family_friendly": False},
-    {"name": "Cave of the Winds", "lat": 38.8802, "lng": -104.9177, "description": "A fascinating underground cave system offering guided tours.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Florissant Fossil Beds National Monument", "lat": 38.9102, "lng": -105.2867, "description": "A park with one of the richest fossil deposits in the world.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Georgetown Loop Railroad", "lat": 39.7061, "lng": -105.6956, "description": "A scenic heritage railroad ride through the Rocky Mountains.", "cost": "paid", "type": "outdoor", "family_friendly": True},
-    {"name": "Tattered Cover Book Store (Historic LoDo Location)", "lat": 39.7530, "lng": -105.0009, "description": "One of the most famous independent bookstores in the country.", "cost": "free", "type": "indoor", "family_friendly": True},
-    {"name": "Denver Firefighters Museum", "lat": 39.7407, "lng": -104.9910, "description": "A museum honoring Denver's firefighting history with interactive exhibits.", "cost": "paid", "type": "indoor", "family_friendly": True},
-    {"name": "Roxborough State Park", "lat": 39.4232, "lng": -105.0689, "description": "A scenic park with dramatic red rock formations and hiking trails.", "cost": "paid", "type": "outdoor", "family_friendly": True}
+[
+    {
+        "name": "Dinosaur Ridge",
+        "lat": 39.6766,
+        "lng": -105.1926,
+        "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true
+    },
+    {
+        "name": "Molly Brown House Museum",
+        "lat": 39.7374,
+        "lng": -104.9807,
+        "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true
+    },
+    {
+        "name": "Red Rocks Park & Amphitheater",
+        "lat": 39.6654,
+        "lng": -105.2057,
+        "description": "A world-famous concert venue set among stunning natural red rock formations.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true
+    },
+    {
+        "name": "Colorado State Capitol",
+        "lat": 39.7392,
+        "lng": -104.9849,
+        "description": "A historic government building with a gold-domed roof and stunning city views.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true
+    }
 ]
-
-# Save to JSON file
-file_path = "/mnt/data/locations.json"
-with open(file_path, "w") as json_file:
-    json.dump(locations, json_file, indent=4)
-
-# Return file path for download
-file_path
