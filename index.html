@@ -18,19 +18,29 @@
             text-align: center;
         }
 
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            position: relative;
+        }
+
+        /* Logo in the Top Left */
+        #logo {
+            width: 80px; /* Adjust size as needed */
+            position: absolute;
+            left: 15px;
+            top: 5px;
+        }
+
         /* Page Title */
         h1 {
             font-size: 2.5em;
-            margin: 10px 0;
+            margin: 0;
             color: #2b4d7f; /* Deep Blue */
             font-weight: bold;
-        }
-
-        /* Logo Styling */
-        #logo {
-            width: 120px; /* Adjust size as needed */
-            display: block;
-            margin: 10px auto;
         }
 
         /* Tagline */
@@ -38,6 +48,7 @@
             font-size: 1.2em;
             color: #3b3b3b;
             font-style: italic;
+            margin-bottom: 10px;
         }
 
         /* Filter Controls */
@@ -79,9 +90,11 @@
 </head>
 <body>
 
-    <h1>TRAIPSE</h1>
-    <!-- Logo Below Title -->
-    <img id="logo" src="logo_final.png" alt="Traipse Logo">
+    <!-- Header with Logo -->
+    <div class="header">
+        <img id="logo" src="logo_final.png" alt="Traipse Logo">
+        <h1>Traipse</h1>
+    </div>
 
     <p>Step into the past—explore history, culture, and hidden gems near you.</p>
 
