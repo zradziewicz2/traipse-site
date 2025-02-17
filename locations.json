@@ -96,7 +96,7 @@
         "description": "An aviation and space museum featuring aircraft and interactive exhibits.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Four Mile Historic Park",
@@ -105,7 +105,7 @@
         "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
         "cost": "paid",
         "type": "outdoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Black American West Museum",
@@ -114,7 +114,7 @@
         "description": "A museum highlighting the often-overlooked contributions of Black pioneers in the American West.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Byers-Evans House Museum",
@@ -123,7 +123,7 @@
         "description": "A historic mansion showcasing Denver’s early aristocracy.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "Grant-Frontier Park",
@@ -132,7 +132,7 @@
         "description": "A scenic park on the South Platte River with historical significance as an early pioneer settlement.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -141,7 +141,7 @@
         "description": "A museum showcasing vintage aircraft and aviation history.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Colorado Aviation Historical Society",
@@ -150,7 +150,7 @@
         "description": "Dedicated to preserving and showcasing Colorado’s aviation history.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Franktown Cave",
@@ -159,5 +159,5 @@
         "description": "An archaeological site containing evidence of prehistoric Native American habitation.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": False
+        "family_friendly": false
 ]
