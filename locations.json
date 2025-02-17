@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Denver Art Museum",
+    "description": "A world-class art museum in downtown Denver.",
+    "lat": 39.7376,
+    "lng": -104.9882
+  },
+  {
+    "name": "Union Station",
+    "description": "Historic train station with shops and restaurants.",
+    "lat": 39.7526,
+    "lng": -105.0004
+  }
+]
+
