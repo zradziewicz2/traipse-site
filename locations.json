@@ -88,5 +88,76 @@
         "cost": "paid",
         "type": "outdoor",
         "family_friendly": true
-    }
+    },
+    {
+        "name": "Wings Over the Rockies Air & Space Museum",
+        "lat": 39.7207,
+        "lng": -104.8929,
+        "description": "An aviation and space museum featuring aircraft and interactive exhibits.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Four Mile Historic Park",
+        "lat": 39.6938,
+        "lng": -104.9247,
+        "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Black American West Museum",
+        "lat": 39.7582,
+        "lng": -104.9768,
+        "description": "A museum highlighting the often-overlooked contributions of Black pioneers in the American West.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Byers-Evans House Museum",
+        "lat": 39.7375,
+        "lng": -104.9885,
+        "description": "A historic mansion showcasing Denver’s early aristocracy.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": False
+    },
+    {
+        "name": "Grant-Frontier Park",
+        "lat": 39.6683,
+        "lng": -105.0136,
+        "description": "A scenic park on the South Platte River with historical significance as an early pioneer settlement.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Vintage Aero Flying Museum",
+        "lat": 40.1062,
+        "lng": -104.6442,
+        "description": "A museum showcasing vintage aircraft and aviation history.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Colorado Aviation Historical Society",
+        "lat": 39.8633,
+        "lng": -104.6737,
+        "description": "Dedicated to preserving and showcasing Colorado’s aviation history.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Franktown Cave",
+        "lat": 39.3906,
+        "lng": -104.7489,
+        "description": "An archaeological site containing evidence of prehistoric Native American habitation.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": False
 ]
