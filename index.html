@@ -6,9 +6,11 @@
     <title>Traipse - Cultural & Historical Sites</title>
 
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-o3I3TiM4mK3CeSLw6/c5G7tUlym+NRcZ+5xjDCNC/jU6zYfnK0LrX0n8L1R13lpx" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha384-o3I3TiM4mK3CeSLw6/c5G7tUlym+NRcZ+5xjDCNC/jU6zYfnK0LrX0n8L1R13lpx" 
+          crossorigin=""/>
 
-    <!-- Custom Styles -->
+    <!-- Inline CSS to Ensure Map is Visible -->
     <style>
         #map {
             height: 500px;
@@ -24,7 +26,9 @@
     <div id="map"></div>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-KJtKCzDRBuKbIYZglTxfyz4afJHrP3E9nmV93Nv5HZbLkRna7/EL2HaA7qfDaE9s" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha384-KJtKCzDRBuKbIYZglTxfyz4afJHrP3E9nmV93Nv5HZbLkRna7/EL2HaA7qfDaE9s" 
+            crossorigin=""></script>
 
     <script>
         // Initialize the map
@@ -37,7 +41,12 @@
 
         // Load locations from JSON
         fetch('locations.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 data.forEach(site => {
                     L.marker([site.lat, site.lng]).addTo(map)
