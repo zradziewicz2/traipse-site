@@ -1,38 +1,36 @@
-[
-    {
-        "name": "Dinosaur Ridge",
-        "lat": 39.6766,
-        "lng": -105.1926,
-        "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
-        "cost": "free",
-        "type": "outdoor",
-        "family_friendly": true
-    },
-    {
-        "name": "Molly Brown House Museum",
-        "lat": 39.7374,
-        "lng": -104.9807,
-        "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
-        "cost": "paid",
-        "type": "indoor",
-        "family_friendly": true
-    },
-    {
-        "name": "Red Rocks Park & Amphitheater",
-        "lat": 39.6654,
-        "lng": -105.2057,
-        "description": "A world-famous concert venue set among stunning natural red rock formations.",
-        "cost": "free",
-        "type": "outdoor",
-        "family_friendly": true
-    },
-    {
-        "name": "Colorado State Capitol",
-        "lat": 39.7392,
-        "lng": -104.9849,
-        "description": "A historic government building with a gold-domed roof and stunning city views.",
-        "cost": "free",
-        "type": "indoor",
-        "family_friendly": true
-    }
+import json
+
+# List of 50 cultural and historical sites in and around Denver
+locations = [
+    {"name": "Dinosaur Ridge", "lat": 39.6766, "lng": -105.1926, "description": "A famous fossil site showcasing dinosaur tracks and bones.", "cost": "free", "type": "outdoor", "family_friendly": True},
+    {"name": "Molly Brown House Museum", "lat": 39.7374, "lng": -104.9807, "description": "The home of Titanic survivor Margaret 'Molly' Brown.", "cost": "paid", "type": "indoor", "family_friendly": True},
+    {"name": "Red Rocks Park & Amphitheater", "lat": 39.6654, "lng": -105.2057, "description": "Famous concert venue set among red rock formations.", "cost": "free", "type": "outdoor", "family_friendly": True},
+    {"name": "Denver Art Museum", "lat": 39.7372, "lng": -104.9893, "description": "A large art museum featuring diverse collections.", "cost": "paid", "type": "indoor", "family_friendly": True},
+    {"name": "Colorado State Capitol", "lat": 39.7392, "lng": -104.9849, "description": "Historic government building with a gold dome.", "cost": "free", "type": "indoor", "family_friendly": True},
+    {"name": "Union Station", "lat": 39.7541, "lng": -105.0005, "description": "A restored 1914 train station with shops and dining.", "cost": "free", "type": "indoor", "family_friendly": True},
+    {"name": "Buffalo Bill Museum & Grave", "lat": 39.7310, "lng": -105.2386, "description": "Museum dedicated to Wild West legend Buffalo Bill Cody.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Four Mile Historic Park", "lat": 39.6938, "lng": -104.9247, "description": "A preserved 19th-century homestead with living history.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "History Colorado Center", "lat": 39.7377, "lng": -104.9866, "description": "Interactive exhibits showcasing Colorado’s past.", "cost": "paid", "type": "indoor", "family_friendly": True},
+    {"name": "Denver Botanic Gardens", "lat": 39.7320, "lng": -104.9610, "description": "Beautiful gardens featuring plants from around the world.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Colorado Railroad Museum", "lat": 39.7778, "lng": -105.1933, "description": "Preserving Colorado’s rich railroad history.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Central City Opera House", "lat": 39.8014, "lng": -105.5142, "description": "A historic 1878 opera house still hosting performances.", "cost": "paid", "type": "indoor", "family_friendly": False},
+    {"name": "Littleton Museum", "lat": 39.6015, "lng": -105.0177, "description": "Living history museum with pioneer-era buildings.", "cost": "free", "type": "outdoor", "family_friendly": True},
+    {"name": "Golden History Museum & Park", "lat": 39.7551, "lng": -105.2225, "description": "Museum highlighting Golden, Colorado’s history.", "cost": "paid", "type": "indoor", "family_friendly": True},
+    {"name": "Rocky Mountain Arsenal Wildlife Refuge", "lat": 39.8186, "lng": -104.8940, "description": "Wildlife refuge home to bison and bald eagles.", "cost": "free", "type": "outdoor", "family_friendly": True},
+    {"name": "Bent’s Old Fort National Historic Site", "lat": 38.0781, "lng": -103.1146, "description": "Reconstructed 19th-century trading post.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Byers-Evans House Museum", "lat": 39.7375, "lng": -104.9885, "description": "Historic mansion of Denver’s aristocracy.", "cost": "paid", "type": "indoor", "family_friendly": False},
+    {"name": "Cave of the Winds", "lat": 38.8802, "lng": -104.9177, "description": "Fascinating underground cave system with tours.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Florissant Fossil Beds National Monument", "lat": 38.9102, "lng": -105.2867, "description": "A park with one of the richest fossil deposits.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Georgetown Loop Railroad", "lat": 39.7061, "lng": -105.6956, "description": "Scenic heritage railroad ride through the Rockies.", "cost": "paid", "type": "outdoor", "family_friendly": True},
+    {"name": "Tattered Cover Book Store (LoDo)", "lat": 39.7530, "lng": -105.0009, "description": "One of the most famous independent bookstores.", "cost": "free", "type": "indoor", "family_friendly": True},
+    {"name": "Denver Firefighters Museum", "lat": 39.7407, "lng": -104.9910, "description": "Museum honoring Denver's firefighting history.", "cost": "paid", "type": "indoor", "family_friendly": True},
+    {"name": "Roxborough State Park", "lat": 39.4232, "lng": -105.0689, "description": "Dramatic red rock formations and hiking trails.", "cost": "paid", "type": "outdoor", "family_friendly": True}
 ]
+
+# Save to a JSON file
+file_path = "/mnt/data/locations.json"
+with open(file_path, "w") as json_file:
+    json.dump(locations, json_file, indent=4)
+
+# Return file path for download
+file_path
