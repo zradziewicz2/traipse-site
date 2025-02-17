@@ -6,7 +6,7 @@
         "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": True
     },
     {
         "name": "Molly Brown House Museum",
@@ -15,7 +15,7 @@
         "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": true
+        "family_friendly": True
     },
     {
         "name": "Red Rocks Park & Amphitheater",
@@ -24,7 +24,7 @@
         "description": "A world-famous concert venue set among stunning natural red rock formations.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": True
     },
     {
         "name": "Colorado State Capitol",
@@ -33,6 +33,60 @@
         "description": "A historic government building with a gold-domed roof and stunning city views.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": true
+        "family_friendly": True
+    },
+    {
+        "name": "Union Station",
+        "lat": 39.7541,
+        "lng": -105.0005,
+        "description": "A beautifully restored 1914 train station featuring shops, restaurants, and history.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Buffalo Bill Museum & Grave",
+        "lat": 39.7310,
+        "lng": -105.2386,
+        "description": "Museum dedicated to Wild West showman Buffalo Bill Cody, with scenic views from Lookout Mountain.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Four Mile Historic Park",
+        "lat": 39.6938,
+        "lng": -104.9247,
+        "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": True
+    },
+    {
+        "name": "History Colorado Center",
+        "lat": 39.7377,
+        "lng": -104.9866,
+        "description": "An interactive museum showcasing Colorado’s past through exhibits and artifacts.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Denver Botanic Gardens",
+        "lat": 39.7320,
+        "lng": -104.9610,
+        "description": "A beautiful 23-acre garden featuring diverse plant collections from around the world.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": True
+    },
+    {
+        "name": "Colorado Railroad Museum",
+        "lat": 39.7778,
+        "lng": -105.1933,
+        "description": "A museum preserving Colorado’s rich railroad history with historic trains and exhibits.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": True
     }
 ]
