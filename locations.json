@@ -1,15 +1,38 @@
 [
-  {
-    "name": "Denver Art Museum",
-    "description": "A world-class art museum in downtown Denver.",
-    "lat": 39.7376,
-    "lng": -104.9882
-  },
-  {
-    "name": "Union Station",
-    "description": "Historic train station with shops and restaurants.",
-    "lat": 39.7526,
-    "lng": -105.0004
-  }
+    {
+        "name": "Dinosaur Ridge",
+        "lat": 39.6766,
+        "lng": -105.1926,
+        "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true
+    },
+    {
+        "name": "Molly Brown House Museum",
+        "lat": 39.7374,
+        "lng": -104.9807,
+        "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true
+    },
+    {
+        "name": "Red Rocks Park & Amphitheater",
+        "lat": 39.6654,
+        "lng": -105.2057,
+        "description": "A world-famous concert venue set among stunning natural red rock formations.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true
+    },
+    {
+        "name": "Colorado State Capitol",
+        "lat": 39.7392,
+        "lng": -104.9849,
+        "description": "A historic government building with a gold-domed roof and stunning city views.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true
+    }
 ]
-
