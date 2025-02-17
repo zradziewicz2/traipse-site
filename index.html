@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traipse - Denver Cultural & Historical Sites</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>Traipse - Cultural & Historical Sites</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-o3I3TiM4mK3CeSLw6/c5G7tUlym+NRcZ+5xjDCNC/jU6zYfnK0LrX0n8L1R13lpx" crossorigin=""/>
+
+    <!-- Custom Styles -->
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Traipse</h1>
-        <p>Explore Denver's cultural and historical sites</p>
-    </header>
-    <main>
-        <div id="map"></div>
-    </main>
+
+    <h1>Welcome to Traipse</h1>
+    <p>Explore cultural and historical sites in Denver</p>
+
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-KJtKCzDRBuKbIYZglTxfyz4afJHrP3E9nmV93Nv5HZbLkRna7/EL2HaA7qfDaE9s" crossorigin=""></script>
+
     <script>
-        var map = L.map('map').setView([39.7392, -104.9903], 12);
-        
+        // Initialize the map
+        var map = L.map('map').setView([39.7392, -104.9903], 12); // Centered on Denver
+
+        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
-        
+
+        // Load locations from JSON
         fetch('locations.json')
             .then(response => response.json())
             .then(data => {
@@ -30,7 +43,9 @@
                     L.marker([site.lat, site.lng]).addTo(map)
                         .bindPopup(`<b>${site.name}</b><br>${site.description}`);
                 });
-            });
+            })
+            .catch(error => console.error("Error loading JSON:", error));
     </script>
+
 </body>
 </html>
