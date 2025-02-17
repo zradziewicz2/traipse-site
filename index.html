@@ -3,26 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traipse - Cultural & Historical Sites</title>
+    <title>Traipse - Discover History Around You</title>
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
-    <!-- Inline CSS to Ensure Map is Visible -->
+    <!-- Custom Styles -->
     <style>
-        #map {
-            height: 500px;
-            width: 100%;
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #d6eaff; /* Light Blue Background */
+            margin: 0;
+            text-align: center;
         }
+
+        /* Page Title */
+        h1 {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: #2b4d7f; /* Deep Blue */
+            font-weight: bold;
+        }
+
+        /* Tagline */
+        p {
+            font-size: 1.2em;
+            color: #3b3b3b;
+            font-style: italic;
+        }
+
+        /* Filter Controls */
         #filters {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            margin: 5px;
+        }
+
+        button {
+            background-color: #2b4d7f;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1f3c61;
+        }
+
+        /* Map Styling */
+        #map {
+            height: 75vh; /* Takes up 75% of the screen */
+            width: 90%; /* Slightly reduced width */
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
 </head>
 <body>
 
-    <h1>Welcome to Traipse</h1>
-    <p>Explore cultural and historical sites in Denver</p>
+    <h1>Traipse</h1>
+    <p>Step into the past—explore history, culture, and hidden gems near you.</p>
 
     <!-- Filter Controls -->
     <div id="filters">
@@ -62,21 +113,21 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        var allMarkers = []; // Store all markers for filtering
+        var allMarkers = [];
 
-        // Function to load locations from JSON and populate map
+        // Function to load locations from JSON
         function loadLocations() {
             fetch('locations.json')
                 .then(response => response.json())
                 .then(data => {
-                    allMarkers.forEach(marker => map.removeLayer(marker)); // Clear existing markers
+                    allMarkers.forEach(marker => map.removeLayer(marker));
                     allMarkers = [];
 
                     data.forEach(site => {
                         let marker = L.marker([site.lat, site.lng]).bindPopup(
                             `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}`
                         );
-                        marker.siteData = site; // Store site data for filtering
+                        marker.siteData = site;
                         allMarkers.push(marker);
                         marker.addTo(map);
                     });
@@ -84,9 +135,9 @@
                 .catch(error => console.error("Error loading JSON:", error));
         }
 
-        loadLocations(); // Initial map load
+        loadLocations();
 
-        // Function to apply filters and update the map
+        // Function to apply filters
         function applyFilters() {
             let selectedCost = document.getElementById("costFilter").value;
             let selectedType = document.getElementById("typeFilter").value;
