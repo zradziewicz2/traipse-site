@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traipse - Cultural & Historical Sites</title>
 
-    <!-- Leaflet CSS (without integrity check) -->
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
     <!-- Inline CSS to Ensure Map is Visible -->
@@ -14,6 +14,9 @@
             height: 500px;
             width: 100%;
         }
+        #filters {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -21,35 +24,87 @@
     <h1>Welcome to Traipse</h1>
     <p>Explore cultural and historical sites in Denver</p>
 
+    <!-- Filter Controls -->
+    <div id="filters">
+        <label>Cost:</label>
+        <select id="costFilter">
+            <option value="all">All</option>
+            <option value="free">Free</option>
+            <option value="paid">Paid</option>
+        </select>
+
+        <label>Type:</label>
+        <select id="typeFilter">
+            <option value="all">All</option>
+            <option value="indoor">Indoor</option>
+            <option value="outdoor">Outdoor</option>
+        </select>
+
+        <label>Family Friendly:</label>
+        <select id="familyFilter">
+            <option value="all">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Map Container -->
     <div id="map"></div>
 
-    <!-- Leaflet JS (without integrity check) -->
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
     <script>
-        // Initialize the map
-        var map = L.map('map').setView([39.7392, -104.9903], 12); // Centered on Denver
-
-        // Add OpenStreetMap tile layer
+        var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Load locations from JSON
-        fetch('locations.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+        var allMarkers = []; // Store all markers for filtering
+
+        // Function to load locations from JSON and populate map
+        function loadLocations() {
+            fetch('locations.json')
+                .then(response => response.json())
+                .then(data => {
+                    allMarkers.forEach(marker => map.removeLayer(marker)); // Clear existing markers
+                    allMarkers = [];
+
+                    data.forEach(site => {
+                        let marker = L.marker([site.lat, site.lng]).bindPopup(
+                            `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}`
+                        );
+                        marker.siteData = site; // Store site data for filtering
+                        allMarkers.push(marker);
+                        marker.addTo(map);
+                    });
+                })
+                .catch(error => console.error("Error loading JSON:", error));
+        }
+
+        loadLocations(); // Initial map load
+
+        // Function to apply filters and update the map
+        function applyFilters() {
+            let selectedCost = document.getElementById("costFilter").value;
+            let selectedType = document.getElementById("typeFilter").value;
+            let selectedFamily = document.getElementById("familyFilter").value;
+
+            allMarkers.forEach(marker => {
+                let site = marker.siteData;
+                let matchesCost = selectedCost === "all" || site.cost === selectedCost;
+                let matchesType = selectedType === "all" || site.type === selectedType;
+                let matchesFamily = selectedFamily === "all" || site.family_friendly.toString() === selectedFamily;
+
+                if (matchesCost && matchesType && matchesFamily) {
+                    marker.addTo(map);
+                } else {
+                    map.removeLayer(marker);
                 }
-                return response.json();
-            })
-            .then(data => {
-                data.forEach(site => {
-                    L.marker([site.lat, site.lng]).addTo(map)
-                        .bindPopup(`<b>${site.name}</b><br>${site.description}`);
-                });
-            })
-            .catch(error => console.error("Error loading JSON:", error));
+            });
+        }
     </script>
 
 </body>
