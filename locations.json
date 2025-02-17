@@ -168,7 +168,7 @@
         "description": "A museum offering interactive exhibits on Colorado's history, from indigenous cultures to contemporary times.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
@@ -177,7 +177,7 @@
         "description": "Showcases a vast collection of decorative art from every major design period, alongside works by Colorado artists.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Forney Museum of Transportation",
@@ -186,7 +186,7 @@
         "description": "Features a diverse collection of over 500 transportation artifacts, including vintage automobiles, locomotives, and aircraft.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Museo de las Americas",
@@ -195,7 +195,7 @@
         "description": "A museum dedicated to Latino art and culture, featuring exhibitions spanning from ancient to contemporary works.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Grant-Humphreys Mansion",
@@ -204,7 +204,7 @@
         "description": "A historic mansion built in 1902, listed on the National Register of Historic Places.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "International Church of Cannabis",
@@ -213,7 +213,7 @@
         "description": "A unique venue featuring vibrant murals and an immersive spiritual experience.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "The Cruise Room",
@@ -222,7 +222,7 @@
         "description": "Denver's oldest bar, opened the day after Prohibition ended in 1933, featuring an art deco ambiance.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "Poet's Row",
@@ -231,7 +231,7 @@
         "description": "A collection of historic apartment buildings, each named after a famous poet, showcasing early 20th-century architecture.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Buckhorn Exchange",
@@ -240,7 +240,7 @@
         "description": "Denver's oldest restaurant, established in 1893, filled with historic artifacts and taxidermy.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "My Brother's Bar",
@@ -249,7 +249,7 @@
         "description": "A historic bar dating back to the 1870s, once frequented by Beat Generation icons like Neal Cassady and Jack Kerouac.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "Denver Zine Library",
@@ -258,7 +258,7 @@
         "description": "A unique library housing over 15,000 self-published works, preserving the culture of DIY publishing.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Linger Eatuary",
@@ -267,7 +267,7 @@
         "description": "An eclectic restaurant, once a mortuary, offering panoramic city views and a diverse menu.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Fifty-Two 80's",
@@ -276,7 +276,7 @@
         "description": "A modern antique shop offering a nostalgic trip back to the 1980s, filled with memorabilia and vintage collectibles.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "National Ice Core Lab",
@@ -285,7 +285,7 @@
         "description": "A research facility preserving ice cores from around the world, providing insights into Earth's climatic history.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": False
+        "family_friendly": false
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -294,7 +294,7 @@
         "description": "An iconic 40-foot-tall sculpture peering into the Colorado Convention Center, symbolizing Denver's playful spirit.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "The Yearling Sculpture",
@@ -303,7 +303,7 @@
         "description": "A whimsical sculpture of a giant red chair with a horse atop it, standing in front of the Denver Public Library.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Mayan Theatre",
@@ -312,7 +312,7 @@
         "description": "A historic theater, built in 1930, showcasing rare Mayan Revival architecture and screening independent films.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Center for Colorado Women's History",
@@ -321,7 +321,7 @@
         "description": "A museum focusing on the achievements and contributions of Colorado women throughout history.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "American Museum of Western Art",
@@ -330,7 +330,7 @@
         "description": "A museum offering a vast collection of art depicting the American West, housed in a historic building.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     },
     {
         "name": "Black American West Museum",
@@ -339,6 +339,6 @@
         "description": "A museum highlighting the often-overlooked contributions of African American pioneers in the West.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": True
+        "family_friendly": true
     }
 ]
