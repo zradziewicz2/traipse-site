@@ -175,7 +175,7 @@
 
             siteData.forEach(site => {
                 let marker = L.marker([site.lat, site.lng]).bindPopup(
-                    `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}`
+                    `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"} <br><b>Local or National:</b> ${site.localornational ? "Local" : "National"}`
                 );
                 marker.siteData = site;
                 allMarkers.push(marker);
