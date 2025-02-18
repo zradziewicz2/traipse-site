@@ -22,29 +22,36 @@
         .header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 15px 20px;
             background: #111;
             color: #03FDFC;
+            text-align: center;
         }
 
         #logo {
             width: 80px;
         }
 
-        /* TRAIPSE + Tagline in One Line */
+        /* TRAIPSE + Tagline in One Line, Centered */
         .title-container {
             display: flex;
             align-items: center;
+            justify-content: center;
             font-size: 2.2em;
-            font-weight: bold; /* Bolder TRAIPSE */
+            font-weight: bold;
+            width: 100%;
         }
 
         .tagline {
             font-size: 0.5em;
             font-style: italic;
-            margin-left: 10px;
             color: #03FDFC;
+            text-align: center;
+        }
+
+        .title-container strong {
+            margin-left: 15px; /* Space between tagline and TRAIPSE */
         }
 
         /* Main Layout: Sidebar + Content */
@@ -153,10 +160,9 @@
 
     <!-- Header -->
     <div class="header">
-        <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
         <div class="title-container">
-            <strong>TRAIPSE</strong>
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+            <strong>TRAIPSE</strong>
         </div>
     </div>
 
