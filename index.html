@@ -18,25 +18,6 @@
             flex-direction: column;
         }
 
-        /* Top Navigation Bar */
-        .top-nav {
-            display: flex;
-            justify-content: flex-end;
-            background: #111;
-            padding: 10px 20px;
-        }
-
-        .top-nav a {
-            color: #03FDFC;
-            text-decoration: none;
-            font-size: 1em;
-            margin-left: 20px;
-        }
-
-        .top-nav a:hover {
-            text-decoration: underline;
-        }
-
         /* Header */
         .header {
             display: flex;
@@ -55,7 +36,8 @@
         .title-container {
             display: flex;
             align-items: center;
-            font-size: 2.2em; /* Bigger TRAIPSE */
+            font-size: 2.2em;
+            font-weight: bold; /* Bolder TRAIPSE */
         }
 
         .tagline {
@@ -169,18 +151,11 @@
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
-    <div class="top-nav">
-        <a href="#">Plan My Trip</a>
-        <a href="#">Login</a>
-        <a href="#">Sign Up</a>
-    </div>
-
     <!-- Header -->
     <div class="header">
         <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
         <div class="title-container">
-            TRAIPSE
+            <strong>TRAIPSE</strong>
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
         </div>
     </div>
