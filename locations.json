@@ -7,7 +7,7 @@
         "cost": "Free",
         "type": "Outdoor",
         "family_friendly": true,
-        "localornational": true
+        "localornational": "local"
     },
     {
         "name": "Molly Brown House Museum",
