@@ -16,7 +16,8 @@
         "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "Red Rocks Park & Amphitheater",
@@ -25,7 +26,8 @@
         "description": "A world-famous concert venue set among stunning natural red rock formations.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "Colorado State Capitol",
@@ -43,7 +45,8 @@
         "description": "A beautifully restored 1914 train station featuring shops, restaurants, and history.",
         "cost": "free",
         "type": "indoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -61,7 +64,8 @@
         "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
         "cost": "paid",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "History Colorado Center",
@@ -70,7 +74,8 @@
         "description": "An interactive museum showcasing Colorado’s past through exhibits and artifacts.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "Denver Botanic Gardens",
@@ -88,7 +93,8 @@
         "description": "A museum preserving Colorado’s rich railroad history with historic trains and exhibits.",
         "cost": "paid",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
@@ -106,7 +112,8 @@
         "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
         "cost": "paid",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": "local"
     },
     {
         "name": "Black American West Museum",
