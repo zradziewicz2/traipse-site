@@ -4,8 +4,8 @@
         "lat": 39.6766,
         "lng": -105.1926,
         "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
-        "cost": "free",
-        "type": "outdoor",
+        "cost": "Free",
+        "type": "Outdoor",
         "family_friendly": true,
         "localornational": true
     },
