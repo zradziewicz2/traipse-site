@@ -7,7 +7,7 @@
         "cost": "free",
         "type": "outdoor",
         "family_friendly": true
-        "guided": "self",
+        "guided": "self-explore",
         "history_scope": "local",
         "type": "other"
         
