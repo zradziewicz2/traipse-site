@@ -14,146 +14,185 @@
             font-family: 'Poppins', sans-serif;
             background-color: #000000;
             margin: 0;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Header */
         .header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 10px;
-            position: relative;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #111;
+            color: #03FDFC;
+            font-size: 1.5em;
+            font-weight: bold;
         }
 
         #logo {
             width: 80px;
-            position: absolute;
-            left: 15px;
-            top: 5px;
         }
 
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-            color: #03FDFC;
-            font-weight: bold;
-        }
-
-        .menu-icon {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            width: 30px;
-            height: 25px;
+        /* Main Container - Sidebar + Content */
+        .container {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
+            height: calc(100vh - 60px);
         }
 
-        .menu-icon div {
-            width: 100%;
-            height: 5px;
-            background-color: #03FDFC;
-            border-radius: 5px;
-        }
-
-        p {
-            font-size: 1.2em;
-            color: #03FDFC;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        #filters {
-            margin-bottom: 15px;
-            padding: 10px;
-        }
-
-        #filters label {
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #181818;
+            padding: 15px;
             color: white;
+            overflow-y: auto;
         }
 
-        select, button {
-            padding: 8px 12px;
+        .sidebar h2 {
+            color: #03FDFC;
+            font-size: 1.2em;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
-            margin: 5px;
         }
 
         button {
-            background-color: #2b4d7f;
-            color: white;
+            background-color: #03FDFC;
+            color: #000;
+            border: none;
+            padding: 10px;
+            font-size: 1em;
+            width: 100%;
             cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: #1f3c61;
+            background-color: #02c9c9;
         }
 
-        #map {
-            height: 75vh;
-            width: 90%;
-            margin: auto;
+        /* Content - Search Results + Map */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #222;
+        }
+
+        .search-results {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .site-card {
+            display: flex;
+            align-items: center;
+            background: #333;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            color: white;
         }
 
-        .popup-image {
-            max-width: 100%;
-            height: auto;
+        .site-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
             border-radius: 5px;
-            margin-top: 5px;
+            margin-right: 15px;
+        }
+
+        .site-card h3 {
+            margin: 0;
+            color: #03FDFC;
+        }
+
+        /* Map */
+        #map {
+            height: 40vh;
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
+
+    <!-- Header -->
     <div class="header">
         <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
-        <h1>TRAIPSE</h1>
-        <div class="menu-icon">
-            <div></div>
-            <div></div>
-            <div></div>
+        <div>TRAIPSE</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Filters</h2>
+
+            <div class="filter-group">
+                <label>Cost:</label>
+                <select id="costFilter">
+                    <option value="all">All</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Type:</label>
+                <select id="typeFilter">
+                    <option value="all">All</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Family Friendly:</label>
+                <select id="familyFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Local or National:</label>
+                <select id="localOrNationalFilter">
+                    <option value="all">All</option>
+                    <option value="local">Local</option>
+                    <option value="national">National</option>
+                </select>
+            </div>
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="search-results" id="searchResults"></div>
+            <div id="map"></div>
         </div>
     </div>
-
-    <p>Step into the past—explore history, culture, and hidden gems near you.</p>
-
-    <div id="filters">
-        <label>Cost:</label>
-        <select id="costFilter">
-            <option value="all">All</option>
-            <option value="free">Free</option>
-            <option value="paid">Paid</option>
-        </select>
-
-        <label>Type:</label>
-        <select id="typeFilter">
-            <option value="all">All</option>
-            <option value="indoor">Indoor</option>
-            <option value="outdoor">Outdoor</option>
-        </select>
-
-        <label>Family Friendly:</label>
-        <select id="familyFilter">
-            <option value="all">All</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-        </select>
-
-        <label>Local or National:</label>
-        <select id="localOrNationalFilter">
-            <option value="all">All</option>
-            <option value="local">Local</option>
-            <option value="national">National</option>
-        </select>
-
-        <button onclick="applyFilters()">Apply Filters</button>
-    </div>
-
-    <div id="map"></div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -171,9 +210,28 @@
                 .then(response => response.json())
                 .then(data => {
                     siteData = data;
+                    updateResults();
                     updateMarkers();
                 })
                 .catch(error => console.error("Error loading JSON:", error));
+        }
+
+        function updateResults() {
+            let resultsContainer = document.getElementById("searchResults");
+            resultsContainer.innerHTML = "";
+
+            siteData.forEach(site => {
+                let resultItem = document.createElement("div");
+                resultItem.className = "site-card";
+                resultItem.innerHTML = `
+                    <img src="images/${site.name.toLowerCase().replace(/\s/g, "_")}.jpg" onerror="this.style.display='none'" alt="${site.name}">
+                    <div>
+                        <h3>${site.name}</h3>
+                        <p>${site.description}</p>
+                    </div>
+                `;
+                resultsContainer.appendChild(resultItem);
+            });
         }
 
         function applyFilters() {
@@ -185,26 +243,20 @@
             allMarkers.forEach(marker => map.removeLayer(marker));
             allMarkers = [];
 
-            siteData.forEach(site => {
-                let matchesCost = selectedCost === "all" || site.cost.toLowerCase() === selectedCost;
-                let matchesType = selectedType === "all" || site.type.toLowerCase() === selectedType;
-                let matchesFamily = selectedFamily === "all" || String(site.family_friendly) === selectedFamily;
-                let matchesLocalOrNational = selectedLocalOrNational === "all" || String(site.localornational) === selectedLocalOrNational;
+            let filteredData = siteData.filter(site => 
+                (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+                (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+                (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
+                (selectedLocalOrNational === "all" || String(site.localornational) === selectedLocalOrNational)
+            );
 
-                if (matchesCost && matchesType && matchesFamily && matchesLocalOrNational) {
-                    let popupContent = `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}<br><b>Local or National:</b> ${site.localornational}`;
-
-                    // Add image for Dinosaur Ridge
-                    if (site.name === "Dinosaur Ridge") {
-                        popupContent += `<br><img class="popup-image" src="dinosaur_ridge.jpg" alt="Dinosaur Ridge">`;
-                    }
-
-                    let marker = L.marker([site.lat, site.lng]).bindPopup(popupContent);
-                    marker.siteData = site;
-                    allMarkers.push(marker);
-                    marker.addTo(map);
-                }
+            filteredData.forEach(site => {
+                let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+                marker.addTo(map);
+                allMarkers.push(marker);
             });
+
+            updateResults();
         }
 
         loadLocations();
