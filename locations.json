@@ -6,7 +6,8 @@
         "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
         "cost": "free",
         "type": "outdoor",
-        "family_friendly": true
+        "family_friendly": true,
+        "localornational": true
     },
     {
         "name": "Molly Brown House Museum",
