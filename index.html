@@ -34,7 +34,7 @@
             width: 80px;
         }
 
-        /* Main Container - Sidebar + Content */
+        /* Main Layout: Sidebar + Content */
         .container {
             display: flex;
             height: calc(100vh - 60px);
@@ -88,18 +88,21 @@
             background-color: #02c9c9;
         }
 
-        /* Content - Search Results + Map */
+        /* Content - Split into Results and Map */
         .content {
             flex-grow: 1;
             display: flex;
-            flex-direction: column;
-            padding: 20px;
+            flex-direction: row;  /* Horizontal layout */
+            padding: 15px;
             background: #222;
+            overflow: hidden;
         }
 
+        /* Left Side - Search Results */
         .search-results {
-            flex-grow: 1;
+            width: 50%;  /* Takes half of the screen */
             overflow-y: auto;
+            padding-right: 15px;
         }
 
         .site-card {
@@ -125,12 +128,11 @@
             color: #03FDFC;
         }
 
-        /* Map */
+        /* Right Side - Map */
         #map {
-            height: 40vh;
-            width: 100%;
+            width: 50%;  /* Takes up the right half of the screen */
+            height: 100%;
             border-radius: 10px;
-            margin-top: 15px;
         }
     </style>
 </head>
@@ -142,7 +144,7 @@
         <div>TRAIPSE</div>
     </div>
 
-    <!-- Main Container -->
+    <!-- Main Layout -->
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -187,7 +189,7 @@
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
-        <!-- Content -->
+        <!-- Content - Left: Results | Right: Map -->
         <div class="content">
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
