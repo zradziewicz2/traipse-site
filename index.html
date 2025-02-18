@@ -70,6 +70,10 @@
             padding: 10px;
         }
 
+        #filters label {
+            color: white;
+        }
+
         select, button {
             padding: 8px 12px;
             font-size: 1em;
@@ -167,25 +171,6 @@
         }
 
         loadLocations();
-
-        function applyFilters() {
-            var costFilter = document.getElementById("costFilter").value;
-            var typeFilter = document.getElementById("typeFilter").value;
-            var familyFilter = document.getElementById("familyFilter").value;
-
-            allMarkers.forEach(marker => {
-                let site = marker.siteData;
-                let costMatch = (costFilter === "all" || site.cost === costFilter);
-                let typeMatch = (typeFilter === "all" || site.type === typeFilter);
-                let familyMatch = (familyFilter === "all" || (site.family_friendly.toString() === familyFilter));
-
-                if (costMatch && typeMatch && familyMatch) {
-                    marker.addTo(map);
-                } else {
-                    map.removeLayer(marker);
-                }
-            });
-        }
     </script>
 </body>
 </html>
