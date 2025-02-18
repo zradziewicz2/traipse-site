@@ -99,6 +99,13 @@
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
+
+        .popup-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
@@ -179,15 +186,20 @@
             allMarkers = [];
 
             siteData.forEach(site => {
-                let matchesCost = selectedCost === "all" || site.cost === selectedCost;
-                let matchesType = selectedType === "all" || site.type === selectedType;
+                let matchesCost = selectedCost === "all" || site.cost.toLowerCase() === selectedCost;
+                let matchesType = selectedType === "all" || site.type.toLowerCase() === selectedType;
                 let matchesFamily = selectedFamily === "all" || String(site.family_friendly) === selectedFamily;
-                let matchesLocalOrNational = selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational;
+                let matchesLocalOrNational = selectedLocalOrNational === "all" || String(site.localornational) === selectedLocalOrNational;
 
                 if (matchesCost && matchesType && matchesFamily && matchesLocalOrNational) {
-                    let marker = L.marker([site.lat, site.lng]).bindPopup(
-                        `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}<br><b>Local or National:</b> ${site.localornational}`
-                    );
+                    let popupContent = `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}<br><b>Local or National:</b> ${site.localornational}`;
+
+                    // Add image for Dinosaur Ridge
+                    if (site.name === "Dinosaur Ridge") {
+                        popupContent += `<br><img class="popup-image" src="dinosaur_ridge.jpg" alt="Dinosaur Ridge">`;
+                    }
+
+                    let marker = L.marker([site.lat, site.lng]).bindPopup(popupContent);
                     marker.siteData = site;
                     allMarkers.push(marker);
                     marker.addTo(map);
