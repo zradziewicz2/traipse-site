@@ -182,11 +182,11 @@
                 let matchesCost = selectedCost === "all" || site.cost === selectedCost;
                 let matchesType = selectedType === "all" || site.type === selectedType;
                 let matchesFamily = selectedFamily === "all" || String(site.family_friendly) === selectedFamily;
-                let matchesLocalOrNational = selectedLocalOrNational === "all" || site.history_scope.toLowerCase() === selectedLocalOrNational;
+                let matchesLocalOrNational = selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational;
 
                 if (matchesCost && matchesType && matchesFamily && matchesLocalOrNational) {
                     let marker = L.marker([site.lat, site.lng]).bindPopup(
-                        `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}<br><b>Scope:</b> ${site.history_scope}`
+                        `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}<br><b>Scope:</b> ${site.localornational}`
                     );
                     marker.siteData = site;
                     allMarkers.push(marker);
