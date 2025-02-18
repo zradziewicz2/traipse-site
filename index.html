@@ -53,13 +53,18 @@
             width: 80px;
         }
 
-        /* Tagline */
+        /* TRAIPSE + Tagline in One Line */
+        .title-container {
+            display: flex;
+            align-items: center;
+            font-size: 2.2em; /* Bigger TRAIPSE */
+        }
+
         .tagline {
-            text-align: center;
-            color: #03FDFC;
-            font-size: 1.2em;
+            font-size: 0.5em;
             font-style: italic;
-            padding: 10px;
+            margin-left: 10px;
+            color: #03FDFC;
         }
 
         /* Main Layout: Sidebar + Content */
@@ -176,11 +181,11 @@
     <!-- Header -->
     <div class="header">
         <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
-        <div>TRAIPSE</div>
+        <div class="title-container">
+            TRAIPSE
+            <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+        </div>
     </div>
-
-    <!-- Tagline -->
-    <div class="tagline">Step into the past—explore history, culture, and hidden gems near you.</div>
 
     <!-- Main Layout -->
     <div class="container">
@@ -215,15 +220,6 @@
                 </select>
             </div>
 
-            <div class="filter-group">
-                <label>Local or National:</label>
-                <select id="localOrNationalFilter">
-                    <option value="all">All</option>
-                    <option value="local">Local</option>
-                    <option value="national">National</option>
-                </select>
-            </div>
-
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
@@ -250,16 +246,24 @@
                 .then(response => response.json())
                 .then(data => {
                     siteData = data;
-                    applyFilters();  
+                    applyFilters();
                 })
                 .catch(error => console.error("Error loading JSON:", error));
         }
 
-        function updateResults(filteredData) {
+        function applyFilters() {
             let resultsContainer = document.getElementById("searchResults");
             resultsContainer.innerHTML = "";
+            allMarkers.forEach(marker => map.removeLayer(marker));
+            allMarkers = [];
 
-            filteredData.forEach(site => {
+            siteData.forEach(site => {
+                let marker = L.marker([site.lat, site.lng]).bindPopup(
+                    `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br><b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}`
+                );
+                marker.addTo(map);
+                allMarkers.push(marker);
+
                 let imageSrc = site.name === "Dinosaur Ridge" ? "dinosaur_ridge.png" : `images/${site.name.toLowerCase().replace(/\s/g, "_")}.jpg`;
 
                 let resultItem = document.createElement("div");
@@ -270,7 +274,7 @@
                         <h3>${site.name}</h3>
                         <p>${site.description}</p>
                         <p><b>Cost:</b> ${site.cost}, <b>Type:</b> ${site.type}</p>
-                        <p><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}, <b>Scope:</b> ${site.localornational}</p>
+                        <p><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}</p>
                     </div>
                 `;
                 resultsContainer.appendChild(resultItem);
