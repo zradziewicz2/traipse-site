@@ -22,14 +22,16 @@
             width: 20%;
             padding: 10px;
             background: #222;
+            overflow-y: auto;
         }
         #list {
-            width: 40%;
+            width: 30%;
             overflow-y: auto;
             padding: 10px;
+            background: #181818;
         }
         #map {
-            width: 40%;
+            width: 50%;
             height: 100vh;
         }
         button {
@@ -37,6 +39,12 @@
             border: none;
             padding: 10px;
             cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .list-item {
+            padding: 10px;
+            border-bottom: 1px solid cyan;
         }
     </style>
 </head>
@@ -45,14 +53,7 @@
         <aside id="filters">
             <h2>Filters</h2>
             <div id="dropdown-filters"></div>
-            <div id="checkbox-filters">
-                <h3>Historical Time Period</h3>
-                <div id="historical_time_period"></div>
-                <h3>Thematic Category</h3>
-                <div id="thematic_category"></div>
-                <h3>Estimated Timeframe</h3>
-                <div id="estimated_timeframe"></div>
-            </div>
+            <div id="checkbox-filters"></div>
             <button id="applyFilters">Apply Filters</button>
         </aside>
         <main>
@@ -71,9 +72,38 @@
         fetch('TraipseData_Full.json')
             .then(response => response.json())
             .then(data => {
+                const listContainer = document.getElementById('list');
+                const dropdownFilters = document.getElementById('dropdown-filters');
+                const checkboxFilters = document.getElementById('checkbox-filters');
+                
+                let filters = {};
+                
+                let dropdownAttributes = ["type", "localornational", "cost", "distance", "reservation", "guided_tour", "accessible_by_transit", "family_friendly", "dog_friendly", "gift_shop", "dining_on_site", "hidden_gem", "spanish_translations", "open_on_mondays", "open_past_6_pm", "open_before_10_am", "luggage_storage", "cash_vs_credit_card", "public_access"];
+                let checkboxAttributes = ["historical_time_period", "thematic_category", "estimated_timeframe"];
+                
+                dropdownAttributes.forEach(attr => {
+                    let select = document.createElement('select');
+                    select.id = attr;
+                    select.innerHTML = `<option value="">All ${attr.replace('_', ' ')}</option>`;
+                    filters[attr] = "";
+                    dropdownFilters.appendChild(select);
+                });
+                
+                checkboxAttributes.forEach(attr => {
+                    let div = document.createElement('div');
+                    div.innerHTML = `<h3>${attr.replace('_', ' ')}</h3>`;
+                    checkboxFilters.appendChild(div);
+                    filters[attr] = new Set();
+                });
+                
                 data.forEach(site => {
                     let marker = L.marker([site.lat, site.lng]).addTo(map);
-                    marker.bindPopup(`<b>${site.name}</b><br>${site.description}`).openPopup();
+                    marker.bindPopup(`<b>${site.name}</b><br>${site.description}`);
+
+                    let listItem = document.createElement('div');
+                    listItem.className = 'list-item';
+                    listItem.innerHTML = `<b>${site.name}</b><p>${site.description}</p>`;
+                    listContainer.appendChild(listItem);
                 });
             });
     </script>
