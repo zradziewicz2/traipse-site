@@ -3,109 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traipse</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>Traipse - Discover History Around You</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+
+    <!-- Custom Styles -->
     <style>
         body {
-            background-color: #111;
-            color: cyan;
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
             margin: 0;
-        }
-        #container {
             display: flex;
-            width: 100%;
+            flex-direction: column;
         }
-        #filters {
-            width: 20%;
-            padding: 10px;
-            background: #222;
-            overflow-y: auto;
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #111;
+            color: #03FDFC;
         }
-        #list {
-            width: 30%;
-            overflow-y: auto;
-            padding: 10px;
+
+        /* Logo on the left */
+        #logo {
+            width: 80px;
+        }
+
+        /* Tagline centered */
+        .tagline {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #03FDFC;
+        }
+
+        /* TRAIPSE on the far right */
+        .title-container {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        /* Main Layout: Sidebar + Content */
+        .container {
+            display: flex;
+            height: calc(100vh - 120px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
             background: #181818;
+            padding: 15px;
+            color: white;
+            overflow-y: auto;
         }
-        #map {
-            width: 50%;
-            height: 100vh;
+
+        .sidebar h2 {
+            color: #03FDFC;
+            font-size: 1.2em;
         }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+        }
+
         button {
-            background: cyan;
+            background-color: #03FDFC;
+            color: #000;
             border: none;
             padding: 10px;
-            cursor: pointer;
+            font-size: 1em;
             width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
             margin-top: 10px;
         }
-        .list-item {
-            padding: 10px;
-            border-bottom: 1px solid cyan;
+
+        button:hover {
+            background-color: #02c9c9;
+        }
+
+        /* Content - Split into Results and Map */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            padding: 15px;
+            background: #222;
+            overflow: hidden;
+        }
+
+        /* Left Side - Search Results */
+        .search-results {
+            width: 50%;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        .site-card {
+            display: flex;
+            align-items: center;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .site-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .site-card h3 {
+            margin: 0;
+            color: #03FDFC;
+        }
+
+        /* Right Side - Map */
+        #map {
+            width: 50%;
+            height: 100%;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <aside id="filters">
-            <h2>Filters</h2>
-            <div id="dropdown-filters"></div>
-            <div id="checkbox-filters"></div>
-            <button id="applyFilters">Apply Filters</button>
-        </aside>
-        <main>
-            <section id="list"></section>
-        </main>
-        <aside id="map"></aside>
+
+    <!-- Header -->
+    <div class="header">
+        <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
+        <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+        <div class="title-container">TRAIPSE</div>
     </div>
-    
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Main Layout -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Filters</h2>
+
+            <div class="filter-group">
+                <label>Cost:</label>
+                <select id="costFilter">
+                    <option value="all">All</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Type:</label>
+                <select id="typeFilter">
+                    <option value="all">All</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Family Friendly:</label>
+                <select id="familyFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Local or National:</label>
+                <select id="localOrNationalFilter">
+                    <option value="all">All</option>
+                    <option value="local">Local</option>
+                    <option value="national">National</option>
+                </select>
+            </div>
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- Content - Left: Results | Right: Map -->
+        <div class="content">
+            <div class="search-results" id="searchResults"></div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
-        let map = L.map('map').setView([39.7392, -104.9903], 11);
+        var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
+            attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        fetch('TraipseData_Full.json')
-            .then(response => response.json())
-            .then(data => {
-                const listContainer = document.getElementById('list');
-                const dropdownFilters = document.getElementById('dropdown-filters');
-                const checkboxFilters = document.getElementById('checkbox-filters');
-                
-                let filters = {};
-                
-                let dropdownAttributes = ["type", "localornational", "cost", "distance", "reservation", "guided_tour", "accessible_by_transit", "family_friendly", "dog_friendly", "gift_shop", "dining_on_site", "hidden_gem", "spanish_translations", "open_on_mondays", "open_past_6_pm", "open_before_10_am", "luggage_storage", "cash_vs_credit_card", "public_access"];
-                let checkboxAttributes = ["historical_time_period", "thematic_category", "estimated_timeframe"];
-                
-                dropdownAttributes.forEach(attr => {
-                    let select = document.createElement('select');
-                    select.id = attr;
-                    select.innerHTML = `<option value="">All ${attr.replace('_', ' ')}</option>`;
-                    filters[attr] = "";
-                    dropdownFilters.appendChild(select);
-                });
-                
-                checkboxAttributes.forEach(attr => {
-                    let div = document.createElement('div');
-                    div.innerHTML = `<h3>${attr.replace('_', ' ')}</h3>`;
-                    checkboxFilters.appendChild(div);
-                    filters[attr] = new Set();
-                });
-                
-                data.forEach(site => {
-                    let marker = L.marker([site.lat, site.lng]).addTo(map);
-                    marker.bindPopup(`<b>${site.name}</b><br>${site.description}`);
+        var allMarkers = [];
+        var siteData = [];
 
-                    let listItem = document.createElement('div');
-                    listItem.className = 'list-item';
-                    listItem.innerHTML = `<b>${site.name}</b><p>${site.description}</p>`;
-                    listContainer.appendChild(listItem);
-                });
+        function loadLocations() {
+            fetch('locations.json')
+                .then(response => response.json())
+                .then(data => {
+                    siteData = data;
+                    applyFilters();
+                })
+                .catch(error => console.error("Error loading JSON:", error));
+        }
+
+        function applyFilters() {
+            let selectedCost = document.getElementById("costFilter").value;
+            let selectedType = document.getElementById("typeFilter").value;
+            let selectedFamily = document.getElementById("familyFilter").value;
+            let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
+
+            let resultsContainer = document.getElementById("searchResults");
+            resultsContainer.innerHTML = "";
+            allMarkers.forEach(marker => map.removeLayer(marker));
+            allMarkers = [];
+
+            siteData.forEach(site => {
+                if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+                    (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+                    (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
+                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
+                    
+                    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+                    marker.addTo(map);
+                    allMarkers.push(marker);
+
+                    resultsContainer.innerHTML += `<div class="site-card"><h3>${site.name}</h3><p>${site.description}</p></div>`;
+                }
             });
+        }
+
+        loadLocations();
     </script>
 </body>
 </html>
