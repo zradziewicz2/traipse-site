@@ -117,7 +117,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "technologyandtransportation"
     },
     {
@@ -161,7 +161,7 @@
         "cost": "free",
         "type": "outdoor",
         "family_friendly": true,
-        "localornational": "Local",
+        "localornational": "local",
         "thematiccategory": "generalhistory"
     },
     {
@@ -172,7 +172,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "technologyandtransportation"
     },
     {
@@ -227,7 +227,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "technologyandtransportation"
     },
     {
@@ -249,7 +249,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": false,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "generalhistory"
     },
     {
@@ -260,7 +260,7 @@
         "cost": "free",
         "type": "indoor",
         "family_friendly": false,
-        "localornational": "Local",
+        "localornational": "local",
         "thematiccategory": "religiousandspiritual"
     },
     {
@@ -281,7 +281,7 @@
         "cost": "free",
         "type": "outdoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "generalhistory"
     },
     {
@@ -336,7 +336,7 @@
         "cost": "free",
         "type": "indoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "generalhistory"
     },
     {
@@ -347,7 +347,7 @@
         "cost": "free",
         "type": "indoor",
         "family_friendly": false,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "technologyandtransportation"
     },
     {
@@ -380,7 +380,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "artsandculture"
     },
     {
@@ -402,7 +402,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": true,
-        "localornational": "National",
+        "localornational": "national",
         "thematiccategory": "generalhistory"
     },
     {
