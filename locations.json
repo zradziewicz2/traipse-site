@@ -261,7 +261,7 @@
         "type": "indoor",
         "family_friendly": false,
         "localornational": "Local",
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "religiousandspiritual"
     },
     {
         "name": "The Cruise Room",
@@ -271,7 +271,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": false,
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "foodanddrink"
     },
     {
         "name": "Poet's Row",
@@ -304,7 +304,7 @@
         "type": "indoor",
         "family_friendly": false,
         "localornational": "local",
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "foodanddrink"
     },
     {
         "name": "Denver Zine Library",
@@ -326,7 +326,7 @@
         "type": "indoor",
         "family_friendly": true,
         "localornational": "local",
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "foodanddrink"
     },
     {
         "name": "Fifty-Two 80's",
@@ -348,7 +348,7 @@
         "type": "indoor",
         "family_friendly": false,
         "localornational": "National",
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "technologyandtransportation"
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -370,7 +370,7 @@
         "type": "outdoor",
         "family_friendly": true,
         "localornational": "local",
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "artsandculture"
     },
     {
         "name": "Mayan Theatre",
@@ -381,7 +381,7 @@
         "type": "indoor",
         "family_friendly": true,
         "localornational": "National",
-        "thematiccategory": "generalhistory"
+        "thematiccategory": "artsandculture"
     },
     {
         "name": "Center for Colorado Women's History",
