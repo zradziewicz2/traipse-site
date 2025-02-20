@@ -18,7 +18,6 @@
             flex-direction: column;
         }
 
-        /* Header */
         .header {
             display: flex;
             align-items: center;
@@ -177,7 +176,7 @@
             </div>
 
             <div class="filter-group">
-                <label>Local or National:</label>
+                <label>Local or National!:</label>
                 <select id="localOrNationalFilter">
                     <option value="all">All</option>
                     <option value="local">Local</option>
@@ -248,7 +247,7 @@
                     (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
                     (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
                     (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
-                    (selectedThematicCategory === "all" || site.thematiccategory?.toLowerCase() === selectedThematicCategory)
+                    (selectedThematicCategory === "all" || (site.thematiccategory && site.thematiccategory.toLowerCase() === selectedThematicCategory))
                 ) {
                     let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
                     marker.addTo(map);
