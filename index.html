@@ -117,6 +117,7 @@
             width: 50%;
             overflow-y: auto;
             padding-right: 15px;
+            max-height: 100%;
         }
 
         .site-card {
@@ -125,7 +126,7 @@
             background: #333;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: white;
             cursor: pointer;
         }
@@ -267,6 +268,15 @@
                     let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
                     marker.addTo(map);
                     allMarkers.push(marker);
+
+                    let siteCard = document.createElement("div");
+                    siteCard.className = "site-card";
+                    siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+                    siteCard.onclick = () => {
+                        map.setView([site.lat, site.lng], 14);
+                        marker.openPopup();
+                    };
+                    resultsContainer.appendChild(siteCard);
                 }
             });
         }
