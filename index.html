@@ -16,6 +16,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
         /* Header */
@@ -28,12 +29,10 @@
             color: #03FDFC;
         }
 
-        /* Logo on the left */
         #logo {
             width: 80px;
         }
 
-        /* Tagline centered */
         .tagline {
             flex-grow: 1;
             text-align: center;
@@ -42,17 +41,17 @@
             color: #03FDFC;
         }
 
-        /* TRAIPSE on the far right */
         .title-container {
             font-size: 2.2em;
             font-weight: bold;
             margin-left: auto;
         }
 
-        /* Main Layout: Sidebar + Content */
+        /* Main Layout */
         .container {
             display: flex;
-            height: calc(100vh - 120px);
+            flex-direction: row;
+            height: calc(100vh - 80px);
         }
 
         /* Sidebar */
@@ -103,7 +102,7 @@
             background-color: #02c9c9;
         }
 
-        /* Content - Split into Results and Map */
+        /* Content */
         .content {
             flex-grow: 1;
             display: flex;
@@ -113,11 +112,12 @@
             overflow: hidden;
         }
 
-        /* Left Side - Search Results */
+        /* Search Results */
         .search-results {
             width: 50%;
             overflow-y: auto;
             padding-right: 15px;
+            max-height: 100%;
         }
 
         .site-card {
@@ -126,16 +126,13 @@
             background: #333;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: white;
+            cursor: pointer;
         }
 
-        .site-card img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-right: 15px;
+        .site-card:hover {
+            background: #444;
         }
 
         .site-card h3 {
@@ -143,11 +140,12 @@
             color: #03FDFC;
         }
 
-        /* Right Side - Map */
+        /* Map */
         #map {
             width: 50%;
             height: 100%;
             border-radius: 10px;
+            background: #333;
         }
     </style>
 </head>
@@ -165,6 +163,21 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
+            
+            <div class="filter-group">
+                <label>Category:</label>
+                <select id="ThematicCategoryFilter">
+                    <option value="all">All</option>
+                    <option value="artsandculture">Arts and Culture</option>
+                    <option value="foodanddrink">Food and Drink</option>
+                    <option value="generalhistory">General History</option>
+                    <option value="historichomes">Historic Homes</option>
+                    <option value="naturalhistory">Natural History</option>
+                    <option value="religiousandspiritual">Religious and Spiritual</option>
+                    <option value="other">Other</option>
+                    <option value="technologyandtransportation">Technology and Transportation</option>
+                </select>
+            </div>
 
             <div class="filter-group">
                 <label>Cost:</label>
@@ -205,7 +218,7 @@
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
-        <!-- Content - Left: Results | Right: Map -->
+        <!-- Content -->
         <div class="content">
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
@@ -238,6 +251,7 @@
             let selectedType = document.getElementById("typeFilter").value;
             let selectedFamily = document.getElementById("familyFilter").value;
             let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
+            let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
 
             let resultsContainer = document.getElementById("searchResults");
             resultsContainer.innerHTML = "";
@@ -247,14 +261,22 @@
             siteData.forEach(site => {
                 if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
                     (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-                    (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
+                    (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+                    (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
                     (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
                     
-                    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+                    let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
                     marker.addTo(map);
                     allMarkers.push(marker);
 
-                    resultsContainer.innerHTML += `<div class="site-card"><h3>${site.name}</h3><p>${site.description}</p></div>`;
+                    let siteCard = document.createElement("div");
+                    siteCard.className = "site-card";
+                    siteCard.innerHTML = <h3>${site.name}</h3><p>${site.description}</p>;
+                    siteCard.onclick = () => {
+                        map.setView([site.lat, site.lng], 14);
+                        marker.openPopup();
+                    };
+                    resultsContainer.appendChild(siteCard);
                 }
             });
         }
