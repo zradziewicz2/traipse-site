@@ -330,9 +330,14 @@ function applyFilters() {
             marker.addTo(map);
             allMarkers.push(marker);
 
-            let siteCard = document.createElement("div");
-            siteCard.className = "site-card";
-            siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+        let siteCard = document.createElement("div");
+        siteCard.className = "site-card";
+        siteCard.innerHTML = `
+            <h3>${site.name}</h3>
+            <img src="${site.image}" alt="${site.name}" style="width:100%; height:auto; border-radius:5px; margin-top: 5px;">
+            <p>${site.description}</p>
+        `;
+
             siteCard.onclick = () => {
                 map.setView([site.lat, site.lng], 14);
                 marker.openPopup();
