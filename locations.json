@@ -9,7 +9,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "dinosaur_ridge.jpg"
+        "image": "dinosaurridge.jpg"
     },
     {
         "name": "Molly Brown House Museum",
@@ -21,7 +21,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "historichomes",
-        "image": "default.jpg"
+        "image": "mollybrown.jpg"
     },
     {
         "name": "Red Rocks Park & Amphitheater",
@@ -33,7 +33,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "naturalhistory",
-        "image": "default.jpg"
+        "image": "redrocks.jpg"
     },
     {
         "name": "Colorado State Capitol",
