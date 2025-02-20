@@ -412,8 +412,8 @@
         "description": "A museum highlighting the often-overlooked contributions of African American pioneers in the West.",
         "cost": "paid",
         "type": "indoor",
-        "family_friendly": true,,
-        "thematiccategory": "generalhistory"
+        "family_friendly": true,
+        "thematiccategory": "generalhistory",
         "localornational": "local"
     }
 ]
