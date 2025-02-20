@@ -16,6 +16,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
+            height: 100vh;
         }
 
         /* Header */
@@ -28,12 +29,10 @@
             color: #03FDFC;
         }
 
-        /* Logo on the left */
         #logo {
             width: 80px;
         }
 
-        /* Tagline centered */
         .tagline {
             flex-grow: 1;
             text-align: center;
@@ -42,17 +41,17 @@
             color: #03FDFC;
         }
 
-        /* TRAIPSE on the far right */
         .title-container {
             font-size: 2.2em;
             font-weight: bold;
             margin-left: auto;
         }
 
-        /* Main Layout: Sidebar + Content */
+        /* Main Layout */
         .container {
             display: flex;
-            height: calc(100vh - 120px);
+            flex-direction: row;
+            height: calc(100vh - 80px); /* Full height minus header */
         }
 
         /* Sidebar */
@@ -103,7 +102,7 @@
             background-color: #02c9c9;
         }
 
-        /* Content - Split into Results and Map */
+        /* Content */
         .content {
             flex-grow: 1;
             display: flex;
@@ -113,7 +112,7 @@
             overflow: hidden;
         }
 
-        /* Left Side - Search Results */
+        /* Search Results */
         .search-results {
             width: 50%;
             overflow-y: auto;
@@ -143,11 +142,12 @@
             color: #03FDFC;
         }
 
-        /* Right Side - Map */
+        /* Map */
         #map {
             width: 50%;
             height: 100%;
             border-radius: 10px;
+            background: #333;
         }
     </style>
 </head>
@@ -166,7 +166,7 @@
         <div class="sidebar">
             <h2>Filters</h2>
             
-             <div class="filter-group">
+            <div class="filter-group">
                 <label>Thematic Category:</label>
                 <select id="ThematicCategoryFilter">
                     <option value="all">All</option>
@@ -179,7 +179,8 @@
                     <option value="other">Other</option>
                     <option value="technologyandtransportation">Technology and Transportation</option>
                 </select>
-                 
+            </div>
+
             <div class="filter-group">
                 <label>Cost:</label>
                 <select id="costFilter">
@@ -219,7 +220,7 @@
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
-        <!-- Content - Left: Results | Right: Map -->
+        <!-- Content -->
         <div class="content">
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
@@ -229,53 +230,48 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
-        var map = L.map('map').setView([39.7392, -104.9903], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+        document.addEventListener("DOMContentLoaded", function () {
+            var mapElement = document.getElementById("map");
+            if (!mapElement) {
+                console.error("Map element not found!");
+                return;
+            }
 
-        var allMarkers = [];
-        var siteData = [];
+            var map = L.map('map').setView([39.7392, -104.9903], 12);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
 
-        function loadLocations() {
-            fetch('locations.json')
-                .then(response => response.json())
-                .then(data => {
-                    siteData = data;
-                    applyFilters();
-                })
-                .catch(error => console.error("Error loading JSON:", error));
-        }
+            var allMarkers = [];
+            var siteData = [];
 
-        function applyFilters() {
-            let selectedCost = document.getElementById("costFilter").value;
-            let selectedType = document.getElementById("typeFilter").value;
-            let selectedFamily = document.getElementById("familyFilter").value;
-            let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
-            let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
+            function loadLocations() {
+                fetch('locations.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        siteData = data;
+                        applyFilters();
+                    })
+                    .catch(error => console.error("Error loading JSON:", error));
+            }
 
-            let resultsContainer = document.getElementById("searchResults");
-            resultsContainer.innerHTML = "";
-            allMarkers.forEach(marker => map.removeLayer(marker));
-            allMarkers = [];
+            function applyFilters() {
+                let resultsContainer = document.getElementById("searchResults");
+                resultsContainer.innerHTML = "";
+                allMarkers.forEach(marker => map.removeLayer(marker));
+                allMarkers = [];
 
-            siteData.forEach(site => {
-                if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-                    (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-                    (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
-                    (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory)&&
-                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
-                    
+                siteData.forEach(site => {
                     let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
                     marker.addTo(map);
                     allMarkers.push(marker);
 
                     resultsContainer.innerHTML += `<div class="site-card"><h3>${site.name}</h3><p>${site.description}</p></div>`;
-                }
-            });
-        }
+                });
+            }
 
-        loadLocations();
+            loadLocations();
+        });
     </script>
 </body>
 </html>
