@@ -28,12 +28,10 @@
             color: #03FDFC;
         }
 
-        /* Logo on the left */
         #logo {
             width: 80px;
         }
 
-        /* Tagline centered */
         .tagline {
             flex-grow: 1;
             text-align: center;
@@ -42,20 +40,17 @@
             color: #03FDFC;
         }
 
-        /* TRAIPSE on the far right */
         .title-container {
             font-size: 2.2em;
             font-weight: bold;
             margin-left: auto;
         }
 
-        /* Main Layout: Sidebar + Content */
         .container {
             display: flex;
             height: calc(100vh - 120px);
         }
 
-        /* Sidebar */
         .sidebar {
             width: 250px;
             background: #181818;
@@ -103,7 +98,6 @@
             background-color: #02c9c9;
         }
 
-        /* Content - Split into Results and Map */
         .content {
             flex-grow: 1;
             display: flex;
@@ -113,7 +107,6 @@
             overflow: hidden;
         }
 
-        /* Left Side - Search Results */
         .search-results {
             width: 50%;
             overflow-y: auto;
@@ -130,20 +123,11 @@
             color: white;
         }
 
-        .site-card img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
-
         .site-card h3 {
             margin: 0;
             color: #03FDFC;
         }
 
-        /* Right Side - Map */
         #map {
             width: 50%;
             height: 100%;
@@ -162,7 +146,6 @@
 
     <!-- Main Layout -->
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
 
@@ -201,26 +184,25 @@
                     <option value="national">National</option>
                 </select>
             </div>
-            
+
             <div class="filter-group">
                 <label>Thematic Category:</label>
                 <select id="ThematicCategoryFilter">
                     <option value="all">All</option>
-                    <option value="artsandculture">ArtsandCulture</option>
-                    <option value="foodanddrink">FoodandDrink</option>
-                    <option value="generalhistory">GeneralHistory</option>
-                    <option value="historichomes">HistoricHomes</option>
-                    <option value="naturalhistory">NaturalHistory</option>
-                    <option value="religiousandspiritual">ReligousandSpiritual</option>
+                    <option value="artsandculture">Arts and Culture</option>
+                    <option value="foodanddrink">Food and Drink</option>
+                    <option value="generalhistory">General History</option>
+                    <option value="historichomes">Historic Homes</option>
+                    <option value="naturalhistory">Natural History</option>
+                    <option value="religiousandspiritual">Religious and Spiritual</option>
                     <option value="other">Other</option>
-                    <option value="technologyandtransportation">TechnologyandTransportation</option>
+                    <option value="technologyandtransportation">Technology and Transportation</option>
                 </select>
             </div>
 
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
-        <!-- Content - Left: Results | Right: Map -->
         <div class="content">
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
@@ -228,7 +210,7 @@
     </div>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -261,11 +243,13 @@
             allMarkers = [];
 
             siteData.forEach(site => {
-                if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+                if (
+                    (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
                     (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
                     (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
-                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) &&
-                    (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory)) {
+                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+                    (selectedThematicCategory === "all" || site.thematiccategory?.toLowerCase() === selectedThematicCategory)
+                ) {
                     let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
                     marker.addTo(map);
                     allMarkers.push(marker);
