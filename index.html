@@ -203,7 +203,7 @@
             </div>
             
             <div class="filter-group">
-                <label>Thematic Category</label>
+                <label>Thematic Category:</label>
                 <select id="ThematicCategoryFilter">
                     <option value="all">All</option>
                     <option value="artsandculture">ArtsandCulture</option>
@@ -264,7 +264,7 @@
                 if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
                     (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
                     (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
-                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
+                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) &&
                     (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory)) {
                     let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
                     marker.addTo(map);
