@@ -165,7 +165,7 @@
             <h2>Filters</h2>
             
             <div class="filter-group">
-                <label>Category:</label>
+                <label>Thematic Category:</label>
                 <select id="ThematicCategoryFilter">
                     <option value="all">All</option>
                     <option value="artsandculture">Arts and Culture</option>
@@ -265,13 +265,13 @@
                     (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
                     (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
                     
-                    let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
+                    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
                     marker.addTo(map);
                     allMarkers.push(marker);
 
                     let siteCard = document.createElement("div");
                     siteCard.className = "site-card";
-                    siteCard.innerHTML = <h3>${site.name}</h3><p>${site.description}</p>;
+                    siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
                     siteCard.onclick = () => {
                         map.setView([site.lat, site.lng], 14);
                         marker.openPopup();
