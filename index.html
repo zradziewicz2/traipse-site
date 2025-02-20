@@ -165,7 +165,21 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
-
+            
+             <div class="filter-group">
+                <label>Thematic Category:</label>
+                <select id="ThematicCategoryFilter">
+                    <option value="all">All</option>
+                    <option value="artsandculture">Arts and Culture</option>
+                    <option value="foodanddrink">Food and Drink</option>
+                    <option value="generalhistory">General History</option>
+                    <option value="historichomes">Historic Homes</option>
+                    <option value="naturalhistory">Natural History</option>
+                    <option value="religiousandspiritual">Religious and Spiritual</option>
+                    <option value="other">Other</option>
+                    <option value="technologyandtransportation">Technology and Transportation</option>
+                </select>
+                 
             <div class="filter-group">
                 <label>Cost:</label>
                 <select id="costFilter">
@@ -238,6 +252,7 @@
             let selectedType = document.getElementById("typeFilter").value;
             let selectedFamily = document.getElementById("familyFilter").value;
             let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
+            let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
 
             let resultsContainer = document.getElementById("searchResults");
             resultsContainer.innerHTML = "";
@@ -248,6 +263,7 @@
                 if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
                     (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
                     (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
+                    (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory)&&
                     (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
                     
                     let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
