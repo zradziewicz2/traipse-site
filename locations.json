@@ -9,7 +9,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "dinosaurridge.jpg"
+        "image": "images/dinosaurridge.jpg"
     },
     {
         "name": "Molly Brown House Museum",
@@ -21,7 +21,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "historichomes",
-        "image": "mollybrown.jpg"
+        "image": "images/mollybrown.jpg"
     },
     {
         "name": "Red Rocks Park & Amphitheater",
@@ -33,7 +33,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "naturalhistory",
-        "image": "redrocks.jpg"
+        "image": "images/redrocks.jpg"
     },
     {
         "name": "Colorado State Capitol",
@@ -45,7 +45,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Union Station",
@@ -57,7 +57,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -69,7 +69,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Four Mile Historic Park",
@@ -81,7 +81,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "History Colorado Center",
@@ -93,7 +93,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Denver Botanic Gardens",
@@ -105,7 +105,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "artsandculture",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Colorado Railroad Museum",
@@ -117,7 +117,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
@@ -129,7 +129,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Four Mile Historic Park",
@@ -141,7 +141,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Black American West Museum",
@@ -153,7 +153,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Byers-Evans House Museum",
@@ -165,7 +165,7 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "historichomes",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Grant-Frontier Park",
@@ -177,7 +177,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -189,7 +189,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Colorado Aviation Historical Society",
@@ -201,7 +201,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "technologyandtransportation",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Franktown Cave",
@@ -213,7 +213,7 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "naturalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "History Colorado Center",
@@ -225,7 +225,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
@@ -237,7 +237,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "artsandculture",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Forney Museum of Transportation",
@@ -249,7 +249,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Museo de las Americas",
@@ -261,7 +261,7 @@
         "family_friendly": true,
         "localornational": "National",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Grant-Humphreys Mansion",
@@ -273,7 +273,7 @@
         "family_friendly": false,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "International Church of Cannabis",
@@ -285,7 +285,7 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "religiousandspiritual",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "The Cruise Room",
@@ -296,7 +296,7 @@
         "type": "indoor",
         "family_friendly": false,
         "thematiccategory": "foodanddrink",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Poet's Row",
@@ -308,7 +308,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Buckhorn Exchange",
@@ -320,7 +320,7 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "My Brother's Bar",
@@ -332,7 +332,7 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "foodanddrink",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Denver Zine Library",
@@ -344,7 +344,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Linger Eatuary",
@@ -356,7 +356,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "foodanddrink",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Fifty-Two 80's",
@@ -368,7 +368,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "National Ice Core Lab",
@@ -380,7 +380,7 @@
         "family_friendly": false,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -392,7 +392,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "The Yearling Sculpture",
@@ -404,7 +404,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "artsandculture",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Mayan Theatre",
@@ -416,7 +416,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "artsandculture",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Center for Colorado Women's History",
@@ -428,7 +428,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "American Museum of Western Art",
@@ -440,7 +440,7 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     },
     {
         "name": "Black American West Museum",
@@ -452,6 +452,6 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "default.jpg"
+        "image": "images/default.jpg"
     }
 ]
