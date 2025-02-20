@@ -4,8 +4,8 @@
         "lat": 39.6766,
         "lng": -105.1926,
         "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
-        "cost": "Free",
-        "type": "Outdoor",
+        "cost": "free",
+        "type": "outdoor",
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory"
@@ -158,8 +158,8 @@
         "lat": 39.6683,
         "lng": -105.0136,
         "description": "A scenic park on the South Platte River with historical significance as an early pioneer settlement.",
-        "cost": "Free",
-        "type": "Outdoor",
+        "cost": "free",
+        "type": "outdoor",
         "family_friendly": true,
         "localornational": "Local",
         "thematiccategory": "generalhistory"
@@ -268,8 +268,8 @@
         "lat": 39.7526,
         "lng": -104.9987,
         "description": "Denver's oldest bar, opened the day after Prohibition ended in 1933, featuring an art deco ambiance.",
-        "cost": "Paid",
-        "type": "Indoor",
+        "cost": "paid",
+        "type": "indoor",
         "family_friendly": false,
         "thematiccategory": "generalhistory"
     },
@@ -413,7 +413,7 @@
         "cost": "paid",
         "type": "indoor",
         "family_friendly": true,
-        "thematiccategory": "generalhistory",
-        "localornational": "local"
+        "localornational": "local",
+        "thematiccategory": "generalhistory"
     }
 ]
