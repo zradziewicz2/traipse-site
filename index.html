@@ -214,6 +214,16 @@
                     <option value="national">National</option>
                 </select>
             </div>
+            
+            <div class="filter-group">
+                <label>Distance:</label>
+                <select id="distanceFilter">
+                    <option value="all">All</option>
+                    <option value="1">Less than 1 mile</option>
+                    <option value="5">1-5 miles</option>
+                    <option value="10">More than 10 miles</option>
+                </select>
+            </div>
 
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
@@ -233,53 +243,103 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
+        var userLocation = null;
+        
         var allMarkers = [];
         var siteData = [];
 
-        function loadLocations() {
-            fetch('locations.json')
-                .then(response => response.json())
-                .then(data => {
-                    siteData = data;
-                    applyFilters();
-                })
-                .catch(error => console.error("Error loading JSON:", error));
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log("User location retrieved:", userLocation);
+                loadLocations(); // Load locations after getting user location
+            },
+            error => {
+                console.error("Error getting location:", error);
+                loadLocations(); // Proceed even if location is not available
+            }
+        );
+    } else {
+        console.warn("Geolocation is not supported by this browser.");
+        loadLocations();
+    }
+}
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 3958.8; // Radius of Earth in miles
+    const toRad = angle => angle * (Math.PI / 180);
+
+    let dLat = toRad(lat2 - lat1);
+    let dLon = toRad(lon2 - lon1);
+
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+        
+// Existing function
+function loadLocations() {
+    fetch('locations.json')
+        .then(response => response.json())
+        .then(data => {
+            siteData = data;
+            applyFilters();
+        })
+        .catch(error => console.error("Error loading JSON:", error));
+}
+
+
+function applyFilters() {
+    let selectedCost = document.getElementById("costFilter").value;
+    let selectedType = document.getElementById("typeFilter").value;
+    let selectedFamily = document.getElementById("familyFilter").value;
+    let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
+    let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
+    let selectedDistance = document.getElementById("distanceFilter").value;
+
+    let resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+
+    siteData.forEach(site => {
+        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+
+        if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+            (selectedDistance === "all" ||
+             (distance !== null &&
+              ((selectedDistance === "1" && distance < 1) ||
+               (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+               (selectedDistance === "10" && distance > 10))))) {
+
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            marker.addTo(map);
+            allMarkers.push(marker);
+
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+            siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+            siteCard.onclick = () => {
+                map.setView([site.lat, site.lng], 14);
+                marker.openPopup();
+            };
+            resultsContainer.appendChild(siteCard);
         }
+    });
+}
 
-        function applyFilters() {
-            let selectedCost = document.getElementById("costFilter").value;
-            let selectedType = document.getElementById("typeFilter").value;
-            let selectedFamily = document.getElementById("familyFilter").value;
-            let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
-            let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
-
-            let resultsContainer = document.getElementById("searchResults");
-            resultsContainer.innerHTML = "";
-            allMarkers.forEach(marker => map.removeLayer(marker));
-            allMarkers = [];
-
-            siteData.forEach(site => {
-                if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-                    (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-                    (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
-                    (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
-                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
-                    
-                    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
-                    marker.addTo(map);
-                    allMarkers.push(marker);
-
-                    let siteCard = document.createElement("div");
-                    siteCard.className = "site-card";
-                    siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
-                    siteCard.onclick = () => {
-                        map.setView([site.lat, site.lng], 14);
-                        marker.openPopup();
-                    };
-                    resultsContainer.appendChild(siteCard);
-                }
-            });
-        }
 
         loadLocations();
     </script>
