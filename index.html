@@ -70,33 +70,32 @@
             font-size: 1.2em;
         }
         
-        .filter-group {
-            margin-bottom: 15px;
-        }
+                 .filter-group {
+                    margin-bottom: 15px;
+                }
         
-        .filter-group label {
-            font-size: 1em;
-        }
+                /* New styles for the Time Period filter */
+                .timePeriod-group {
+                    font-size: 0.9em;
+                    display: flex;
+                    flex-direction: column; /* Stack labels vertically */
+                    gap: 5px; /* Reduce gap between checkboxes */
+                }
         
-        /* New styles for the Time Period filter */
-        .timePeriod-group {
-            font-size: 0.9em; /* Adjusted for readability */
-            display: flex;
-            flex-wrap: wrap; /* Ensures text doesn't overflow */
-            gap: 10px; /* Adds spacing between items */
-            align-items: center;
-        }
+                .timePeriod-group label {
+                    display: flex;
+                    flex-direction: column; /* Ensures text and year appear stacked */
+                    align-items: flex-start; /* Aligns everything neatly */
+                    font-family: Arial, sans-serif;
+                    white-space: nowrap; /* Prevents weird wrapping */
+                }
         
-        .timePeriod-group label {
-            display: flex;
-            align-items: center;
-            white-space: nowrap; /* Prevents wrapping */
-            font-family: Arial, sans-serif; /* Matches the font in the image */
-        }
-        
-        .timePeriodFilter {
-            margin-right: 5px; /* Adds space between checkbox and text */
-        }
+                .timePeriod-years {
+                    font-size: 0.8em; /* Smaller font for years */
+                    color: #A0A0A0; /* Lighter gray for subtle contrast */
+                    margin-left: 22px; /* Aligns with checkbox */
+                }
+
         
         .filter-group select {
             width: 100%;
@@ -187,15 +186,36 @@
         <div class="filter-group">
             <label>Time Period:</label>
             <div class="timePeriod-group">
-                <label><input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric</label>
-                <label><input type="checkbox" class="timePeriodFilter" value="indigenous"> Indigenous & Native History</label>
-                <label><input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements (1492-1800)</label>
-                <label><input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century & Westward Expansion (1800-1899)</label>
-                <label><input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> Industrial Revolution & 20th Century (1900-1950s)</label>
-                <label><input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History or Civil Rights (1950s-Present)</label>
-                <label><input type="checkbox" class="timePeriodFilter" value="other"> Other</label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric
+                    <span class="timePeriod-years">(Before 1492)</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="indigenous"> Indigenous & Native History
+                    <span class="timePeriod-years">(Before 1492 – Present)</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements
+                    <span class="timePeriod-years">(1492 – 1800)</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century & Westward Expansion
+                    <span class="timePeriod-years">(1800 – 1899)</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> Industrial Revolution & 20th Century
+                    <span class="timePeriod-years">(1900 – 1950s)</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History or Civil Rights
+                    <span class="timePeriod-years">(1950s – Present)</span>
+                </label>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="other"> Other
+                </label>
             </div>
         </div>
+
 
             
             <div class="filter-group">
