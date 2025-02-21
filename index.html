@@ -149,7 +149,7 @@
             margin-bottom: 10px;
             color: white;
             cursor: pointer;
-            gap: 15px; /* Adds spacing between image and text */
+            gap: 15px; /* Ensures spacing between image and text */
         }
         
         .site-card:hover {
@@ -162,6 +162,20 @@
             object-fit: cover;
             border-radius: 5px;
         }
+        
+        .site-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 70%;
+        }
+        
+        .site-info p {
+            margin: 5px 0; /* Reduce spacing between attributes */
+            font-size: 0.9em; /* Slightly smaller for readability */
+            color: #D0D0D0; /* Lighter text for contrast */
+        }
+
 
 
         .site-card h3 {
@@ -417,7 +431,7 @@ function applyFilters() {
                 <div class="site-info">
                     <h3>${site.name}</h3>
                     <p>${site.description}</p>
-                    <p><strong>Time period:</strong> ${site.timeperiod.join(", ")}</p>
+                    <p><strong>Time Period:</strong> ${site.timeperiod.join(", ")}</p>
                     <p><strong>Category:</strong> ${site.thematiccategory}</p>
                     <p><strong>Cost:</strong> ${site.cost}</p>
                     <p><strong>Type:</strong> ${site.type}</p>
@@ -425,6 +439,7 @@ function applyFilters() {
                     <p><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
                 </div>
             `;
+
 
 
             siteCard.onclick = () => {
