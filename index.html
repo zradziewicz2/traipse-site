@@ -539,6 +539,24 @@ function translateEstimatedTime(time) {
     return timeMap[time] || time; // Return formatted value or original if not found
 }
 
+        function translateReservations(reservation) {
+            if (!reservation) return "Unknown"; 
+            const reservationMap = {
+                "walkins_welcome": "Walk-Ins Welcome",
+                "reservationrequired": "Reservation Required"
+            };
+            return reservationMap[reservation] || reservation;
+        }
+
+function translateReservations(reservation) {
+    if (!reservation) return "Unknown"; // Handle missing values
+    const reservationMap = {
+        "walkins_welcome": "Walk-Ins Welcome",
+        "reservationrequired": "Reservation Required"
+    };
+    return reservationMap[reservation] || reservation; // Return formatted value or original if not found
+}
+
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
