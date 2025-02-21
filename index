@@ -409,6 +409,46 @@
             </div>
             
             <div class="filter-group">
+                <label>Estimated Time:</label>
+                <select id="estimatedTimeFilter">
+                    <option value="all">All</option>
+                    <option value="<15 minutes">Less than 15 minutes</option>
+                    <option value="15-1 hour">15 minutes to 1 hour</option>
+                    <option value="1-2 hours">1-2 hours</option>
+                    <option value="more than 2 hours">More than 2 hours</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Reservations:</label>
+                <select id="reservationsFilter">
+                    <option value="all">All</option>
+                    <option value="walkins_welcome">Walk-Ins Welcome</option>
+                    <option value="reservationrequired">Reservation Required</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Tours:</label>
+                <select id="toursFilter">
+                    <option value="all">All</option>
+                    <option value="selftours">Self-Tours</option>
+                    <option value="guidedtours">Guided Tours</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Transit Accessibility:</label>
+                <select id="transitFilter">
+                    <option value="all">All</option>
+                    <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
+                    <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
+                    <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
+                </select>
+            </div>
+
+            
+            <div class="filter-group">
                 <label>Distance:</label>
                 <select id="distanceFilter">
                     <option value="all">All</option>
@@ -497,6 +537,11 @@ function applyFilters() {
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
     let selectedDistance = document.getElementById("distanceFilter").value;
+    let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
+    let selectedReservations = document.getElementById("reservationsFilter").value;
+    let selectedTours = document.getElementById("toursFilter").value;
+    let selectedTransit = document.getElementById("transitFilter").value;
+    
 
     // Get selected time periods (array of checked values)
     let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
@@ -518,6 +563,11 @@ function applyFilters() {
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
             (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
             (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
+            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
+            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
+            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit))
+
             (selectedDistance === "all" ||
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
@@ -540,17 +590,21 @@ function applyFilters() {
                     <div class="site-image-container">
                         <img src="${site.image}" alt="${site.name}" class="site-image">
                     </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-attributes">${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}</p>
-                    <p class="site-distance"><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
-                </div>
-
+                    <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p class="site-attributes">${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}</p>
+                        <p><strong>Estimated Time:</strong> ${translateEstimatedTime(site.estimatedtime)}</p>
+                        <p><strong>Reservations:</strong> ${translateReservations(site.reservations)}</p>
+                        <p><strong>Tours:</strong> ${translateTours(site.tours)}</p>
+                        <p><strong>Transit Accessibility:</strong> ${translateTransit(site.transit)}</p>
+                        <p class="site-distance"><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+                    </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+
 
             
             // Function to translate category names to their proper display format
