@@ -149,11 +149,20 @@
             margin-bottom: 10px;
             color: white;
             cursor: pointer;
+            gap: 15px; /* Adds spacing between image and text */
         }
-
+        
         .site-card:hover {
             background: #444;
         }
+        
+        .site-card img {
+            width: 120px; /* Adjust image width */
+            height: 120px; /* Adjust image height */
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
 
         .site-card h3 {
             margin: 0;
@@ -404,11 +413,19 @@ function applyFilters() {
             siteCard.style.alignItems = "center"; // Center items in the card
 
             siteCard.innerHTML = `
-            <h3 style="text-align: center; width: 100%;">${site.name}</h3>
-            <img src="${site.image}" alt="${site.name}" 
-                 style="width: 300px; height: 200px; object-fit: cover; border-radius: 5px; margin-bottom: 10px;">
-            <p style="text-align: center; width: 90%;">${site.description}</p>
-        `;
+                <img src="${site.image}" alt="${site.name}">
+                <div class="site-info">
+                    <h3>${site.name}</h3>
+                    <p>${site.description}</p>
+                    <p><strong>Time period:</strong> ${site.timeperiod.join(", ")}</p>
+                    <p><strong>Category:</strong> ${site.thematiccategory}</p>
+                    <p><strong>Cost:</strong> ${site.cost}</p>
+                    <p><strong>Type:</strong> ${site.type}</p>
+                    <p><strong>Local/National:</strong> ${site.localornational}</p>
+                    <p><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+                </div>
+            `;
+
 
             siteCard.onclick = () => {
                 map.setView([site.lat, site.lng], 14);
