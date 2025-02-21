@@ -299,8 +299,26 @@
             border-radius: 10px;
             background: #333;
         }
-    </style>
-</head>
+        .additional-filters {
+            margin-top: 10px;
+            border-top: 1px solid #03FDFC;
+            padding-top: 10px;
+            display: none;
+        }
+        
+        .toggle-filters {
+            background: none;
+            border: none;
+            color: #03FDFC;
+            font-size: 1em;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            padding: 5px 0;
+        }
+        </style>
+        </head>
+
 <body>
 
     <!-- Header -->
@@ -380,33 +398,6 @@
                     <option value="paid">Paid</option>
                 </select>
             </div>
-
-            <div class="filter-group">
-                <label>Type:</label>
-                <select id="typeFilter">
-                    <option value="all">All</option>
-                    <option value="indoor">Indoor</option>
-                    <option value="outdoor">Outdoor</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Family Friendly:</label>
-                <select id="familyFilter">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Local or National:</label>
-                <select id="localOrNationalFilter">
-                    <option value="all">All</option>
-                    <option value="local">Local</option>
-                    <option value="national">National</option>
-                </select>
-            </div>
             
             <div class="filter-group">
                 <label>Estimated Time:</label>
@@ -416,34 +407,6 @@
                     <option value="15-1 hour">15 minutes to 1 hour</option>
                     <option value="1-2 hours">1-2 hours</option>
                     <option value="more than 2 hours">More than 2 hours</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label>Reservations:</label>
-                <select id="reservationsFilter">
-                    <option value="all">All</option>
-                    <option value="walkins_welcome">Walk-Ins Welcome</option>
-                    <option value="reservationrequired">Reservation Required</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label>Tours:</label>
-                <select id="toursFilter">
-                    <option value="all">All</option>
-                    <option value="selftours">Self-Tours</option>
-                    <option value="guidedtours">Guided Tours</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label>Transit Accessibility:</label>
-                <select id="transitFilter">
-                    <option value="all">All</option>
-                    <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
-                    <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
-                    <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
                 </select>
             </div>
 
@@ -457,6 +420,55 @@
                     <option value="10">More than 10 miles</option>
                 </select>
             </div>
+
+                        <!-- Button to Show Additional Filters -->
+            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+            
+            <!-- Additional Filters Hidden by Default -->
+            <div class="additional-filters" id="additionalFilters" style="display: none;">
+                <div class="filter-group">
+                    <label>Reservations:</label>
+                    <select id="reservationsFilter">
+                        <option value="all">All</option>
+                        <option value="walkins_welcome">Walk-Ins Welcome</option>
+                        <option value="reservationrequired">Reservation Required</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Tours:</label>
+                    <select id="toursFilter">
+                        <option value="all">All</option>
+                        <option value="selftours">Self-Tours</option>
+                        <option value="guidedtours">Guided Tours</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Transit Accessibility:</label>
+                    <select id="transitFilter">
+                        <option value="all">All</option>
+                        <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
+                        <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
+                        <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Type:</label>
+                    <select id="typeFilter">
+                        <option value="all">All</option>
+                        <option value="indoor">Indoor</option>
+                        <option value="outdoor">Outdoor</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Family Friendly:</label>
+                    <select id="familyFilter">
+                        <option value="all">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
 
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
@@ -728,6 +740,16 @@ function applyFilters() {
                 getUserLocation(); // Gets user's location when the page loads
             };
 
-    </script>
+<script>
+    function toggleAdditionalFilters() {
+        var filters = document.getElementById("additionalFilters");
+        if (filters.style.display === "none" || filters.style.display === "") {
+            filters.style.display = "block";
+        } else {
+            filters.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
+
