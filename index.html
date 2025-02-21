@@ -213,6 +213,13 @@
             font-size: 0.9em;
             color: #D0D0D0;
         }
+        
+        .site-distance {
+            margin-top: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #D0D0D0;
+        }
 
         
         .site-image-container {
@@ -533,12 +540,14 @@ function applyFilters() {
                     <div class="site-image-container">
                         <img src="${site.image}" alt="${site.name}" class="site-image">
                     </div>
-                    <div class="site-details">
-                        <h3 class="site-title">${site.name}</h3>
-                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-attributes">${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}</p>
-                    </div>
+                <div class="site-details">
+                    <h3 class="site-title">${site.name}</h3>
+                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                    <p class="site-attributes">${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}</p>
+                    <p class="site-distance"><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+                </div>
+
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
