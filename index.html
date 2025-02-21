@@ -142,6 +142,7 @@
 
         .site-card {
             display: flex;
+            flex-direction: column;
             align-items: center;
             background: #333;
             padding: 15px;
@@ -149,20 +150,58 @@
             margin-bottom: 10px;
             color: white;
             cursor: pointer;
-            gap: 15px; /* Ensures spacing between image and text */
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
         }
         
         .site-card:hover {
             background: #444;
         }
         
-        .site-card img {
-            width: 120px; /* Adjust image width */
-            height: 120px; /* Adjust image height */
+        .site-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #03FDFC;
+            margin-bottom: 10px;
+        }
+        
+        .site-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .site-image {
+            width: 150px;
+            height: 150px;
             object-fit: cover;
             border-radius: 5px;
         }
         
+        .site-details {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding-left: 15px;
+        }
+        
+        .site-details p {
+            margin: 3px 0;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+        
+        .site-description {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #E0E0E0;
+            max-width: 90%;
+        }
+
         .site-info {
             display: flex;
             flex-direction: column;
@@ -427,18 +466,27 @@ function applyFilters() {
             siteCard.style.alignItems = "center"; // Center items in the card
 
             siteCard.innerHTML = `
-                <img src="${site.image}" alt="${site.name}">
-                <div class="site-info">
-                    <h3>${site.name}</h3>
-                    <p>${site.description}</p>
-                    <p><strong>Time Period:</strong> ${site.timeperiod.join(", ")}</p>
-                    <p><strong>Category:</strong> ${site.thematiccategory}</p>
-                    <p><strong>Cost:</strong> ${site.cost}</p>
-                    <p><strong>Type:</strong> ${site.type}</p>
-                    <p><strong>Local/National:</strong> ${site.localornational}</p>
-                    <p><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+                <h3 class="site-title">${site.name}</h3>
+                <div class="site-content">
+                    <img src="${site.image}" alt="${site.name}" class="site-image">
+                    <div class="site-details">
+                        <p><strong>Time Period:</strong> ${formatText(site.timeperiod.join(", "))}</p>
+                        <p><strong>Category:</strong> ${formatText(site.thematiccategory)}</p>
+                        <p><strong>Cost:</strong> ${formatText(site.cost)}</p>
+                        <p><strong>Type:</strong> ${formatText(site.type)}</p>
+                        <p><strong>Local/National:</strong> ${formatText(site.localornational)}</p>
+                        <p><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+                    </div>
                 </div>
+                <p class="site-description">${site.description}</p>
             `;
+            
+            // Function to format text properly (capitalize and add spaces)
+            function formatText(text) {
+                return text.replace(/([a-z])([A-Z])/g, "$1 $2") // Adds space between camelCase words
+                           .replace(/\b[a-z]/g, char => char.toUpperCase()); // Capitalizes first letter
+            }
+
 
 
 
