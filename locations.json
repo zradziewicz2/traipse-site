@@ -27,7 +27,7 @@
         "localornational": "local",
         "thematiccategory": "historichomes",
         "image": "images/mollybrown.jpg",
-        "timeperiod": ["industrialrevolution"]
+        "timeperiod": ["industrialrevolution"],
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
@@ -44,7 +44,11 @@
         "localornational": "local",
         "thematiccategory": "naturalhistory",
         "image": "images/redrocks.jpg",
-        "timeperiod": ["prehistoric"]
+        "timeperiod": ["prehistoric"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Colorado State Capitol",
@@ -57,7 +61,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/coloradostatecapital.jpg",
-        "timeperiod": ["colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"]
+        "timeperiod": ["colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Union Station",
@@ -70,7 +78,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/unionstation.jpg",
-         "timeperiod": ["industrialrevolution"]
+         "timeperiod": ["industrialrevolution"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -83,7 +95,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/buffalobillmuseumandgrave.jpg",
-        "timeperiod": ["colonial"]
+        "timeperiod": ["colonial"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Four Mile Historic Park",
@@ -96,7 +112,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/fourmilehistoricpark.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "History Colorado Center",
@@ -109,7 +129,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["prehistoric", "indigenous", "colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"]
+        "timeperiod": ["prehistoric", "indigenous", "colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Denver Botanic Gardens",
@@ -122,7 +146,11 @@
         "localornational": "local",
         "thematiccategory": "artsandculture",
         "image": "images/default.jpg",
-        "timeperiod": ["other"]
+        "timeperiod": ["other"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Colorado Railroad Museum",
@@ -135,7 +163,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
@@ -148,7 +180,11 @@
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Four Mile Historic Park",
@@ -161,7 +197,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Black American West Museum",
@@ -174,7 +214,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Byers-Evans House Museum",
@@ -187,7 +231,11 @@
         "localornational": "local",
         "thematiccategory": "historichomes",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Grant-Frontier Park",
@@ -200,7 +248,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -213,7 +265,11 @@
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Colorado Aviation Historical Society",
@@ -226,7 +282,11 @@
         "localornational": "local",
         "thematiccategory": "technologyandtransportation",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Franktown Cave",
@@ -239,7 +299,11 @@
         "localornational": "local",
         "thematiccategory": "naturalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "History Colorado Center",
@@ -252,7 +316,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
@@ -265,7 +333,11 @@
         "localornational": "local",
         "thematiccategory": "artsandculture",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Forney Museum of Transportation",
@@ -278,7 +350,11 @@
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Museo de las Americas",
@@ -291,7 +367,11 @@
         "localornational": "National",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Grant-Humphreys Mansion",
@@ -304,7 +384,11 @@
         "localornational": "national",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "International Church of Cannabis",
@@ -317,7 +401,11 @@
         "localornational": "local",
         "thematiccategory": "religiousandspiritual",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "The Cruise Room",
@@ -329,7 +417,11 @@
         "family_friendly": false,
         "thematiccategory": "foodanddrink",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Poet's Row",
@@ -342,7 +434,11 @@
         "localornational": "national",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Buckhorn Exchange",
@@ -355,7 +451,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "My Brother's Bar",
@@ -368,7 +468,11 @@
         "localornational": "local",
         "thematiccategory": "foodanddrink",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Denver Zine Library",
@@ -381,7 +485,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Linger Eatuary",
@@ -394,7 +502,11 @@
         "localornational": "local",
         "thematiccategory": "foodanddrink",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Fifty-Two 80's",
@@ -407,7 +519,11 @@
         "localornational": "national",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "National Ice Core Lab",
@@ -420,7 +536,11 @@
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -433,7 +553,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "The Yearling Sculpture",
@@ -446,7 +570,11 @@
         "localornational": "local",
         "thematiccategory": "artsandculture",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Mayan Theatre",
@@ -459,7 +587,11 @@
         "localornational": "national",
         "thematiccategory": "artsandculture",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Center for Colorado Women's History",
@@ -472,7 +604,11 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "American Museum of Western Art",
@@ -485,7 +621,11 @@
         "localornational": "national",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Black American West Museum",
@@ -498,6 +638,10 @@
         "localornational": "local",
         "thematiccategory": "generalhistory",
         "image": "images/default.jpg",
-        "timeperiod": ["nineteenthcentury"]
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     }
 ]
