@@ -18,7 +18,7 @@
             flex-direction: column;
             height: 100vh;
         }
-
+        
         /* Header */
         .header {
             display: flex;
@@ -566,14 +566,14 @@ function applyFilters() {
             (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
             (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
-            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit))
-
-            (selectedDistance === "all" ||
+            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+            (selectedDistance === "all" || 
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
                (selectedDistance === "10" && distance > 10)))) &&
             matchesTimePeriod) {
+        
 
             let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
