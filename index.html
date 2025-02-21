@@ -624,7 +624,10 @@ function applyFilters() {
 
 
 
-        loadLocations();
+            window.onload = function() {
+                getUserLocation(); // Gets user's location when the page loads
+            };
+
     </script>
 </body>
 </html>
