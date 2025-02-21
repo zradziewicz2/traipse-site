@@ -14,7 +14,7 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "overtenmilesfromtransit"
     },
     {
         "name": "Molly Brown House Museum",
@@ -113,7 +113,7 @@
         "thematiccategory": "generalhistory",
         "image": "images/fourmilehistoricpark.jpg",
         "timeperiod": ["nineteenthcentury"],
-        "estimatedtime": "1 hour",
+        "estimatedtime": "<15 minutes",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
         "transit": "underhalfamilefromtransit"
@@ -131,7 +131,7 @@
         "image": "images/default.jpg",
         "timeperiod": ["prehistoric", "indigenous", "colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"],
         "estimatedtime": "1 hour",
-        "reservations": "walkins_welcome",
+        "reservations": "reservationrequired",
         "tours": ["selftours", "guidedtours"],
         "transit": "underhalfamilefromtransit"
     },
@@ -166,7 +166,7 @@
         "timeperiod": ["nineteenthcentury"],
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
-        "tours": ["selftours", "guidedtours"],
+        "tours": ["selftours"],
         "transit": "underhalfamilefromtransit"
     },
     {
@@ -183,7 +183,7 @@
         "timeperiod": ["nineteenthcentury"],
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
-        "tours": ["selftours", "guidedtours"],
+        "tours": ["selftours],
         "transit": "underhalfamilefromtransit"
     },
     {
@@ -200,7 +200,7 @@
         "timeperiod": ["nineteenthcentury"],
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
-        "tours": ["selftours", "guidedtours"],
+        "tours": ["selftours"],
         "transit": "underhalfamilefromtransit"
     },
     {
@@ -216,8 +216,8 @@
         "image": "images/default.jpg",
         "timeperiod": ["nineteenthcentury"],
         "estimatedtime": "1 hour",
-        "reservations": "walkins_welcome",
-        "tours": ["selftours", "guidedtours"],
+        "reservations": "reservationrequired",
+        "tours": ["selftours"],
         "transit": "underhalfamilefromtransit"
     },
     {
@@ -252,7 +252,7 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "halfamiletotenmilesfromtransit"
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -302,8 +302,8 @@
         "timeperiod": ["nineteenthcentury"],
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
-        "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "tours": ["selftours"],
+        "transit": "morethantenmilesfromtransit"
     },
     {
         "name": "History Colorado Center",
@@ -589,7 +589,7 @@
         "image": "images/default.jpg",
         "timeperiod": ["nineteenthcentury"],
         "estimatedtime": "1 hour",
-        "reservations": "walkins_welcome",
+        "reservations": "reservationsrequired",
         "tours": ["selftours", "guidedtours"],
         "transit": "underhalfamilefromtransit"
     },
