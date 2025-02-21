@@ -10,7 +10,11 @@
         "localornational": "local",
         "thematiccategory": "naturalhistory",
         "image": "images/dinosaurridge.jpg",
-        "timeperiod": ["prehistoric"]
+        "timeperiod": ["prehistoric"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Molly Brown House Museum",
@@ -24,6 +28,10 @@
         "thematiccategory": "historichomes",
         "image": "images/mollybrown.jpg",
         "timeperiod": ["industrialrevolution"]
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit"
     },
     {
         "name": "Red Rocks Park & Amphitheater",
