@@ -113,7 +113,7 @@
         "thematiccategory": "generalhistory",
         "image": "images/fourmilehistoricpark.jpg",
         "timeperiod": ["nineteenthcentury"],
-        "estimatedtime": "less than 15 minutes",
+        "estimatedtime": "<than 15 minutes",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
         "transit": "underhalfamilefromtransit"
