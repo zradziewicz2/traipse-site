@@ -9,7 +9,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "naturalhistory",
-        "image": "images/dinosaurridge.jpg"
+        "image": "images/dinosaurridge.jpg",
+        "timeperiod": "prehistoric"
     },
     {
         "name": "Molly Brown House Museum",
@@ -21,7 +22,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "historichomes",
-        "image": "images/mollybrown.jpg"
+        "image": "images/mollybrown.jpg",
+        "timeperiod": "industrialrevolution"
     },
     {
         "name": "Red Rocks Park & Amphitheater",
@@ -33,7 +35,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "naturalhistory",
-        "image": "images/redrocks.jpg"
+        "image": "images/redrocks.jpg",
+        "timeperiod": "prehistoric"
     },
     {
         "name": "Colorado State Capitol",
@@ -45,7 +48,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/coloradostatecapital.jpg"
+        "image": "images/coloradostatecapital.jpg",
+        "timeperiod": "colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"
     },
     {
         "name": "Union Station",
@@ -57,7 +61,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/unionstation.jpg"
+        "image": "images/unionstation.jpg",
+         "timeperiod": "industrialrevolution"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -69,7 +74,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/buffalobillmuseumandgrave.jpg"
+        "image": "images/buffalobillmuseumandgrave.jpg",
+        "timeperiod": "colonial"
     },
     {
         "name": "Four Mile Historic Park",
@@ -81,7 +87,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/fourmilehistoricpark.jpg"
+        "image": "images/fourmilehistoricpark.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "History Colorado Center",
@@ -93,7 +100,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "prehistoric", "indigenous", "colonial", "nineteenthcentury", "industrialrevolution", "modernhistory"
     },
     {
         "name": "Denver Botanic Gardens",
@@ -105,7 +113,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "artsandculture",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "other"
     },
     {
         "name": "Colorado Railroad Museum",
@@ -117,7 +126,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
@@ -129,7 +139,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Four Mile Historic Park",
@@ -141,7 +152,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Black American West Museum",
@@ -153,7 +165,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Byers-Evans House Museum",
@@ -165,7 +178,8 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "historichomes",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Grant-Frontier Park",
@@ -177,7 +191,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -189,7 +204,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Colorado Aviation Historical Society",
@@ -201,7 +217,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "technologyandtransportation",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Franktown Cave",
@@ -213,7 +230,8 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "naturalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "History Colorado Center",
@@ -225,7 +243,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
@@ -237,7 +256,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "artsandculture",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Forney Museum of Transportation",
@@ -249,7 +269,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Museo de las Americas",
@@ -261,7 +282,8 @@
         "family_friendly": true,
         "localornational": "National",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Grant-Humphreys Mansion",
@@ -273,7 +295,8 @@
         "family_friendly": false,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "International Church of Cannabis",
@@ -285,7 +308,8 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "religiousandspiritual",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "The Cruise Room",
@@ -296,7 +320,8 @@
         "type": "indoor",
         "family_friendly": false,
         "thematiccategory": "foodanddrink",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Poet's Row",
@@ -308,7 +333,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Buckhorn Exchange",
@@ -320,7 +346,8 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "My Brother's Bar",
@@ -332,7 +359,8 @@
         "family_friendly": false,
         "localornational": "local",
         "thematiccategory": "foodanddrink",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Denver Zine Library",
@@ -344,7 +372,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Linger Eatuary",
@@ -356,7 +385,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "foodanddrink",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Fifty-Two 80's",
@@ -368,7 +398,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "National Ice Core Lab",
@@ -380,7 +411,8 @@
         "family_friendly": false,
         "localornational": "national",
         "thematiccategory": "technologyandtransportation",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -392,7 +424,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "The Yearling Sculpture",
@@ -404,7 +437,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "artsandculture",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Mayan Theatre",
@@ -416,7 +450,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "artsandculture",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Center for Colorado Women's History",
@@ -428,7 +463,8 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "American Museum of Western Art",
@@ -440,7 +476,8 @@
         "family_friendly": true,
         "localornational": "national",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     },
     {
         "name": "Black American West Museum",
@@ -452,6 +489,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/default.jpg",
+        "timeperiod": "nineteethcentury"
     }
 ]
