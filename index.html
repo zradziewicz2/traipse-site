@@ -158,16 +158,62 @@
             font-size: 1.4em;
             font-weight: bold;
             color: #03FDFC;
-            text-align: center;
+            text-align: left;  /* Align title to the left */
+            margin-bottom: 5px;
+        }
+        
+        .site-card {
+            display: flex;
+            flex-direction: column;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
             margin-bottom: 10px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
         }
         
         .site-content {
             display: flex;
             flex-direction: row;
-            align-items: center;
+            align-items: flex-start; /* Aligns content properly */
             width: 100%;
         }
+        
+        .site-image-container {
+            flex-shrink: 0;
+            width: 150px; /* Fixed width for images */
+            margin-right: 15px; /* Adds spacing between image and details */
+        }
+        
+        .site-image {
+            width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .site-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .site-details p {
+            margin: 3px 0;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+        
+        .site-attributes {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+
         
         .site-image-container {
             flex-shrink: 0;
@@ -483,22 +529,20 @@ function applyFilters() {
             siteCard.style.alignItems = "center"; // Center items in the card
 
             siteCard.innerHTML = `
-                <h3 class="site-title">${site.name}</h3>
                 <div class="site-content">
                     <div class="site-image-container">
                         <img src="${site.image}" alt="${site.name}" class="site-image">
                     </div>
                     <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
                         <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                         <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p><strong>Cost:</strong> ${translateCost(site.cost)}</p>
-                        <p><strong>Type:</strong> ${translateType(site.type)}</p>
-                        <p><strong>Local/National:</strong> ${translateLocalOrNational(site.localornational)}</p>
-                        <p><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+                        <p class="site-attributes">${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}</p>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+
             
             // Function to translate category names to their proper display format
             function translateCategory(category) {
