@@ -165,6 +165,16 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
+            <div class="filter-group">
+                <h2>Time Period:</h2>
+                <label><input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric</label>
+                <label><input type="checkbox" class="timePeriodFilter" value="indigenous"> Indigenous & Native History</label>
+                <label><input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements</label>
+                <label><input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century & Westward Expansion</label>
+                <label><input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> Industrial Revolution & 20th Century</label>
+                <label><input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History or Civil Rights</label>
+                <label><input type="checkbox" class="timePeriodFilter" value="other"> Other</label>
+            </div>
             
             <div class="filter-group">
                 <label>Thematic Category:</label>
@@ -307,6 +317,9 @@ function applyFilters() {
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
     let selectedDistance = document.getElementById("distanceFilter").value;
 
+    // Get selected time periods (array of checked values)
+    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
+
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
     allMarkers.forEach(marker => map.removeLayer(marker));
@@ -314,6 +327,10 @@ function applyFilters() {
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+
+        // Check if site has at least one of the selected time periods
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
         if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
@@ -324,7 +341,8 @@ function applyFilters() {
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-               (selectedDistance === "10" && distance > 10))))) {
+               (selectedDistance === "10" && distance > 10)))) &&
+            matchesTimePeriod) {
 
             let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
@@ -343,8 +361,6 @@ function applyFilters() {
             <p style="text-align: center; width: 90%;">${site.description}</p>
         `;
 
-
-
             siteCard.onclick = () => {
                 map.setView([site.lat, site.lng], 14);
                 marker.openPopup();
@@ -353,6 +369,7 @@ function applyFilters() {
         }
     });
 }
+
 
 
         loadLocations();
