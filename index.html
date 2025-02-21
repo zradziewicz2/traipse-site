@@ -639,11 +639,12 @@ function applyFilters() {
                         <h3 class="site-title">${site.name}</h3>
                         <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                         <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-attributes">${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}</p>
-                        <p><strong>Estimated Time:</strong> ${translateEstimatedTime(site.estimatedtime)}</p>
-                        <p><strong>Reservations:</strong> ${translateReservations(site.reservations)}</p>
-                        <p><strong>Tours:</strong> ${translateTours(site.tours)}</p>
-                        <p><strong>Transit Accessibility:</strong> ${translateTransit(site.transit)}</p>
+                        <p class="site-attributes">
+                            ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
+                            ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
+                            ${translateTours(site.tours)}, ${translateTransit(site.transit)}
+                        </p>
+
                         <p class="site-distance"><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
                     </div>
                 </div>
