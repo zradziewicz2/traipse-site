@@ -591,7 +591,9 @@ function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
     let selectedFamily = document.getElementById("familyFilter").value;
-    let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
+    let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
+    ? document.getElementById("localOrNationalFilter").value 
+    : "all";
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
