@@ -45,7 +45,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/coloradostatecapital.jpg"
     },
     {
         "name": "Union Station",
@@ -57,7 +57,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/unionstation.jpg"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -69,7 +69,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/buffalobillmuseumandgrave.jpg"
     },
     {
         "name": "Four Mile Historic Park",
@@ -81,7 +81,7 @@
         "family_friendly": true,
         "localornational": "local",
         "thematiccategory": "generalhistory",
-        "image": "images/default.jpg"
+        "image": "images/fourmilehistoricpark.jpg"
     },
     {
         "name": "History Colorado Center",
