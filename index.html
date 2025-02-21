@@ -528,6 +528,16 @@ function loadLocations() {
         })
         .catch(error => console.error("Error loading JSON:", error));
 }
+function translateEstimatedTime(time) {
+    if (!time) return "Unknown"; // Handle missing values
+    const timeMap = {
+        "<15 minutes": "Less than 15 minutes",
+        "15-1 hour": "15 minutes to 1 hour",
+        "1-2 hours": "1-2 hours",
+        "more than 2 hours": "More than 2 hours"
+    };
+    return timeMap[time] || time; // Return formatted value or original if not found
+}
 
 
 function applyFilters() {
