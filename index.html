@@ -547,6 +547,15 @@ function translateEstimatedTime(time) {
             };
             return reservationMap[reservation] || reservation;
         }
+function translateTransit(transit) {
+    if (!transit) return "Unknown"; // Handle missing values
+    const transitMap = {
+        "underhalfamilefromtransit": "Under Half Mile from Transit",
+        "halfamiletotenmilesfromtransit": "Half Mile to 10 Miles from Transit",
+        "overtenmilesfromtransit": "Over 10 Miles from Transit"
+    };
+    return transitMap[transit.toLowerCase()] || transit; // Return formatted value or original if not found
+}
 
 function translateReservations(reservation) {
     if (!reservation) return "Unknown"; // Handle missing values
