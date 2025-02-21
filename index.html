@@ -556,6 +556,14 @@ function translateReservations(reservation) {
     };
     return reservationMap[reservation] || reservation; // Return formatted value or original if not found
 }
+function translateTours(tours) {
+    if (!tours || !Array.isArray(tours)) return "Unknown"; // Handle missing or incorrect values
+    const tourMap = {
+        "selftours": "Self-Guided Tours",
+        "guidedtours": "Guided Tours"
+    };
+    return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
+}
 
 
 function applyFilters() {
