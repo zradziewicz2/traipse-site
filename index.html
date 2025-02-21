@@ -150,19 +150,15 @@
             margin-bottom: 10px;
             color: white;
             cursor: pointer;
-            text-align: center;
             max-width: 600px;
             width: 100%;
-        }
-        
-        .site-card:hover {
-            background: #444;
         }
         
         .site-title {
             font-size: 1.4em;
             font-weight: bold;
             color: #03FDFC;
+            text-align: center;
             margin-bottom: 10px;
         }
         
@@ -170,23 +166,44 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
             width: 100%;
         }
         
+        .site-image-container {
+            flex-shrink: 0;
+            width: 35%;
+        }
+        
         .site-image {
-            width: 150px;
-            height: 150px;
+            width: 100%;
+            height: auto;
+            max-height: 150px;
             object-fit: cover;
             border-radius: 5px;
         }
         
         .site-details {
+            flex-grow: 1;
+            padding-left: 15px;
             display: flex;
             flex-direction: column;
             text-align: left;
-            padding-left: 15px;
         }
+        
+        .site-details p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+        
+        .site-description {
+            text-align: left;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #E0E0E0;
+            max-width: 90%;
+        }
+
         
         .site-details p {
             margin: 3px 0;
@@ -468,18 +485,70 @@ function applyFilters() {
             siteCard.innerHTML = `
                 <h3 class="site-title">${site.name}</h3>
                 <div class="site-content">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
+                    <div class="site-image-container">
+                        <img src="${site.image}" alt="${site.name}" class="site-image">
+                    </div>
                     <div class="site-details">
-                        <p><strong>Time Period:</strong> ${formatText(site.timeperiod.join(", "))}</p>
-                        <p><strong>Category:</strong> ${formatText(site.thematiccategory)}</p>
-                        <p><strong>Cost:</strong> ${formatText(site.cost)}</p>
-                        <p><strong>Type:</strong> ${formatText(site.type)}</p>
-                        <p><strong>Local/National:</strong> ${formatText(site.localornational)}</p>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p><strong>Cost:</strong> ${translateCost(site.cost)}</p>
+                        <p><strong>Type:</strong> ${translateType(site.type)}</p>
+                        <p><strong>Local/National:</strong> ${translateLocalOrNational(site.localornational)}</p>
                         <p><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+            
+            // Function to translate category names to their proper display format
+            function translateCategory(category) {
+                const categoryMap = {
+                    "artsandculture": "Arts and Culture",
+                    "foodanddrink": "Food and Drink",
+                    "generalhistory": "General History",
+                    "historichomes": "Historic Homes",
+                    "naturalhistory": "Natural History",
+                    "religiousandspiritual": "Religious and Spiritual",
+                    "technologyandtransportation": "Technology and Transportation",
+                    "other": "Other"
+                };
+                return categoryMap[category.toLowerCase()] || formatText(category);
+            }
+            
+            // Function to translate time periods
+            function translateTimePeriod(timeperiod) {
+                const timePeriodMap = {
+                    "prehistoric": "Prehistoric",
+                    "indigenous": "Indigenous & Native History",
+                    "colonial": "Colonial & Early Settlements",
+                    "nineteenthcentury": "19th Century & Westward Expansion",
+                    "industrialrevolution": "Industrial Revolution & 20th Century",
+                    "modernhistory": "Modern History or Civil Rights",
+                    "other": "Other"
+                };
+                return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
+            }
+            
+            // Function to properly format cost
+            function translateCost(cost) {
+                return cost.charAt(0).toUpperCase() + cost.slice(1);
+            }
+            
+            // Function to properly format type
+            function translateType(type) {
+                return type.charAt(0).toUpperCase() + type.slice(1);
+            }
+            
+            // Function to properly format local/national
+            function translateLocalOrNational(value) {
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+            
+            // Generic function to add spaces between camelCase words & capitalize
+            function formatText(text) {
+                return text.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b[a-z]/g, char => char.toUpperCase());
+            }
+
             
             // Function to format text properly (capitalize and add spaces)
             function formatText(text) {
