@@ -135,11 +135,18 @@
         .filters-above-map {
             display: flex;
             align-items: center;
-            padding: 10px;
-            background: #181818;
+            justify-content: flex-start; /* Align content to the left */
+            padding: 12px 15px;
+            background: #111; /* Match sidebar header color */
             color: white;
             font-size: 1em;
             gap: 10px;
+            width: calc(100% - 300px); /* Make it align with the content area */
+            position: absolute;
+            top: 80px; /* Position it below the header */
+            left: 300px; /* Align with the map */
+            z-index: 1000; /* Ensure it stays on top */
+            border-bottom: 2px solid #03FDFC;
         }
         
         .filters-above-map label {
@@ -148,13 +155,15 @@
         }
         
         .filters-above-map select {
-            padding: 5px;
+            padding: 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
             background: #333;
             color: white;
+            cursor: pointer;
         }
+
 
 
 
@@ -506,6 +515,7 @@
    
         <!-- Content -->
         <div class="content">
+            <!-- City Filter ABOVE the Map -->
             <div class="filters-above-map">
                 <label for="cityFilter">City:</label>
                 <select id="cityFilter" onchange="applyFilters()">
@@ -521,7 +531,6 @@
             <div id="map"></div>
         </div>
 
-    </div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
