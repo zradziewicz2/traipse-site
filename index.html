@@ -62,7 +62,7 @@
         .sidebar {
             width: 300px;
             background: #181818;
-            padding: 15px;
+            : 15px;
             color: white;
             overflow-y: auto;
         }
@@ -101,7 +101,7 @@
         
         .filter-group select {
             width: 100%;
-            padding: 8px;
+            : 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
@@ -112,7 +112,7 @@
             background-color: #03FDFC;
             color: #000;
             border: none;
-            padding: 10px;
+            : 10px;
             font-size: 1em;
             width: 100%;
             cursor: pointer;
@@ -126,13 +126,12 @@
 
         /* Content */
         .content {
-            flex-grow: 1;
             display: flex;
             flex-direction: row;
-            padding: 0;  /* Remove padding to eliminate the gap */
-            background: #222;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
         }
+
         
         .filters-above-map label {
             font-weight: bold;
@@ -140,7 +139,7 @@
         }
         
         .filters-above-map select {
-            padding: 8px;
+            : 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
@@ -154,12 +153,13 @@
 
         /* Search Results */
         .search-results {
-            width: 50%;
+            flex: 1;  /* Allows it to resize dynamically */
+            max-width: 50%; /* Prevents it from getting too large */
+            min-width: 40%; /* Prevents it from shrinking too much */
             overflow-y: auto;
-            padding-right: 0; /* Ensure no extra space */
-            max-height: 100%;
-            margin-right: 0px; /* Forces elements to touch */
+            padding: 10px;
         }
+
 
 
 
