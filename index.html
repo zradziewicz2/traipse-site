@@ -62,19 +62,24 @@
         .sidebar {
             width: 300px;
             background: #181818;
-            : 15px;
+            padding: 20px; /* Add padding */
             color: white;
             overflow-y: auto;
         }
+
 
         .sidebar h2 {
             color: #03FDFC;
             font-size: 1.2em;
         }
         
-                 .filter-group {
-                    margin-bottom: 15px;
-                }
+        .filter-group {
+            margin-bottom: 20px; /* Increase spacing */
+            padding: 10px; /* Add padding inside each filter */
+            border-radius: 5px; /* Slight rounding */
+            background: #222; /* Optional: Give a subtle background */
+        }
+
         
         .timePeriod-group {
             font-size: 0.9em;
@@ -151,14 +156,17 @@
 
 
 
-        /* Search Results */
-        .search-results {
-            flex: 1;  /* Allows it to resize dynamically */
-            max-width: 50%; /* Prevents it from getting too large */
-            min-width: 40%; /* Prevents it from shrinking too much */
+          .search-results {
+            flex: 1;
+            max-width: 50%;
+            min-width: 40%;
             overflow-y: auto;
-            padding: 10px;
+            padding: 20px; /* Adds more spacing */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the cards */
         }
+
 
 
 
