@@ -131,23 +131,6 @@
             background: #222;
             overflow: hidden;
         }
-
-        .filters-above-map {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* Align content to the left */
-            padding: 12px 15px;
-            background: #111; /* Match sidebar header color */
-            color: white;
-            font-size: 1em;
-            gap: 10px;
-            width: calc(100% - 300px); /* Make it align with the content area */
-            position: absolute;
-            top: 80px; /* Position it below the header */
-            left: 300px; /* Align with the map */
-            z-index: 1000; /* Ensure it stays on top */
-            border-bottom: 2px solid #03FDFC;
-        }
         
         .filters-above-map label {
             font-weight: bold;
@@ -354,15 +337,63 @@
             text-align: left;
             width: 100%;
             padding: 5px 0;
+
+        .city-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1em;
+            color: #03FDFC;
+            background: #111; /* Match the header */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .city-filter label {
+            font-weight: bold;
+        }
+        
+        .city-filter select {
+            padding: 5px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            background: #222;
+            color: white;
+            cursor: pointer;
+        }
+
         }
         </style>
         </head>
 
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
+        <!-- Header -->
+        <div class="header">
+            <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
+            
+            <!-- City Filter in Header -->
+            <div class="city-filter">
+                <label for="cityFilter">City:</label>
+                <select id="cityFilter" onchange="applyFilters()">
+                    <option value="all">All Cities</option>
+                    <option value="denver">Denver</option>
+                    <option value="washingtondc">Washington D.C.</option>
+                    <option value="philadelphia">Philadelphia</option>
+                    <option value="boston">Boston</option>
+                    <option value="chicago">Chicago</option>
+                    <option value="newyorkcity">New York City</option>
+                    <option value="atlanta">Atlanta</option>
+                    <option value="neworleans">New Orleans</option>
+                    <option value="sanfrancisco">San Francisco</option>
+                </select>
+            </div>
+        
+            <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+            <div class="title-container">TRAIPSE</div>
+        </div>
+
         <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
         <div class="title-container">TRAIPSE</div>
     </div>
@@ -513,24 +544,6 @@
         </div>
 
    
-        <!-- Content -->
-        <div class="content">
-            <!-- City Filter ABOVE the Map -->
-            <div class="filters-above-map">
-                <label for="cityFilter">City:</label>
-                <select id="cityFilter" onchange="applyFilters()">
-                    <option value="all">All Cities</option>
-                    <option value="denver">Denver</option>
-                    <option value="washingtondc">Washington D.C.</option>
-                    <option value="philadelphia">Philadelphia</option>
-                    <option value="boston">Boston</option>
-                    <option value="chicago">Chicago</option>
-                    <option value="newyorkcity">New York City.</option>
-                    <option value="atlanta">Atlanta</option>
-                    <option value="neworleans">New Orleans</option>
-                    <option value="sanfrancisco">San Francisco</option>
-                </select>
-            </div>
         
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
