@@ -40,12 +40,34 @@
         }
 
 
+        /* Tagline */
         .tagline {
-            flex-grow: 1;
-            text-align: center;
-            font-size: 1.2em;
-            font-style: italic;
+            font-size: 1.5em; /* More pronounced */
+            font-weight: bold;
             color: #03FDFC;
+            flex-grow: 0; /* Remove extra flex space */
+            margin-left: 20px; /* Moves it closer to City Filter */
+        } 
+                /* Header Buttons */
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .header-buttons button {
+            background-color: #03FDFC;
+            color: #000;
+            font-size: 1em;
+            font-weight: bold;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .header-buttons button:hover {
+            background-color: #02c9c9;
         }
 
         .title-container {
@@ -371,7 +393,7 @@
             }
             
             .city-filter select {
-                padding: 10px; /* Make dropdown bigger */
+                padding: 12px; /* Make dropdown bigger */
                 font-size: 1.2em; /* Increase text size */
                 border-radius: 8px;
                 border: none;
@@ -388,13 +410,13 @@
 
 <body>
 
-        <!-- Header -->
+               <!-- Header -->
         <div class="header">
-            <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
-            
-            <!-- City Filter in Header -->
+            <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
+        
+            <!-- City Filter -->
             <div class="city-filter">
-                <label for="cityFilter">        </label>
+                <label for="cityFilter">City:</label>
                 <select id="cityFilter" onchange="applyFilters()">
                     <option value="all">All Cities</option>
                     <option value="denver">Denver</option>
@@ -408,6 +430,22 @@
                     <option value="sanfrancisco">San Francisco</option>
                 </select>
             </div>
+        
+            <!-- Tagline -->
+            <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+        
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <button>MY PLACES</button>
+                <button>CONNECT</button>
+                <button>SUBMIT FEEDBACK</button>
+                <button>DONATE</button>
+            </div>
+        
+            <!-- Title -->
+            <div class="title-container">TRAIPSE</div>
+        </div>
+
         
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
             <div class="title-container">TRAIPSE</div>
