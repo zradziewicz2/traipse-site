@@ -58,13 +58,16 @@
         .header-buttons {
             position: absolute;
             left: 50%;
-            top: 60%; /* Adjust this value to move the buttons up/down */
-            transform: translate(-50%, -50%); /* Center horizontally and slightly adjust vertically */
+            top: 50%; /* Adjust to vertically center */
+            transform: translate(-50%, -50%); /* Center horizontally and adjust vertically */
             display: flex;
             gap: 12px; /* Space between buttons */
             align-items: center;
             justify-content: center;
+            flex-wrap: wrap; /* Ensures proper wrapping if the screen is small */
+            width: auto; /* Prevents stretching */
         }
+
 
        
         /* Standardized Header Buttons */
