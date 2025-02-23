@@ -19,16 +19,17 @@
             height: 100vh;
         }
         
-        /* Header */
-            .header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 10px 15px; /* Reduce padding */
-                background: #111;
-                color: #03FDFC;
-                height: 60px; /* Set fixed height */
-            }
+        /* Updated Header Layout */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #111;
+            color: #03FDFC;
+            height: 70px; /* Increase height for better alignment */
+        }
+
 
 
         #logo {
@@ -41,36 +42,47 @@
 
 
         /* Tagline - Smaller and Different Font */
+        /* Updated Tagline - Smaller & Adjusted Font */
         .tagline {
-            font-size: 1.2em; /* Make it smaller */
-            font-family: 'Roboto', sans-serif; /* Change font */
-            font-weight: 500; /* Less bold */
+            font-size: 1em; /* Smaller */
+            font-family: 'Georgia', serif; /* Change to a more classic font */
+            font-weight: normal; /* Less bold */
             color: #03FDFC;
-            margin-left: 15px; /* Adjust position */
-            white-space: nowrap;
+            margin-left: 20px; /* Position adjustment */
         }
 
 
-        /* Header Buttons */
+
+        /* Updated Header Buttons */
         .header-buttons {
             display: flex;
-            gap: 8px; /* Reduce spacing between buttons */
+            gap: 15px; /* Adjust spacing */
             align-items: center;
             justify-content: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Centering */
+            top: 15px; /* Move down slightly */
         }
+
         
-        /* Smaller header buttons */
+        /* Standardized Header Buttons */
         .small-button {
             background-color: #03FDFC;
             color: #000;
-            font-size: 0.9em; /* Slightly smaller font */
+            font-size: 0.9em;
             font-weight: bold;
-            padding: 6px 10px; /* Reduce padding */
+            padding: 10px 15px; /* Ensure equal padding */
+            height: 40px; /* Force all buttons to be the same height */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         
         .small-button:hover {
             background-color: #02c9c9;
