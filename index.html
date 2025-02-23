@@ -179,22 +179,23 @@
         }
 
             
-            .site-actions {
-                display: flex;
-                justify-content: center; /* Centers horizontally */
-                gap: 15px; /* Space between icons */
-                margin-top: 5px; /* Reduce spacing */
-                padding-bottom: 10px; /* Ensure space from bottom */
-            }
+        .site-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Slightly reduce space between icons */
+            margin-top: 0px; /* Remove unnecessary spacing */
+            padding-bottom: 5px; /* Minimal bottom padding */
+        }
 
 
-
-        
         .star-icon, .x-icon {
             cursor: pointer;
-            transition: color 0.3s ease-in-out; /* Smooth color change */
-            color: white; /* Default color */
+            transition: color 0.3s ease-in-out;
+            color: white;
+            margin: 0; /* Remove any unnecessary spacing */
+            padding: 0; /* Remove extra padding */
         }
+
 
         
         .star-icon.active {
@@ -347,15 +348,7 @@
             font-size: 0.9em;
             color: #D0D0D0;
         }
-        
-        .site-description {
-            text-align: left;
-            margin-top: 10px;
-            font-size: 0.95em;
-            color: #E0E0E0;
-            max-width: 90%;
-        }
-
+    
         
         .site-details p {
             margin: 3px 0;
@@ -365,11 +358,13 @@
         
         .site-description {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 5px; /* Reduce spacing */
+            margin-bottom: 3px; /* Closer to the icons */
             font-size: 0.95em;
             color: #E0E0E0;
             max-width: 90%;
         }
+
 
         .site-info {
             display: flex;
