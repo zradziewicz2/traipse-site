@@ -899,17 +899,10 @@ function applyFilters() {
             let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
             // Check if this site is already liked or not interested
-            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-            // Ensure correct UI updates
-            document.getElementById(`star-${site.id}`).classList.toggle("active", isLiked);
-            document.getElementById(`x-${site.id}`).classList.toggle("active", isNotInterested);
-            
-                        siteCard.innerHTML = `
+            siteCard.innerHTML = `
                 <div class="site-content">
                     <div class="site-image-container">
                         <img src="${site.image}" alt="${site.name}" class="site-image">
@@ -1116,6 +1109,5 @@ function applyFilters() {
 </script>
 </body>
 </html>
-
 
 
