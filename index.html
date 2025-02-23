@@ -893,12 +893,6 @@ function applyFilters() {
             siteCard.style.display = "flex";  
             siteCard.style.flexDirection = "column";  
             siteCard.style.alignItems = "center"; // Center items in the card
-
-            let siteCard = document.createElement("div");
-            siteCard.className = "site-card";
-            siteCard.style.display = "flex";  
-            siteCard.style.flexDirection = "column";  
-            siteCard.style.alignItems = "center"; // Center items in the card
             
             // Get stored My Places and Not Interested lists
             let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
