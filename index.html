@@ -822,12 +822,13 @@ function applyFilters() {
             
                     <!-- Icons for Saving & Removing -->
                     <div class="site-actions">
-                        <span class="star-icon" id="star-${site.id}" onclick="toggleMyPlaces('${site.id}')">☆</span>
-                        <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}')">✖</span>
+                        <span id="star-${site.id}" class="star-icon" onclick="toggleMyPlaces('${site.id}')">☆</span>
+                        <span id="x-${site.id}" class="x-icon" onclick="toggleNotInterested('${site.id}')">✖</span>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+
 
 
 
