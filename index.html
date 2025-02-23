@@ -310,11 +310,12 @@
         }
 
         .site-title {
-            font-size: 1.4em;
+            font-size: 2em; /* Match height with logo */
             font-weight: bold;
             color: #03FDFC;
-            text-align: left;  /* Align title to the left */
-            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            height: 50px; /* Ensures it aligns with the logo */
         }
         
         .site-card {
@@ -469,14 +470,7 @@
             .city-filter {
                 display: flex;
                 align-items: center;
-                justify-content: center; /* Center content horizontally */
-                gap: 20px; /* Increase spacing between label and dropdown */
-                font-size: 1.3em; /* Make text bigger */
-                font-weight: bold;
-                color: #03FDFC;
-                background: #111; /* Match the header */
-                padding: 10px 20px;
-                border-radius: 8px;
+                gap: 15px; /* Space between TRAIPSE and dropdown */
             }
             
             .city-filter label {
@@ -539,9 +533,9 @@
         
             <!-- City Filter -->
             <!-- Wrap the dropdown in a larger div -->
-            <div class="city-filter" style="display: flex; align-items: center; gap: 10px;">
-                <label for="cityFilter" style="font-size: 2em; font-weight: bold; color: #03FDFC;">   TRAIPSE   </label>
-                <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
+        <div class="city-filter">
+            <div class="site-title">TRAIPSE</div>
+            <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
                     <option value="all">All Cities</option>
                     <option value="denver">Denver</option>
                     <option value="washingtondc">Washington D.C.</option>
