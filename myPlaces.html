@@ -57,13 +57,27 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="places-list">
-            <h2>My Places</h2>
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="showPlaces('liked')">Liked</button>
-                <button class="filter-btn" onclick="showPlaces('disliked')">Not Interested</button>
+            <div class="places-list">
+                <h2>My Places</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="showPlaces('liked')">Liked</button>
+                    <button class="filter-btn" onclick="showPlaces('disliked')">Not Interested</button>
+                </div>
+                
+                <!-- Add this new section here -->
+                <div>
+                    <h2>My Places</h2>
+                    <div id="myPlacesList"></div>
+                </div>
+            
+                <div>
+                    <h2>Not Interested</h2>
+                    <div id="notInterestedList"></div>
+                </div>
+            
+                <div id="savedPlaces"></div>
             </div>
+
             <div id="savedPlaces"></div>
         </div>
         <div class="map-container" id="map"></div>
@@ -153,6 +167,33 @@ function showPlaces(type) {
 
         showPlaces('liked');
     });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+        
+            let myPlacesContainer = document.getElementById("myPlacesList");
+            let notInterestedContainer = document.getElementById("notInterestedList");
+        
+            myPlacesContainer.innerHTML = myPlaces.length ? "" : "<p>No places saved yet.</p>";
+            notInterestedContainer.innerHTML = notInterested.length ? "" : "<p>No places marked as not interested.</p>";
+        
+            myPlaces.forEach(site => {
+                let item = document.createElement("div");
+                item.classList.add("site-card");
+                item.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+                myPlacesContainer.appendChild(item);
+            });
+        
+            notInterested.forEach(site => {
+                let item = document.createElement("div");
+                item.classList.add("site-card");
+                item.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+                notInterestedContainer.appendChild(item);
+            });
+        });
+
+
 </script>
 
 </body>
