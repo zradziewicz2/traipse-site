@@ -40,14 +40,16 @@
         }
 
 
-        /* Tagline */
+        /* Tagline - Smaller and Different Font */
         .tagline {
-            font-size: 1.5em; /* More pronounced */
-            font-weight: bold;
+            font-size: 1.2em; /* Make it smaller */
+            font-family: 'Roboto', sans-serif; /* Change font */
+            font-weight: 500; /* Less bold */
             color: #03FDFC;
-            flex-grow: 0; /* Remove extra flex space */
-            margin-left: 20px; /* Moves it closer to City Filter */
-        } 
+            margin-left: 15px; /* Adjust position */
+            white-space: nowrap;
+        }
+
 
         /* Header Buttons */
         .header-buttons {
@@ -397,17 +399,18 @@
                 font-weight: bold;
             }
             
-            /* City Filter Dropdown */
+            /* City Filter - Bigger and More Pronounced */
             .city-filter-dropdown {
-                font-size: 1.2em; /* Make bigger */
-                font-weight: bold; /* Make text stand out */
-                padding: 10px 15px;
-                border-radius: 8px;
-                border: none;
-                background: #222;
-                color: white;
+                font-size: 1.5em; /* Increase text size */
+                font-weight: bold;
+                padding: 12px 20px; /* Make it larger */
+                border-radius: 10px;
+                border: 2px solid #03FDFC; /* Add a turquoise border */
+                background: #111; /* Match dark theme */
+                color: #03FDFC; /* Make text pop */
                 cursor: pointer;
             }
+
 
 
         }
