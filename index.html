@@ -182,19 +182,18 @@
         .site-actions {
             display: flex;
             gap: 10px;
-            margin-top: 10px;
-            font-size: 1.5em; /* Make icons bigger */
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
         }
+
         
         .star-icon, .x-icon {
             cursor: pointer;
-            transition: color 0.3s ease, transform 0.2s ease;
+            transition: color 0.3s ease-in-out; /* Smooth color change */
             color: white; /* Default color */
         }
-        
-        .star-icon:hover, .x-icon:hover {
-            transform: scale(1.2); /* Slight zoom on hover */
-        }
+
         
         .star-icon.active {
             color: gold; /* Star turns gold when selected */
@@ -206,6 +205,28 @@
             content: '❌';
         }
 
+        /* Tooltip styling */
+        .star-icon::after,
+        .x-icon::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 8px;
+            font-size: 0.8em;
+            border-radius: 5px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            transform: translateY(-120%);
+        }
+        
+        /* Show tooltip on hover */
+        .star-icon:hover::after,
+        .x-icon:hover::after {
+            opacity: 1;
+        }
 
 
         .site-card {
@@ -803,7 +824,7 @@ function applyFilters() {
             siteCard.style.alignItems = "center"; // Center items in the card
 
             siteCard.innerHTML = `
-                <div class="site-content">
+                <div class="site-content" style="position: relative;">
                     <div class="site-image-container">
                         <img src="${site.image}" alt="${site.name}" class="site-image">
                     </div>
@@ -820,10 +841,12 @@ function applyFilters() {
                         <p class="site-distance"><strong>Distance:</strong> ${userLocation ? distance.toFixed(1) + " miles" : "Unknown"}</p>
                     </div>
             
-                    <!-- Icons for Saving & Removing -->
+                    <!-- Icons for Saving & Removing, now at bottom-left -->
                     <div class="site-actions">
-                        <span id="star-${site.id}" class="star-icon" onclick="toggleMyPlaces('${site.id}', this)">☆</span>
-                        <span id="x-${site.id}" class="x-icon" onclick="toggleNotInterested('${site.id}', this)">✖</span>
+                        <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places" 
+                              onclick="toggleMyPlaces('${site.id}', this)">☆</span>
+                        <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me" 
+                              onclick="toggleNotInterested('${site.id}', this)">✖</span>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
