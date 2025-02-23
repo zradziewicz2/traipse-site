@@ -242,7 +242,9 @@
         .header-buttons {
             display: flex;
             gap: 10px; /* Space between buttons */
+            justify-content: flex-end; /* Aligns buttons to the right */
         }
+
         .header-buttons-container {
             display: flex;
             justify-content: flex-end; /* Moves buttons to the right */
@@ -253,15 +255,22 @@
             background: transparent;
             border: 2px solid #03FDFC;
             color: #03FDFC;
-            font-size: 0.8em;
+            font-size: 0.7em; /* Reduced font size */
             font-weight: bold;
             padding: 5px 10px;
             height: 30px;
+            min-width: 110px; /* Ensures all buttons have the same width */
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             border-radius: 5px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap; /* Prevents text wrapping */
         }
+
         
             .header-btn:hover {
                 background: #03FDFC;
