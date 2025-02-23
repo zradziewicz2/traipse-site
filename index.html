@@ -24,22 +24,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 20px; /* Slightly more padding */
+            padding: 15px 20px;
             background: #111;
             color: #03FDFC;
-            height: 65px; /* Tiny increase to fit the spacing */
+            height: 90px;
+            position: relative;
         }
 
-
-        .website-title {
-            font-size: 2em;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #03FDFC;
-            white-space: nowrap;
-            margin: 5px 15px; /* Adds space above and below */
-        }
 
 
 
@@ -318,25 +309,13 @@
             width: 100%;
         }
 
-         .website-title {
-            font-size: 2.5em; /* Webpage title size */
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #03FDFC;
-            white-space: nowrap;
-        }
-
-        .site-card-title {
-            font-size: 1.4em; /* Reduce from 1.8em */
+        .site-title {
+            font-size: 1.4em;
             font-weight: bold;
-            text-transform: uppercase;
             color: #03FDFC;
-            margin-bottom: 5px; /* Reduce space */
+            text-align: left;  /* Align title to the left */
+            margin-bottom: 5px;
         }
-
-
-
         
         .site-card {
             display: flex;
@@ -490,7 +469,14 @@
             .city-filter {
                 display: flex;
                 align-items: center;
-                gap: 15px; /* Space between TRAIPSE and dropdown */
+                justify-content: center; /* Center content horizontally */
+                gap: 20px; /* Increase spacing between label and dropdown */
+                font-size: 1.3em; /* Make text bigger */
+                font-weight: bold;
+                color: #03FDFC;
+                background: #111; /* Match the header */
+                padding: 10px 20px;
+                border-radius: 8px;
             }
             
             .city-filter label {
@@ -553,24 +539,21 @@
         
             <!-- City Filter -->
             <!-- Wrap the dropdown in a larger div -->
-        <div class="website-title">TRAIPSE</div>
-
-        
-        <!-- Move city filter outside -->
-        <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
-
-                <option value="all">All Cities</option>
-                <option value="denver">Denver</option>
-                <option value="washingtondc">Washington D.C.</option>
-                <option value="philadelphia">Philadelphia</option>
-                <option value="boston">Boston</option>
-                <option value="chicago">Chicago</option>
-                <option value="newyorkcity">New York City</option>
-                <option value="atlanta">Atlanta</option>
-                <option value="neworleans">New Orleans</option>
-                <option value="sanfrancisco">San Francisco</option>
-            </select>
-
+            <div class="city-filter" style="display: flex; align-items: center; gap: 10px;">
+                <label for="cityFilter" style="font-size: 2em; font-weight: bold; color: #03FDFC;">   TRAIPSE   </label>
+                <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
+                    <option value="all">All Cities</option>
+                    <option value="denver">Denver</option>
+                    <option value="washingtondc">Washington D.C.</option>
+                    <option value="philadelphia">Philadelphia</option>
+                    <option value="boston">Boston</option>
+                    <option value="chicago">Chicago</option>
+                    <option value="newyorkcity">New York City</option>
+                    <option value="atlanta">Atlanta</option>
+                    <option value="neworleans">New Orleans</option>
+                    <option value="sanfrancisco">San Francisco</option>
+                </select>
+            </div>
         
             <!-- Tagline -->
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
@@ -638,7 +621,7 @@
 
             
             <div class="filter-group">
-                <label>Category:</label>
+                <label>Thematic Category:</label>
                 <select id="ThematicCategoryFilter">
                     <option value="all">All</option>
                     <option value="artsandculture">Arts and Culture</option>
@@ -647,8 +630,8 @@
                     <option value="historichomes">Historic Homes</option>
                     <option value="naturalhistory">Natural History</option>
                     <option value="religiousandspiritual">Religious and Spiritual</option>
-                    <option value="technologyandtransportation">Technology and Transportation</option>
                     <option value="other">Other</option>
+                    <option value="technologyandtransportation">Technology and Transportation</option>
                 </select>
             </div>
 
@@ -793,19 +776,14 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
         
 // Existing function
-        fetch('./locations.json')  // Ensure the file is in the same directory as index.html
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                siteData = data;
-                applyFilters();
-            })
-            .catch(error => console.error("Error loading JSON:", error));
-
+function loadLocations() {
+    fetch('locations.json')
+        .then(response => response.json())
+        .then(data => {
+            siteData = data;
+            applyFilters();
+        })
+        .catch(error => console.error("Error loading JSON:", error));
 }
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
@@ -924,29 +902,25 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-        siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
+            siteCard.innerHTML = `
+                <div class="site-content">
+                    <div class="site-image-container">
+                        <img src="${site.image}" alt="${site.name}" class="site-image">
+                    </div>
+                    <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p class="site-attributes">
+                            ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
+                            ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
+                            ${translateTours(site.tours)}, ${translateTransit(site.transit)}
+                        </p>
+                    </div>
                 </div>
-                <div class="site-details">
-                    <h3 class="site-card-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-attributes">
-                        ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
-                        ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
-                        ${translateTours(site.tours)}, ${translateTransit(site.transit)}
-                    </p>
-                    <p class="site-distance">
-                        ${distance !== null ? `${distance} miles away` : "Distance unavailable"}
-                    </p>
-                </div>
-            </div>
-        
-            <p class="site-description">${site.description}</p>
-        `;
-
+            
+                <p class="site-description">${site.description}</p>
+            
                 <div class="site-actions">
                     <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
                           data-tooltip="Add to My Places">⭐</span>
