@@ -919,25 +919,29 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-            siteCard.innerHTML = `
-                <div class="site-content">
-                    <div class="site-image-container">
-                        <img src="${site.image}" alt="${site.name}" class="site-image">
-                    </div>
-                    <div class="site-details">
-                        <h3 class="site-title">${site.name}</h3>
-                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-attributes">
-                            ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
-                            ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
-                            ${translateTours(site.tours)}, ${translateTransit(site.transit)}
-                        </p>
-                    </div>
+        siteCard.innerHTML = `
+            <div class="site-content">
+                <div class="site-image-container">
+                    <img src="${site.image}" alt="${site.name}" class="site-image">
                 </div>
-            
-                <p class="site-description">${site.description}</p>
-            
+                <div class="site-details">
+                    <h3 class="site-card-title">${site.name}</h3>
+                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                    <p class="site-attributes">
+                        ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
+                        ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
+                        ${translateTours(site.tours)}, ${translateTransit(site.transit)}
+                    </p>
+                    <p class="site-distance">
+                        ${distance !== null ? `${distance} miles away` : "Distance unavailable"}
+                    </p>
+                </div>
+            </div>
+        
+            <p class="site-description">${site.description}</p>
+        `;
+
                 <div class="site-actions">
                     <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
                           data-tooltip="Add to My Places">⭐</span>
