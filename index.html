@@ -36,27 +36,25 @@
 
 
         #logo {
-            width: auto; /* Adjust width automatically */
-            height: 70px; /* Set a fixed height (adjust as needed) */
-            max-width: 100%; /* Prevent overflow */
-            object-fit: contain; /* Maintain aspect ratio */
-            margin-left: 10px; /* Space from the left */
+            width: auto;
+            height: 50px; /* Reduce size */
+            max-width: 100%;
+            object-fit: contain;
+            margin-left: 10px;
+            display: block; /* Ensures it stays inside the header */
         }
 
 
-        /* Tagline - Smaller and Different Font */
-        /* Updated Tagline - Smaller & Adjusted Font */
-            /* Adjusted Tagline Position */
             .tagline {
                 font-size: 1em;
                 font-family: 'Georgia', serif;
                 font-weight: normal;
                 color: #03FDFC;
                 margin-left: 20px;
-                margin-right: 15px; /* Give it more space */
                 white-space: nowrap;
-                flex-grow: 1;
+                flex-grow: 0; /* Prevents stretching */
             }
+
 
 
 
@@ -70,9 +68,8 @@
                 justify-content: center;
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
-                top: 50%; /* Move buttons lower */
-                transform: translate(-50%, -50%); /* Center vertically */
+                top: 50%;
+                transform: translate(-50%, 0%); /* Fixes centering issue */
             }
 
 
