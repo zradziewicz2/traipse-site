@@ -48,27 +48,32 @@
             flex-grow: 0; /* Remove extra flex space */
             margin-left: 20px; /* Moves it closer to City Filter */
         } 
-                /* Header Buttons */
+
+        /* Header Buttons */
         .header-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px; /* Reduce spacing between buttons */
+            align-items: center;
+            justify-content: center;
         }
         
-        .header-buttons button {
+        /* Smaller header buttons */
+        .small-button {
             background-color: #03FDFC;
             color: #000;
-            font-size: 1em;
+            font-size: 0.9em; /* Slightly smaller font */
             font-weight: bold;
-            padding: 8px 12px;
+            padding: 6px 10px; /* Reduce padding */
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         
-        .header-buttons button:hover {
+        .small-button:hover {
             background-color: #02c9c9;
         }
+
 
         .title-container {
             font-size: 2.5em; /* Slightly bigger */
@@ -392,15 +397,18 @@
                 font-weight: bold;
             }
             
-            .city-filter select {
-                padding: 12px; /* Make dropdown bigger */
-                font-size: 1.2em; /* Increase text size */
+            /* City Filter Dropdown */
+            .city-filter-dropdown {
+                font-size: 1.2em; /* Make bigger */
+                font-weight: bold; /* Make text stand out */
+                padding: 10px 15px;
                 border-radius: 8px;
                 border: none;
                 background: #222;
                 color: white;
                 cursor: pointer;
             }
+
 
         }
 
