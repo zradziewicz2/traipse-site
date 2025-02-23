@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Places - Traipse</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000000;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+        .places-list {
+            width: 40%;
+            overflow-y: auto;
+            padding: 20px;
+            background: #181818;
+            color: white;
+        }
+        .map-container {
+            width: 60%;
+            height: 100%;
+        }
+        .site-card {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            color: white;
+            width: 100%;
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .filter-btn.active {
+            background: #03FDFC;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="places-list">
+            <h2>My Places</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="showPlaces('liked')">Liked</button>
+                <button class="filter-btn" onclick="showPlaces('disliked')">Not Interested</button>
+            </div>
+            <div id="savedPlaces"></div>
+        </div>
+        <div class="map-container" id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+        let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+
+        var map = L.map('map').setView([39.7392, -104.9903], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        function showPlaces(type) {
+            let listContainer = document.getElementById("savedPlaces");
+            listContainer.innerHTML = "";
+            let places = type === 'liked' ? myPlaces : notInterested;
+
+            places.forEach(site => {
+                let siteCard = document.createElement("div");
+                siteCard.className = "site-card";
+                siteCard.innerHTML = `
+                    <h3>${site.name}</h3>
+                    <p><strong>Category:</strong> ${site.category}</p>
+                    <p>${site.description}</p>
+                    <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
+                `;
+                listContainer.appendChild(siteCard);
+                L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b>`);
+            });
+        }
+
+        function removePlace(id, type) {
+            let places = type === 'liked' ? myPlaces : notInterested;
+            let updatedPlaces = places.filter(site => site.id !== id);
+            localStorage.setItem(type === 'liked' ? 'myPlaces' : 'notInterested', JSON.stringify(updatedPlaces));
+            location.reload();
+        }
+
+        showPlaces('liked');
+    </script>
+</body>
+</html>
