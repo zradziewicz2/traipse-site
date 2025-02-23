@@ -30,8 +30,14 @@
             height: 60px; /* Decrease height */
         }
 
-
-
+        .website-title {
+            font-size: 2.5em; /* Webpage title size */
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #03FDFC;
+            white-space: nowrap;
+        }
 
 
         #logo {
@@ -309,14 +315,24 @@
             width: 100%;
         }
 
-        .site-title {
-            font-size: 1.8em; /* Reduce from 3.5em */
-            font-weight: 800;
+         .website-title {
+            font-size: 2.5em; /* Webpage title size */
+            font-weight: 900;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: #03FDFC;
             white-space: nowrap;
         }
+
+        .site-card-title {
+            font-size: 1.4em; /* Reduce from 1.8em */
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #03FDFC;
+            margin-bottom: 5px; /* Reduce space */
+        }
+
+
 
         
         .site-card {
@@ -534,7 +550,8 @@
         
             <!-- City Filter -->
             <!-- Wrap the dropdown in a larger div -->
-        <div class="site-title">TRAIPSE</div> 
+        <div class="website-title">TRAIPSE</div>
+
         
         <!-- Move city filter outside -->
         <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
