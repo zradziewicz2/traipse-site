@@ -27,7 +27,7 @@
             padding: 15px 20px;
             background: #111;
             color: #03FDFC;
-            height: 90px; /* Increased height to prevent overlap */
+            height: 90px;
             position: relative;
         }
 
@@ -239,30 +239,34 @@
             opacity: 1;
         }
 
-                .header-buttons {
+        .header-buttons {
             display: flex;
             gap: 10px; /* Space between buttons */
-            margin-right: 15px; /* Push buttons away from TRAIPSE */
+        }
+        .header-buttons-container {
+            display: flex;
+            justify-content: flex-end; /* Moves buttons to the right */
+            flex-grow: 1;
         }
         
         .header-btn {
-            background: transparent; /* No fill */
-            border: 2px solid #03FDFC; /* Cyan blue outline */
-            color: #03FDFC; /* Cyan blue text */
-            font-size: 0.8em; /* Small text */
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
             font-weight: bold;
             padding: 5px 10px;
-            height: 30px; /* Same height for all buttons */
+            height: 30px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
-            border-radius: 5px; /* Slightly rounded edges */
+            border-radius: 5px;
         }
         
-        .header-btn:hover {
-            background: #03FDFC; /* Fill with cyan on hover */
-            color: black; /* Change text color on hover */
-        }
+            .header-btn:hover {
+                background: #03FDFC;
+                color: black;
+            }
 
         .site-card {
             display: flex;
@@ -528,13 +532,15 @@
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
         
             <!-- Title -->
-          <div class="header-buttons">
-            <button class="header-btn">CONNECT</button>
-            <button class="header-btn">MY PLACES</button>
-            <button class="header-btn">SUBMIT FEEDBACK</button>
-            <button class="header-btn">DONATE</button>
-        </div>
-        <div class="title-container">TRAIPSE</div>
+            <div class="header-buttons-container">
+                <div class="header-buttons">
+                    <button class="header-btn">CONNECT</button>
+                    <button class="header-btn">MY PLACES</button>
+                    <button class="header-btn">SUBMIT FEEDBACK</button>
+                    <button class="header-btn">DONATE</button>
+                </div>
+            </div>
+
 
         </div>
  
