@@ -239,7 +239,31 @@
             opacity: 1;
         }
 
+                .header-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            margin-right: 15px; /* Push buttons away from TRAIPSE */
+        }
         
+        .header-btn {
+            background: transparent; /* No fill */
+            border: 2px solid #03FDFC; /* Cyan blue outline */
+            color: #03FDFC; /* Cyan blue text */
+            font-size: 0.8em; /* Small text */
+            font-weight: bold;
+            padding: 5px 10px;
+            height: 30px; /* Same height for all buttons */
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border-radius: 5px; /* Slightly rounded edges */
+        }
+        
+        .header-btn:hover {
+            background: #03FDFC; /* Fill with cyan on hover */
+            color: black; /* Change text color on hover */
+        }
+
         .site-card {
             display: flex;
             flex-direction: column;
@@ -485,7 +509,7 @@
             <!-- City Filter -->
             <!-- Wrap the dropdown in a larger div -->
             <div class="city-filter" style="display: flex; align-items: center; gap: 10px;">
-                <label for="cityFilter" style="font-size: 2em; font-weight: bold; color: #03FDFC;">City:</label>
+                <label for="cityFilter" style="font-size: 2em; font-weight: bold; color: #03FDFC;">   TRAIPSE   </label>
                 <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
                     <option value="all">All Cities</option>
                     <option value="denver">Denver</option>
@@ -504,7 +528,14 @@
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
         
             <!-- Title -->
-            <div class="title-container">TRAIPSE</div>
+          <div class="header-buttons">
+            <button class="header-btn">CONNECT</button>
+            <button class="header-btn">MY PLACES</button>
+            <button class="header-btn">SUBMIT FEEDBACK</button>
+            <button class="header-btn">DONATE</button>
+        </div>
+        <div class="title-container">TRAIPSE</div>
+
         </div>
  
     <!-- Main Layout -->
