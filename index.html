@@ -822,12 +822,13 @@ function applyFilters() {
             
                     <!-- Icons for Saving & Removing -->
                     <div class="site-actions">
-                        <span id="star-${site.id}" class="star-icon" onclick="toggleMyPlaces('${site.id}')">☆</span>
-                        <span id="x-${site.id}" class="x-icon" onclick="toggleNotInterested('${site.id}')">✖</span>
+                        <span id="star-${site.id}" class="star-icon" onclick="toggleMyPlaces('${site.id}', this)">☆</span>
+                        <span id="x-${site.id}" class="x-icon" onclick="toggleNotInterested('${site.id}', this)">✖</span>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+
 
 
 
@@ -922,44 +923,40 @@ function applyFilters() {
         let myPlaces = new Set();
         let notInterested = new Set();
         
-        function toggleMyPlaces(siteId) {
-            let starIcon = document.querySelector(`#star-${siteId}`);
-        
+        function toggleMyPlaces(siteId, element) {
             if (myPlaces.has(siteId)) {
                 myPlaces.delete(siteId);
-                starIcon.textContent = "☆"; // Change back to no fill
-                starIcon.classList.remove("active");
+                element.textContent = "☆"; // Change back to no fill
+                element.classList.remove("active");
             } else {
                 myPlaces.add(siteId);
-                starIcon.textContent = "⭐"; // Change to filled star
-                starIcon.classList.add("active");
+                element.textContent = "⭐"; // Change to filled star
+                element.classList.add("active");
         
-                // If marked "Not Interested" before, remove it from there
+                // If marked "Not Interested" before, remove it
                 if (notInterested.has(siteId)) {
                     notInterested.delete(siteId);
-                    let xIcon = document.querySelector(`#x-${siteId}`);
+                    let xIcon = document.getElementById(`x-${siteId}`);
                     xIcon.textContent = "✖"; // Change X back to outline
                     xIcon.classList.remove("active");
                 }
             }
         }
         
-        function toggleNotInterested(siteId) {
-            let xIcon = document.querySelector(`#x-${siteId}`);
-        
+        function toggleNotInterested(siteId, element) {
             if (notInterested.has(siteId)) {
                 notInterested.delete(siteId);
-                xIcon.textContent = "✖"; // Change back to outline
-                xIcon.classList.remove("active");
+                element.textContent = "✖"; // Change back to outline
+                element.classList.remove("active");
             } else {
                 notInterested.add(siteId);
-                xIcon.textContent = "❌"; // Change to filled X
-                xIcon.classList.add("active");
+                element.textContent = "❌"; // Change to filled X
+                element.classList.add("active");
         
-                // If marked "My Places" before, remove it from there
+                // If marked "My Places" before, remove it
                 if (myPlaces.has(siteId)) {
                     myPlaces.delete(siteId);
-                    let starIcon = document.querySelector(`#star-${siteId}`);
+                    let starIcon = document.getElementById(`star-${siteId}`);
                     starIcon.textContent = "☆"; // Change star back to outline
                     starIcon.classList.remove("active");
                 }
