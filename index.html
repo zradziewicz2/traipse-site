@@ -790,12 +790,19 @@ function applyFilters() {
                             ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
                             ${translateTours(site.tours)}, ${translateTransit(site.transit)}
                         </p>
-
-                        <p class="site-distance"><strong>Distance:</strong> ${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles" : "Unknown"}</p>
+            
+                        <p class="site-distance"><strong>Distance:</strong> ${userLocation ? distance.toFixed(1) + " miles" : "Unknown"}</p>
+                    </div>
+            
+                    <!-- Icons for Saving & Removing -->
+                    <div class="site-actions">
+                        <span class="star-icon" onclick="toggleMyPlaces('${site.id}', '${site.name}', '${site.image}', '${site.description}')">⭐</span>
+                        <span class="x-icon" onclick="toggleNotInterested('${site.id}')">❌</span>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+
 
 
             
