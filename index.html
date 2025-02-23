@@ -1007,77 +1007,103 @@ function applyFilters() {
                 }
             }
                 // Store user preferences in sets
-function toggleMyPlaces(siteId, element) {
-    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-
-    let site = siteData.find(s => s.id === siteId);
-    if (!site) return;
-
-    let index = myPlaces.findIndex(s => s.id === siteId);
-
-    if (index > -1) {
-        // Remove from My Places
-        myPlaces.splice(index, 1);
-        element.textContent = "☆"; // Change back to empty star
-        element.classList.remove("active");
-    } else {
-        // Add to My Places
-        myPlaces.push(site);
-        element.textContent = "⭐"; // Change to filled star
-        element.classList.add("active");
-
-        // If marked as "Not Interested", remove from that list
-        let notIndex = notInterested.findIndex(s => s.id === siteId);
-        if (notIndex > -1) {
-            notInterested.splice(notIndex, 1);
-            let xIcon = document.getElementById(`x-${siteId}`);
-            if (xIcon) {
-                xIcon.textContent = "✖"; // Change X back to outline
-                xIcon.classList.remove("active");
-            }
-        }
-    }
-
-    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-    localStorage.setItem('notInterested', JSON.stringify(notInterested));
-}
-
-        function toggleNotInterested(siteId, element) {
-            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-        
-            let site = siteData.find(s => s.id === siteId);
-            if (!site) return;
-        
-            let index = notInterested.findIndex(s => s.id === siteId);
-        
-            if (index > -1) {
-                // Remove from Not Interested
-                notInterested.splice(index, 1);
-                element.textContent = "✖"; // Change back to outline
-                element.classList.remove("active");
-            } else {
-                // Add to Not Interested
-                notInterested.push(site);
-                element.textContent = "❌"; // Change to filled X
-                element.classList.add("active");
-        
-                // If marked as "My Places", remove from that list
-                let myIndex = myPlaces.findIndex(s => s.id === siteId);
-                if (myIndex > -1) {
-                    myPlaces.splice(myIndex, 1);
-                    let starIcon = document.getElementById(`star-${siteId}`);
-                    if (starIcon) {
-                        starIcon.textContent = "☆"; // Change star back to outline
-                        starIcon.classList.remove("active");
+            function toggleMyPlaces(siteId, element) {
+                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+                // Ensure siteData is available
+                if (!siteData || siteData.length === 0) {
+                    console.error("Site data is not loaded yet.");
+                    return;
+                }
+            
+                let site = siteData.find(s => s.id === siteId);
+                if (!site) {
+                    console.error(`Site with ID ${siteId} not found.`);
+                    return;
+                }
+            
+                let index = myPlaces.findIndex(s => s.id === siteId);
+            
+                if (index > -1) {
+                    // Remove from My Places
+                    myPlaces.splice(index, 1);
+                    element.textContent = "☆"; // Change back to empty star
+                    element.classList.remove("active");
+                } else {
+                    // Add to My Places
+                    myPlaces.push(site);
+                    element.textContent = "⭐"; // Change to filled star
+                    element.classList.add("active");
+            
+                    // Remove from Not Interested if present
+                    let notIndex = notInterested.findIndex(s => s.id === siteId);
+                    if (notIndex > -1) {
+                        notInterested.splice(notIndex, 1);
+                        let xIcon = document.getElementById(`x-${siteId}`);
+                        if (xIcon) {
+                            xIcon.textContent = "✖"; // Change X back to outline
+                            xIcon.classList.remove("active");
+                        }
                     }
                 }
+            
+                // Save updates to localStorage
+                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+                localStorage.setItem('notInterested', JSON.stringify(notInterested));
+            
+                console.log("Updated My Places:", myPlaces);
             }
-        
-            localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-            localStorage.setItem('notInterested', JSON.stringify(notInterested));
-        }
+            
+            
+            function toggleNotInterested(siteId, element) {
+                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+                // Ensure siteData is available
+                if (!siteData || siteData.length === 0) {
+                    console.error("Site data is not loaded yet.");
+                    return;
+                }
+            
+                let site = siteData.find(s => s.id === siteId);
+                if (!site) {
+                    console.error(`Site with ID ${siteId} not found.`);
+                    return;
+                }
+            
+                let index = notInterested.findIndex(s => s.id === siteId);
+            
+                if (index > -1) {
+                    // Remove from Not Interested
+                    notInterested.splice(index, 1);
+                    element.textContent = "✖"; // Change back to outline
+                    element.classList.remove("active");
+                } else {
+                    // Add to Not Interested
+                    notInterested.push(site);
+                    element.textContent = "❌"; // Change to filled X
+                    element.classList.add("active");
+            
+                    // Remove from My Places if present
+                    let myIndex = myPlaces.findIndex(s => s.id === siteId);
+                    if (myIndex > -1) {
+                        myPlaces.splice(myIndex, 1);
+                        let starIcon = document.getElementById(`star-${siteId}`);
+                        if (starIcon) {
+                            starIcon.textContent = "☆"; // Change star back to outline
+                            starIcon.classList.remove("active");
+                        }
+                    }
+                }
+            
+                // Save updates to localStorage
+                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+                localStorage.setItem('notInterested', JSON.stringify(notInterested));
+            
+                console.log("Updated Not Interested:", notInterested);
+            }
+
 
 </script>
 </body>
