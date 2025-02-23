@@ -1028,27 +1028,9 @@ function applyFilters() {
             }
         
             localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-        }
+        } // <-- Make sure this closing } matches properly
+    
 
-
-            if (myPlaces.has(siteId)) {
-                myPlaces.delete(siteId);
-                element.textContent = "☆"; // Change back to no fill
-                element.classList.remove("active");
-            } else {
-                myPlaces.add(siteId);
-                element.textContent = "⭐"; // Change to filled star
-                element.classList.add("active");
-        
-                // If marked "Not Interested" before, remove it
-                if (notInterested.has(siteId)) {
-                    notInterested.delete(siteId);
-                    let xIcon = document.getElementById(`x-${siteId}`);
-                    xIcon.textContent = "✖"; // Change X back to outline
-                    xIcon.classList.remove("active");
-                }
-            }
-        }
         
         function toggleNotInterested(siteId, element) {
             if (notInterested.has(siteId)) {
