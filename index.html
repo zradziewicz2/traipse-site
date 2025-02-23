@@ -179,6 +179,32 @@
         }
 
 
+        .site-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 1.5em; /* Make icons bigger */
+        }
+        
+        .star-icon, .x-icon {
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+            color: white; /* Default color */
+        }
+        
+        .star-icon:hover, .x-icon:hover {
+            transform: scale(1.2); /* Slight zoom on hover */
+        }
+        
+        .star-icon.active {
+            color: gold; /* Star turns gold when selected */
+            content: '⭐';
+        }
+        
+        .x-icon.active {
+            color: red; /* X turns red when selected */
+            content: '❌';
+        }
 
 
 
@@ -796,12 +822,13 @@ function applyFilters() {
             
                     <!-- Icons for Saving & Removing -->
                     <div class="site-actions">
-                        <span class="star-icon" onclick="toggleMyPlaces('${site.id}', '${site.name}', '${site.image}', '${site.description}')">⭐</span>
-                        <span class="x-icon" onclick="toggleNotInterested('${site.id}')">❌</span>
+                        <span class="star-icon" id="star-${site.id}" onclick="toggleMyPlaces('${site.id}')">☆</span>
+                        <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}')">✖</span>
                     </div>
                 </div>
                 <p class="site-description">${site.description}</p>
             `;
+
 
 
 
@@ -875,20 +902,68 @@ function applyFilters() {
     });
 }
 
-
-
-            window.onload = function() {
-                getUserLocation(); // Gets user's location when the page loads
-            };
-
-    function toggleAdditionalFilters() {
-        var filters = document.getElementById("additionalFilters");
-        if (filters.style.display === "none" || filters.style.display === "") {
-            filters.style.display = "block";
-        } else {
-            filters.style.display = "none";
+        
+        
+                    window.onload = function() {
+                        getUserLocation(); // Gets user's location when the page loads
+                    };
+        
+            function toggleAdditionalFilters() {
+                var filters = document.getElementById("additionalFilters");
+                if (filters.style.display === "none" || filters.style.display === "") {
+                    filters.style.display = "block";
+                } else {
+                    filters.style.display = "none";
+                }
+            }
+                // Store user preferences in sets
+        let myPlaces = new Set();
+        let notInterested = new Set();
+        
+        function toggleMyPlaces(siteId) {
+            let starIcon = document.getElementById(`star-${siteId}`);
+        
+            if (myPlaces.has(siteId)) {
+                myPlaces.delete(siteId);
+                starIcon.textContent = "☆"; // Change back to no fill
+                starIcon.classList.remove("active");
+            } else {
+                myPlaces.add(siteId);
+                starIcon.textContent = "⭐"; // Change to filled star
+                starIcon.classList.add("active");
+        
+                // If marked "Not Interested" before, remove it from there
+                if (notInterested.has(siteId)) {
+                    notInterested.delete(siteId);
+                    let xIcon = document.getElementById(`x-${siteId}`);
+                    xIcon.textContent = "✖"; // Change X back to outline
+                    xIcon.classList.remove("active");
+                }
+            }
         }
-    }
+        
+        function toggleNotInterested(siteId) {
+            let xIcon = document.getElementById(`x-${siteId}`);
+        
+            if (notInterested.has(siteId)) {
+                notInterested.delete(siteId);
+                xIcon.textContent = "✖"; // Change back to outline
+                xIcon.classList.remove("active");
+            } else {
+                notInterested.add(siteId);
+                xIcon.textContent = "❌"; // Change to filled X
+                xIcon.classList.add("active");
+        
+                // If marked "My Places" before, remove it from there
+                if (myPlaces.has(siteId)) {
+                    myPlaces.delete(siteId);
+                    let starIcon = document.getElementById(`star-${siteId}`);
+                    starIcon.textContent = "☆"; // Change star back to outline
+                    starIcon.classList.remove("active");
+                }
+            }
+        }
+
 </script>
 </body>
 </html>
