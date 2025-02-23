@@ -24,11 +24,20 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 20px;
+            padding: 12px 20px; /* Slightly more padding */
             background: #111;
             color: #03FDFC;
-            height: 90px;
-            position: relative;
+            height: 65px; /* Tiny decrease to fit spacing */
+        }
+
+        .website-title {
+            font-size: 2em;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #03FDFC;
+            white-space: nowrap;
+            margin: 5px 15px; /* Adds space above and below */
         }
 
 
@@ -534,13 +543,11 @@
 <body>
 
                <!-- Header -->
-        <div class="header">
-            <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
-        
-            <!-- City Filter -->
-            <!-- Wrap the dropdown in a larger div -->
-            <div class="city-filter" style="display: flex; align-items: center; gap: 10px;">
-                <label for="cityFilter" style="font-size: 2em; font-weight: bold; color: #03FDFC;">   TRAIPSE   </label>
+            <div class="header">
+                <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
+            
+                <div class="website-title">TRAIPSE</div>
+            
                 <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
                     <option value="all">All Cities</option>
                     <option value="denver">Denver</option>
@@ -553,22 +560,19 @@
                     <option value="neworleans">New Orleans</option>
                     <option value="sanfrancisco">San Francisco</option>
                 </select>
-            </div>
-        
-            <!-- Tagline -->
-            <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
-        
-            <!-- Title -->
-            <div class="header-buttons-container">
-                <div class="header-buttons">
-                    <button class="header-btn">CONNECT</button>
-                   <button class="header-btn" onclick="window.location.href='https://zradziewicz2.github.io/traipse-site/myPlaces.html'">
-    MY PLACES
-</button>
-                    <button class="header-btn">SUBMIT FEEDBACK</button>
-                    <button class="header-btn">DONATE</button>
+            
+                <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+            
+                <div class="header-buttons-container">
+                    <div class="header-buttons">
+                        <button class="header-btn">CONNECT</button>
+                        <button class="header-btn" onclick="window.location.href='myPlaces.html'">MY PLACES</button>
+                        <button class="header-btn">SUBMIT FEEDBACK</button>
+                        <button class="header-btn">DONATE</button>
+                    </div>
                 </div>
             </div>
+            
 
 
         </div>
