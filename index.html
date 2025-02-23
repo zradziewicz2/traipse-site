@@ -1007,49 +1007,76 @@ function applyFilters() {
                 }
             }
                 // Store user preferences in sets
-// Store user preferences in sets
-        function toggleMyPlaces(siteId, element) {
+function toggleMyPlaces(siteId, element) {
+    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+
+    let site = siteData.find(s => s.id === siteId);
+    if (!site) return;
+
+    let index = myPlaces.findIndex(s => s.id === siteId);
+
+    if (index > -1) {
+        // Remove from My Places
+        myPlaces.splice(index, 1);
+        element.textContent = "☆"; // Change back to empty star
+        element.classList.remove("active");
+    } else {
+        // Add to My Places
+        myPlaces.push(site);
+        element.textContent = "⭐"; // Change to filled star
+        element.classList.add("active");
+
+        // If marked as "Not Interested", remove from that list
+        let notIndex = notInterested.findIndex(s => s.id === siteId);
+        if (notIndex > -1) {
+            notInterested.splice(notIndex, 1);
+            let xIcon = document.getElementById(`x-${siteId}`);
+            if (xIcon) {
+                xIcon.textContent = "✖"; // Change X back to outline
+                xIcon.classList.remove("active");
+            }
+        }
+    }
+
+    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    localStorage.setItem('notInterested', JSON.stringify(notInterested));
+}
+
+        function toggleNotInterested(siteId, element) {
             let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            
-            let site = siteData.find(s => s.id === siteId); // Find the site in your site data
+            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+        
+            let site = siteData.find(s => s.id === siteId);
             if (!site) return;
         
-            let index = myPlaces.findIndex(s => s.id === siteId);
+            let index = notInterested.findIndex(s => s.id === siteId);
+        
             if (index > -1) {
-                // Remove from localStorage if it was already added
-                myPlaces.splice(index, 1);
-                element.textContent = "☆";
-                element.classList.remove("active");
-            } else {
-                // Add to localStorage
-                myPlaces.push(site);
-                element.textContent = "⭐";
-                element.classList.add("active");
-            }
-        
-            localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-        } // <-- Make sure this closing } matches properly
-    
-
-        
-        function toggleNotInterested(siteId, element) {
-            if (notInterested.has(siteId)) {
-                notInterested.delete(siteId);
+                // Remove from Not Interested
+                notInterested.splice(index, 1);
                 element.textContent = "✖"; // Change back to outline
                 element.classList.remove("active");
             } else {
-                notInterested.add(siteId);
+                // Add to Not Interested
+                notInterested.push(site);
                 element.textContent = "❌"; // Change to filled X
                 element.classList.add("active");
         
-                // If marked "My Places" before, remove it
-                if (myPlaces.has(siteId)) {
-                    myPlaces.delete(siteId);
+                // If marked as "My Places", remove from that list
+                let myIndex = myPlaces.findIndex(s => s.id === siteId);
+                if (myIndex > -1) {
+                    myPlaces.splice(myIndex, 1);
                     let starIcon = document.getElementById(`star-${siteId}`);
-                    starIcon.textContent = "☆"; // Change star back to outline
-                    starIcon.classList.remove("active");
+                    if (starIcon) {
+                        starIcon.textContent = "☆"; // Change star back to outline
+                        starIcon.classList.remove("active");
+                    }
                 }
             }
+        
+            localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+            localStorage.setItem('notInterested', JSON.stringify(notInterested));
         }
 
 </script>
