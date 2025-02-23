@@ -81,40 +81,47 @@
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        function showPlaces(type) {
-            let listContainer = document.getElementById("savedPlaces");
-            listContainer.innerHTML = "";
-            let places = type === 'liked' ? myPlaces : notInterested;
+function showPlaces(type) {
+    let listContainer = document.getElementById("savedPlaces");
+    listContainer.innerHTML = "";
 
-            // Clear existing map markers
-            map.eachLayer((layer) => {
-                if (!!layer.toGeoJSON) {
-                    map.removeLayer(layer);
-                }
-            });
+    let places = type === 'liked' ? JSON.parse(localStorage.getItem('myPlaces')) || [] 
+                                  : JSON.parse(localStorage.getItem('notInterested')) || [];
 
-            if (places.length === 0) {
-                listContainer.innerHTML = `<p style="color: #aaa;">No places saved yet.</p>`;
-                return;
-            }
+    console.log("Loaded places:", places);  // Debugging log to check if places load
 
-            places.forEach(site => {
-                let siteCard = document.createElement("div");
-                siteCard.className = "site-card";
-                siteCard.innerHTML = `
-                    <h3>${site.name}</h3>
-                    <p><strong>Category:</strong> ${site.category || "Unknown"}</p>
-                    <p>${site.description || "No description available."}</p>
-                    <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
-                `;
-                listContainer.appendChild(siteCard);
+    if (places.length === 0) {
+        listContainer.innerHTML = `<p style="color: #aaa;">No places saved yet.</p>`;
+        return;
+    }
 
-                // Add marker to the map
-                L.marker([site.lat, site.lng])
-                    .addTo(map)
-                    .bindPopup(`<b>${site.name}</b>`);
-            });
+    // Clear previous markers
+    map.eachLayer(layer => {
+        if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
         }
+    });
+
+    places.forEach(site => {
+        console.log("Adding to UI:", site); // Debugging log for each place
+
+        let siteCard = document.createElement("div");
+        siteCard.className = "site-card";
+        siteCard.innerHTML = `
+            <h3>${site.name}</h3>
+            <p><strong>Category:</strong> ${site.category || "Unknown"}</p>
+            <p>${site.description || "No description available."}</p>
+            <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
+        `;
+        listContainer.appendChild(siteCard);
+
+        // Add marker to the map
+        L.marker([site.lat, site.lng])
+            .addTo(map)
+            .bindPopup(`<b>${site.name}</b>`);
+    });
+}
+
 
         function removePlace(id, type) {
             let places = type === 'liked' ? myPlaces : notInterested;
