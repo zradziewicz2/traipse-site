@@ -85,6 +85,27 @@ function showPlaces(type) {
     let listContainer = document.getElementById("savedPlaces");
     listContainer.innerHTML = "";
 
+    let places = type === 'liked' 
+        ? JSON.parse(localStorage.getItem('myPlaces') || "[]") 
+        : JSON.parse(localStorage.getItem('notInterested') || "[]");
+
+    places.forEach(site => {
+        let siteCard = document.createElement("div");
+        siteCard.className = "site-card";
+        siteCard.innerHTML = `
+            <h3>${site.name}</h3>
+            <p><strong>Category:</strong> ${site.category}</p>
+            <p>${site.description}</p>
+            <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
+        `;
+        listContainer.appendChild(siteCard);
+        L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b>`);
+    });
+}
+
+    let listContainer = document.getElementById("savedPlaces");
+    listContainer.innerHTML = "";
+
     let places = type === 'liked' ? JSON.parse(localStorage.getItem('myPlaces')) || [] 
                                   : JSON.parse(localStorage.getItem('notInterested')) || [];
 
