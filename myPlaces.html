@@ -57,143 +57,94 @@
     </style>
 </head>
 <body>
-            <div class="places-list">
-                <h2>My Places</h2>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" onclick="showPlaces('liked')">Liked</button>
-                    <button class="filter-btn" onclick="showPlaces('disliked')">Not Interested</button>
-                </div>
-                
-                <!-- Add this new section here -->
-                <div>
-                    <h2>My Places</h2>
-                    <div id="myPlacesList"></div>
-                </div>
-            
-                <div>
-                    <h2>Not Interested</h2>
-                    <div id="notInterestedList"></div>
-                </div>
-            
-                <div id="savedPlaces"></div>
-            </div>
 
-            <div id="savedPlaces"></div>
+<div class="container">
+    <div class="places-list">
+        <h2>My Places</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="showPlaces('liked')">Liked</button>
+            <button class="filter-btn" onclick="showPlaces('disliked')">Not Interested</button>
         </div>
-        <div class="map-container" id="map"></div>
+
+        <!-- Corrected Sections -->
+        <div id="myPlacesList"></div>
+        <div id="notInterestedList"></div>
+
+        <!-- Saved Places (List of Marked Locations) -->
+        <div id="savedPlaces"></div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- Map Container -->
+    <div class="map-container" id="map"></div>
+</div>
+
+<!-- Leaflet Map -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
 <script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-        let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+document.addEventListener("DOMContentLoaded", function () {
+    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
 
-        var map = L.map('map').setView([39.7392, -104.9903], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+    var map = L.map('map').setView([39.7392, -104.9903], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-function showPlaces(type) {
-    let listContainer = document.getElementById("savedPlaces");
-    listContainer.innerHTML = "";
+    function showPlaces(type) {
+        let listContainer = document.getElementById("savedPlaces");
+        listContainer.innerHTML = "";
 
-    let places = type === 'liked' 
-        ? JSON.parse(localStorage.getItem('myPlaces') || "[]") 
-        : JSON.parse(localStorage.getItem('notInterested') || "[]");
+        let places = type === 'liked' 
+            ? JSON.parse(localStorage.getItem('myPlaces') || "[]") 
+            : JSON.parse(localStorage.getItem('notInterested') || "[]");
 
-    places.forEach(site => {
-        let siteCard = document.createElement("div");
-        siteCard.className = "site-card";
-        siteCard.innerHTML = `
-            <h3>${site.name}</h3>
-            <p><strong>Category:</strong> ${site.category}</p>
-            <p>${site.description}</p>
-            <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
-        `;
-        listContainer.appendChild(siteCard);
-        L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b>`);
-    });
-}
-
-    let listContainer = document.getElementById("savedPlaces");
-    listContainer.innerHTML = "";
-
-    let places = type === 'liked' ? JSON.parse(localStorage.getItem('myPlaces')) || [] 
-                                  : JSON.parse(localStorage.getItem('notInterested')) || [];
-
-    console.log("Loaded places:", places);  // Debugging log to check if places load
-
-    if (places.length === 0) {
-        listContainer.innerHTML = `<p style="color: #aaa;">No places saved yet.</p>`;
-        return;
+        places.forEach(site => {
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+            siteCard.innerHTML = `
+                <h3>${site.name}</h3>
+                <p><strong>Category:</strong> ${site.category || "Unknown"}</p>
+                <p>${site.description || "No description available."}</p>
+                <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
+            `;
+            listContainer.appendChild(siteCard);
+            L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b>`);
+        });
     }
 
-    // Clear previous markers
-    map.eachLayer(layer => {
-        if (layer instanceof L.Marker) {
-            map.removeLayer(layer);
-        }
-    });
+    function removePlace(id, type) {
+        let places = type === 'liked' ? myPlaces : notInterested;
+        let updatedPlaces = places.filter(site => site.id !== id);
+        localStorage.setItem(type === 'liked' ? 'myPlaces' : 'notInterested', JSON.stringify(updatedPlaces));
+        location.reload();
+    }
 
-    places.forEach(site => {
-        console.log("Adding to UI:", site); // Debugging log for each place
+    function updateLists() {
+        let myPlacesContainer = document.getElementById("myPlacesList");
+        let notInterestedContainer = document.getElementById("notInterestedList");
 
-        let siteCard = document.createElement("div");
-        siteCard.className = "site-card";
-        siteCard.innerHTML = `
-            <h3>${site.name}</h3>
-            <p><strong>Category:</strong> ${site.category || "Unknown"}</p>
-            <p>${site.description || "No description available."}</p>
-            <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
-        `;
-        listContainer.appendChild(siteCard);
+        myPlacesContainer.innerHTML = myPlaces.length ? "" : "<p>No places saved yet.</p>";
+        notInterestedContainer.innerHTML = notInterested.length ? "" : "<p>No places marked as not interested.</p>";
 
-        // Add marker to the map
-        L.marker([site.lat, site.lng])
-            .addTo(map)
-            .bindPopup(`<b>${site.name}</b>`);
-    });
-}
-
-
-        function removePlace(id, type) {
-            let places = type === 'liked' ? myPlaces : notInterested;
-            let updatedPlaces = places.filter(site => site.id !== id);
-            localStorage.setItem(type === 'liked' ? 'myPlaces' : 'notInterested', JSON.stringify(updatedPlaces));
-            location.reload();
-        }
-
-        showPlaces('liked');
-    });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-        
-            let myPlacesContainer = document.getElementById("myPlacesList");
-            let notInterestedContainer = document.getElementById("notInterestedList");
-        
-            myPlacesContainer.innerHTML = myPlaces.length ? "" : "<p>No places saved yet.</p>";
-            notInterestedContainer.innerHTML = notInterested.length ? "" : "<p>No places marked as not interested.</p>";
-        
-            myPlaces.forEach(site => {
-                let item = document.createElement("div");
-                item.classList.add("site-card");
-                item.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
-                myPlacesContainer.appendChild(item);
-            });
-        
-            notInterested.forEach(site => {
-                let item = document.createElement("div");
-                item.classList.add("site-card");
-                item.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
-                notInterestedContainer.appendChild(item);
-            });
+        myPlaces.forEach(site => {
+            let item = document.createElement("div");
+            item.classList.add("site-card");
+            item.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+            myPlacesContainer.appendChild(item);
         });
 
+        notInterested.forEach(site => {
+            let item = document.createElement("div");
+            item.classList.add("site-card");
+            item.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+            notInterestedContainer.appendChild(item);
+        });
+    }
 
+    updateLists();
+    showPlaces('liked');
+});
 </script>
 
 </body>
