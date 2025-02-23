@@ -793,14 +793,19 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
         
 // Existing function
-function loadLocations() {
-    fetch('locations.json')
-        .then(response => response.json())
-        .then(data => {
-            siteData = data;
-            applyFilters();
-        })
-        .catch(error => console.error("Error loading JSON:", error));
+        fetch('./locations.json')  // Ensure the file is in the same directory as index.html
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                siteData = data;
+                applyFilters();
+            })
+            .catch(error => console.error("Error loading JSON:", error));
+
 }
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
