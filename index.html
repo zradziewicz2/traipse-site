@@ -23,7 +23,7 @@
         .header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between; /* Space out elements */
             padding: 15px 20px;
             background: #111;
             color: #03FDFC;
@@ -310,12 +310,12 @@
         }
 
         .site-title {
-            font-size: 2em; /* Match height with logo */
-            font-weight: bold;
+            font-size: 3.5em; /* Make "TRAIPSE" larger */
+            font-weight: 900; /* Maximum boldness */
+            letter-spacing: 3px;
+            text-transform: uppercase;
             color: #03FDFC;
-            display: flex;
-            align-items: center;
-            height: 50px; /* Ensures it aligns with the logo */
+            white-space: nowrap; /* Prevents wrapping */
         }
         
         .site-card {
@@ -535,19 +535,20 @@
             <!-- Wrap the dropdown in a larger div -->
         <div class="city-filter">
             <div class="site-title">TRAIPSE</div>
+            
             <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
-                    <option value="all">All Cities</option>
-                    <option value="denver">Denver</option>
-                    <option value="washingtondc">Washington D.C.</option>
-                    <option value="philadelphia">Philadelphia</option>
-                    <option value="boston">Boston</option>
-                    <option value="chicago">Chicago</option>
-                    <option value="newyorkcity">New York City</option>
-                    <option value="atlanta">Atlanta</option>
-                    <option value="neworleans">New Orleans</option>
-                    <option value="sanfrancisco">San Francisco</option>
-                </select>
-            </div>
+                <option value="all">All Cities</option>
+                <option value="denver">Denver</option>
+                <option value="washingtondc">Washington D.C.</option>
+                <option value="philadelphia">Philadelphia</option>
+                <option value="boston">Boston</option>
+                <option value="chicago">Chicago</option>
+                <option value="newyorkcity">New York City</option>
+                <option value="atlanta">Atlanta</option>
+                <option value="neworleans">New Orleans</option>
+                <option value="sanfrancisco">San Francisco</option>
+            </select>
+
         
             <!-- Tagline -->
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
