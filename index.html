@@ -1008,30 +1008,28 @@ function applyFilters() {
             }
                 // Store user preferences in sets
 // Store user preferences in sets
-        let myPlaces = new Set();
-        let notInterested = new Set();
-        
         function toggleMyPlaces(siteId, element) {
-    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-    
-    let site = siteData.find(s => s.id === siteId); // Find the site in your site data
-    if (!site) return;
+            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+            
+            let site = siteData.find(s => s.id === siteId); // Find the site in your site data
+            if (!site) return;
+        
+            let index = myPlaces.findIndex(s => s.id === siteId);
+            if (index > -1) {
+                // Remove from localStorage if it was already added
+                myPlaces.splice(index, 1);
+                element.textContent = "☆";
+                element.classList.remove("active");
+            } else {
+                // Add to localStorage
+                myPlaces.push(site);
+                element.textContent = "⭐";
+                element.classList.add("active");
+            }
+        
+            localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+        }
 
-    let index = myPlaces.findIndex(s => s.id === siteId);
-    if (index > -1) {
-        // Remove from localStorage if it was already added
-        myPlaces.splice(index, 1);
-        element.textContent = "☆";
-        element.classList.remove("active");
-    } else {
-        // Add to localStorage
-        myPlaces.push(site);
-        element.textContent = "⭐";
-        element.classList.add("active");
-    }
-
-    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-}
 
             if (myPlaces.has(siteId)) {
                 myPlaces.delete(siteId);
