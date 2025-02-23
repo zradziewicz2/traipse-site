@@ -179,13 +179,13 @@
         }
 
 
-        .site-actions {
-            display: flex;
-            gap: 10px;
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-        }
+            .site-actions {
+                display: flex;
+                justify-content: center; /* Centers horizontally */
+                gap: 15px; /* Space between icons */
+                margin-top: 10px; /* Adds spacing above icons */
+            }
+
 
         
         .star-icon, .x-icon {
@@ -824,39 +824,33 @@ function applyFilters() {
             siteCard.style.alignItems = "center"; // Center items in the card
 
             siteCard.innerHTML = `
-                <div class="site-content" style="position: relative;">
-                    <div class="site-image-container">
-                        <img src="${site.image}" alt="${site.name}" class="site-image">
-                    </div>
-                    <div class="site-details">
-                        <h3 class="site-title">${site.name}</h3>
-                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-attributes">
-                            ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
-                            ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
-                            ${translateTours(site.tours)}, ${translateTransit(site.transit)}
-                        </p>
-            
-                        <p class="site-distance"><strong>Distance:</strong> ${userLocation ? distance.toFixed(1) + " miles" : "Unknown"}</p>
-                    </div>
-            
-                    <!-- Icons for Saving & Removing, now at bottom-left -->
-                    <div class="site-actions">
-                        <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places" 
-                              onclick="toggleMyPlaces('${site.id}', this)">☆</span>
-                        <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me" 
-                              onclick="toggleNotInterested('${site.id}', this)">✖</span>
-                    </div>
+            <div class="site-content">
+                <div class="site-image-container">
+                    <img src="${site.image}" alt="${site.name}" class="site-image">
                 </div>
-                <p class="site-description">${site.description}</p>
-            `;
-
-
-
-
-
-
+                <div class="site-details">
+                    <h3 class="site-title">${site.name}</h3>
+                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                    <p class="site-attributes">
+                        ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
+                        ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
+                        ${translateTours(site.tours)}, ${translateTransit(site.transit)}
+                    </p>
+                    <p class="site-distance"><strong>Distance:</strong> ${userLocation ? distance.toFixed(1) + " miles" : "Unknown"}</p>
+                </div>
+            </div>
+        
+            <p class="site-description">${site.description}</p>
+        
+            <!-- Centered Icons Below the Description -->
+            <div class="site-actions">
+                <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places" 
+                      onclick="toggleMyPlaces('${site.id}', this)">☆</span>
+                <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me" 
+                      onclick="toggleNotInterested('${site.id}', this)">✖</span>
+            </div>
+        `;
             
             // Function to translate category names to their proper display format
             function translateCategory(category) {
