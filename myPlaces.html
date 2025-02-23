@@ -70,42 +70,43 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-    <script>
-        let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-        let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+<script>
+    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
 
-        var map = L.map('map').setView([39.7392, -104.9903], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+    var map = L.map('map').setView([39.7392, -104.9903], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-        function showPlaces(type) {
-            let listContainer = document.getElementById("savedPlaces");
-            listContainer.innerHTML = "";
-            let places = type === 'liked' ? myPlaces : notInterested;
+    function showPlaces(type) {
+        let listContainer = document.getElementById("savedPlaces");
+        listContainer.innerHTML = "";
+        let places = type === 'liked' ? myPlaces : notInterested;
 
-            places.forEach(site => {
-                let siteCard = document.createElement("div");
-                siteCard.className = "site-card";
-                siteCard.innerHTML = `
-                    <h3>${site.name}</h3>
-                    <p><strong>Category:</strong> ${site.category}</p>
-                    <p>${site.description}</p>
-                    <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
-                `;
-                listContainer.appendChild(siteCard);
-                L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b>`);
-            });
-        }
+        places.forEach(site => {
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+            siteCard.innerHTML = `
+                <h3>${site.name}</h3>
+                <p><strong>Category:</strong> ${site.category}</p>
+                <p>${site.description}</p>
+                <button onclick="removePlace('${site.id}', '${type}')">Remove</button>
+            `;
+            listContainer.appendChild(siteCard);
+            L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b>`);
+        });
+    }
 
-        function removePlace(id, type) {
-            let places = type === 'liked' ? myPlaces : notInterested;
-            let updatedPlaces = places.filter(site => site.id !== id);
-            localStorage.setItem(type === 'liked' ? 'myPlaces' : 'notInterested', JSON.stringify(updatedPlaces));
-            location.reload();
-        }
+    function removePlace(id, type) {
+        let places = type === 'liked' ? myPlaces : notInterested;
+        let updatedPlaces = places.filter(site => site.id !== id);
+        localStorage.setItem(type === 'liked' ? 'myPlaces' : 'notInterested', JSON.stringify(updatedPlaces));
+        location.reload();
+    }
 
-        showPlaces('liked');
+    showPlaces('liked');
+    });
     </script>
 </body>
 </html>
