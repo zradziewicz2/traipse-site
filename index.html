@@ -917,11 +917,12 @@ function applyFilters() {
                 }
             }
                 // Store user preferences in sets
+// Store user preferences in sets
         let myPlaces = new Set();
         let notInterested = new Set();
         
         function toggleMyPlaces(siteId) {
-            let starIcon = document.getElementById(`star-${siteId}`);
+            let starIcon = document.querySelector(`#star-${siteId}`);
         
             if (myPlaces.has(siteId)) {
                 myPlaces.delete(siteId);
@@ -935,7 +936,7 @@ function applyFilters() {
                 // If marked "Not Interested" before, remove it from there
                 if (notInterested.has(siteId)) {
                     notInterested.delete(siteId);
-                    let xIcon = document.getElementById(`x-${siteId}`);
+                    let xIcon = document.querySelector(`#x-${siteId}`);
                     xIcon.textContent = "✖"; // Change X back to outline
                     xIcon.classList.remove("active");
                 }
@@ -943,7 +944,7 @@ function applyFilters() {
         }
         
         function toggleNotInterested(siteId) {
-            let xIcon = document.getElementById(`x-${siteId}`);
+            let xIcon = document.querySelector(`#x-${siteId}`);
         
             if (notInterested.has(siteId)) {
                 notInterested.delete(siteId);
@@ -957,7 +958,7 @@ function applyFilters() {
                 // If marked "My Places" before, remove it from there
                 if (myPlaces.has(siteId)) {
                     myPlaces.delete(siteId);
-                    let starIcon = document.getElementById(`star-${siteId}`);
+                    let starIcon = document.querySelector(`#star-${siteId}`);
                     starIcon.textContent = "☆"; // Change star back to outline
                     starIcon.classList.remove("active");
                 }
