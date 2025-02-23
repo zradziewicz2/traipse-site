@@ -376,18 +376,26 @@
                 font-weight: bold;
             }
             
-        /* Adjusted City Filter */
-        .city-filter-dropdown {
-            font-size: 1.5em;
-            font-weight: bold;
-            padding: 10px 18px;
-            border-radius: 8px;
-            border: 2px solid #03FDFC;
-            background: #000;
-            color: #03FDFC;
-            cursor: pointer;
-            margin-right: 20px; /* Prevents shifting */
-        }
+            .city-filter-dropdown {
+                font-size: 1.8em; /* Increase font size */
+                font-weight: bold;
+                padding: 12px 25px; /* Increase padding for a bigger look */
+                border-radius: 10px; /* Slightly more rounded edges */
+                border: 3px solid #03FDFC; /* Thicker border */
+                background: #111; /* Darker background for contrast */
+                color: #03FDFC;
+                cursor: pointer;
+                margin-right: 20px;
+                text-align: center; /* Ensure text is centered */
+                outline: none;
+                transition: all 0.3s ease-in-out;
+            }
+            
+            /* Add hover effect to make it interactive */
+            .city-filter-dropdown:hover {
+                background: #03FDFC;
+                color: #000;
+            }
 
 
 
@@ -405,7 +413,9 @@
             <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
         
             <!-- City Filter -->
-            <div class="city-filter">
+            <!-- Wrap the dropdown in a larger div -->
+            <div class="city-filter" style="display: flex; align-items: center; gap: 15px;">
+                <label for="cityFilter" style="font-size: 1.8em; font-weight: bold; color: #03FDFC;">City:</label>
                 <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
                     <option value="all">All Cities</option>
                     <option value="denver">Denver</option>
@@ -419,6 +429,7 @@
                     <option value="sanfrancisco">San Francisco</option>
                 </select>
             </div>
+
         
             <!-- Tagline -->
             <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
