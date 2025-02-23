@@ -178,13 +178,15 @@
             align-items: center; /* Centers the cards */
         }
 
-
+            
             .site-actions {
                 display: flex;
                 justify-content: center; /* Centers horizontally */
                 gap: 15px; /* Space between icons */
-                margin-top: 10px; /* Adds spacing above icons */
+                margin-top: 5px; /* Reduce spacing */
+                padding-bottom: 10px; /* Ensure space from bottom */
             }
+
 
 
         
@@ -205,22 +207,30 @@
             content: '❌';
         }
 
-        /* Tooltip styling */
-        .star-icon::after,
-        .x-icon::after {
+        .star-icon::before,
+        .x-icon::before {
             content: attr(data-tooltip);
             position: absolute;
             background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 5px 8px;
-            font-size: 0.8em;
-            border-radius: 5px;
+            padding: 4px 6px;
+            font-size: 0.75em;
+            border-radius: 4px;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.2s;
             pointer-events: none;
-            transform: translateY(-120%);
+            bottom: 120%; /* Move above the icon */
+            left: 50%;
+            transform: translateX(-50%);
         }
+        
+        .star-icon:hover::before,
+        .x-icon:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-3px); /* Small lift effect */
+        }
+
         
         /* Show tooltip on hover */
         .star-icon:hover::after,
@@ -228,21 +238,21 @@
             opacity: 1;
         }
 
-
+        
         .site-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             background: #333;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            padding: 10px; /* Reduce padding */
+            border-radius: 8px; /* Slightly smaller radius */
+            margin-bottom: 8px; /* Reduce space between cards */
             color: white;
             cursor: pointer;
             max-width: 600px;
             width: 100%;
         }
-        
+
         .site-title {
             font-size: 1.4em;
             font-weight: bold;
