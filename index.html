@@ -376,20 +376,31 @@
                 font-weight: bold;
             }
             
-            .city-filter-dropdown {
-                font-size: 1.8em; /* Increase font size */
-                font-weight: bold;
-                padding: 12px 25px; /* Increase padding for a bigger look */
-                border-radius: 10px; /* Slightly more rounded edges */
-                border: 3px solid #03FDFC; /* Thicker border */
-                background: #111; /* Darker background for contrast */
-                color: #03FDFC;
-                cursor: pointer;
-                margin-right: 20px;
-                text-align: center; /* Ensure text is centered */
-                outline: none;
-                transition: all 0.3s ease-in-out;
-            }
+        .city-filter-dropdown {
+            font-size: 2em !important; /* Force a larger font size */
+            font-weight: bold;
+            padding: 15px 30px !important; /* Increase padding */
+            width: auto; /* Allow it to expand */
+            min-width: 250px; /* Set a minimum width */
+            border-radius: 10px;
+            border: 3px solid #03FDFC;
+            background: #111 !important; /* Force background color */
+            color: #03FDFC !important;
+            cursor: pointer;
+            text-align: center;
+            outline: none;
+            appearance: none; /* Remove browser default styles */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Hover Effect */
+        .city-filter-dropdown:hover {
+            background: #03FDFC !important;
+            color: #000 !important;
+        }
+
             
             /* Add hover effect to make it interactive */
             .city-filter-dropdown:hover {
