@@ -894,34 +894,56 @@ function applyFilters() {
             siteCard.style.flexDirection = "column";  
             siteCard.style.alignItems = "center"; // Center items in the card
 
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+            siteCard.style.display = "flex";  
+            siteCard.style.flexDirection = "column";  
+            siteCard.style.alignItems = "center"; // Center items in the card
+            
+            // Get stored My Places and Not Interested lists
+            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+            // Check if this site is already liked or not interested
+            let isLiked = myPlaces.some(s => s.id === site.id);
+            let isNotInterested = notInterested.some(s => s.id === site.id);
+            
             siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
+                <div class="site-content">
+                    <div class="site-image-container">
+                        <img src="${site.image}" alt="${site.name}" class="site-image">
+                    </div>
+                    <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p class="site-attributes">
+                            ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
+                            ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
+                            ${translateTours(site.tours)}, ${translateTransit(site.transit)}
+                        </p>
+                    </div>
                 </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-attributes">
-                        ${translateCost(site.cost)}, ${translateType(site.type)}, ${translateLocalOrNational(site.localornational)}, 
-                        ${translateEstimatedTime(site.estimatedtime)}, ${translateReservations(site.reservations)}, 
-                        ${translateTours(site.tours)}, ${translateTransit(site.transit)}
-                    </p>
-                    <p class="site-distance"><strong>Distance:</strong> ${userLocation ? distance.toFixed(1) + " miles" : "Unknown"}</p>
+            
+                <p class="site-description">${site.description}</p>
+            
+                <div class="site-actions">
+                    <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
+                          data-tooltip="Add to My Places">⭐</span>
+                    <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+                          data-tooltip="Not for me">✖</span>
                 </div>
-            </div>
-        
-            <p class="site-description">${site.description}</p>
-        
-            <!-- Centered Icons Below the Description -->
-            <div class="site-actions">
-                <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places" 
-                      onclick="toggleMyPlaces('${site.id}', this)">☆</span>
-                <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me" 
-                      onclick="toggleNotInterested('${site.id}', this)">✖</span>
-            </div>
-        `;
+            `;
+            
+            // Now attach event listeners (this is the critical fix!)
+            let starButton = siteCard.querySelector(`#star-${site.id}`);
+            let xButton = siteCard.querySelector(`#x-${site.id}`);
+            
+            starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
+            xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
+            
+            resultsContainer.appendChild(siteCard);
+
             
             // Function to translate category names to their proper display format
             function translateCategory(category) {
@@ -1008,14 +1030,10 @@ function applyFilters() {
             }
                 // Store user preferences in sets
             function toggleMyPlaces(siteId, element) {
+                console.log(`Toggling My Places for site ID: ${siteId}`); // Debugging log
+            
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-                // Ensure siteData is available
-                if (!siteData || siteData.length === 0) {
-                    console.error("Site data is not loaded yet.");
-                    return;
-                }
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
@@ -1026,29 +1044,25 @@ function applyFilters() {
                 let index = myPlaces.findIndex(s => s.id === siteId);
             
                 if (index > -1) {
-                    // Remove from My Places
                     myPlaces.splice(index, 1);
-                    element.textContent = "☆"; // Change back to empty star
+                    element.textContent = "☆";
                     element.classList.remove("active");
                 } else {
-                    // Add to My Places
                     myPlaces.push(site);
-                    element.textContent = "⭐"; // Change to filled star
+                    element.textContent = "⭐";
                     element.classList.add("active");
             
-                    // Remove from Not Interested if present
                     let notIndex = notInterested.findIndex(s => s.id === siteId);
                     if (notIndex > -1) {
                         notInterested.splice(notIndex, 1);
                         let xIcon = document.getElementById(`x-${siteId}`);
                         if (xIcon) {
-                            xIcon.textContent = "✖"; // Change X back to outline
+                            xIcon.textContent = "✖";
                             xIcon.classList.remove("active");
                         }
                     }
                 }
             
-                // Save updates to localStorage
                 localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
                 localStorage.setItem('notInterested', JSON.stringify(notInterested));
             
@@ -1057,14 +1071,10 @@ function applyFilters() {
             
             
             function toggleNotInterested(siteId, element) {
+                console.log(`Toggling Not Interested for site ID: ${siteId}`); // Debugging log
+            
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-                // Ensure siteData is available
-                if (!siteData || siteData.length === 0) {
-                    console.error("Site data is not loaded yet.");
-                    return;
-                }
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
@@ -1075,34 +1085,31 @@ function applyFilters() {
                 let index = notInterested.findIndex(s => s.id === siteId);
             
                 if (index > -1) {
-                    // Remove from Not Interested
                     notInterested.splice(index, 1);
-                    element.textContent = "✖"; // Change back to outline
+                    element.textContent = "✖";
                     element.classList.remove("active");
                 } else {
-                    // Add to Not Interested
                     notInterested.push(site);
-                    element.textContent = "❌"; // Change to filled X
+                    element.textContent = "❌";
                     element.classList.add("active");
             
-                    // Remove from My Places if present
                     let myIndex = myPlaces.findIndex(s => s.id === siteId);
                     if (myIndex > -1) {
                         myPlaces.splice(myIndex, 1);
                         let starIcon = document.getElementById(`star-${siteId}`);
                         if (starIcon) {
-                            starIcon.textContent = "☆"; // Change star back to outline
+                            starIcon.textContent = "☆";
                             starIcon.classList.remove("active");
                         }
                     }
                 }
             
-                // Save updates to localStorage
                 localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
                 localStorage.setItem('notInterested', JSON.stringify(notInterested));
             
                 console.log("Updated Not Interested:", notInterested);
             }
+
 
 
 </script>
