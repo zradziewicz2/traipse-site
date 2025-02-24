@@ -914,20 +914,6 @@ function applyFilters() {
             marker.addTo(map);
             allMarkers.push(marker);
 
-            let siteCard = document.createElement("div");
-            siteCard.className = "site-card";
-            siteCard.style.display = "flex";  
-            siteCard.style.flexDirection = "column";  
-            siteCard.style.alignItems = "center"; // Center items in the card
-            
-            // Get stored My Places and Not Interested lists
-            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-            // Check if this site is already liked or not interested
-            let isLiked = myPlaces.some(s => s.id === site.id);
-            let isNotInterested = notInterested.some(s => s.id === site.id);
-            
             siteCard.innerHTML = `
                 <div class="site-content">
                     <div class="site-image-container">
@@ -969,11 +955,14 @@ function applyFilters() {
             
                 <div class="site-actions">
                     <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
+                          onclick="toggleMyPlaces('${site.id}', this)" 
                           data-tooltip="Add to My Places">⭐</span>
                     <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+                          onclick="toggleNotInterested('${site.id}', this)" 
                           data-tooltip="Not for me">✖</span>
                 </div>
             `;
+
 
 
 
