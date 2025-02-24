@@ -429,6 +429,27 @@
             max-width: 90%;
         }
 
+        .attribute-box {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin: 2px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .attribute-box:hover {
+            background: #03FDFC;
+            color: black;
+        }
+
+
 
         .site-info {
             display: flex;
@@ -917,30 +938,30 @@ function applyFilters() {
                         <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                         <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
                         <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                        
-                        <p class="site-attributes">
+            
+                        <div class="site-attributes">
                             ${
-                                selectedCost !== "all" ? `${translateCost(site.cost)}, ` : ""
+                                selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""
                             } 
                             ${
-                                selectedType !== "all" ? `${translateType(site.type)}, ` : ""
+                                selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""
                             }
                             ${
-                                selectedLocalOrNational !== "all" ? `${translateLocalOrNational(site.localornational)}, ` : ""
+                                selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""
                             }
                             ${
-                                selectedEstimatedTime !== "all" ? `${translateEstimatedTime(site.estimatedtime)}, ` : ""
+                                selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""
                             }
                             ${
-                                selectedReservations !== "all" ? `${translateReservations(site.reservations)}, ` : ""
+                                selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""
                             }
                             ${
-                                selectedTours !== "all" ? `${translateTours(site.tours)}, ` : ""
+                                selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""
                             }
                             ${
-                                selectedTransit !== "all" ? `${translateTransit(site.transit)}` : ""
+                                selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
                             }
-                        </p>
+                        </div>
                     </div>
                 </div>
             
@@ -953,6 +974,7 @@ function applyFilters() {
                           data-tooltip="Not for me">✖</span>
                 </div>
             `;
+
 
 
             
