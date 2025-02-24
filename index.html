@@ -1057,23 +1057,25 @@ siteCard.classList.add("site-card");
                     myPlaces.splice(index, 1);
                     element.classList.remove("active");
                 } else {
-                    // Add to My Places
+                    // Add to My Places **ONLY IF NOT ALREADY PRESENT**
                     myPlaces.push(site);
                     element.classList.add("active");
             
-                    // Remove from Not Interested if it's there
+                    // Remove from Not Interested if it exists there
                     let notIndex = notInterested.findIndex(s => s.id === siteId);
                     if (notIndex > -1) {
                         notInterested.splice(notIndex, 1);
-                        document.getElementById(`x-${siteId}`).classList.remove("active");
+                        let xButton = document.getElementById(`x-${siteId}`);
+                        if (xButton) xButton.classList.remove("active");
                     }
                 }
             
                 localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
                 localStorage.setItem('notInterested', JSON.stringify(notInterested));
             
-                updateMyPlacesPage();
+                updateMyPlacesPage(); // ✅ Make sure this refreshes the MyPlaces page correctly
             }
+
 
             
             
@@ -1119,41 +1121,61 @@ function updateMyPlacesPage() {
     let notInterestedContainer = document.getElementById("notInterestedPlaces");
 
     if (likedContainer) {
-        likedContainer.innerHTML = myPlaces.length > 0 ? myPlaces.map(site => `
-            <div class="site-card">
-                <div class="site-content">
-                    <div class="site-image-container">
-                        <img src="${site.image}" alt="${site.name}" class="site-image">
+        likedContainer.innerHTML = ""; // Clear previous entries
+        if (myPlaces.length > 0) {
+            myPlaces.forEach(site => {
+                let siteCard = document.createElement("div");
+                siteCard.classList.add("site-card");
+
+                siteCard.innerHTML = `
+                    <div class="site-content">
+                        <div class="site-image-container">
+                            <img src="${site.image}" alt="${site.name}" class="site-image">
+                        </div>
+                        <div class="site-details">
+                            <h3 class="site-title">${site.name}</h3>
+                            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                            <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                            <p class="site-description">${site.description}</p>
+                        </div>
                     </div>
-                    <div class="site-details">
-                        <h3 class="site-title">${site.name}</h3>
-                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                        <p class="site-description">${site.description}</p>
-                    </div>
-                </div>
-            </div>
-        `).join('') : "<p>No liked places yet.</p>";
+                `;
+
+                likedContainer.appendChild(siteCard);
+            });
+        } else {
+            likedContainer.innerHTML = "<p>No liked places yet.</p>";
+        }
     }
 
     if (notInterestedContainer) {
-        notInterestedContainer.innerHTML = notInterested.length > 0 ? notInterested.map(site => `
-            <div class="site-card">
-                <div class="site-content">
-                    <div class="site-image-container">
-                        <img src="${site.image}" alt="${site.name}" class="site-image">
+        notInterestedContainer.innerHTML = ""; // Clear previous entries
+        if (notInterested.length > 0) {
+            notInterested.forEach(site => {
+                let siteCard = document.createElement("div");
+                siteCard.classList.add("site-card");
+
+                siteCard.innerHTML = `
+                    <div class="site-content">
+                        <div class="site-image-container">
+                            <img src="${site.image}" alt="${site.name}" class="site-image">
+                        </div>
+                        <div class="site-details">
+                            <h3 class="site-title">${site.name}</h3>
+                            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                            <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                            <p class="site-description">${site.description}</p>
+                        </div>
                     </div>
-                    <div class="site-details">
-                        <h3 class="site-title">${site.name}</h3>
-                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                        <p class="site-description">${site.description}</p>
-                    </div>
-                </div>
-            </div>
-        `).join('') : "<p>No sites marked as not interested.</p>";
+                `;
+
+                notInterestedContainer.appendChild(siteCard);
+            });
+        } else {
+            notInterestedContainer.innerHTML = "<p>No sites marked as not interested.</p>";
+        }
     }
 }
 
