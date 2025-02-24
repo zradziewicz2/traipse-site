@@ -914,6 +914,11 @@ function applyFilters() {
             marker.addTo(map);
             allMarkers.push(marker);
 
+// ✅ Declare siteCard before using it
+let siteCard = document.createElement("div");
+siteCard.classList.add("site-card");
+
+            // ✅ Now use siteCard.innerHTML safely
             siteCard.innerHTML = `
                 <div class="site-content">
                     <div class="site-image-container">
@@ -924,44 +929,21 @@ function applyFilters() {
                         <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                         <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
                         <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-            
-                        <div class="site-attributes">
-                            ${
-                                selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""
-                            } 
-                            ${
-                                selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""
-                            }
-                            ${
-                                selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""
-                            }
-                            ${
-                                selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""
-                            }
-                            ${
-                                selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""
-                            }
-                            ${
-                                selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""
-                            }
-                            ${
-                                selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
-                            }
-                        </div>
                     </div>
                 </div>
-            
                 <p class="site-description">${site.description}</p>
-            
                 <div class="site-actions">
-                    <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
+                    <span id="star-${site.id}" class="star-icon" 
                           onclick="toggleMyPlaces('${site.id}', this)" 
                           data-tooltip="Add to My Places">⭐</span>
-                    <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+                    <span id="x-${site.id}" class="x-icon" 
                           onclick="toggleNotInterested('${site.id}', this)" 
                           data-tooltip="Not for me">✖</span>
                 </div>
             `;
+            
+            // ✅ Append siteCard to the results container
+            document.getElementById("searchResults").appendChild(siteCard);
 
 
 
