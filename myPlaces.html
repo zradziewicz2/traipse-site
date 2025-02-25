@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Places - Traipse</title>
-    
-    <!-- Leaflet Map Library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-
-    <!-- Google Maps API (For Optimized Routes) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
-
-    <!-- PDF Generator Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
@@ -25,31 +17,25 @@
             flex-direction: column;
             align-items: center;
         }
-
         .container {
             display: flex;
             width: 90%;
-            max-width: 1400px;
+            max-width: 1200px;
             margin-top: 20px;
         }
-
-        /* Scrollable List */
         .favorites-section {
             flex: 1;
             margin-right: 20px;
-            height: 700px;
+            height: 600px;
             overflow-y: auto;
             padding-right: 10px;
-            border-right: 2px solid #03FDFC;
         }
-
         .map-container {
             width: 60%;
-            height: 750px;
+            height: 700px;
             border-radius: 10px;
             overflow: hidden;
         }
-
         .card {
             background: #222;
             padding: 15px;
@@ -58,7 +44,6 @@
             display: flex;
             align-items: center;
         }
-
         .card img {
             width: 60px;
             height: 60px;
@@ -66,7 +51,6 @@
             border-radius: 5px;
             margin-right: 10px;
         }
-
         .remove-btn {
             background: red;
             border: none;
@@ -76,12 +60,9 @@
             cursor: pointer;
             margin-left: auto;
         }
-
         .remove-btn:hover {
             background: darkred;
         }
-
-        /* Itinerary Button */
         .itinerary-btn {
             background: #03FDFC;
             border: none;
@@ -95,7 +76,6 @@
             text-align: center;
             margin-top: 15px;
         }
-
         .itinerary-btn:hover {
             background: #02c9c9;
         }
@@ -112,6 +92,7 @@
         <div id="map" class="map-container"></div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
         let filteredPlaces = myPlaces.filter(site => site.name !== "Dinosaur Ridge" && site.name !== "Test Place");
@@ -159,55 +140,64 @@
             });
         }
 
-        async function generateItinerary() {
+        function generateItinerary() {
             if (filteredPlaces.length < 2) {
-                alert("Add at least two places to generate an itinerary.");
+                alert("At least two locations are required for an itinerary.");
                 return;
             }
+
+            // **Sort locations manually by latitude (North to South)**
+            let sortedPlaces = [...filteredPlaces].sort((a, b) => a.lat - b.lat);
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             doc.setFont("helvetica");
             doc.setFontSize(16);
-            doc.text("Optimized Itinerary", 20, 20);
+            doc.text("Itinerary", 20, 20);
+            let y = 40;
+            let totalTravelTime = 0;
+            
+            sortedPlaces.forEach((site, index) => {
+                doc.setFontSize(14);
+                doc.text(`${index + 1}. ${site.name}`, 20, y);
+                doc.setFontSize(12);
+                doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 10);
+                doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 20);
 
-            let waypoints = filteredPlaces.map(place => ({
-                location: new google.maps.LatLng(place.lat, place.lng),
-                stopover: true
-            }));
+                if (index < sortedPlaces.length - 1) {
+                    let distance = estimateDistance(site, sortedPlaces[index + 1]);
+                    let travelTime = estimateTravelTime(distance);
+                    totalTravelTime += travelTime;
 
-            let directionsService = new google.maps.DirectionsService();
-            let request = {
-                origin: waypoints[0].location,
-                destination: waypoints[waypoints.length - 1].location,
-                waypoints: waypoints.slice(1, -1),
-                optimizeWaypoints: true,
-                travelMode: google.maps.TravelMode.DRIVING
-            };
-
-            directionsService.route(request, function(result, status) {
-                if (status == google.maps.DirectionsStatus.OK) {
-                    let optimizedRoute = result.routes[0].legs;
-                    let y = 40;
-
-                    optimizedRoute.forEach((leg, index) => {
-                        let place = filteredPlaces[index];
-                        doc.setFontSize(14);
-                        doc.text(`${index + 1}. ${place.name}`, 20, y);
-                        doc.setFontSize(12);
-                        doc.text(`Description: ${place.description}`, 20, y + 10);
-                        doc.text(`Estimated Visit Time: ${place.estimatedTime || 'Unknown'}`, 20, y + 20);
-                        doc.text(`Cost: ${place.cost || 'Free'}`, 20, y + 30);
-                        doc.text(`Travel Time: ${leg.duration.text}`, 20, y + 40);
-                        doc.text(`Distance: ${leg.distance.text}`, 20, y + 50);
-                        y += 60;
-                    });
-
-                    doc.save("itinerary.pdf");
+                    doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y + 30);
+                    y += 50;
                 } else {
-                    alert("Error generating itinerary. Please try again.");
+                    y += 40;
                 }
             });
+
+            doc.setFontSize(14);
+            doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 20, y + 20);
+            doc.save("itinerary.pdf");
+        }
+
+        function estimateDistance(siteA, siteB) {
+            const R = 3958.8; // Radius of Earth in miles
+            const toRad = angle => angle * (Math.PI / 180);
+
+            let dLat = toRad(siteB.lat - siteA.lat);
+            let dLon = toRad(siteB.lng - siteA.lng);
+
+            let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(toRad(siteA.lat)) * Math.cos(toRad(siteB.lat)) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c; // Distance in miles
+        }
+
+        function estimateTravelTime(distance) {
+            return Math.round(distance * 1.5); // Assume 40 mph (1 mile = 1.5 min)
         }
 
         displayFavorites();
