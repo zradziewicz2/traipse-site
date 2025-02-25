@@ -240,13 +240,13 @@
                 <div id="favorites-list"></div>
                 
                 <!-- Itinerary Button Added Here -->
-                <div class="itinerary-btn-container">
-                    <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
-                </div>
             </div>
         
             <div id="map" class="map-container"></div>
         </div>
+        <div class="itinerary-btn-container">
+        <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
+    </div>
 
     <!-- Itinerary Generator Button (Placed Below the List) -->
 
@@ -293,6 +293,76 @@
 
         displayFavorites();
         updateMap();
+        <script>
+    function generateItinerary() {
+        if (myPlaces.length < 2) {
+            alert("At least two locations are required for an itinerary.");
+            return;
+        }
+
+        let sortedPlaces = [...myPlaces].sort((a, b) => a.lat - b.lat);
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        let img = new Image();
+        img.src = "traipse_logo_turquoise2.png"; 
+        doc.addImage(img, "PNG", 10, 10, 30, 30); 
+
+        doc.setFont("times", "bold");
+        doc.setFontSize(22);
+        doc.text("Itinerary", 50, 25);
+
+        doc.setFont("times", "italic");
+        doc.setFontSize(14);
+        doc.text("Happy Traipsing!", 50, 35);
+
+        let y = 50;
+        let totalTravelTime = 0;
+
+        sortedPlaces.forEach((site, index) => {
+            doc.setFont("times", "bold");
+            doc.setFontSize(14);
+            doc.text(`${index + 1}. ${site.name}`, 20, y);
+
+            doc.setFont("times", "normal");
+            doc.setFontSize(12);
+            doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 10);
+            doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 20);
+
+            if (index < sortedPlaces.length - 1) {
+                let distance = estimateDistance(site, sortedPlaces[index + 1]);
+                let travelTime = estimateTravelTime(distance);
+                totalTravelTime += travelTime;
+
+                doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y + 30);
+                y += 45;
+            } else {
+                y += 30;
+            }
+        });
+
+        doc.setFontSize(14);
+        doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 20, y + 15);
+        doc.save("itinerary.pdf");
+    }
+
+    function estimateDistance(siteA, siteB) {
+        const R = 3958.8;
+        const toRad = angle => angle * (Math.PI / 180);
+        let dLat = toRad(siteB.lat - siteA.lat);
+        let dLon = toRad(siteB.lng - siteA.lng);
+        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(siteA.lat)) * Math.cos(toRad(siteB.lat)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+
+    function estimateTravelTime(distance) {
+        return Math.round(distance * 1.5);
+    }
+
     </script>
 </body>
 </html>
