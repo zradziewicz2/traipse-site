@@ -297,11 +297,6 @@
 
         displayFavorites();
         updateMap();
-    function generateItinerary() {
-        if (myPlaces.length < 2) {
-            alert("At least two locations are required for an itinerary.");
-            return;
-        }
 
         let sortedPlaces = [...myPlaces].sort((a, b) => a.lat - b.lat);
         function generateItinerary() {
