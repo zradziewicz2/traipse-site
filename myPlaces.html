@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Places - Traipse</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -24,11 +25,13 @@
         .favorites-section {
             flex: 1;
             margin-right: 20px;
+            height: 600px;
             overflow-y: auto;
+            padding-right: 10px;
         }
         .map-container {
-            width: 50%;
-            height: 600px;
+            width: 60%;
+            height: 700px;
             border-radius: 10px;
             overflow: hidden;
         }
@@ -68,19 +71,12 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            margin-top: 20px;
             display: block;
             text-align: center;
+            margin-top: 15px;
         }
         .itinerary-btn:hover {
             background: #02c9c9;
-        }
-        .itinerary-output {
-            background: #111;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-            width: 80%;
         }
     </style>
 </head>
@@ -90,8 +86,7 @@
         <div class="favorites-section">
             <h2>My Favorites</h2>
             <div id="favorites-list"></div>
-            <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
-            <div id="itinerary-output" class="itinerary-output" style="display: none;"></div>
+            <button class="itinerary-btn" onclick="generatePDF()">Itinerary Generator</button>
         </div>
         <div id="map" class="map-container"></div>
     </div>
@@ -113,6 +108,7 @@
                     <div>
                         <strong>${site.name}</strong>
                         <p>${site.description}</p>
+                        <p><strong>Cost:</strong> ${site.cost}</p>
                     </div>
                     <button class="remove-btn" onclick="removeFromFavorites('${site.id}')">Remove</button>
                 `;
@@ -143,28 +139,25 @@
             });
         }
 
-        function generateItinerary() {
-            if (filteredPlaces.length === 0) {
-                alert("No places added to generate an itinerary.");
-                return;
-            }
-            let output = document.getElementById("itinerary-output");
-            output.style.display = "block";
-            output.innerHTML = "<h3>Itinerary</h3>";
-            let totalTime = 0;
-            let totalCost = 0;
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFont("helvetica");
+            doc.setFontSize(16);
+            doc.text("Itinerary", 20, 20);
             
+            let y = 40;
             filteredPlaces.forEach((site, index) => {
-                let visitTime = site.estimatedTime || "1 hour";
-                let cost = site.cost ? `$${site.cost}` : "Free";
-                totalCost += site.cost ? parseFloat(site.cost) : 0;
-                output.innerHTML += `
-                    <p><strong>Stop ${index + 1}: ${site.name}</strong><br>
-                    Estimated Visit Time: ${visitTime}<br>
-                    Cost: ${cost}</p>
-                `;
+                doc.setFontSize(14);
+                doc.text(`${index + 1}. ${site.name}`, 20, y);
+                doc.setFontSize(12);
+                doc.text(`Description: ${site.description}`, 20, y + 10);
+                doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 20);
+                doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 30);
+                y += 50;
             });
-            output.innerHTML += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)}</p>`;
+            
+            doc.save("itinerary.pdf");
         }
         
         displayFavorites();
