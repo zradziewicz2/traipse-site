@@ -320,13 +320,13 @@
             // ** Adjusted Logo Position & Size (Smaller, Further Right) **
             let img = new Image();
             img.src = "traipse_logo_turquoise2.png";
-            doc.addImage(img, "PNG", 185, 5, 10, 12); // **Smaller, positioned in top-right corner**
+            doc.addImage(img, "PNG", 192, 5, 10, 12); // **Moved further right**
         
-            // ** Add "TRAIPSE" to the left of the logo **
+            // ** Add "TRAIPSE" closer to the logo & matching color **
             doc.setFont("helvetica", "bold");
-            doc.setTextColor(3, 253, 252); // **Matching turquoise color**
+            doc.setTextColor(3, 253, 252); // **Turquoise color**
             doc.setFontSize(20);
-            doc.text("TRAIPSE", 145, 15); // **Aligns with the logo**
+            doc.text("TRAIPSE", 167, 14); // **Moved right & closer to the logo**
         
             // ** Title & Subtitle **
             doc.setFont("helvetica", "bold");
@@ -376,6 +376,7 @@
         
             doc.save("itinerary.pdf");
         }
+
         
 
 
