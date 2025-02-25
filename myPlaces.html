@@ -16,26 +16,31 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100vh;
         }
+
         .container {
             display: flex;
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 20px;
+            width: 95%;
+            max-width: 1400px;
+            height: 85vh;
         }
+
         .favorites-section {
             flex: 1;
-            margin-right: 20px;
-            height: 600px;
             overflow-y: auto;
-            padding-right: 10px;
+            padding: 15px;
+            background: #181818;
+            border-radius: 10px;
         }
+
         .map-container {
-            width: 60%;
-            height: 700px;
+            flex: 2;
+            height: 100%;
             border-radius: 10px;
             overflow: hidden;
         }
+
         .card {
             background: #222;
             padding: 15px;
@@ -43,14 +48,16 @@
             border-radius: 8px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
+
         .card img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 5px;
-            margin-right: 10px;
         }
+
         .remove-btn {
             background: red;
             border: none;
@@ -58,11 +65,12 @@
             padding: 5px 10px;
             border-radius: 5px;
             cursor: pointer;
-            margin-left: auto;
         }
+
         .remove-btn:hover {
             background: darkred;
         }
+
         .itinerary-btn {
             background: #03FDFC;
             border: none;
@@ -72,10 +80,11 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            display: block;
+            width: 100%;
             text-align: center;
             margin-top: 15px;
         }
+
         .itinerary-btn:hover {
             background: #02c9c9;
         }
@@ -150,30 +159,28 @@
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
-            // ** Add Logo (Positioned Next to Title) **
+
             let img = new Image();
             img.src = "traipse_logo_turquoise2.png"; 
             doc.addImage(img, "PNG", 10, 10, 30, 30); 
 
-            // ** Title & Subtitle **
-            doc.setFont("helvetica", "bold");
+            doc.setFont("times", "bold");
             doc.setFontSize(22);
-            doc.text("Itinerary", 50, 25);  // Title (Positioned Right of Logo)
-            
-            doc.setFont("helvetica", "italic");
+            doc.text("Itinerary", 50, 25);
+
+            doc.setFont("times", "italic");
             doc.setFontSize(14);
-            doc.text("Happy Traipsing!", 50, 35); // Subtitle
+            doc.text("Happy Traipsing!", 50, 35);
 
             let y = 50;
             let totalTravelTime = 0;
 
             sortedPlaces.forEach((site, index) => {
-                doc.setFont("helvetica", "bold");
-                doc.setFontSize(16);
+                doc.setFont("times", "bold");
+                doc.setFontSize(14);
                 doc.text(`${index + 1}. ${site.name}`, 20, y);
 
-                doc.setFont("helvetica", "normal");
+                doc.setFont("times", "normal");
                 doc.setFontSize(12);
                 doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 10);
                 doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 20);
@@ -184,14 +191,14 @@
                     totalTravelTime += travelTime;
 
                     doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y + 30);
-                    y += 50;
+                    y += 45;
                 } else {
-                    y += 40;
+                    y += 30;
                 }
             });
 
             doc.setFontSize(14);
-            doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 20, y + 20);
+            doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 20, y + 15);
             doc.save("itinerary.pdf");
         }
 
