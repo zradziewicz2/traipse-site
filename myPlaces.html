@@ -58,14 +58,17 @@
             border-radius: 5px;
         }
 
-        .notes-input {
-            width: 100%;
-            background: #333;
-            color: white;
+        .remove-btn {
+            background: red;
             border: none;
-            padding: 5px;
-            margin-top: 5px;
+            color: white;
+            padding: 5px 10px;
             border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background: darkred;
         }
 
         .itinerary-btn {
@@ -93,8 +96,7 @@
         <div class="favorites-section">
             <h2>My Favorites</h2>
             <div id="favorites-list"></div>
-            <button class="itinerary-btn" onclick="generateItinerary()">Generate Itinerary</button>
-            <button class="itinerary-btn" onclick="shareItinerary()">Share Itinerary</button>
+            <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
         </div>
         <div id="map" class="map-container"></div>
     </div>
@@ -103,13 +105,12 @@
     <script>
         let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
         let filteredPlaces = myPlaces.filter(site => site.name !== "Dinosaur Ridge" && site.name !== "Test Place");
+        localStorage.setItem('myPlaces', JSON.stringify(filteredPlaces));
 
         function displayFavorites() {
             const favoritesList = document.getElementById("favorites-list");
             favoritesList.innerHTML = "";
             filteredPlaces.forEach(site => {
-                let notes = localStorage.getItem(`notes_${site.id}`) || "";
-
                 let card = document.createElement("div");
                 card.className = "card";
                 card.innerHTML = `
@@ -118,16 +119,34 @@
                         <strong>${site.name}</strong>
                         <p>${site.description}</p>
                         <p><strong>Cost:</strong> ${site.cost}</p>
-                        <textarea class="notes-input" placeholder="Add notes..." 
-                            oninput="saveNotes('${site.id}', this.value)">${notes}</textarea>
                     </div>
+                    <button class="remove-btn" onclick="removeFromFavorites('${site.id}')">Remove</button>
                 `;
                 favoritesList.appendChild(card);
             });
         }
 
-        function saveNotes(siteId, text) {
-            localStorage.setItem(`notes_${siteId}`, text);
+        function removeFromFavorites(siteId) {
+            filteredPlaces = filteredPlaces.filter(site => site.id !== siteId);
+            localStorage.setItem('myPlaces', JSON.stringify(filteredPlaces));
+            displayFavorites();
+            updateMap();
+        }
+
+        let map = L.map('map').setView([39.7392, -104.9903], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        function updateMap() {
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            filteredPlaces.forEach(site => {
+                L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            });
         }
 
         function generateItinerary() {
@@ -136,7 +155,6 @@
                 return;
             }
 
-            let mode = confirm("Press OK for Walking Mode, Cancel for Driving Mode") ? "walking" : "driving";
             let sortedPlaces = [...filteredPlaces].sort((a, b) => a.lat - b.lat);
 
             const { jsPDF } = window.jspdf;
@@ -144,15 +162,15 @@
 
             let img = new Image();
             img.src = "traipse_logo_turquoise2.png"; 
-            doc.addImage(img, "PNG", 10, 10, 40, 40);
+            doc.addImage(img, "PNG", 10, 10, 30, 30); 
 
             doc.setFont("times", "bold");
             doc.setFontSize(22);
-            doc.text("Itinerary", 60, 25);
+            doc.text("Itinerary", 50, 25);
 
             doc.setFont("times", "italic");
             doc.setFontSize(14);
-            doc.text("Happy Traipsing!", 60, 35);
+            doc.text("Happy Traipsing!", 50, 35);
 
             let y = 50;
             let totalTravelTime = 0;
@@ -166,15 +184,14 @@
                 doc.setFontSize(12);
                 doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 10);
                 doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 20);
-                doc.text(`Notes: ${localStorage.getItem(`notes_${site.id}`) || 'None'}`, 20, y + 30);
 
                 if (index < sortedPlaces.length - 1) {
                     let distance = estimateDistance(site, sortedPlaces[index + 1]);
-                    let travelTime = mode === "walking" ? estimateWalkingTime(distance) : estimateDrivingTime(distance);
+                    let travelTime = estimateTravelTime(distance);
                     totalTravelTime += travelTime;
 
-                    doc.text(`Travel: ~${distance.toFixed(1)} miles (~${travelTime} min, ${mode})`, 20, y + 40);
-                    y += 50;
+                    doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y + 30);
+                    y += 45;
                 } else {
                     y += 30;
                 }
@@ -197,22 +214,12 @@
             return R * c;
         }
 
-        function estimateWalkingTime(distance) {
-            return Math.round(distance * 20);
-        }
-
-        function estimateDrivingTime(distance) {
+        function estimateTravelTime(distance) {
             return Math.round(distance * 1.5);
         }
 
-        function shareItinerary() {
-            let itineraryText = filteredPlaces.map((site, index) => `${index + 1}. ${site.name}`).join("\n");
-            let shareURL = `https://traipseapp.com/itinerary?data=${encodeURIComponent(itineraryText)}`;
-            navigator.clipboard.writeText(shareURL);
-            alert("Itinerary link copied to clipboard!");
-        }
-
         displayFavorites();
+        updateMap();
     </script>
 </body>
 </html>
