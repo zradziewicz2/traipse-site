@@ -1,6 +1,7 @@
 [
     {
         "name": "Dinosaur Ridge",
+        "id": "site123",
         "lat": 39.6766,
         "lng": -105.1926,
         "city": "denver",
@@ -19,6 +20,7 @@
     },
     {
         "name": "Molly Brown House Museum",
+        "id": "site124",
         "lat": 39.7374,
         "lng": -104.9807,
         "city": "denver",
@@ -37,6 +39,7 @@
     },
     {
         "name": "Red Rocks Park & Amphitheater",
+        "id": "site125",
         "lat": 39.6654,
         "lng": -105.2057,
         "city": "denver",
@@ -55,6 +58,7 @@
     },
     {
         "name": "Colorado State Capitol",
+        "id": "site126",
         "lat": 39.7392,
         "lng": -104.9849,
         "city": "denver",
@@ -73,6 +77,7 @@
     },
     {
         "name": "Union Station",
+        "id": "site127",
         "lat": 39.7541,
         "lng": -105.0005,
         "city": "denver",
@@ -91,6 +96,7 @@
     },
     {
         "name": "Buffalo Bill Museum & Grave",
+        "id": "site128",
         "lat": 39.7310,
         "lng": -105.2386,
         "city": "denver",
@@ -109,6 +115,7 @@
     },
     {
         "name": "Four Mile Historic Park",
+        "id": "site129",
         "lat": 39.6938,
         "lng": -104.9247,
         "city": "denver",
@@ -127,6 +134,7 @@
     },
     {
         "name": "History Colorado Center",
+        "id": "site130",
         "lat": 39.7377,
         "lng": -104.9866,
         "city": "denver",
