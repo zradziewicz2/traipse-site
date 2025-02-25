@@ -377,7 +377,26 @@
             font-size: 0.9em;
             color: #D0D0D0;
         }
+        .attribute-box {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin: 2px;
+            text-align: center;
+            white-space: nowrap;
+        }
         
+        .attribute-box:hover {
+            background: #03FDFC;
+            color: black;
+        }
+
         .site-distance {
             margin-top: 5px;
             font-size: 0.9em;
@@ -889,7 +908,7 @@ function applyFilters() {
         
                 
 
-            let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
             allMarkers.push(marker);
 
@@ -954,10 +973,11 @@ function applyFilters() {
                 </div>
             `;
 
+
             
             // Now attach event listeners (this is the critical fix!)
-            let starButton = siteCard.querySelector(#star-${site.id});
-            let xButton = siteCard.querySelector(#x-${site.id});
+            let starButton = siteCard.querySelector(`#star-${site.id}`);
+            let xButton = siteCard.querySelector(`#x-${site.id}`);
             
             starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
             xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
@@ -1050,14 +1070,14 @@ function applyFilters() {
             }
                 // Store user preferences in sets
             function toggleMyPlaces(siteId, element) {
-                console.log(Toggling My Places for site ID: ${siteId}); // Debugging log
+                console.log(`Toggling My Places for site ID: ${siteId}`); // Debugging log
             
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
-                    console.error(Site with ID ${siteId} not found.);
+                    console.error(`Site with ID ${siteId} not found.`);
                     return;
                 }
             
@@ -1075,7 +1095,7 @@ function applyFilters() {
                     let notIndex = notInterested.findIndex(s => s.id === siteId);
                     if (notIndex > -1) {
                         notInterested.splice(notIndex, 1);
-                        let xIcon = document.getElementById(x-${siteId});
+                        let xIcon = document.getElementById(`x-${siteId}`);
                         if (xIcon) {
                             xIcon.textContent = "✖";
                             xIcon.classList.remove("active");
@@ -1091,14 +1111,14 @@ function applyFilters() {
             
             
             function toggleNotInterested(siteId, element) {
-                console.log(Toggling Not Interested for site ID: ${siteId}); // Debugging log
+                console.log(`Toggling Not Interested for site ID: ${siteId}`); // Debugging log
             
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
-                    console.error(Site with ID ${siteId} not found.);
+                    console.error(`Site with ID ${siteId} not found.`);
                     return;
                 }
             
@@ -1116,7 +1136,7 @@ function applyFilters() {
                     let myIndex = myPlaces.findIndex(s => s.id === siteId);
                     if (myIndex > -1) {
                         myPlaces.splice(myIndex, 1);
-                        let starIcon = document.getElementById(star-${siteId});
+                        let starIcon = document.getElementById(`star-${siteId}`);
                         if (starIcon) {
                             starIcon.textContent = "☆";
                             starIcon.classList.remove("active");
@@ -1135,3 +1155,4 @@ function applyFilters() {
 </script>
 </body>
 </html>
+
