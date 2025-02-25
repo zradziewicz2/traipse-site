@@ -134,31 +134,6 @@
                 L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             });
         }
-                }
-        function generateItinerary() {
-            let itineraryContainer = document.getElementById("itinerary");
-            itineraryContainer.innerHTML = "<h2>Generated Itinerary</h2>";
-            let totalCost = 0;
-            let estimatedTime = 0;
-            let previousLocation = null;
-            myPlaces.forEach((place, index) => {
-                let travelTime = previousLocation ? "30 min drive" : "Starting Point";
-                let visitDuration = place.estimatedTime || "1 hour";
-                totalCost += parseFloat(place.cost.replace("$", "")) || 0;
-                estimatedTime += 1.5;
-                itineraryContainer.innerHTML += `
-                    <div class='place-card'>
-                        <strong>${place.name}</strong><br>
-                        Travel Time: ${travelTime}<br>
-                        Estimated Visit: ${visitDuration}<br>
-                        Cost: ${place.cost || "Free"}
-                    </div>
-                `;
-                previousLocation = place;
-            });
-            itineraryContainer.innerHTML += `<p><strong>Total Estimated Time:</strong> ${estimatedTime.toFixed(1)} hours</p>`;
-            itineraryContainer.innerHTML += `<p><strong>Total Cost:</strong> $${totalCost.toFixed(2)}</p>`;
-        }
         
         displayFavorites();
         updateMap();
