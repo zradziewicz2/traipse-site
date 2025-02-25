@@ -207,35 +207,6 @@
             align-items: center; /* Centers the cards */
         }
 
-            
-        .site-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px; /* Slightly reduce space between icons */
-            margin-top: 0px; /* Remove unnecessary spacing */
-            padding-bottom: 5px; /* Minimal bottom padding */
-        }
-
-
-        .star-icon, .x-icon {
-            cursor: pointer;
-            transition: color 0.3s ease-in-out;
-            color: white;
-            margin: 0; /* Remove any unnecessary spacing */
-            padding: 0; /* Remove extra padding */
-        }
-
-
-        
-        .star-icon.active {
-            color: gold; /* Star turns gold when selected */
-            content: '⭐';
-        }
-        
-        .x-icon.active {
-            color: red; /* X turns red when selected */
-            content: '❌';
-        }
 
         .star-icon::before,
         .x-icon::before {
@@ -966,21 +937,11 @@ function applyFilters() {
         
             <p class="site-description">${site.description}</p>
         
-            <div class="site-actions">
-                <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
-                      data-tooltip="Add to My Places">⭐</span>
-                <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
-                      data-tooltip="Not for me">✖</span>
             </div>
         `;
 
             
             // Now attach event listeners (this is the critical fix!)
-            let starButton = siteCard.querySelector(`#star-${site.id}`);
-            let xButton = siteCard.querySelector(`#x-${site.id}`);
-            
-            starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
-            xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
             
             resultsContainer.appendChild(siteCard);
 
@@ -1069,45 +1030,6 @@ function applyFilters() {
                 }
             }
                 // Store user preferences in sets
-            function toggleMyPlaces(siteId, element) {
-                console.log(`Toggling My Places for site ID: ${siteId}`); // Debugging log
-            
-                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-                let site = siteData.find(s => s.id === siteId);
-                if (!site) {
-                    console.error(`Site with ID ${siteId} not found.`);
-                    return;
-                }
-            
-                let index = myPlaces.findIndex(s => s.id === siteId);
-            
-                if (index > -1) {
-                    myPlaces.splice(index, 1);
-                    element.textContent = "☆";
-                    element.classList.remove("active");
-                } else {
-                    myPlaces.push(site);
-                    element.textContent = "⭐";
-                    element.classList.add("active");
-            
-                    let notIndex = notInterested.findIndex(s => s.id === siteId);
-                    if (notIndex > -1) {
-                        notInterested.splice(notIndex, 1);
-                        let xIcon = document.getElementById(`x-${siteId}`);
-                        if (xIcon) {
-                            xIcon.textContent = "✖";
-                            xIcon.classList.remove("active");
-                        }
-                    }
-                }
-            
-                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-                localStorage.setItem('notInterested', JSON.stringify(notInterested));
-            
-                console.log("Updated My Places:", myPlaces);
-            }
             
             
             function toggleNotInterested(siteId, element) {
