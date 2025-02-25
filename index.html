@@ -910,16 +910,25 @@ function applyFilters() {
         
                 
 
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
             marker.addTo(map);
             allMarkers.push(marker);
 
-// ✅ Declare siteCard before using it
-let siteCard = document.createElement("div");
-siteCard.classList.add("site-card");
-
-            // ✅ Now use siteCard.innerHTML safely
-            siteCard.innerHTML = `
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+            siteCard.style.display = "flex";  
+            siteCard.style.flexDirection = "column";  
+            siteCard.style.alignItems = "center"; // Center items in the card
+            
+            // Get stored My Places and Not Interested lists
+            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+            // Check if this site is already liked or not interested
+            let isLiked = myPlaces.some(s => s.id === site.id);
+            let isNotInterested = notInterested.some(s => s.id === site.id);
+            
+            siteCard.innerHTML = 
                 <div class="site-content">
                     <div class="site-image-container">
                         <img src="${site.image}" alt="${site.name}" class="site-image">
@@ -928,30 +937,50 @@ siteCard.classList.add("site-card");
                         <h3 class="site-title">${site.name}</h3>
                         <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                         <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                        <p class="site-distance">${distance !== null ? ${distance.toFixed(1)} miles away : "Distance unavailable"}</p>
+            
+                        <div class="site-attributes">
+                            ${
+                                selectedCost !== "all" ? <span class="attribute-box">${translateCost(site.cost)}</span> : ""
+                            } 
+                            ${
+                                selectedType !== "all" ? <span class="attribute-box">${translateType(site.type)}</span> : ""
+                            }
+                            ${
+                                selectedLocalOrNational !== "all" ? <span class="attribute-box">${translateLocalOrNational(site.localornational)}</span> : ""
+                            }
+                            ${
+                                selectedEstimatedTime !== "all" ? <span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span> : ""
+                            }
+                            ${
+                                selectedReservations !== "all" ? <span class="attribute-box">${translateReservations(site.reservations)}</span> : ""
+                            }
+                            ${
+                                selectedTours !== "all" ? <span class="attribute-box">${translateTours(site.tours)}</span> : ""
+                            }
+                            ${
+                                selectedTransit !== "all" ? <span class="attribute-box">${translateTransit(site.transit)}</span> : ""
+                            }
+                        </div>
                     </div>
                 </div>
+            
                 <p class="site-description">${site.description}</p>
+            
                 <div class="site-actions">
-                    <span id="star-${site.id}" class="star-icon" 
-                          onclick="toggleMyPlaces('${site.id}', this)" 
+                    <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
                           data-tooltip="Add to My Places">⭐</span>
-                    <span id="x-${site.id}" class="x-icon" 
-                          onclick="toggleNotInterested('${site.id}', this)" 
+                    <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
                           data-tooltip="Not for me">✖</span>
                 </div>
-            `;
-            
-            // ✅ Append siteCard to the results container
-            document.getElementById("searchResults").appendChild(siteCard);
-
+            ;
 
 
 
             
             // Now attach event listeners (this is the critical fix!)
-            let starButton = siteCard.querySelector(`#star-${site.id}`);
-            let xButton = siteCard.querySelector(`#x-${site.id}`);
+            let starButton = siteCard.querySelector(#star-${site.id});
+            let xButton = siteCard.querySelector(#x-${site.id});
             
             starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
             xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
@@ -1044,146 +1073,88 @@ siteCard.classList.add("site-card");
             }
                 // Store user preferences in sets
             function toggleMyPlaces(siteId, element) {
+                console.log(Toggling My Places for site ID: ${siteId}); // Debugging log
+            
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
-                if (!site) return;
+                if (!site) {
+                    console.error(Site with ID ${siteId} not found.);
+                    return;
+                }
             
                 let index = myPlaces.findIndex(s => s.id === siteId);
             
                 if (index > -1) {
-                    // Remove from My Places if already there
                     myPlaces.splice(index, 1);
+                    element.textContent = "☆";
                     element.classList.remove("active");
                 } else {
-                    // Add to My Places **ONLY IF NOT ALREADY PRESENT**
                     myPlaces.push(site);
+                    element.textContent = "⭐";
                     element.classList.add("active");
             
-                    // Remove from Not Interested if it exists there
                     let notIndex = notInterested.findIndex(s => s.id === siteId);
                     if (notIndex > -1) {
                         notInterested.splice(notIndex, 1);
-                        let xButton = document.getElementById(`x-${siteId}`);
-                        if (xButton) xButton.classList.remove("active");
+                        let xIcon = document.getElementById(x-${siteId});
+                        if (xIcon) {
+                            xIcon.textContent = "✖";
+                            xIcon.classList.remove("active");
+                        }
                     }
                 }
             
                 localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
                 localStorage.setItem('notInterested', JSON.stringify(notInterested));
             
-                updateMyPlacesPage(); // ✅ Make sure this refreshes the MyPlaces page correctly
+                console.log("Updated My Places:", myPlaces);
             }
-
-
             
             
-function toggleNotInterested(siteId, element) {
-    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-
-    let site = siteData.find(s => s.id === siteId);
-    if (!site) return;
-
-    let index = notInterested.findIndex(s => s.id === siteId);
-
-    if (index > -1) {
-        // Remove from Not Interested if already there
-        notInterested.splice(index, 1);
-        element.classList.remove("active");
-    } else {
-        // Add to Not Interested
-        notInterested.push(site);
-        element.classList.add("active");
-
-        // Remove from My Places if it's there
-        let myIndex = myPlaces.findIndex(s => s.id === siteId);
-        if (myIndex > -1) {
-            myPlaces.splice(myIndex, 1);
-            let starIcon = document.getElementById(`star-${siteId}`);
-            if (starIcon) starIcon.classList.remove("active");
-        }
-    }
-
-    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-    localStorage.setItem('notInterested', JSON.stringify(notInterested));
-
-    updateMyPlacesPage(); // ✅ CALL THE FUNCTION HERE
-}
-
-// ✅ Move updateMyPlacesPage OUTSIDE of toggleNotInterested()
-function updateMyPlacesPage() {
-    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-
-    let likedContainer = document.getElementById("likedPlaces");
-    let notInterestedContainer = document.getElementById("notInterestedPlaces");
-
-    if (likedContainer) {
-        likedContainer.innerHTML = ""; // Clear previous entries
-        if (myPlaces.length > 0) {
-            myPlaces.forEach(site => {
-                let siteCard = document.createElement("div");
-                siteCard.classList.add("site-card");
-
-                siteCard.innerHTML = `
-                    <div class="site-content">
-                        <div class="site-image-container">
-                            <img src="${site.image}" alt="${site.name}" class="site-image">
-                        </div>
-                        <div class="site-details">
-                            <h3 class="site-title">${site.name}</h3>
-                            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                            <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                            <p class="site-description">${site.description}</p>
-                        </div>
-                    </div>
-                `;
-
-                likedContainer.appendChild(siteCard);
-            });
-        } else {
-            likedContainer.innerHTML = "<p>No liked places yet.</p>";
-        }
-    }
-
-    if (notInterestedContainer) {
-        notInterestedContainer.innerHTML = ""; // Clear previous entries
-        if (notInterested.length > 0) {
-            notInterested.forEach(site => {
-                let siteCard = document.createElement("div");
-                siteCard.classList.add("site-card");
-
-                siteCard.innerHTML = `
-                    <div class="site-content">
-                        <div class="site-image-container">
-                            <img src="${site.image}" alt="${site.name}" class="site-image">
-                        </div>
-                        <div class="site-details">
-                            <h3 class="site-title">${site.name}</h3>
-                            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                            <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                            <p class="site-description">${site.description}</p>
-                        </div>
-                    </div>
-                `;
-
-                notInterestedContainer.appendChild(siteCard);
-            });
-        } else {
-            notInterestedContainer.innerHTML = "<p>No sites marked as not interested.</p>";
-        }
-    }
-}
-
+            function toggleNotInterested(siteId, element) {
+                console.log(Toggling Not Interested for site ID: ${siteId}); // Debugging log
+            
+                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+                let site = siteData.find(s => s.id === siteId);
+                if (!site) {
+                    console.error(Site with ID ${siteId} not found.);
+                    return;
+                }
+            
+                let index = notInterested.findIndex(s => s.id === siteId);
+            
+                if (index > -1) {
+                    notInterested.splice(index, 1);
+                    element.textContent = "✖";
+                    element.classList.remove("active");
+                } else {
+                    notInterested.push(site);
+                    element.textContent = "❌";
+                    element.classList.add("active");
+            
+                    let myIndex = myPlaces.findIndex(s => s.id === siteId);
+                    if (myIndex > -1) {
+                        myPlaces.splice(myIndex, 1);
+                        let starIcon = document.getElementById(star-${siteId});
+                        if (starIcon) {
+                            starIcon.textContent = "☆";
+                            starIcon.classList.remove("active");
+                        }
+                    }
+                }
+            
+                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+                localStorage.setItem('notInterested', JSON.stringify(notInterested));
+            
+                console.log("Updated Not Interested:", notInterested);
+            }
 
 
 
 </script>
 </body>
 </html>
-
-
