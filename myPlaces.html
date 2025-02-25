@@ -97,6 +97,7 @@
             margin: 10px auto;
             padding: 10px;
             box-sizing: border-box;
+            min-height: 75vh; /* Prevents it from shrinking too much */
         }
 
         /* ===== My Favorites List ===== */
@@ -115,16 +116,18 @@
         }
 
         /* ===== Itinerary Generator Button (Now Below the List) ===== */
-        .itinerary-btn-container {
+            .itinerary-btn-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            position: relative;  /* Keeps it positioned naturally below content */
+            bottom: 0;
+            margin-top: 15px;
             padding: 15px;
             width: 100%;
+            background-color: #111;  /* Dark background to separate it visually */
         }
-
-
+        
         .itinerary-btn {
             background: #03FDFC;
             border: none;
@@ -134,9 +137,11 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            text-align: center;
             width: 300px;
+            text-align: center;
+            display: block;
         }
+
 
         .itinerary-btn:hover {
             background: #02c9c9;
