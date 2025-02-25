@@ -175,7 +175,31 @@
             font-weight: bold;
             color: #03FDFC;
             margin-bottom: 5px;
+                }
+                .itinerary-btn-container {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 15px;
+            width: 100%;
+            background-color: red; /* 🔴 TEMP: Add a red background to check visibility */
         }
+        
+        .itinerary-btn {
+            display: block !important;
+            background: #03FDFC !important;
+            color: black !important;
+            font-size: 1.2em !important;
+            font-weight: bold !important;
+            padding: 12px 20px !important;
+            border-radius: 8px !important;
+            width: 300px !important;
+            text-align: center;
+            cursor: pointer !important;
+            z-index: 9999 !important; /* Ensure it's on top of other elements */
+        }
+
 
         .remove-btn {
             background: red;
