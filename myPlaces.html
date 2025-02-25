@@ -317,45 +317,56 @@
         
             let sortedPlaces = [...myPlaces].sort((a, b) => a.lat - b.lat);
         
+            // ** Add Logo Next to Title **
             let img = new Image();
             img.src = "traipse_logo_turquoise2.png";
             doc.addImage(img, "PNG", 10, 10, 30, 30);
         
-            doc.setFont("times", "bold");
+            // ** Title & Subtitle **
+            doc.setFont("helvetica", "bold");
             doc.setFontSize(22);
-            doc.text("Itinerary", 50, 25);
+            doc.text("Itinerary", 50, 20);
         
-            doc.setFont("times", "italic");
-            doc.setFontSize(14);
-            doc.text("Happy Traipsing!", 50, 35);
+            doc.setFont("helvetica", "italic");
+            doc.setFontSize(12);
+            doc.text("Happy Traipsing!", 50, 28);
         
-            let y = 50;
+            let y = 40; // **Start Y Position**
             let totalTravelTime = 0;
         
             sortedPlaces.forEach((site, index) => {
-                doc.setFont("times", "bold");
+                doc.setFont("helvetica", "bold");
                 doc.setFontSize(14);
-                doc.text(`${index + 1}. ${site.name}`, 20, y);
+                doc.text(`${index + 1}. ${site.name}`, 15, y);
         
-                doc.setFont("times", "normal");
-                doc.setFontSize(12);
-                doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 10);
-                doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 20);
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(11);
+                y += 6;  // **Less space between lines**
+        
+                doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y);
+                y += 5;
+        
+                doc.text(`Cost: ${site.cost || 'Free'}`, 20, y);
+                y += 5;
         
                 if (index < sortedPlaces.length - 1) {
                     let distance = estimateDistance(site, sortedPlaces[index + 1]);
                     let travelTime = estimateTravelTime(distance);
                     totalTravelTime += travelTime;
         
-                    doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y + 30);
-                    y += 45;
+                    doc.setFont("helvetica", "italic");
+                    doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y);
+                    y += 8; // **Smaller gap between locations**
                 } else {
-                    y += 30;
+                    y += 6;
                 }
             });
         
-            doc.setFontSize(14);
-            doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 20, y + 15);
+            // **Total Travel Time**
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 15, y + 5);
+        
             doc.save("itinerary.pdf");
         }
 
