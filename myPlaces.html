@@ -19,6 +19,73 @@
             height: 100vh;
         }
 
+        /* ===== Header Styles ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            background: #111;
+            color: #03FDFC;
+            height: 65px;
+            width: 100%;
+        }
+
+        #logo {
+            width: auto;
+            height: 50px;
+            object-fit: contain;
+            margin-left: 10px;
+        }
+
+        .website-title {
+            font-size: 2em;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #03FDFC;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .tagline {
+            font-size: 1em;
+            font-family: 'Georgia', serif;
+            color: #03FDFC;
+            white-space: nowrap;
+            flex-grow: 0;
+        }
+
+        .header-buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            flex-grow: 1;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
+            font-weight: bold;
+            padding: 5px 10px;
+            min-width: 110px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .header-btn:hover {
+            background: #03FDFC;
+            color: black;
+        }
+
+        /* ===== Main Page Styles ===== */
         .container {
             display: flex;
             width: 95%;
@@ -52,43 +119,18 @@
         }
 
         .card img {
-            width: 120px; /* Bigger image */
+            width: 120px;
             height: 100px;
             object-fit: cover;
             border-radius: 5px;
             margin-right: 15px;
         }
 
-        .card-content {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
         .card-title {
-            font-size: 1.5em; /* Bigger title */
+            font-size: 1.5em;
             font-weight: bold;
             color: #03FDFC;
             margin-bottom: 5px;
-        }
-
-        .metadata {
-            font-size: 0.9em;
-            color: #bbb;
-        }
-
-        .metadata strong {
-            color: white;
-        }
-
-        .notes-input {
-            width: 100%;
-            background: #333;
-            color: white;
-            border: none;
-            padding: 5px;
-            margin-top: 5px;
-            border-radius: 5px;
         }
 
         .remove-btn {
@@ -99,7 +141,6 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
-            align-self: flex-start;
         }
 
         .remove-btn:hover {
@@ -126,6 +167,24 @@
     </style>
 </head>
 <body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
+        <div class="website-title">TRAIPSE</div>
+        <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+
+        <div class="header-buttons-container">
+            <div class="header-buttons">
+                <button class="header-btn">CONNECT</button>
+                <button class="header-btn" onclick="window.location.href='myPlaces.html'">MY PLACES</button>
+                <button class="header-btn">SUBMIT FEEDBACK</button>
+                <button class="header-btn">DONATE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Places Section -->
     <h1>My Places</h1>
     <div class="container">
         <div class="favorites-section">
@@ -139,28 +198,19 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-        let filteredPlaces = myPlaces.filter(site => site.name !== "Dinosaur Ridge" && site.name !== "Test Place");
 
         function displayFavorites() {
             const favoritesList = document.getElementById("favorites-list");
             favoritesList.innerHTML = "";
-            filteredPlaces.forEach(site => {
-                let notes = localStorage.getItem(`notes_${site.id}`) || "";
-
+            myPlaces.forEach(site => {
                 let card = document.createElement("div");
                 card.className = "card";
                 card.innerHTML = `
                     <img src="${site.image}" alt="${site.name}">
-                    <div class="card-content">
-                        <div class="card-title">${site.name}</div>
-                        <div class="metadata">
-                            <strong>Time Period:</strong> ${site.timeperiod || 'Unknown'}<br>
-                            <strong>Category:</strong> ${site.category || 'Unknown'}<br>
-                            <strong>Distance:</strong> ${site.distance || 'Unknown'} miles<br>
-                            <strong>Cost:</strong> ${site.cost || 'Free'}
-                        </div>
-                        <textarea class="notes-input" placeholder="Add a personal note or reminder..." 
-                            oninput="saveNotes('${site.id}', this.value)">${notes}</textarea>
+                    <div>
+                        <strong class="card-title">${site.name}</strong>
+                        <p>${site.description}</p>
+                        <p><strong>Cost:</strong> ${site.cost}</p>
                     </div>
                     <button class="remove-btn" onclick="removeFromFavorites('${site.id}')">Remove</button>
                 `;
@@ -168,13 +218,9 @@
             });
         }
 
-        function saveNotes(siteId, text) {
-            localStorage.setItem(`notes_${siteId}`, text);
-        }
-
         function removeFromFavorites(siteId) {
-            filteredPlaces = filteredPlaces.filter(site => site.id !== siteId);
-            localStorage.setItem('myPlaces', JSON.stringify(filteredPlaces));
+            myPlaces = myPlaces.filter(site => site.id !== siteId);
+            localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
             displayFavorites();
             updateMap();
         }
@@ -190,51 +236,9 @@
                     map.removeLayer(layer);
                 }
             });
-            filteredPlaces.forEach(site => {
+            myPlaces.forEach(site => {
                 L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             });
-        }
-
-        function generateItinerary() {
-            if (filteredPlaces.length < 2) {
-                alert("At least two locations are required for an itinerary.");
-                return;
-            }
-
-            let sortedPlaces = [...filteredPlaces].sort((a, b) => a.lat - b.lat);
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            let img = new Image();
-            img.src = "traipse_logo_turquoise2.png"; 
-            doc.addImage(img, "PNG", 10, 10, 30, 30); 
-
-            doc.setFont("times", "bold");
-            doc.setFontSize(22);
-            doc.text("Itinerary", 50, 25);
-            doc.setFont("times", "italic");
-            doc.setFontSize(14);
-            doc.text("Happy Traipsing!", 50, 35);
-
-            let y = 50;
-            sortedPlaces.forEach((site, index) => {
-                let notes = localStorage.getItem(`notes_${site.id}`) || "No personal notes.";
-
-                doc.setFont("times", "bold");
-                doc.setFontSize(14);
-                doc.text(`${index + 1}. ${site.name}`, 20, y);
-
-                doc.setFont("times", "normal");
-                doc.setFontSize(12);
-                doc.text(`Category: ${site.category || 'Unknown'}`, 20, y + 10);
-                doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y + 20);
-                doc.text(`Cost: ${site.cost || 'Free'}`, 20, y + 30);
-                doc.text(`Note: ${notes}`, 20, y + 40);
-
-                y += 50;
-            });
-
-            doc.save("itinerary.pdf");
         }
 
         displayFavorites();
