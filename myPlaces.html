@@ -377,26 +377,7 @@
             font-size: 0.9em;
             color: #D0D0D0;
         }
-        .attribute-box {
-            display: inline-block;
-            background: transparent;
-            border: 2px solid #03FDFC;
-            color: #03FDFC;
-            font-size: 0.8em;
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            margin: 2px;
-            text-align: center;
-            white-space: nowrap;
-        }
         
-        .attribute-box:hover {
-            background: #03FDFC;
-            color: black;
-        }
-
         .site-distance {
             margin-top: 5px;
             font-size: 0.9em;
@@ -926,53 +907,37 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-            siteCard.innerHTML = `
-                <div class="site-content">
-                    <div class="site-image-container">
-                        <img src="${site.image}" alt="${site.name}" class="site-image">
-                    </div>
-                    <div class="site-details">
-                        <h3 class="site-title">${site.name}</h3>
-                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                        <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-            
-                        <div class="site-attributes">
-                            ${
-                                selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""
-                            } 
-                            ${
-                                selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""
-                            }
-                            ${
-                                selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""
-                            }
-                            ${
-                                selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""
-                            }
-                            ${
-                                selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""
-                            }
-                            ${
-                                selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""
-                            }
-                            ${
-                                selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
-                            }
-                        </div>
-                    </div>
+                   siteCard.innerHTML = `
+            <div class="site-content">
+                <div class="site-image-container">
+                    <img src="${site.image}" alt="${site.name}" class="site-image">
                 </div>
-            
-                <p class="site-description">${site.description}</p>
-            
-                <div class="site-actions">
-                    <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
-                          data-tooltip="Add to My Places">⭐</span>
-                    <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
-                          data-tooltip="Not for me">✖</span>
+                <div class="site-details">
+                    <h3 class="site-title">${site.name}</h3>
+                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                    <p class="site-attributes">
+                        ${translateCost(site.cost)}, ${translateType(site.type)}, 
+                        ${translateLocalOrNational(site.localornational)}, 
+                        ${translateEstimatedTime(site.estimatedtime)}, 
+                        ${translateReservations(site.reservations)}, 
+                        ${translateTours(site.tours)}, ${translateTransit(site.transit)}
+                    </p>
+                    <p class="site-distance">
+                        ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
+                    </p>
                 </div>
-            `;
-
+            </div>
+        
+            <p class="site-description">${site.description}</p>
+        
+            <div class="site-actions">
+                <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
+                      data-tooltip="Add to My Places">⭐</span>
+                <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+                      data-tooltip="Not for me">✖</span>
+            </div>
+        `;
 
             
             // Now attach event listeners (this is the critical fix!)
