@@ -85,12 +85,12 @@
             color: black;
         }
 
-        /* ===== Main Page Layout ===== */
+        /* ===== Page Layout ===== */
         .container {
             display: flex;
             width: 95%;
             max-width: 1600px;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 100px);
             gap: 20px;
             margin: 10px auto;
             padding: 10px;
@@ -104,16 +104,21 @@
             padding: 15px;
             background: #181818;
             border-radius: 10px;
-            height: 100%;
+            height: 85%;
             box-sizing: border-box;
         }
 
-        /* ===== Itinerary Generator Button ===== */
+        .favorites-section h2 {
+            margin-top: 0;
+        }
+
+        /* ===== Itinerary Generator Button (Now Below the List) ===== */
         .itinerary-btn-container {
             display: flex;
             justify-content: center;
             margin-top: 10px;
             padding: 10px;
+            width: 100%;
         }
 
         .itinerary-btn {
@@ -203,12 +208,7 @@
     </div>
 
     <!-- My Places Section -->
-    <h1 style="margin: 10px 0;">My Places</h1>
-
-    <!-- Itinerary Generator Button (Outside the List) -->
-    <div class="itinerary-btn-container">
-        <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
-    </div>
+    <h1 style="margin: 20px 0 10px 20px;">My Places</h1>
 
     <div class="container">
         <div class="favorites-section">
@@ -216,6 +216,11 @@
             <div id="favorites-list"></div>
         </div>
         <div id="map" class="map-container"></div>
+    </div>
+
+    <!-- Itinerary Generator Button (Placed Below the List) -->
+    <div class="itinerary-btn-container">
+        <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -254,11 +259,6 @@
         }).addTo(map);
 
         function updateMap() {
-            map.eachLayer(layer => {
-                if (layer instanceof L.Marker) {
-                    map.removeLayer(layer);
-                }
-            });
             myPlaces.forEach(site => {
                 L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             });
