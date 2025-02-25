@@ -75,6 +75,13 @@
         .itinerary-btn:hover {
             background: #02c9c9;
         }
+        .itinerary-output {
+            background: #111;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            width: 80%;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +90,8 @@
         <div class="favorites-section">
             <h2>My Favorites</h2>
             <div id="favorites-list"></div>
-            <button class="itinerary-btn">Itinerary Generator</button>
+            <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
+            <div id="itinerary-output" class="itinerary-output" style="display: none;"></div>
         </div>
         <div id="map" class="map-container"></div>
     </div>
@@ -133,6 +141,30 @@
             filteredPlaces.forEach(site => {
                 L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             });
+        }
+
+        function generateItinerary() {
+            if (filteredPlaces.length === 0) {
+                alert("No places added to generate an itinerary.");
+                return;
+            }
+            let output = document.getElementById("itinerary-output");
+            output.style.display = "block";
+            output.innerHTML = "<h3>Itinerary</h3>";
+            let totalTime = 0;
+            let totalCost = 0;
+            
+            filteredPlaces.forEach((site, index) => {
+                let visitTime = site.estimatedTime || "1 hour";
+                let cost = site.cost ? `$${site.cost}` : "Free";
+                totalCost += site.cost ? parseFloat(site.cost) : 0;
+                output.innerHTML += `
+                    <p><strong>Stop ${index + 1}: ${site.name}</strong><br>
+                    Estimated Visit Time: ${visitTime}<br>
+                    Cost: ${cost}</p>
+                `;
+            });
+            output.innerHTML += `<p><strong>Total Estimated Cost:</strong> $${totalCost.toFixed(2)}</p>`;
         }
         
         displayFavorites();
