@@ -186,6 +186,30 @@
         .remove-btn:hover {
             background: darkred;
         }
+        .itinerary-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        
+        .itinerary-btn {
+            background: #03FDFC;
+            border: none;
+            color: black;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 300px;
+            text-align: center;
+        }
+        
+        .itinerary-btn:hover {
+            background: #02c9c9;
+        }
+
 
     </style>
 </head>
@@ -210,18 +234,21 @@
     <!-- My Places Section -->
     <h1 style="margin: 20px 0 10px 20px;">My Places</h1>
 
-    <div class="container">
-        <div class="favorites-section">
-            <h2>My Favorites</h2>
-            <div id="favorites-list"></div>
+        <div class="container">
+            <div class="favorites-section">
+                <h2>My Favorites</h2>
+                <div id="favorites-list"></div>
+                
+                <!-- Itinerary Button Added Here -->
+                <div class="itinerary-btn-container">
+                    <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
+                </div>
+            </div>
+        
+            <div id="map" class="map-container"></div>
         </div>
-        <div id="map" class="map-container"></div>
-    </div>
 
     <!-- Itinerary Generator Button (Placed Below the List) -->
-    <div class="itinerary-btn-container">
-        <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
-    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
