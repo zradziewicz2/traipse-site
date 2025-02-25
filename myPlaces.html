@@ -4,109 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Places - Traipse</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #000;
             color: white;
             margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #03FDFC;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 20px;
         }
-        .category {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #222;
+        .favorites-section {
+            flex: 1;
+            margin-right: 20px;
+            overflow-y: auto;
+        }
+        .map-container {
+            width: 50%;
+            height: 600px;
             border-radius: 10px;
+            overflow: hidden;
         }
-        .site-card {
+        .card {
+            background: #222;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            background: #333;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
         }
-        .site-image {
-            width: 80px;
-            height: 80px;
+        .card img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
             border-radius: 5px;
-            margin-right: 15px;
-        }
-        .site-info {
-            flex-grow: 1;
-            text-align: left;
+            margin-right: 10px;
         }
         .remove-btn {
-            background: none;
-            border: 2px solid #ff4444;
-            color: #ff4444;
+            background: red;
+            border: none;
+            color: white;
             padding: 5px 10px;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
+            margin-left: auto;
         }
         .remove-btn:hover {
-            background: #ff4444;
-            color: white;
+            background: darkred;
+        }
+        .itinerary-btn {
+            background: #03FDFC;
+            border: none;
+            color: black;
+            padding: 12px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+        }
+        .itinerary-btn:hover {
+            background: #02c9c9;
         }
     </style>
 </head>
 <body>
     <h1>My Places</h1>
     <div class="container">
-        <div class="category" id="favorites">
+        <div class="favorites-section">
             <h2>My Favorites</h2>
-            <div id="favoritesList"></div>
+            <div id="favorites-list"></div>
+            <button class="itinerary-btn">Itinerary Generator</button>
         </div>
-        <div class="category" id="notForMe">
-            <h2>Not for Me</h2>
-            <div id="notForMeList"></div>
-        </div>
+        <div id="map" class="map-container"></div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
-        function loadMyPlaces() {
-            let favorites = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-            const renderList = (list, containerId) => {
-                let container = document.getElementById(containerId);
-                container.innerHTML = '';
-                list.forEach(site => {
-                    let siteCard = document.createElement('div');
-                    siteCard.className = 'site-card';
-                    siteCard.innerHTML = `
-                        <img src="${site.image}" class="site-image" alt="${site.name}">
-                        <div class="site-info">
-                            <h3>${site.name}</h3>
-                            <p>${site.description}</p>
-                        </div>
-                        <button class="remove-btn" onclick="removeFromList('${site.id}', '${containerId}')">Remove</button>
-                    `;
-                    container.appendChild(siteCard);
-                });
-            };
-            
-            renderList(favorites, 'favoritesList');
-            renderList(notInterested, 'notForMeList');
+        let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+        let filteredPlaces = myPlaces.filter(site => site.name !== "Dinosaur Ridge" && site.name !== "Test Place");
+        localStorage.setItem('myPlaces', JSON.stringify(filteredPlaces));
+        
+        function displayFavorites() {
+            const favoritesList = document.getElementById("favorites-list");
+            favoritesList.innerHTML = "";
+            filteredPlaces.forEach(site => {
+                let card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                    <img src="${site.image}" alt="${site.name}">
+                    <div>
+                        <strong>${site.name}</strong>
+                        <p>${site.description}</p>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromFavorites('${site.id}')">Remove</button>
+                `;
+                favoritesList.appendChild(card);
+            });
         }
-
-        function removeFromList(siteId, listType) {
-            let listKey = listType === 'favoritesList' ? 'myPlaces' : 'notInterested';
-            let list = JSON.parse(localStorage.getItem(listKey)) || [];
-            list = list.filter(site => site.id !== siteId);
-            localStorage.setItem(listKey, JSON.stringify(list));
-            loadMyPlaces();
+        
+        function removeFromFavorites(siteId) {
+            filteredPlaces = filteredPlaces.filter(site => site.id !== siteId);
+            localStorage.setItem('myPlaces', JSON.stringify(filteredPlaces));
+            displayFavorites();
+            updateMap();
         }
+        
+        let map = L.map('map').setView([39.7392, -104.9903], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-        window.onload = loadMyPlaces;
+        function updateMap() {
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+            filteredPlaces.forEach(site => {
+                L.marker([site.lat, site.lng]).addTo(map).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            });
+        }
+        
+        displayFavorites();
+        updateMap();
     </script>
 </body>
 </html>
