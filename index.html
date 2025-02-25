@@ -1055,46 +1055,39 @@ function applyFilters() {
                 // Store user preferences in sets
             
             
-            function toggleFavorite(siteId, element) {
-                console.log(`Toggling Favorite for site ID: ${siteId}`);
-            
+             function toggleFavorite(siteId, element) {
                 let favorites = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
-                if (!site) {
-                    console.error(`Error: Site with ID ${siteId} not found.`);
-                    return;
-                }
+                if (!site) return;
             
                 let index = favorites.findIndex(s => s.id === siteId);
-                
                 if (index > -1) {
                     favorites.splice(index, 1);
-                    element.textContent = "☆"; // Unselected state
+                    element.textContent = "☆";
                 } else {
                     favorites.push(site);
-                    element.textContent = "⭐"; // Selected state
-            
+                    element.textContent = "⭐";
+                    
                     // Remove from 'Not Interested' if present
                     notInterested = notInterested.filter(s => s.id !== siteId);
-                    let xIcon = document.getElementById(`x-${siteId}`);
-                    if (xIcon) xIcon.textContent = "✖";
+                    document.getElementById(`x-${siteId}`).textContent = "✖";
                 }
             
                 localStorage.setItem('myPlaces', JSON.stringify(favorites));
                 localStorage.setItem('notInterested', JSON.stringify(notInterested));
             }
             
-            function toggleNotInterested(siteId, element) {
+               function toggleNotInterested(siteId, element) {
                 console.log(`Toggling Not Interested for site ID: ${siteId}`);
             
-                let favorites = JSON.parse(localStorage.getItem('myPlaces')) || [];
+                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
-                    console.error(`Error: Site with ID ${siteId} not found.`);
+                    console.error(`Site with ID ${siteId} not found.`);
                     return;
                 }
             
@@ -1102,24 +1095,27 @@ function applyFilters() {
             
                 if (index > -1) {
                     notInterested.splice(index, 1);
-                    element.textContent = "✖"; // Unselected state
+                    element.textContent = "✖";
+                    element.classList.remove("active");
                 } else {
                     notInterested.push(site);
-                    element.textContent = "❌"; // Selected state
+                    element.textContent = "❌";
+                    element.classList.add("active");
             
-                    // Remove from 'My Places' if present
-                    let myIndex = favorites.findIndex(s => s.id === siteId);
+                    let myIndex = myPlaces.findIndex(s => s.id === siteId);
                     if (myIndex > -1) {
-                        favorites.splice(myIndex, 1);
+                        myPlaces.splice(myIndex, 1);
                         let starIcon = document.getElementById(`star-${siteId}`);
-                        if (starIcon) starIcon.textContent = "☆";
+                        if (starIcon) {
+                            starIcon.textContent = "☆";
+                            starIcon.classList.remove("active");
+                        }
                     }
                 }
             
-                localStorage.setItem('myPlaces', JSON.stringify(favorites));
+                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
                 localStorage.setItem('notInterested', JSON.stringify(notInterested));
-            }
-
+            
                 console.log("Updated Not Interested:", notInterested);
             }
 
