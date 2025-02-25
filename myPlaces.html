@@ -889,7 +889,7 @@ function applyFilters() {
         
                 
 
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
             marker.addTo(map);
             allMarkers.push(marker);
 
@@ -907,42 +907,57 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-                   siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
+            siteCard.innerHTML = `
+                <div class="site-content">
+                    <div class="site-image-container">
+                        <img src="${site.image}" alt="${site.name}" class="site-image">
+                    </div>
+                    <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+            
+                        <div class="site-attributes">
+                            ${
+                                selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""
+                            } 
+                            ${
+                                selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""
+                            }
+                            ${
+                                selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""
+                            }
+                            ${
+                                selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""
+                            }
+                            ${
+                                selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""
+                            }
+                            ${
+                                selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""
+                            }
+                            ${
+                                selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-attributes">
-                        ${translateCost(site.cost)}, ${translateType(site.type)}, 
-                        ${translateLocalOrNational(site.localornational)}, 
-                        ${translateEstimatedTime(site.estimatedtime)}, 
-                        ${translateReservations(site.reservations)}, 
-                        ${translateTours(site.tours)}, ${translateTransit(site.transit)}
-                    </p>
-                    <p class="site-distance">
-                        ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-                    </p>
+            
+                <p class="site-description">${site.description}</p>
+            
+                <div class="site-actions">
+                    <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
+                          data-tooltip="Add to My Places">⭐</span>
+                    <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+                          data-tooltip="Not for me">✖</span>
                 </div>
-            </div>
-        
-            <p class="site-description">${site.description}</p>
-        
-            <div class="site-actions">
-                <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
-                      data-tooltip="Add to My Places">⭐</span>
-                <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
-                      data-tooltip="Not for me">✖</span>
-            </div>
-        `;
+            `;
 
             
             // Now attach event listeners (this is the critical fix!)
-            let starButton = siteCard.querySelector(`#star-${site.id}`);
-            let xButton = siteCard.querySelector(`#x-${site.id}`);
+            let starButton = siteCard.querySelector(#star-${site.id});
+            let xButton = siteCard.querySelector(#x-${site.id});
             
             starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
             xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
@@ -1035,14 +1050,14 @@ function applyFilters() {
             }
                 // Store user preferences in sets
             function toggleMyPlaces(siteId, element) {
-                console.log(`Toggling My Places for site ID: ${siteId}`); // Debugging log
+                console.log(Toggling My Places for site ID: ${siteId}); // Debugging log
             
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
-                    console.error(`Site with ID ${siteId} not found.`);
+                    console.error(Site with ID ${siteId} not found.);
                     return;
                 }
             
@@ -1060,7 +1075,7 @@ function applyFilters() {
                     let notIndex = notInterested.findIndex(s => s.id === siteId);
                     if (notIndex > -1) {
                         notInterested.splice(notIndex, 1);
-                        let xIcon = document.getElementById(`x-${siteId}`);
+                        let xIcon = document.getElementById(x-${siteId});
                         if (xIcon) {
                             xIcon.textContent = "✖";
                             xIcon.classList.remove("active");
@@ -1076,14 +1091,14 @@ function applyFilters() {
             
             
             function toggleNotInterested(siteId, element) {
-                console.log(`Toggling Not Interested for site ID: ${siteId}`); // Debugging log
+                console.log(Toggling Not Interested for site ID: ${siteId}); // Debugging log
             
                 let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
                 let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             
                 let site = siteData.find(s => s.id === siteId);
                 if (!site) {
-                    console.error(`Site with ID ${siteId} not found.`);
+                    console.error(Site with ID ${siteId} not found.);
                     return;
                 }
             
@@ -1101,7 +1116,7 @@ function applyFilters() {
                     let myIndex = myPlaces.findIndex(s => s.id === siteId);
                     if (myIndex > -1) {
                         myPlaces.splice(myIndex, 1);
-                        let starIcon = document.getElementById(`star-${siteId}`);
+                        let starIcon = document.getElementById(star-${siteId});
                         if (starIcon) {
                             starIcon.textContent = "☆";
                             starIcon.classList.remove("active");
@@ -1120,4 +1135,3 @@ function applyFilters() {
 </script>
 </body>
 </html>
-
