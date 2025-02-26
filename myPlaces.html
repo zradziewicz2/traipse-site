@@ -105,12 +105,13 @@
         /* ===== Page Layout ===== */
         .container {
             display: flex;
-            width: 100vw;  /* Ensures full width */
+            width: 100%;  /* Ensures full width */
             max-width: 100%;
             height: calc(100vh - 100px);
             gap: 10px; /* Reduce space between sections */
             padding: 0 20px; /* Add some margin on the edges */
             box-sizing: border-box;
+            overflow: hidden;
         }
 
 
@@ -125,8 +126,10 @@
                 /* ===== My Favorites List ===== */
         .favorites-section {
             flex: 1.5;
-            max-width: 50vw;
+            max-width: calc(50% - 10px);
             overflow-y: auto;
+            overflow-x: hidden;
+            min-width: 0;
             padding: 15px;  /* Reduced padding */
             background: #181818;
             border-radius: 10px;
