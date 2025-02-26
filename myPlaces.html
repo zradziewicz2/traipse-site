@@ -350,81 +350,88 @@
         updateMap();
 
         let sortedPlaces = [...myPlaces].sort((a, b) => a.lat - b.lat);
-        function generateItinerary() {
-            if (typeof window.jspdf === "undefined") {
-                alert("Error: jsPDF library not loaded.");
-                return;
-            }
-        
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-        
-            if (myPlaces.length < 2) {
-                alert("At least two locations are required for an itinerary.");
-                return;
-            }
-        
-            let sortedPlaces = [...myPlaces].sort((a, b) => a.lat - b.lat);
-        
-            // ** Adjusted Logo Position & Size **
-            let img = new Image();
-            img.src = "traipse_logo_turquoise2.png";
-            doc.addImage(img, "PNG", 195, 5, 8, 12); // **Further right & taller**
-        
-            // ** Move "TRAIPSE" further left & match color **
-            doc.setFont("helvetica", "bold");
-            doc.setTextColor(3, 253, 252); // **Same turquoise color**
-            doc.setFontSize(20);
-            doc.text("TRAIPSE", 160, 14); // **Moved further left from the logo**
-        
-            // ** Title & Subtitle **
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(22);
-            doc.setTextColor(0, 0, 0); // **Black for title text**
-            doc.text("Itinerary", 15, 20); // Left-aligned title
-        
+function generateItinerary() {
+    if (typeof window.jspdf === "undefined") {
+        alert("Error: jsPDF library not loaded.");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    if (myPlaces.length < 2) {
+        alert("At least two locations are required for an itinerary.");
+        return;
+    }
+
+    let sortedPlaces = [...myPlaces].sort((a, b) => a.lat - b.lat);
+
+    // ** Adjusted Logo Position & Size **
+    let img = new Image();
+    img.src = "traipse_logo_turquoise2.png";
+    doc.addImage(img, "PNG", 195, 5, 8, 12); // **Further right & taller**
+
+    // ** Move "TRAIPSE" further left & match color **
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(3, 253, 252); // **Same turquoise color**
+    doc.setFontSize(20);
+    doc.text("TRAIPSE", 160, 14); // **Moved further left from the logo**
+
+    // ** Title & Subtitle **
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.setTextColor(0, 0, 0); // **Black for title text**
+    doc.text("Itinerary", 15, 20); // Left-aligned title
+
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(12);
+    doc.text("Happy Traipsing!", 15, 28);
+
+    let y = 40; // **Start Y Position**
+    let totalTravelTime = 0;
+
+    sortedPlaces.forEach((site, index) => {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(`${index + 1}. ${site.name}`, 15, y);
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(11);
+        y += 6;  // **Less space between lines**
+
+        doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y);
+        y += 5;
+
+        doc.text(`Cost: ${site.cost || 'Free'}`, 20, y);
+        y += 5;
+
+        // ** Fetch user notes from textareas **
+        let userNotes = document.getElementById(`notes-${site.id}`)?.value || "No notes added.";
+        doc.setFont("helvetica", "italic");
+        doc.text(`Notes: ${userNotes}`, 20, y);
+        y += 7;
+
+        if (index < sortedPlaces.length - 1) {
+            let distance = estimateDistance(site, sortedPlaces[index + 1]);
+            let travelTime = estimateTravelTime(distance);
+            totalTravelTime += travelTime;
+
             doc.setFont("helvetica", "italic");
-            doc.setFontSize(12);
-            doc.text("Happy Traipsing!", 15, 28);
-        
-            let y = 40; // **Start Y Position**
-            let totalTravelTime = 0;
-        
-            sortedPlaces.forEach((site, index) => {
-                doc.setFont("helvetica", "bold");
-                doc.setFontSize(14);
-                doc.text(`${index + 1}. ${site.name}`, 15, y);
-        
-                doc.setFont("helvetica", "normal");
-                doc.setFontSize(11);
-                y += 6;  // **Less space between lines**
-        
-                doc.text(`Estimated Visit Time: ${site.estimatedTime || 'Unknown'}`, 20, y);
-                y += 5;
-        
-                doc.text(`Cost: ${site.cost || 'Free'}`, 20, y);
-                y += 5;
-        
-                if (index < sortedPlaces.length - 1) {
-                    let distance = estimateDistance(site, sortedPlaces[index + 1]);
-                    let travelTime = estimateTravelTime(distance);
-                    totalTravelTime += travelTime;
-        
-                    doc.setFont("helvetica", "italic");
-                    doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y);
-                    y += 8; // **Smaller gap between locations**
-                } else {
-                    y += 6;
-                }
-            });
-        
-            // **Total Travel Time**
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(12);
-            doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 15, y + 5);
-        
-            doc.save("itinerary.pdf");
+            doc.text(`Drive: ~${distance.toFixed(1)} miles (~${travelTime} min)`, 20, y);
+            y += 8; // **Smaller gap between locations**
+        } else {
+            y += 6;
         }
+    });
+
+    // **Total Travel Time**
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(12);
+    doc.text(`Total Estimated Travel Time: ~${totalTravelTime} min`, 15, y + 5);
+
+    doc.save("itinerary.pdf");
+}
+
 
 
         
