@@ -16,7 +16,15 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "overtenmilesfromtransit"
+        "transit": "overtenmilesfromtransit",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Molly Brown House Museum",
