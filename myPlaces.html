@@ -148,11 +148,13 @@
 
         /* ===== Map Container ===== */
         .map-container {
-            flex: 1.3; /* Increased width of map to extend right */
-            height: 90vh; /* Increased height */
+            flex: 1.3; /* Expands the map width further to the right */
+            height: 80vh; /* Reduces height to prevent it from going too far down */
+            max-height: 650px; /* Ensures it doesn’t get too tall */
             border-radius: 10px;
             overflow: hidden;
         }
+
 
         /* ===== Cards ===== */
         .card {
