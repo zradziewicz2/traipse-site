@@ -307,7 +307,6 @@
                         <strong class="card-title">${site.name}</strong>
                         <p>${site.description}</p>
                         <p><strong>Cost:</strong> ${site.cost || 'Free'}</p>
-                        <label for="notes-${site.id}"><strong>Notes:</strong></label>
                         <textarea id="notes-${site.id}" class="notes-input" rows="2" placeholder="Add your notes here...">${site.notes || ''}</textarea>
                     </div>
                     <button class="remove-btn" onclick="removeFromFavorites('${site.id}')">Remove</button>
