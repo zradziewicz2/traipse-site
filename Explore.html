@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore - Traipse</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -19,6 +19,8 @@
             height: 100vh;
             overflow: hidden;
         }
+
+        /* ===== Header ===== */
         .header {
             display: flex;
             align-items: center;
@@ -30,15 +32,62 @@
             width: 100%;
             box-sizing: border-box;
         }
-        .map-container {
-            flex: 1;
-            height: calc(100vh - 65px);
-            width: 100%;
+
+        .website-title {
+            font-size: 2em;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #03FDFC;
+            margin-left: 15px;
         }
+
+        .header-buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            flex-grow: 1;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-btn {
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
+            font-weight: bold;
+            padding: 5px 10px;
+            min-width: 110px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .header-btn:hover {
+            background: #03FDFC;
+            color: black;
+        }
+
+        /* ===== Map Styling ===== */
+        .map-container {
+            width: 100vw;
+            height: calc(100vh - 65px);
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ===== Heatmap Toggle Button ===== */
         .toggle-btn {
             position: absolute;
-            top: 80px;
-            left: 20px;
+            top: 15px;
+            left: 15px;
             background: #03FDFC;
             border: none;
             color: black;
@@ -47,62 +96,21 @@
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            z-index: 1000;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 255, 255, 0.3);
         }
+
         .toggle-btn:hover {
             background: #02c9c9;
         }
+
     </style>
 </head>
 <body>
+
+    <!-- Header -->
     <div class="header">
         <div class="website-title">TRAIPSE - EXPLORE</div>
-    </div>
-    <button class="toggle-btn" onclick="toggleHeatmap()">Toggle Heatmap</button>
-    <div id="map" class="map-container"></div>
-    
-    <script>
-        let map = L.map('map').setView([39.7392, -104.9903], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-        
-        let heatmapLayer;
-        
-        function fetchHistoricalData() {
-            const queryUrl = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(`
-                SELECT ?place ?placeLabel ?lat ?lon WHERE {
-                    ?place wdt:P31 wd:Q839954;  # Instance of historical site
-                           wdt:P625 ?coord.
-                    SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
-                    BIND(geof:longitude(?coord) AS ?lon)
-                    BIND(geof:latitude(?coord) AS ?lat)
-                } LIMIT 200
-            `);
-            
-            fetch(queryUrl)
-                .then(response => response.json())
-                .then(data => {
-                    let heatPoints = [];
-                    data.results.bindings.forEach(item => {
-                        let lat = parseFloat(item.lat.value);
-                        let lon = parseFloat(item.lon.value);
-                        heatPoints.push([lat, lon, 0.8]);
-                    });
-                    heatmapLayer = L.heatLayer(heatPoints, { radius: 25 }).addTo(map);
-                })
-                .catch(error => console.error("Error fetching historical data:", error));
-        }
-        
-        function toggleHeatmap() {
-            if (map.hasLayer(heatmapLayer)) {
-                map.removeLayer(heatmapLayer);
-            } else {
-                fetchHistoricalData();
-            }
-        }
-        
-        fetchHistoricalData();
-    </script>
-</body>
-</html>
+        <div class="header-buttons-container">
+            <div class="header-buttons">
+                <button cla
