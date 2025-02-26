@@ -41,13 +41,14 @@
             object-fit: contain;
             margin-left: 10px;
         }
-                .favorites-header {
+        .favorites-header {
             display: flex;
             justify-content: space-between; /* Pushes title left, button right */
             align-items: center;
             padding: 10px 15px;
             background: #181818; /* Matches card background */
             border-radius: 10px 10px 0 0;
+            width: 100%;
         }
         
         .favorites-header h2 {
@@ -150,21 +151,19 @@
 
 
         
-         .itinerary-btn {
+        .itinerary-btn {
             background: #03FDFC;
-            position: absolute;
             border: none;
             color: black;
             font-weight: bold;
-            border-radius: 6px; /* Slightly rounded corners */
+            border-radius: 6px;
             cursor: pointer;
             text-align: center;
-            width: 180px; /* Reduce width */
-            height: 40px; /* Adjust height */
-            top: 10px;  /* Aligns it with My Favorites */
-            right: 15px;  /* Moves it to the right */
-            padding: 6px 10px;  /* Smaller padding */
-            font-size: 0.9em;  /* Reduce text size */
+            width: 140px; /* Smaller button */
+            height: 35px; /* Adjusted height */
+            padding: 6px 10px;
+            font-size: 0.9em;
+            margin-left: auto; /* Pushes it to the right */
         }
 
 
@@ -273,6 +272,7 @@
             <h2>My Favorites</h2>
             <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
         </div>
+
 
                 <div id="favorites-list"></div>
             </div>
