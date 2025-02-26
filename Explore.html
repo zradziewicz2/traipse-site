@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore - Traipse</title>
+    <!-- Leaflet Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
+    <!-- Heatmap Plugin -->
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
     
@@ -142,53 +148,38 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script>
-        // Initialize Map
-        let map = L.map('map', {
-            center: [39.7392, -104.9903],  // Denver
-            zoom: 12,
-            zoomControl: true,
-            attributionControl: true
-        });
+<script>
+    let map = L.map('map').setView([39.7392, -104.9903], 12);
 
-        // Load Tile Layer (Base Map)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-        // Heatmap Layer
-        let heat = null;
+    // Sample historical sites heatmap data (latitude, longitude, intensity)
+    let heatmapData = [
+        [39.7392, -104.9903, 0.8],  // Downtown Denver
+        [39.7420, -104.9820, 0.7],  // Capitol Hill
+        [39.7500, -104.9990, 0.9],  // Union Station
+        [39.7600, -105.0050, 0.5]   // Highlands
+    ];
 
-        // Generate Random Historical Points (Simulated Data)
-        let heatmapData = generateRandomHeatmapData(100); // Generates 100 points
+    let heatLayer = L.heatLayer(heatmapData, { 
+        radius: 25, 
+        blur: 15, 
+        maxZoom: 17 
+    });
 
-        function generateRandomHeatmapData(numPoints) {
-            let points = [];
-            for (let i = 0; i < numPoints; i++) {
-                let lat = 39.65 + Math.random() * 0.2;  // Random within Denver
-                let lng = -105.1 + Math.random() * 0.2;
-                let intensity = Math.random() * 0.8 + 0.2;  // Intensity between 0.2 and 1
-                points.push([lat, lng, intensity]);
-            }
-            return points;
+    let heatmapVisible = false;
+
+    function toggleHeatmap() {
+        if (heatmapVisible) {
+            map.removeLayer(heatLayer);
+        } else {
+            heatLayer.addTo(map);
         }
-
-        function toggleHeatmap() {
-            if (!heat) {
-                heat = L.heatLayer(heatmapData, {
-                    radius: 25,   // Adjust heat radius
-                    blur: 20,     // Smooth transition
-                    maxZoom: 14   // Limit when heat disappears
-                }).addTo(map);
-            } else {
-                map.removeLayer(heat);
-                heat = null;
-            }
-        }
-
-        // ** Load heatmap automatically on page load **
-        toggleHeatmap();
-    </script>
+        heatmapVisible = !heatmapVisible;
+    }
+</script>
 
 </body>
 </html>
