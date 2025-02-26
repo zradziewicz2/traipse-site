@@ -40,6 +40,19 @@
             object-fit: contain;
             margin-left: 10px;
         }
+                .favorites-header {
+            display: flex;
+            justify-content: space-between; /* Pushes title left, button right */
+            align-items: center;
+            padding: 10px 15px;
+            background: #181818; /* Matches card background */
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .favorites-header h2 {
+            margin: 0;
+            color: white;
+        }
 
         .website-title {
             font-size: 2em;
@@ -243,7 +256,11 @@
 
         <div class="container">
             <div class="favorites-section">
-                <h2>My Favorites</h2>
+        <div class="favorites-header">
+            <h2>My Favorites</h2>
+            <button class="itinerary-btn" onclick="generateItinerary()">Itinerary Generator</button>
+        </div>
+
                 <div id="favorites-list"></div>
             </div>
         
