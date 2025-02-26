@@ -113,6 +113,13 @@
             box-sizing: border-box;
         }
 
+        .card-title {
+            font-size: 1.8em; /* Bigger Title */
+            font-weight: bold;
+            color: #03FDFC; /* Cyan Blue */
+            margin-bottom: 5px;
+        }
+
 
         /* ===== My Favorites List ===== */
         .favorites-section {
@@ -174,22 +181,22 @@
         /* ===== Cards ===== */
         .card {
             background: #222;
-            padding: 15px;
-            margin-bottom: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
             border-radius: 8px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             box-shadow: 2px 2px 10px rgba(0, 255, 255, 0.2);
             width: 100%;
+            font-size: 1.1em; /* Slightly larger text */
         }
 
         .card img {
-            width: 120px;
-            height: 90px;
+            width: 200px;  /* Adjust width */
+            height: 150px; /* Adjust height */
             object-fit: cover;
             border-radius: 5px;
-            margin-right: 15px;
-        
+            margin-right: 20px;
         }
 
 
@@ -231,6 +238,19 @@
         .itinerary-btn:hover {
             background: #02c9c9;
         }
+        
+        .notes-input {
+            width: 100%;
+            background: #333;
+            border: 1px solid #03FDFC;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 5px;
+            font-size: 1em;
+            resize: vertical;
+        }
+
 
 
     </style>
@@ -285,13 +305,22 @@
                     <div>
                         <strong class="card-title">${site.name}</strong>
                         <p>${site.description}</p>
-                        <p><strong>Cost:</strong> ${site.cost}</p>
+                        <p><strong>Cost:</strong> ${site.cost || 'Free'}</p>
+                        <label for="notes-${site.id}"><strong>Notes:</strong></label>
+                        <textarea id="notes-${site.id}" class="notes-input" rows="2" placeholder="Add your notes here...">${site.notes || ''}</textarea>
                     </div>
                     <button class="remove-btn" onclick="removeFromFavorites('${site.id}')">Remove</button>
                 `;
                 favoritesList.appendChild(card);
+                
+                // Save notes to localStorage when user types
+                document.getElementById(`notes-${site.id}`).addEventListener("input", function() {
+                    site.notes = this.value;
+                    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+                });
             });
         }
+        
 
         function removeFromFavorites(siteId) {
             myPlaces = myPlaces.filter(site => site.id !== siteId);
