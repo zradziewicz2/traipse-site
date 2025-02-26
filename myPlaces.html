@@ -105,14 +105,14 @@
         /* ===== Page Layout ===== */
         .container {
             display: flex;
-            width: 98%;
-            max-width: 1600px;
-            height: calc(100vh - 100px); /* Adjusted to fill space better */
-            gap: 20px;
-            margin: 0 auto; /* Centering */
-            padding: 0; /* Remove unnecessary padding */
+            width: 100vw;  /* Ensures full width */
+            max-width: 100%;
+            height: calc(100vh - 100px);
+            gap: 10px; /* Reduce space between sections */
+            padding: 0 20px; /* Add some margin on the edges */
             box-sizing: border-box;
         }
+
 
         .card-title {
             font-size: 1.4em; /* Bigger Title */
@@ -124,7 +124,8 @@
         
                 /* ===== My Favorites List ===== */
         .favorites-section {
-            flex: 1.2;
+            flex: 1.5;
+            max-width: 50vw;
             overflow-y: auto;
             padding: 15px;  /* Reduced padding */
             background: #181818;
@@ -178,11 +179,12 @@
 
         /* ===== Map Container ===== */
         .map-container {
-            flex: 1.8; /* Expands the map width further to the right */
+            flex: 1.5; /* Expands the map width further to the right */
             height: 100vh; /* Reduces height to prevent it from going too far down */
             max-height: 650px; /* Ensures it doesn’t get too tall */
             border-radius: 10px;
             overflow: hidden;
+            max-width: 50vw;
         }
 
 
