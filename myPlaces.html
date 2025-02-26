@@ -77,6 +77,14 @@
             justify-content: flex-end;
             flex-grow: 1;
         }
+        
+        .header-btn.active {
+            background: #03FDFC; /* Cyan blue fill */
+            color: black; /* Black text for contrast */
+            border: 2px solid #03FDFC; /* Keep border the same color */
+            font-weight: bold;
+            cursor: default; /* No click effect */
+        }
 
         .header-buttons {
             display: flex;
@@ -272,7 +280,7 @@
         <div class="header-buttons-container">
             <div class="header-buttons">
                 <button class="header-btn">CONNECT</button>
-                <button class="header-btn" onclick="window.location.href='myPlaces.html'">MY PLACES</button>
+                <button class="header-btn active">MY PLACES</button>
                 <button class="header-btn">SUBMIT FEEDBACK</button>
                 <button class="header-btn">DONATE</button>
             </div>
