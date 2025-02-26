@@ -216,18 +216,23 @@
 
 
         .remove-btn {
-            background: red;
-            border: none;
-            color: white;
+            background: black; /* Black background */
+            border: 2px solid #03FDFC; /* Cyan border */
+            color: #03FDFC; /* Cyan text */
             padding: 6px 10px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .remove-btn:hover {
+            background: #03FDFC; /* Cyan background on hover */
+            color: black; /* Black text on hover */
         }
 
-        .remove-btn:hover {
-            background: darkred;
-        }
         .itinerary-btn-container {
             display: flex;
             justify-content: center;
