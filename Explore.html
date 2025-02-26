@@ -113,4 +113,57 @@
         <div class="website-title">TRAIPSE - EXPLORE</div>
         <div class="header-buttons-container">
             <div class="header-buttons">
-                <button cla
+                <button class="header-btn" onclick="window.location.href='index.html'">HOME</button>
+                <button class="header-btn" onclick="window.location.href='myPlaces.html'">MY PLACES</button>
+                <button class="header-btn active">EXPLORE</button>
+                <button class="header-btn">SUBMIT FEEDBACK</button>
+                <button class="header-btn">DONATE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Container -->
+    <div class="map-container">
+        <button class="toggle-btn" onclick="toggleHeatmap()">Toggle Heatmap</button>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize Map
+        let map = L.map('map').setView([39.7392, -104.9903], 12);  // Denver
+
+        // Load Tile Layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Initialize Heatmap Layer
+        let heat = null;
+
+        // Generate Random Historical Points (fake data)
+        let heatmapData = generateRandomHeatmapData(50);
+
+        function generateRandomHeatmapData(numPoints) {
+            let points = [];
+            for (let i = 0; i < numPoints; i++) {
+                let lat = 39.65 + Math.random() * 0.2;  // Random within Denver
+                let lng = -105.1 + Math.random() * 0.2;
+                let intensity = Math.random() * 0.8 + 0.2;  // Intensity between 0.2 and 1
+                points.push([lat, lng, intensity]);
+            }
+            return points;
+        }
+
+        function toggleHeatmap() {
+            if (!heat) {
+                heat = L.heatLayer(heatmapData, { radius: 25, blur: 15 }).addTo(map);
+            } else {
+                map.removeLayer(heat);
+                heat = null;
+            }
+        }
+    </script>
+
+</body>
+</html>
