@@ -142,7 +142,7 @@
         let heat = null;
 
         // Generate Random Historical Points (fake data)
-        let heatmapData = generateRandomHeatmapData(50);
+        let heatmapData = generateRandomHeatmapData(100); // 100 points
 
         function generateRandomHeatmapData(numPoints) {
             let points = [];
@@ -157,12 +157,15 @@
 
         function toggleHeatmap() {
             if (!heat) {
-                heat = L.heatLayer(heatmapData, { radius: 25, blur: 15 }).addTo(map);
+                heat = L.heatLayer(heatmapData, { radius: 25, blur: 20 }).addTo(map);
             } else {
                 map.removeLayer(heat);
                 heat = null;
             }
         }
+
+        // ** Load heatmap automatically on page load **
+        toggleHeatmap();
     </script>
 
 </body>
