@@ -856,7 +856,7 @@ function translateTours(tours) {
 }
 function translateGiftshop(value) {
     if (!value) return "Unknown"; // Handles missing or undefined values
-    return value.toLowerCase() === "true" ? "Has Gift Shop" : "No Gift Shop";
+    return String(value).toLowerCase() === "true" ? "Has Gift Shop" : "No Gift Shop";
 }
 
 
@@ -904,7 +904,7 @@ function applyFilters() {
             (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
-            (selectedGiftshop === "all" || String(site.giftshop || "").toLowerCase() === selectedGiftshop) &&
+            (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
             (selectedDistance === "all" || 
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
