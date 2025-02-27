@@ -58,7 +58,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Red Rocks Park & Amphitheater",
@@ -88,7 +89,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Colorado State Capitol",
@@ -118,7 +120,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Union Station",
@@ -148,7 +151,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -178,7 +182,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Four Mile Historic Park",
@@ -208,7 +213,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "History Colorado Center",
@@ -238,7 +244,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Denver Botanic Gardens",
@@ -267,7 +274,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Colorado Railroad Museum",
@@ -296,7 +304,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
@@ -325,7 +334,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Four Mile Historic Park",
@@ -354,7 +364,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Black American West Museum",
@@ -383,7 +394,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Byers-Evans House Museum",
@@ -412,7 +424,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Grant-Frontier Park",
@@ -441,7 +454,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -470,7 +484,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Colorado Aviation Historical Society",
@@ -499,7 +514,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Franktown Cave",
@@ -528,7 +544,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "History Colorado Center",
@@ -557,7 +574,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
@@ -586,7 +604,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Forney Museum of Transportation",
@@ -615,7 +634,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Museo de las Americas",
@@ -644,7 +664,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Grant-Humphreys Mansion",
@@ -673,7 +694,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "International Church of Cannabis",
@@ -702,7 +724,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "The Cruise Room",
@@ -730,7 +753,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Poet's Row",
@@ -759,7 +783,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Buckhorn Exchange",
@@ -788,7 +813,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "My Brother's Bar",
@@ -817,7 +843,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Denver Zine Library",
@@ -846,7 +873,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Linger Eatuary",
@@ -875,7 +903,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Fifty-Two 80's",
@@ -904,7 +933,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "National Ice Core Lab",
@@ -933,7 +963,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -962,7 +993,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "The Yearling Sculpture",
@@ -991,7 +1023,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Mayan Theatre",
@@ -1020,7 +1053,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Center for Colorado Women's History",
@@ -1049,7 +1083,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "American Museum of Western Art",
@@ -1078,7 +1113,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     },
     {
         "name": "Black American West Museum",
@@ -1107,6 +1143,7 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic"
+        "publicaccess": "accessibletopublic",
+        "address": "123 Main Street, Denver CO"
     }
 ]
