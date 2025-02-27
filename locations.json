@@ -27,7 +27,7 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": "accessibletopublic,
+        "publicaccess": "accessibletopublic",
         "address": "123 Main Street, Denver CO"
     },
     {
