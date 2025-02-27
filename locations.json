@@ -137,7 +137,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Buffalo Bill Museum & Grave",
@@ -156,7 +167,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Four Mile Historic Park",
@@ -175,7 +197,18 @@
         "estimatedtime": "<than 15 minutes",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "History Colorado Center",
@@ -194,7 +227,18 @@
         "estimatedtime": "1 hour",
         "reservations": "reservationrequired",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Denver Botanic Gardens",
@@ -212,7 +256,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Colorado Railroad Museum",
@@ -230,7 +285,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
@@ -248,7 +314,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Four Mile Historic Park",
@@ -266,7 +343,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Black American West Museum",
@@ -284,7 +372,18 @@
         "estimatedtime": "1 hour",
         "reservations": "reservationrequired",
         "tours": ["selftours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Byers-Evans House Museum",
@@ -302,7 +401,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Grant-Frontier Park",
@@ -320,7 +430,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "halfamiletotenmilesfromtransit"
+        "transit": "halfamiletotenmilesfromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Vintage Aero Flying Museum",
@@ -338,7 +459,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Colorado Aviation Historical Society",
@@ -356,7 +488,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Franktown Cave",
@@ -374,7 +517,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours"],
-        "transit": "morethantenmilesfromtransit"
+        "transit": "morethantenmilesfromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "History Colorado Center",
@@ -392,7 +546,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
@@ -410,7 +575,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Forney Museum of Transportation",
@@ -428,7 +604,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Museo de las Americas",
@@ -446,7 +633,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Grant-Humphreys Mansion",
@@ -464,7 +662,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "International Church of Cannabis",
@@ -482,7 +691,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "The Cruise Room",
@@ -499,7 +719,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Poet's Row",
@@ -517,7 +748,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Buckhorn Exchange",
@@ -535,7 +777,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "My Brother's Bar",
@@ -553,7 +806,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Denver Zine Library",
@@ -571,7 +835,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Linger Eatuary",
@@ -589,7 +864,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Fifty-Two 80's",
@@ -607,7 +893,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "National Ice Core Lab",
@@ -625,7 +922,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
@@ -643,7 +951,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "The Yearling Sculpture",
@@ -661,7 +980,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Mayan Theatre",
@@ -679,7 +1009,18 @@
         "estimatedtime": "1 hour",
         "reservations": "reservationrequired",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Center for Colorado Women's History",
@@ -697,7 +1038,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "American Museum of Western Art",
@@ -715,7 +1067,18 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     },
     {
         "name": "Black American West Museum",
@@ -733,6 +1096,17 @@
         "estimatedtime": "1 hour",
         "reservations": "walkins_welcome",
         "tours": ["selftours", "guidedtours"],
-        "transit": "underhalfamilefromtransit"
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "archeological",
+        "website": "https://dinoridge.org/?gad_source=1",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": true,
+        "hours": "8AM - 6PM",
+        "luggagestorage": true,
+        "dollaramount": "-",
+        "cashorcredit": "both",
+        "publicaccess": "accessibletopublic"
     }
 ]
