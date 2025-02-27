@@ -728,6 +728,14 @@
                         <option value="false">No</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                    <label>Gift Shop:</label>
+                    <select id="giftshopFilter">
+                        <option value="all">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
             </div>
 
 
@@ -846,6 +854,10 @@ function translateTours(tours) {
     };
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
+function translateGiftshop(value) {
+    if (!value) return "Unknown"; // Handles missing or undefined values
+    return value.toLowerCase() === "true" ? "Has Gift Shop" : "No Gift Shop";
+}
 
 
 function applyFilters() {
@@ -862,6 +874,7 @@ function applyFilters() {
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
+    let selectedGiftshop = document.getElementById("giftshopFilter").value;
     
 
     // Get selected time periods (array of checked values)
@@ -891,6 +904,7 @@ function applyFilters() {
             (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+            (selectedGiftshop === "all" || String(site.giftshop || "").toLowerCase() === selectedGiftshop) &&
             (selectedDistance === "all" || 
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
@@ -950,6 +964,10 @@ function applyFilters() {
                         }
                         ${
                             selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
+                        
+                        }
+                        ${
+                            selectedGiftshop !== "all" ? `<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>` : ""
                         }
                     </div>
                 </div>
