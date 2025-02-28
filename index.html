@@ -1169,14 +1169,18 @@ siteCard.innerHTML = `
 
 
 
-            siteCard.onclick = () => {
-                map.setView([site.lat, site.lng], 14);
-                marker.openPopup();
-            };
-            resultsContainer.appendChild(siteCard);
-        }
-    });
-}
+    siteCard.onclick = () => {
+        map.setView([site.lat, site.lng], 14);
+        marker.openPopup();
+    };
+    
+    resultsContainer.appendChild(siteCard);
+}  // Ensure this correctly closes the function
+});  // Ensure this correctly closes the forEach loop
+}  // Ensure this correctly closes the applyFilters() function
+
+</script>  <!-- This should now be properly color-coded -->
+
 <script>
     function saveCityAndNavigate() {
         const selectedCity = document.getElementById("cityFilter").value;
