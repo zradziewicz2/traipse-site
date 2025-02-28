@@ -144,54 +144,65 @@
         }).addTo(map);
 
         let heatmapData = [
-            // Denver
+           let heatmapData = [
+            // Denver - Major Sites (Higher Intensity)
             [39.7480, -104.9991, 0.8],  // Larimer Square
             [39.7527, -104.9990, 0.7],  // Union Station
             [39.7400, -104.9784, 0.8],  // Capitol Hill
             [39.7565, -104.9701, 0.6],  // Five Points
-
-            // Boulder
+        
+            // Denver - Additional Sites (Lower Intensity)
+            [39.7339, -104.9925, 0.5],  // Cheesman Park (old cemetery site)
+            [39.7442, -105.0035, 0.4],  // Auraria Campus (St. Cajetan’s Church)
+            [39.7449, -104.9469, 0.5],  // Riverside Cemetery (oldest cemetery in Denver)
+            [39.7630, -105.0150, 0.4],  // Elitch Theatre (first movie theater in Denver)
+            [39.7686, -104.9719, 0.3],  // Whittier Neighborhood (oldest Black neighborhood)
+            [39.7582, -104.9701, 0.4],  // Rossonian Hotel (Jazz history in Five Points)
+        
+            // Boulder - Major Sites
             [40.0176, -105.2797, 0.9],  // Pearl Street Mall
             [40.0069, -105.2694, 0.8],  // CU Boulder Old Main
             [39.9994, -105.2815, 0.7],  // Mapleton Hill
             [39.9980, -105.2813, 0.6],  // Chautauqua Park
-
-            // Golden
+        
+            // Golden - Major Sites
             [39.7555, -105.2211, 0.9],  // Downtown Golden
             [39.7561, -105.2245, 0.8],  // Colorado School of Mines
             [39.7469, -105.2012, 0.7],  // Coors Brewery
             [39.7335, -105.2350, 0.6],  // Buffalo Bill's Grave
-
-            // Morrison
+        
+            // Morrison - Major Sites
             [39.6553, -105.1911, 0.8],  // Morrison Historic District
             [39.6644, -105.2055, 0.9],  // Dinosaur Ridge
             [39.6650, -105.2050, 0.7],  // Red Rocks Amphitheater
-
-            // Aurora
+        
+            // Aurora - Major Sites
             [39.7420, -104.8384, 0.7],  // Fitzsimons Army Hospital
             [39.7270, -104.8760, 0.6],  // DeLaney Farm
             [39.7294, -104.8280, 0.5],  // Coal Creek Schoolhouse
-
-            // Lakewood
+        
+            // Lakewood - Major Sites
             [39.7067, -105.0814, 0.8],  // Heritage Lakewood Belmar Park
             [39.6900, -105.1177, 0.7],  // Jewish Consumptive Relief Society
-
-            // Broomfield
+        
+            // Broomfield - Major Sites
             [39.9205, -105.0905, 0.7],  // Broomfield Depot Museum
-
-            // Littleton
+        
+            // Littleton - Major Sites
             [39.6133, -105.0166, 0.9],  // Littleton Main Street
             [39.6121, -105.0170, 0.8],  // Littleton Museum
-
-            // Arvada
+        
+            // Arvada - Major Sites
             [39.8006, -105.0817, 0.8],  // Olde Town Arvada
             [39.8023, -105.0833, 0.7],  // Arvada Flour Mill
-
-            // Westminster
+        
+            // Westminster - Major Sites
             [39.8384, -105.0380, 0.7],  // Westminster Castle
-
-            // Superior
+        
+            // Superior - Major Sites
             [39.9528, -105.1686, 0.6],  // Industrial Mine Site
+        ];
+
         ];
 
         let heatLayer = L.heatLayer(heatmapData, { 
