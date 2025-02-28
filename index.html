@@ -127,6 +127,17 @@
             flex-direction: column;
             gap: 5px; /* Keeps the spacing consistent */
         }
+        .filter-row {
+            display: flex;
+            gap: 10px; /* Space between filters */
+            justify-content: space-between;
+        }
+        
+        .filter-row .filter-group {
+            flex: 1; /* Ensures both filters take equal space */
+            min-width: 0; /* Prevents overflow issues */
+        }
+
         
         .timePeriod-group label {
             display: flex;
@@ -672,26 +683,29 @@
                 </select>
             </div>
 
-
-            <div class="filter-group">
-                <label>Cost:</label>
-                <select id="costFilter">
-                    <option value="all">All</option>
-                    <option value="free">Free</option>
-                    <option value="paid">Paid</option>
-                </select>
-            </div>
             
-            <div class="filter-group">
-                <label>Estimated Time:</label>
-                <select id="estimatedTimeFilter">
-                    <option value="all">All</option>
-                    <option value="<15 minutes">Less than 15 minutes</option>
-                    <option value="15-1 hour">15 minutes to 1 hour</option>
-                    <option value="1-2 hours">1-2 hours</option>
-                    <option value="more than 2 hours">More than 2 hours</option>
-                </select>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Cost:</label>
+                    <select id="costFilter">
+                        <option value="all">All</option>
+                        <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+            
+                <div class="filter-group">
+                    <label>Estimated Time:</label>
+                    <select id="estimatedTimeFilter">
+                        <option value="all">All</option>
+                        <option value="<15 minutes">Less than 15 minutes</option>
+                        <option value="15-1 hour">15 minutes to 1 hour</option>
+                        <option value="1-2 hours">1-2 hours</option>
+                        <option value="more than 2 hours">More than 2 hours</option>
+                    </select>
+                </div>
             </div>
+
 
             
             <div class="filter-group">
