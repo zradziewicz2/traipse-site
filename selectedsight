@@ -953,7 +953,7 @@ function applyFilters() {
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
-    let Type = document.getElementById("sightTypeFilter").value;
+    let selectedSightType = document.getElementById("sightTypeFilter").value;
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
