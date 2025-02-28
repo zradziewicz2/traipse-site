@@ -1105,16 +1105,16 @@ siteCard.innerHTML = `
             }
             function translateSightType(type) {
                 if (!type) return "Unknown";
+                
                 const typeMap = {
                     "museums": "Museums & Exhibits",
                     "archeological": "Archaeological Sites",
                     "landmark": "Landmarks & Monuments",
                     "historichome": "Historic Homes & Estates",
-                    "cemetery": "Cemeteries & Burial Sites",
-                    return typeMap[type.toLowerCase()] || "Other";
-
+                    "cemetery": "Cemeteries & Burial Sites"
                 };
-                return typeMap[type.toLowerCase()] || "Other";
+            
+                return typeMap[type.toLowerCase()] || "Other"; // ✅ Move return outside
             }
 
             
