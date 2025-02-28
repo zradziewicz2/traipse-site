@@ -1146,4 +1146,35 @@
         "publicaccess": false,
         "address": "123 Main Street, Denver CO"
     }
+    {
+        "name": "American Mountaineering Museum",
+        "lat": 39.7554,
+        "lng": -105.2236,
+        "city": "Denver",
+        "description": "A museum dedicated to the history and culture of mountaineering, featuring exhibits on famous climbers, mountain environments, and climbing gear.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local",
+        "thematiccategory": "technologyandtransportation",
+        "image": "images/default.jpg",
+        "timeperiod": ["nineteenthcentury"],
+        "estimatedtime": "1 hour",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "museums",
+        "website": "http://www.mountaineeringmuseum.org",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": false,
+        "hours": "10AM - 4PM",
+        "luggagestorage": false,
+        "dollaramount": "$7 - $10",
+        "cashorcredit": "both",
+        "publicaccess": true,
+        "address": "710 10th St, Golden, CO 80401"
+    }
+
 ]
