@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Heatmap Plugin (Only Included Once) -->
+    <!-- Heatmap Plugin -->
     <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
 
     <style>
@@ -25,7 +25,6 @@
             overflow: hidden;
         }
 
-        /* ===== Header ===== */
         .header {
             display: flex;
             align-items: center;
@@ -76,13 +75,11 @@
             color: black;
         }
 
-        /* Active Button (Indicates Current Page) */
         .header-btn.active {
             background: #03FDFC;
             color: black;
         }
 
-        /* ===== Map Styling ===== */
         .map-container {
             width: 100vw;
             height: calc(100vh - 65px);
@@ -94,7 +91,6 @@
             height: 100%;
         }
 
-        /* ===== Heatmap Toggle Button ===== */
         .toggle-btn {
             position: absolute;
             top: 15px;
@@ -141,22 +137,63 @@
     </div>
 
     <script>
-        // Initialize the map
-        let map = L.map('map').setView([39.7392, -104.9903], 12);
+        let map = L.map('map').setView([39.7392, -104.9903], 11);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Sample historical sites heatmap data (latitude, longitude, intensity)
         let heatmapData = [
-            [39.7392, -104.9903, 0.8],  // Downtown Denver
-            [39.7420, -104.9820, 0.7],  // Capitol Hill
-            [39.7500, -104.9990, 0.9],  // Union Station
-            [39.7600, -105.0050, 0.5]   // Highlands
+            // Denver
+            [39.7480, -104.9991, 0.8],  // Larimer Square
+            [39.7527, -104.9990, 0.7],  // Union Station
+            [39.7400, -104.9784, 0.8],  // Capitol Hill
+            [39.7565, -104.9701, 0.6],  // Five Points
+
+            // Boulder
+            [40.0176, -105.2797, 0.9],  // Pearl Street Mall
+            [40.0069, -105.2694, 0.8],  // CU Boulder Old Main
+            [39.9994, -105.2815, 0.7],  // Mapleton Hill
+            [39.9980, -105.2813, 0.6],  // Chautauqua Park
+
+            // Golden
+            [39.7555, -105.2211, 0.9],  // Downtown Golden
+            [39.7561, -105.2245, 0.8],  // Colorado School of Mines
+            [39.7469, -105.2012, 0.7],  // Coors Brewery
+            [39.7335, -105.2350, 0.6],  // Buffalo Bill's Grave
+
+            // Morrison
+            [39.6553, -105.1911, 0.8],  // Morrison Historic District
+            [39.6644, -105.2055, 0.9],  // Dinosaur Ridge
+            [39.6650, -105.2050, 0.7],  // Red Rocks Amphitheater
+
+            // Aurora
+            [39.7420, -104.8384, 0.7],  // Fitzsimons Army Hospital
+            [39.7270, -104.8760, 0.6],  // DeLaney Farm
+            [39.7294, -104.8280, 0.5],  // Coal Creek Schoolhouse
+
+            // Lakewood
+            [39.7067, -105.0814, 0.8],  // Heritage Lakewood Belmar Park
+            [39.6900, -105.1177, 0.7],  // Jewish Consumptive Relief Society
+
+            // Broomfield
+            [39.9205, -105.0905, 0.7],  // Broomfield Depot Museum
+
+            // Littleton
+            [39.6133, -105.0166, 0.9],  // Littleton Main Street
+            [39.6121, -105.0170, 0.8],  // Littleton Museum
+
+            // Arvada
+            [39.8006, -105.0817, 0.8],  // Olde Town Arvada
+            [39.8023, -105.0833, 0.7],  // Arvada Flour Mill
+
+            // Westminster
+            [39.8384, -105.0380, 0.7],  // Westminster Castle
+
+            // Superior
+            [39.9528, -105.1686, 0.6],  // Industrial Mine Site
         ];
 
-        // Declare the heat layer properly
         let heatLayer = L.heatLayer(heatmapData, { 
             radius: 45, 
             blur: 15, 
