@@ -1177,103 +1177,97 @@ siteCard.innerHTML = `
         }
     });
 }
+<script>
+    function saveCityAndNavigate() {
+        const selectedCity = document.getElementById("cityFilter").value;
+        localStorage.setItem("selectedCity", selectedCity);
+        window.location.href = "explore.html"; // Redirect to Explore page
+    }
 
-            <script>
-                function saveCityAndNavigate() {
-                    const selectedCity = document.getElementById("cityFilter").value;
-                    localStorage.setItem("selectedCity", selectedCity);
-                    window.location.href = "explore.html"; // Redirect to Explore page
-                }
-            
-            window.onload = function() {
-                getUserLocation(); // Only call this once
-                const savedCity = localStorage.getItem("selectedCity");
-                if (savedCity) {
-                    document.getElementById("cityFilter").value = savedCity;
-                }
-            
-                loadLocations(); // Ensure this runs after setting filters
-            };
-        
-            function toggleAdditionalFilters() {
-                var filters = document.getElementById("additionalFilters");
-                if (filters.style.display === "none" || filters.style.display === "") {
-                    filters.style.display = "block";
-                } else {
-                    filters.style.display = "none";
+    window.onload = function() {
+        getUserLocation(); // Only call this once
+        const savedCity = localStorage.getItem("selectedCity");
+        if (savedCity) {
+            document.getElementById("cityFilter").value = savedCity;
+        }
+
+        loadLocations(); // Ensure this runs after setting filters
+    };
+</script>
+
+<script>
+    function toggleAdditionalFilters() {
+        var filters = document.getElementById("additionalFilters");
+        if (filters.style.display === "none" || filters.style.display === "") {
+            filters.style.display = "block";
+        } else {
+            filters.style.display = "none";
+        }
+    }
+
+    function toggleFavorite(siteId, element) {
+        let favorites = JSON.parse(localStorage.getItem('myPlaces')) || [];
+        let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+
+        let site = siteData.find(s => s.id === siteId);
+        if (!site) return;
+
+        let index = favorites.findIndex(s => s.id === siteId);
+        if (index > -1) {
+            favorites.splice(index, 1);
+            element.textContent = "☆";
+        } else {
+            favorites.push(site);
+            element.textContent = "⭐";
+
+            // Remove from 'Not Interested' if present
+            notInterested = notInterested.filter(s => s.id !== siteId);
+            document.getElementById(`x-${siteId}`).textContent = "✖";
+        }
+
+        localStorage.setItem('myPlaces', JSON.stringify(favorites));
+        localStorage.setItem('notInterested', JSON.stringify(notInterested));
+    }
+
+    function toggleNotInterested(siteId, element) {
+        console.log(`Toggling Not Interested for site ID: ${siteId}`);
+
+        let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+        let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+
+        let site = siteData.find(s => s.id === siteId);
+        if (!site) {
+            console.error(`Site with ID ${siteId} not found.`);
+            return;
+        }
+
+        let index = notInterested.findIndex(s => s.id === siteId);
+
+        if (index > -1) {
+            notInterested.splice(index, 1);
+            element.textContent = "✖";
+            element.classList.remove("active");
+        } else {
+            notInterested.push(site);
+            element.textContent = "❌";
+            element.classList.add("active");
+
+            let myIndex = myPlaces.findIndex(s => s.id === siteId);
+            if (myIndex > -1) {
+                myPlaces.splice(myIndex, 1);
+                let starIcon = document.getElementById(`star-${siteId}`);
+                if (starIcon) {
+                    starIcon.textContent = "☆";
+                    starIcon.classList.remove("active");
                 }
             }
-                // Store user preferences in sets
-            
-            
-             function toggleFavorite(siteId, element) {
-                let favorites = JSON.parse(localStorage.getItem('myPlaces')) || [];
-                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-                let site = siteData.find(s => s.id === siteId);
-                if (!site) return;
-            
-                let index = favorites.findIndex(s => s.id === siteId);
-                if (index > -1) {
-                    favorites.splice(index, 1);
-                    element.textContent = "☆";
-                } else {
-                    favorites.push(site);
-                    element.textContent = "⭐";
-                    
-                    // Remove from 'Not Interested' if present
-                    notInterested = notInterested.filter(s => s.id !== siteId);
-                    document.getElementById(`x-${siteId}`).textContent = "✖";
-                }
-            
-                localStorage.setItem('myPlaces', JSON.stringify(favorites));
-                localStorage.setItem('notInterested', JSON.stringify(notInterested));
-            }
-            
-               function toggleNotInterested(siteId, element) {
-                console.log(`Toggling Not Interested for site ID: ${siteId}`);
-            
-                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-                let site = siteData.find(s => s.id === siteId);
-                if (!site) {
-                    console.error(`Site with ID ${siteId} not found.`);
-                    return;
-                }
-            
-                let index = notInterested.findIndex(s => s.id === siteId);
-            
-                if (index > -1) {
-                    notInterested.splice(index, 1);
-                    element.textContent = "✖";
-                    element.classList.remove("active");
-                } else {
-                    notInterested.push(site);
-                    element.textContent = "❌";
-                    element.classList.add("active");
-            
-                    let myIndex = myPlaces.findIndex(s => s.id === siteId);
-                    if (myIndex > -1) {
-                        myPlaces.splice(myIndex, 1);
-                        let starIcon = document.getElementById(`star-${siteId}`);
-                        if (starIcon) {
-                            starIcon.textContent = "☆";
-                            starIcon.classList.remove("active");
-                        }
-                    }
-                }
-            
-                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-                localStorage.setItem('notInterested', JSON.stringify(notInterested));
-            
-                console.log("Updated Not Interested:", notInterested);
-            }
+        }
 
-        
+        localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+        localStorage.setItem('notInterested', JSON.stringify(notInterested));
 
-
-
+        console.log("Updated Not Interested:", notInterested);
+    }
 </script>
 </body>
 </html>
