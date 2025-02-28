@@ -736,6 +736,51 @@
                         <option value="false">No</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                <label>Dining On-Site:</label>
+                <select id="diningonsiteFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Featured Site:</label>
+                <select id="featuredFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Spanish Translations:</label>
+                <select id="spanishtranslationsFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Luggage Storage:</label>
+                <select id="luggagestorageFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Public Access:</label>
+                <select id="publicaccessFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
             </div>
 
 
@@ -855,9 +900,35 @@ function translateTours(tours) {
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
 function translateGiftshop(value) {
-    if (!value) return "Unknown"; // Handles missing or undefined values
+    if (!value) return "Unknown";
     return String(value).toLowerCase() === "true" ? "Has Gift Shop" : "No Gift Shop";
 }
+
+function translateDiningOnsite(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Dining Available" : "No Dining On-Site";
+}
+
+function translateFeatured(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Featured Site" : "Not Featured";
+}
+
+function translateSpanishTranslations(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Spanish Translations Available" : "No Spanish Translations";
+}
+
+function translateLuggageStorage(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Luggage Storage Available" : "No Luggage Storage";
+}
+
+function translatePublicAccess(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Publicly Accessible" : "Restricted Access";
+}
+
 
 
 function applyFilters() {
@@ -875,6 +946,12 @@ function applyFilters() {
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
     let selectedGiftshop = document.getElementById("giftshopFilter").value;
+    let selectedDiningOnsite = document.getElementById("diningonsiteFilter").value;
+    let selectedFeatured = document.getElementById("featuredFilter").value;
+    let selectedSpanishTranslations = document.getElementById("spanishtranslationsFilter").value;
+    let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
+    let selectedPublicAccess = document.getElementById("publicaccessFilter").value;
+
     
 
     // Get selected time periods (array of checked values)
@@ -905,6 +982,12 @@ function applyFilters() {
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
             (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
+            (selectedDiningOnsite === "all" || (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
+            (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
+            (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
+            (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
+            (selectedPublicAccess === "all" || (site.publicaccess && site.publicaccess.toString().toLowerCase() === selectedPublicAccess)) &&
+
             (selectedDistance === "all" || 
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
@@ -932,54 +1015,42 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-        siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
-                </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-        
-                    <div class="site-attributes">
-                        ${
-                            selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""
-                        } 
-                        ${
-                            selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""
-                        }
-                        ${
-                            selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""
-                        }
-                        ${
-                            selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""
-                        }
-                        ${
-                            selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""
-                        }
-                        ${
-                            selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""
-                        }
-                        ${
-                            selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
-                        
-                        }
-                        ${
-                            selectedGiftshop !== "all" ? `<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>` : ""
-                        }
-                    </div>
-                </div>
+siteCard.innerHTML = `
+    <div class="site-content">
+        <div class="site-image-container">
+            <img src="${site.image}" alt="${site.name}" class="site-image">
+        </div>
+        <div class="site-details">
+            <h3 class="site-title">${site.name}</h3>
+            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+            <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+
+            <div class="site-attributes">
+                ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""} 
+                ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+                ${selectedGiftshop !== "all" ? `<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>` : ""}
+                ${selectedDiningOnsite !== "all" ? `<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>` : ""}
+                ${selectedFeatured !== "all" ? `<span class="attribute-box">${translateFeatured(site.featured)}</span>` : ""}
+                ${selectedSpanishTranslations !== "all" ? `<span class="attribute-box">${translateSpanishTranslations(site.spanishtranslations)}</span>` : ""}
+                ${selectedLuggageStorage !== "all" ? `<span class="attribute-box">${translateLuggageStorage(site.luggagestorage)}</span>` : ""}
+                ${selectedPublicAccess !== "all" ? `<span class="attribute-box">${translatePublicAccess(site.publicaccess)}</span>` : ""}
             </div>
-        
-            <p class="site-description">${site.description}</p>
-            <div class="site-actions">
-                <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
-                <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
-            </div>
-            </div>
-        `;
+        </div>
+    </div>
+
+    <p class="site-description">${site.description}</p>
+    <div class="site-actions">
+        <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
+        <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
+    </div>
+`;
+
 
             
             // Now attach event listeners (this is the critical fix!)
