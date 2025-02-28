@@ -1175,6 +1175,38 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "address": "710 10th St, Golden, CO 80401"
+    },
+    {
+        "name": "Golden History Museums",
+        "lat": 39.7555,
+        "lng": -105.2211,
+        "city": "Denver",
+        "description": "A collection of museums showcasing Golden's rich history, including historic buildings, exhibits on the city's past, and interactive displays.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local",
+        "thematiccategory": "generalhistory",
+        "image": "images/default.jpg",
+        "timeperiod": ["nineteenthcentury", "twentiethcentury"],
+        "estimatedtime": "1-2 hours",
+        "reservations": "walkins_welcome",
+        "tours": ["selftours", "guidedtours"],
+        "transit": "underhalfamilefromtransit",
+        "sighttype": "museums",
+        "website": "https://www.goldenhistory.org",
+        "giftshop": true,
+        "diningonsite": false,
+        "featured": true,
+        "spanishtranslations": false,
+        "hours": "10AM - 4:30PM",
+        "luggagestorage": false,
+        "dollaramount": "$5 - $10",
+        "cashorcredit": "both",
+        "publicaccess": true,
+        "address": "923 10th St, Golden, CO 80401"
     }
+
+
 
 ]
