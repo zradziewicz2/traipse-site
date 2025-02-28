@@ -184,30 +184,21 @@
         // Update Heatmap Layer
         // Base heatmap settings
         let heatLayer = L.heatLayer(heatmapData, { 
-            radius: 60,         // Default radius
-            blur: 20,           // Keeps it smooth
-            maxOpacity: 0.8,    // Ensures color is visible
-            scaleRadius: true,  // Dynamic scaling at wider zoom levels
+            radius: 75,         // Large, consistent blob size
+            blur: 25,           // Smooth blending
+            maxZoom: 14,        // Prevents heatmap from fading out at high zoom
+            maxOpacity: 0.8,    // Ensures color stays visible
+            scaleRadius: false, // Keeps blob size consistent regardless of zoom
+            useLocalExtrema: false, // Keeps color scale consistent
+            maxIntensity: 1.3,  // Prevents high values from turning too red
             gradient: {
                 0.3: "blue",
                 0.5: "lime",
                 0.7: "yellow",
                 1.0: "red"
             }
-        }).addTo(map);
-        
-        // Function to adjust heatmap based on zoom level
-        map.on('zoomend', function () {
-            let zoom = map.getZoom();
-            
-            if (zoom >= 15) { 
-                // High zoom (preserve size & color)
-                heatLayer.setOptions({ radius: 75, scaleRadius: false, maxOpacity: 0.9 });
-            } else { 
-                // Lower zoom (dynamic resizing)
-                heatLayer.setOptions({ radius: 60, scaleRadius: true, maxOpacity: 0.8 });
-            }
         });
+
 
         
         let heatmapVisible = false;
