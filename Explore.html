@@ -146,7 +146,7 @@
         <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
         <div class="website-title">TRAIPSE</div>
 
-            <select id="cityFilter" class="city-filter-dropdown">
+           <select id="cityFilter" class="city-filter-dropdown" onchange="saveSelectedCity()">
                 <option value="all">All Cities</option>
                 <option value="denver">Denver</option>
                 <option value="washingtondc">Washington D.C.</option>
@@ -223,6 +223,21 @@
             }
             heatmapVisible = !heatmapVisible;
         }
+
+                // Ensure city selection persists when navigating from index to explore
+        window.onload = function() {
+            const savedCity = localStorage.getItem("selectedCity");
+            if (savedCity) {
+                document.getElementById("cityFilter").value = savedCity;
+            }
+        };
+        
+        // Save selected city when changed
+        function saveSelectedCity() {
+            const selectedCity = document.getElementById("cityFilter").value;
+            localStorage.setItem("selectedCity", selectedCity);
+        }
+
     </script>
 </body>
 </html>
