@@ -652,6 +652,19 @@
             </div>
 
             <div class="filter-group">
+                <label>Sight Type:</label>
+                <select id="sightTypeFilter">
+                    <option value="all">All</option>
+                    <option value="museums">Museums & Exhibits</option>
+                    <option value="archeological">Archaeological Sites</option>
+                    <option value="landmark">Landmarks & Monuments</option>
+                    <option value="historichome">Historic Homes & Estates</option>
+                    <option value="cemetery">Cemeteries & Burial Sites</option>
+                </select>
+            </div>
+
+
+            <div class="filter-group">
                 <label>Cost:</label>
                 <select id="costFilter">
                     <option value="all">All</option>
@@ -939,6 +952,7 @@ function applyFilters() {
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
+    let selectedSightType = document.getElementById("sightTypeFilter").value;
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
@@ -976,6 +990,7 @@ function applyFilters() {
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
             (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+            (selectedSightType === "all" || site.sighttype.toLowerCase() === selectedSightType) &&
             (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
             (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
             (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
@@ -1030,6 +1045,7 @@ siteCard.innerHTML = `
                 ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""} 
                 ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
                 ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                ${selectedSightType !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
                 ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
                 ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
                 ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
@@ -1086,6 +1102,18 @@ siteCard.innerHTML = `
                 };
                 return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
             }
+            function translateSightType(type) {
+                if (!type) return "Unknown";
+                const typeMap = {
+                    "museums": "Museums & Exhibits",
+                    "archeological": "Archaeological Sites",
+                    "landmark": "Landmarks & Monuments",
+                    "historichome": "Historic Homes & Estates",
+                    "cemetery": "Cemeteries & Burial Sites"
+                };
+                return typeMap[type.toLowerCase()] || "Other";
+            }
+
             
             // Function to properly format cost
             function translateCost(cost) {
