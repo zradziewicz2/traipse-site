@@ -182,18 +182,22 @@
         ];
         
         // Update Heatmap Layer
-        let heatLayer = L.heatLayer(heatmapData, { 
-            radius: 75,  // Large circles for entire neighborhoods
-            blur: 15,    // Defined edges but not too sharp
-            maxZoom: 14,
-            maxOpacity: 0.9,  // More vibrant heatmap effect
-            gradient: {
-                0.3: "blue",
-                0.5: "lime",
-                0.7: "yellow",
-                1.0: "red"
-            }
-        });
+            let heatLayer = L.heatLayer(heatmapData, { 
+                radius: 75,         // Large, consistent blob size
+                blur: 25,           // Smooth blending
+                maxZoom: 14,        // Prevents heatmap from fading out at high zoom
+                maxOpacity: 0.8,    // Ensures color stays visible
+                scaleRadius: false, // Keeps blob size consistent regardless of zoom
+                useLocalExtrema: false, // Keeps color scale consistent
+                maxIntensity: 1.3,  // Prevents high values from turning too red
+                gradient: {
+                    0.3: "blue",
+                    0.5: "lime",
+                    0.7: "yellow",
+                    1.0: "red"
+                }
+            });
+
         
         let heatmapVisible = false;
         
