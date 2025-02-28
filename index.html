@@ -576,7 +576,7 @@
             
                 <div class="website-title">TRAIPSE</div>
             
-            <select id="cityFilter" class="city-filter-dropdown" onchange="saveCityAndNavigate()">
+            <select id="cityFilter" class="city-filter-dropdown" onchange="saveCitySelection()">
                 <option value="all">All Cities</option>
                 <option value="denver">Denver</option>
                 <option value="washingtondc">Washington D.C.</option>
@@ -1182,21 +1182,24 @@ siteCard.innerHTML = `
 </script>  <!-- This should now be properly color-coded -->
 
 <script>
-    function saveCityAndNavigate() {
-        const selectedCity = document.getElementById("cityFilter").value;
-        localStorage.setItem("selectedCity", selectedCity);
-        window.location.href = "explore.html"; // Redirect to Explore page
-    }
-
-    window.onload = function() {
-        getUserLocation(); // Only call this once
-        const savedCity = localStorage.getItem("selectedCity");
-        if (savedCity) {
-            document.getElementById("cityFilter").value = savedCity;
+        function saveCitySelection() {
+            const selectedCity = document.getElementById("cityFilter").value;
+            localStorage.setItem("selectedCity", selectedCity);
+            applyFilters(); // Apply filters without navigating away
         }
 
-        loadLocations(); // Ensure this runs after setting filters
-    };
+
+        window.onload = function() {
+            getUserLocation();
+            
+            const savedCity = localStorage.getItem("selectedCity");
+            if (savedCity) {
+                document.getElementById("cityFilter").value = savedCity;
+            }
+        
+            loadLocations(); // Load sites after setting the filter
+        };
+
 
     function toggleAdditionalFilters() {
         var filters = document.getElementById("additionalFilters");
