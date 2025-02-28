@@ -3,237 +3,1265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traipse - Discover History</title>
+    <title>Traipse - Discover History Around You</title>
 
-    <!-- Leaflet Library -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
+    <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #000;
-            color: white;
+            background-color: #000000;
             margin: 0;
             display: flex;
             flex-direction: column;
             height: 100vh;
         }
-
-        /* Header */
+        
+        /* Adjusted Header Layout */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 20px;
+            padding: 12px 20px; /* Slightly more padding */
             background: #111;
             color: #03FDFC;
-            height: 65px;
+            height: 65px; /* Tiny decrease to fit spacing */
         }
 
         .website-title {
             font-size: 2em;
             font-weight: 900;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: #03FDFC;
-            margin-left: 15px;
+            white-space: nowrap;
+            margin: 5px 15px; /* Adds space above and below */
         }
 
-        /* Layout */
+
+
+
+        #logo {
+            width: auto;
+            height: 50px; /* Reduce size */
+            max-width: 100%;
+            object-fit: contain;
+            margin-left: 10px;
+            display: block; /* Ensures it stays inside the header */
+        }
+        .attribute-box {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin: 2px;
+            text-align: center;
+            white-space: nowrap;
+        }
+    
+        .attribute-box:hover {
+            background: #03FDFC;
+            color: black;
+    }
+
+
+
+            .tagline {
+                font-size: 1em;
+                font-family: 'Georgia', serif;
+                font-weight: normal;
+                color: #03FDFC;
+                margin-left: 20px;
+                white-space: nowrap;
+                flex-grow: 0; /* Prevents stretching */
+            }
+
+        .title-container {
+            font-size: 2.5em; /* Slightly bigger */
+            font-weight: 900; /* Maximum boldness */
+            letter-spacing: 2px; /* Makes it stand out more */
+            text-transform: uppercase; /* Ensures it's always capitalized */
+            margin-left: auto;
+        }
+
+        /* Main Layout */
         .container {
             display: flex;
             flex-direction: row;
-            height: calc(100vh - 65px);
+            height: calc(100vh - 80px);
         }
 
-        /* Left Panel */
-        .left-panel {
-            width: 50%;
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
             background: #181818;
-            padding: 20px;
+            padding: 20px; /* Add padding */
+            color: white;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
         }
 
-        .left-panel h2 {
+
+        .sidebar h2 {
             color: #03FDFC;
             font-size: 1.2em;
         }
-
-        /* Map */
-        .map-container {
-            width: 50%;
-            height: 100%;
-            position: relative;
+        
+        .filter-group {
+            margin-bottom: 8px; /* Increase spacing */
+            padding: 10px; /* Add padding inside each filter */
+            border-radius: 5px; /* Slight rounding */
+            background: #222; /* Optional: Give a subtle background */
         }
 
-        #map {
+        
+        .timePeriod-group {
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: column;
+            gap: 5px; /* Keeps the spacing consistent */
+        }
+        .filter-row {
+            display: flex;
+            gap: 10px; /* Space between filters */
+            justify-content: space-between;
+        }
+        .filter-group label {
+            font-size: 0.85em; /* Adjust size as needed */
+            font-weight: normal; /* Reduce boldness if necessary */
+            color: #D0D0D0; /* Subtle gray for readability */
+}
+
+        
+        .filter-row .filter-group {
+            flex: 1; /* Ensures both filters take equal space */
+            min-width: 0; /* Prevents overflow issues */
+        }
+
+        
+        .timePeriod-group label {
+            display: flex;
+            align-items: center; /* Keeps checkbox and text on the same line */
+            gap: 8px; /* Adjusts spacing between checkbox and text */
+            font-family: Montserrat, sans-serif;
+        }
+        
+        .timePeriod-years {
+            font-size: 0.8em;
+            color: #A0A0A0; /* Subtle gray for the year */
+            margin-left: 30px; /* Aligns the years with the text */
+            display: block; /* Forces the year to appear below */
+        }
+
+
+        
+        .filter-group select {
+            width: 100%;
+            : 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+        }
+
+
+        button {
+            background-color: #03FDFC;
+            color: #000;
+            border: none;
+            : 10px;
+            font-size: 1em;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #02c9c9;
+        }
+
+        /* Content */
+        .content {
+            display: flex;
+            flex-direction: row;
             width: 100%;
             height: 100%;
         }
 
-        /* City Filter Dropdown */
-        .city-filter-dropdown {
-            font-size: 1em;
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: 2px solid #03FDFC;
-            background-color: #111;
+        
+        .filters-above-map label {
+            font-weight: bold;
             color: #03FDFC;
+        }
+        
+        .filters-above-map select {
+            : 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+            background: #333;
+            color: white;
             cursor: pointer;
         }
 
-        .city-filter-dropdown:hover {
+
+
+
+          .search-results {
+            flex: 1;
+            max-width: 50%;
+            min-width: 40%;
+            overflow-y: auto;
+            padding: 20px; /* Adds more spacing */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the cards */
+        }
+
+
+        .star-icon::before,
+        .x-icon::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 6px;
+            font-size: 0.75em;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            bottom: 120%; /* Move above the icon */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+                .site-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        
+        .star-icon, .x-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .star-icon:hover {
+            color: #FFD700; /* Gold for favorite */
+        }
+        
+        .x-icon:hover {
+            color: #ff4444; /* Red for not interested */
+        }
+
+        .star-icon:hover::before,
+        .x-icon:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-3px); /* Small lift effect */
+        }
+
+        
+        /* Show tooltip on hover */
+        .star-icon:hover::after,
+        .x-icon:hover::after {
+            opacity: 1;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            justify-content: flex-end; /* Aligns buttons to the right */
+        }
+
+        .header-buttons-container {
+            display: flex;
+            justify-content: flex-end; /* Moves buttons to the right */
+            flex-grow: 1;
+        }
+        
+        .header-button {
+            display: inline-block;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            color: #03FDFC; /* Cyan outline */
+            background: none;
+            border: 2px solid #03FDFC;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .header-button:hover {
             background: #03FDFC;
             color: #000;
         }
 
-    </style>
-</head>
+        .header-btn {
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.7em; /* Reduced font size */
+            font-weight: bold;
+            padding: 5px 10px;
+            height: 30px;
+            min-width: 110px; /* Ensures all buttons have the same width */
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border-radius: 5px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap; /* Prevents text wrapping */
+        }
+
+        
+            .header-btn:hover {
+                background: #03FDFC;
+                color: black;
+            }
+
+        .site-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #333;
+            padding: 10px; /* Reduce padding */
+            border-radius: 8px; /* Slightly smaller radius */
+            margin-bottom: 8px; /* Reduce space between cards */
+            color: white;
+            cursor: pointer;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .site-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #03FDFC;
+            text-align: left;  /* Align title to the left */
+            margin-bottom: 5px;
+        }
+        
+        .site-card {
+            display: flex;
+            flex-direction: column;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .site-content {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start; /* Aligns content properly */
+            width: 100%;
+        }
+        
+        .site-image-container {
+            flex-shrink: 0;
+            width: 150px; /* Fixed width for images */
+            margin-right: 15px; /* Adds spacing between image and details */
+        }
+        
+        .site-image {
+            width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .site-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .site-details p {
+            margin: 3px 0;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+        
+        .site-attributes {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+        
+        .site-distance {
+            margin-top: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #D0D0D0;
+        }
+
+        
+        .site-image-container {
+            flex-shrink: 0;
+            width: 35%;
+        }
+        
+        .site-image {
+            width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .site-details {
+            flex-grow: 1;
+            padding-left: 15px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .site-details p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+    
+        
+        .site-details p {
+            margin: 3px 0;
+            font-size: 0.9em;
+            color: #D0D0D0;
+        }
+        
+        .site-description {
+            text-align: center;
+            margin-top: 5px; /* Reduce spacing */
+            margin-bottom: 3px; /* Closer to the icons */
+            font-size: 0.95em;
+            color: #E0E0E0;
+            max-width: 90%;
+        }
+
+
+        .site-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 70%;
+        }
+        
+        .site-info p {
+            margin: 5px 0; /* Reduce spacing between attributes */
+            font-size: 0.9em; /* Slightly smaller for readability */
+            color: #D0D0D0; /* Lighter text for contrast */
+        }
+
+
+
+        .site-card h3 {
+            margin: 0;
+            color: #03FDFC;
+        }
+
+        /* Map */
+        #map {
+            width: 50%;
+            height: 100%;
+            border-radius: -5; /* Remove unnecessary border radius */
+            background: #333;
+        }
+
+        .additional-filters {
+            margin-top: 10px;
+            border-top: 1px solid #03FDFC;
+            padding-top: 10px;
+            display: none;
+        }
+        
+        .toggle-filters {
+            background: none;
+            border: none;
+            color: #03FDFC;
+            font-size: 1em;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            padding: 5px 0;
+
+            .city-filter {
+                display: flex;
+                align-items: center;
+                justify-content: center; /* Center content horizontally */
+                gap: 20px; /* Increase spacing between label and dropdown */
+                font-size: 1.3em; /* Make text bigger */
+                font-weight: bold;
+                color: #03FDFC;
+                background: #111; /* Match the header */
+                padding: 10px 20px;
+                border-radius: 8px;
+            }
+            
+            .city-filter label {
+                font-weight: bold;
+            }
+                 select {
+            all: unset; /* Reset all browser styles */
+        }
+   
+        .city-filter-dropdown {
+            font-size: 2em !important; /* Force larger text */
+            font-weight: bold;
+            height: 60px !important; /* Increase height */
+            width: 300px !important; /* Set a fixed width */
+            padding: 10px 20px !important;
+            border-radius: 10px;
+            border: 4px solid #03FDFC !important; /* Thicker border */
+            background-color: #111 !important;
+            color: #03FDFC !important;
+            cursor: pointer;
+            text-align: center;
+            outline: none;
+            appearance: none !important; /* Remove default dropdown styles */
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+        }
+        
+        /* Make dropdown even larger on hover */
+        .city-filter-dropdown:hover {
+            background: #03FDFC !important;
+            color: #000 !important;
+            transform: scale(1.05); /* Slight enlargement effect */
+        }
+        
+        /* Force dropdown options to be bigger */
+        .city-filter-dropdown option {
+            font-size: 1.8em !important;
+            padding: 15px !important;
+        }
+
+
+            
+            /* Add hover effect to make it interactive */
+            .city-filter-dropdown:hover {
+                background: #03FDFC;
+                color: #000;
+            }
+
+        }
+
+        }
+        </style>
+        </head>
+
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <div class="website-title">TRAIPSE - DISCOVER HISTORY</div>
+               <!-- Header -->
+            <div class="header">
+                <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
+            
+                <div class="website-title">TRAIPSE</div>
+            
+                <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
+                    <option value="all">All Cities</option>
+                    <option value="denver">Denver</option>
+                    <option value="washingtondc">Washington D.C.</option>
+                    <option value="philadelphia">Philadelphia</option>
+                    <option value="boston">Boston</option>
+                    <option value="chicago">Chicago</option>
+                    <option value="newyorkcity">New York City</option>
+                    <option value="atlanta">Atlanta</option>
+                    <option value="neworleans">New Orleans</option>
+                    <option value="sanfrancisco">San Francisco</option>
+                </select>
+            
+                <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+            
+                <div class="header-buttons-container">
+                    <div class="header-buttons">
+                        <button class="header-btn">CONNECT</button>
+                        <button class="header-btn" onclick="window.location.href='myPlaces.html'">MY PLACES</button>
+                        <button class="header-btn">SUBMIT FEEDBACK</button>
+                        <button class="header-btn">DONATE</button>
+                    </div>
+                </div>
+            </div>
+            
 
-        <select id="cityFilter" class="city-filter-dropdown" onchange="applyFilters()">
-            <option value="denver">Denver</option>
-            <option value="washingtondc">Washington D.C.</option>
-            <option value="philadelphia">Philadelphia</option>
-            <option value="boston">Boston</option>
-            <option value="chicago">Chicago</option>
-            <option value="newyorkcity">New York City</option>
-            <option value="atlanta">Atlanta</option>
-            <option value="neworleans">New Orleans</option>
-            <option value="sanfrancisco">San Francisco</option>
-        </select>
-    </div>
 
+        </div>
+ 
     <!-- Main Layout -->
     <div class="container">
-        <!-- Left Panel (Space for Future Features) -->
-        <div class="left-panel">
-            <h2>Explore Historic Areas</h2>
-            <div id="searchResults"></div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Filters</h2>
+                <div class="filter-group">
+                <label>Featured Site:</label>
+                <select id="featuredFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+        <div class="filter-group">
+            <label>Time Period:</label>
+            <div class="timePeriod-group">
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric
+                </label>
+                <span class="timePeriod-years">(Before 1492)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="indigenous"> Indigenous & Native History
+                </label>
+                <span class="timePeriod-years">(Before 1492 – Present)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements
+                </label>
+                <span class="timePeriod-years">(1492 – 1800)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century - Civil War, Westward Expansion
+                </label>
+                <span class="timePeriod-years">(1800 – 1899)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> 20th Century - Industrial Revolution, World Wars
+                </label>
+                <span class="timePeriod-years">(1900 – 1950s)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History or Civil Rights
+                </label>
+                <span class="timePeriod-years">(1950s – Present)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="other"> Other
+                </label>
+            </div>
         </div>
 
-        <!-- Map Section -->
-        <div class="map-container">
+
+
+            
+            <div class="filter-group">
+                <label>Thematic Category:</label>
+                <select id="ThematicCategoryFilter">
+                    <option value="all">All</option>
+                    <option value="artsandculture">Arts and Culture</option>
+                    <option value="foodanddrink">Food and Drink</option>
+                    <option value="generalhistory">General History</option>
+                    <option value="historichomes">Historic Homes</option>
+                    <option value="naturalhistory">Natural History</option>
+                    <option value="religiousandspiritual">Religious and Spiritual</option>
+                    <option value="technologyandtransportation">Technology and Transportation</option>
+                    <option value="other">Other</option>
+
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Sight Type:</label>
+                <select id="sightTypeFilter">
+                    <option value="all">All</option>
+                    <option value="museums">Museums & Exhibits</option>
+                    <option value="archeological">Archaeological Sites</option>
+                    <option value="landmark">Landmarks & Monuments</option>
+                    <option value="historichome">Historic Homes & Estates</option>
+                    <option value="cemetery">Cemeteries & Burial Sites</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Cost:</label>
+                    <select id="costFilter">
+                        <option value="all">All</option>
+                        <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+            
+                <div class="filter-group">
+                    <label>Estimated Time:</label>
+                    <select id="estimatedTimeFilter">
+                        <option value="all">All</option>
+                        <option value="<15 minutes">Less than 15 minutes</option>
+                        <option value="15-1 hour">15 minutes to 1 hour</option>
+                        <option value="1-2 hours">1-2 hours</option>
+                        <option value="more than 2 hours">More than 2 hours</option>
+                    </select>
+                </div>
+            </div>
+
+
+            
+            <div class="filter-group">
+                <label>Distance:</label>
+                <select id="distanceFilter">
+                    <option value="all">All</option>
+                    <option value="1">Less than 1 mile</option>
+                    <option value="5">1-5 miles</option>
+                    <option value="10">More than 10 miles</option>
+                </select>
+            </div>
+
+                        <!-- Button to Show Additional Filters -->
+            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+            
+            <!-- Additional Filters Hidden by Default -->
+            <div class="additional-filters" id="additionalFilters" style="display: none;">
+                <div class="filter-group">
+                    <label>Reservations:</label>
+                    <select id="reservationsFilter">
+                        <option value="all">All</option>
+                        <option value="walkins_welcome">Walk-Ins Welcome</option>
+                        <option value="reservationrequired">Reservation Required</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Tours:</label>
+                    <select id="toursFilter">
+                        <option value="all">All</option>
+                        <option value="selftours">Self-Tours</option>
+                        <option value="guidedtours">Guided Tours</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Transit Accessibility:</label>
+                    <select id="transitFilter">
+                        <option value="all">All</option>
+                        <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
+                        <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
+                        <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Indoors or Outdoors:</label>
+                    <select id="typeFilter">
+                        <option value="all">All</option>
+                        <option value="indoor">Indoor</option>
+                        <option value="outdoor">Outdoor</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Family Friendly:</label>
+                    <select id="familyFilter">
+                        <option value="all">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Gift Shop:</label>
+                    <select id="giftshopFilter">
+                        <option value="all">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                <label>Dining On-Site:</label>
+                <select id="diningonsiteFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+        
+            <div class="filter-group">
+                <label>Spanish Translations:</label>
+                <select id="spanishtranslationsFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Luggage Storage:</label>
+                <select id="luggagestorageFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Public Access:</label>
+                <select id="publicaccessFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            </div>
+
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+   
+        
+            <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
         </div>
-    </div>
 
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
-        // Load last selected city from localStorage (default: Denver)
-        let selectedCity = localStorage.getItem("selectedCity") || "denver";
-        document.getElementById("cityFilter").value = selectedCity;
-
-        // Initialize Map
-        let map = L.map('map').setView([39.7392, -104.9903], 11);
+        var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Historic Site Data (Per City)
-        let cityData = {
-            denver: [
-                [39.7480, -104.9991, 1.3],  // Larimer Square
-                [39.7565, -104.9701, 1.2],  // Five Points
-                [39.7400, -104.9784, 1.3],  // Capitol Hill
-                [39.7527, -104.9990, 1.2],  // LoDo
-                [39.7339, -104.9925, 1.0],  // Cheesman Park
-                [39.7215, -104.9872, 1.1],  // Baker Historic District
-                [39.7686, -104.9719, 1.0],  // Whittier Neighborhood
-                [39.7600, -105.0050, 1.0]   // Highland (LoHi)
-            ],
-              // Boulder - Historic Areas
-            [40.0176, -105.2797, 1.3],  // Pearl Street Mall
-            [40.0069, -105.2694, 1.2],  // Mapleton Hill
-            [39.9980, -105.2813, 1.1],  // Chautauqua Park
+        var userLocation = null;
         
-            // Golden - Historic Areas
-            [39.7555, -105.2211, 1.3],  // Downtown Golden
-        
-            // Morrison - Historic Areas
-            [39.6553, -105.1911, 1.2],  // Morrison Historic District
-        
-            // Aurora - Historic Areas
-            [39.7420, -104.8384, 1.1],  // Fitzsimons Historic District
-        
-            // Lakewood - Historic Areas
-            [39.7067, -105.0814, 1.1],  // Heritage Lakewood Belmar Park
-        
-            // Littleton - Historic Areas
-            [39.6133, -105.0166, 1.3],  // Littleton Main Street Historic District
-        
-            // Arvada - Historic Areas
-            [39.8006, -105.0817, 1.2],  // Olde Town Arvada
-        
-            // Westminster - Historic Areas
-            [39.8364, -105.0372, 1.0],  // Harris Park Historic District
-            washingtondc: [
-                [38.8977, -77.0365, 1.3], // White House
-                [38.8895, -77.0352, 1.2], // National Mall
-                [38.8976, -77.0431, 1.2]  // Lafayette Square
-            ],
-            philadelphia: [
-                [39.9523, -75.1638, 1.3], // Independence Hall
-                [39.9489, -75.1503, 1.2]  // Liberty Bell
-            ],
-            boston: [
-                [42.3601, -71.0589, 1.3], // Boston Common
-                [42.3576, -71.0605, 1.2]  // Old State House
-            ],
-            chicago: [
-                [41.8781, -87.6298, 1.3], // Downtown Chicago
-                [41.8827, -87.6233, 1.2]  // Millennium Park
-            ],
-            newyorkcity: [
-                [40.7128, -74.0060, 1.3], // Downtown Manhattan
-                [40.7488, -73.9854, 1.2]  // Empire State Building
-            ],
-            atlanta: [
-                [33.7490, -84.3880, 1.3], // Downtown Atlanta
-                [33.7488, -84.3877, 1.2]  // Centennial Olympic Park
-            ],
-            neworleans: [
-                [29.9511, -90.0715, 1.3], // French Quarter
-                [29.9584, -90.0659, 1.2]  // St. Louis Cemetery
-            ],
-            sanfrancisco: [
-                [37.7749, -122.4194, 1.3], // Golden Gate Park
-                [37.8087, -122.4098, 1.2]  // Fisherman's Wharf
-            ]
-        };
+        var allMarkers = [];
+        var siteData = [];
 
-        let heatLayer;
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log("User location retrieved:", userLocation);
+                loadLocations(); // Load locations after getting user location
+            },
+            error => {
+                console.error("Error getting location:", error);
+                loadLocations(); // Proceed even if location is not available
+            }
+        );
+    } else {
+        console.warn("Geolocation is not supported by this browser.");
+        loadLocations();
+    }
+}
 
-        function applyFilters() {
-            // Save selected city to localStorage
-            selectedCity = document.getElementById("cityFilter").value;
-            localStorage.setItem("selectedCity", selectedCity);
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 3958.8; // Radius of Earth in miles
+    const toRad = angle => angle * (Math.PI / 180);
 
-            // Update Map
-            let cityCoords = cityData[selectedCity];
-            map.setView(cityCoords[0].slice(0, 2), 12);
+    let dLat = toRad(lat2 - lat1);
+    let dLon = toRad(lon2 - lon1);
 
-            if (heatLayer) {
-                map.removeLayer(heatLayer);
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+        
+// Existing function
+function loadLocations() {
+    fetch('locations.json')
+        .then(response => response.json())
+        .then(data => {
+            siteData = data;
+            applyFilters();
+        })
+        .catch(error => console.error("Error loading JSON:", error));
+}
+function translateEstimatedTime(time) {
+    if (!time) return "Unknown"; // Handle missing values
+    const timeMap = {
+        "<15 minutes": "Less than 15 minutes",
+        "15-1 hour": "15 minutes to 1 hour",
+        "1-2 hours": "1-2 hours",
+        "more than 2 hours": "More than 2 hours"
+    };
+    return timeMap[time] || time; // Return formatted value or original if not found
+}
+
+        function translateReservations(reservation) {
+            if (!reservation) return "Unknown"; 
+            const reservationMap = {
+                "walkins_welcome": "Walk-Ins Welcome",
+                "reservationrequired": "Reservation Required"
+            };
+            return reservationMap[reservation] || reservation;
+        }
+function translateTransit(transit) {
+    if (!transit) return "Unknown"; // Handle missing values
+    const transitMap = {
+        "underhalfamilefromtransit": "Under Half Mile from Transit",
+        "halfamiletotenmilesfromtransit": "Half Mile to 10 Miles from Transit",
+        "overtenmilesfromtransit": "Over 10 Miles from Transit"
+    };
+    return transitMap[transit.toLowerCase()] || transit; // Return formatted value or original if not found
+}
+
+function translateReservations(reservation) {
+    if (!reservation) return "Unknown"; // Handle missing values
+    const reservationMap = {
+        "walkins_welcome": "Walk-Ins Welcome",
+        "reservationrequired": "Reservation Required"
+    };
+    return reservationMap[reservation] || reservation; // Return formatted value or original if not found
+}
+function translateTours(tours) {
+    if (!tours || !Array.isArray(tours)) return "Unknown"; // Handle missing or incorrect values
+    const tourMap = {
+        "selftours": "Self-Guided Tours",
+        "guidedtours": "Guided Tours"
+    };
+    return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
+}
+function translateGiftshop(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Has Gift Shop" : "No Gift Shop";
+}
+
+function translateDiningOnsite(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Dining Available" : "No Dining On-Site";
+}
+
+function translateFeatured(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Featured Site" : "Not Featured";
+}
+
+function translateSpanishTranslations(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Spanish Translations Available" : "No Spanish Translations";
+}
+
+function translateLuggageStorage(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Luggage Storage Available" : "No Luggage Storage";
+}
+
+function translatePublicAccess(value) {
+    if (!value) return "Unknown";
+    return String(value).toLowerCase() === "true" ? "Publicly Accessible" : "Restricted Access";
+}
+
+
+
+function applyFilters() {
+    let selectedCost = document.getElementById("costFilter").value;
+    let selectedType = document.getElementById("typeFilter").value;
+    let selectedFamily = document.getElementById("familyFilter").value;
+    let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
+    ? document.getElementById("localOrNationalFilter").value 
+    : "all";
+    let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
+    let selectedSightType = document.getElementById("sightTypeFilter").value;
+    let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
+    let selectedDistance = document.getElementById("distanceFilter").value;
+    let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
+    let selectedReservations = document.getElementById("reservationsFilter").value;
+    let selectedTours = document.getElementById("toursFilter").value;
+    let selectedTransit = document.getElementById("transitFilter").value;
+    let selectedGiftshop = document.getElementById("giftshopFilter").value;
+    let selectedDiningOnsite = document.getElementById("diningonsiteFilter").value;
+    let selectedFeatured = document.getElementById("featuredFilter").value;
+    let selectedSpanishTranslations = document.getElementById("spanishtranslationsFilter").value;
+    let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
+    let selectedPublicAccess = document.getElementById("publicaccessFilter").value;
+
+    
+
+    // Get selected time periods (array of checked values)
+    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
+
+    let resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+
+    siteData.forEach(site => {
+        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+
+        // Check if site has at least one of the selected time periods
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            site.timeperiod.some(period => selectedTimePeriods.includes(period));
+
+        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
+        
+        if (matchesCity && // Apply city filter
+            (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+            (selectedSightType === "all" || site.sighttype.toLowerCase() === selectedSightType) &&
+            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
+            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
+            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
+            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+            (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
+            (selectedDiningOnsite === "all" || (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
+            (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
+            (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
+            (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
+            (selectedPublicAccess === "all" || (site.publicaccess && site.publicaccess.toString().toLowerCase() === selectedPublicAccess)) &&
+
+            (selectedDistance === "all" || 
+             (distance !== null &&
+              ((selectedDistance === "1" && distance < 1) ||
+               (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+               (selectedDistance === "10" && distance > 10)))) &&
+            matchesTimePeriod) {
+        
+                
+
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            marker.addTo(map);
+            allMarkers.push(marker);
+
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+            siteCard.style.display = "flex";  
+            siteCard.style.flexDirection = "column";  
+            siteCard.style.alignItems = "center"; // Center items in the card
+            
+            // Get stored My Places and Not Interested lists
+            let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+            let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+            // Check if this site is already liked or not interested
+            let isLiked = myPlaces.some(s => s.id === site.id);
+            let isNotInterested = notInterested.some(s => s.id === site.id);
+            
+siteCard.innerHTML = `
+    <div class="site-content">
+        <div class="site-image-container">
+            <img src="${site.image}" alt="${site.name}" class="site-image">
+        </div>
+        <div class="site-details">
+            <h3 class="site-title">${site.name}</h3>
+            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+            <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+
+            <div class="site-attributes">
+                ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""} 
+                ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                ${selectedSightType !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
+                ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+                ${selectedGiftshop !== "all" ? `<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>` : ""}
+                ${selectedDiningOnsite !== "all" ? `<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>` : ""}
+                ${selectedFeatured !== "all" ? `<span class="attribute-box">${translateFeatured(site.featured)}</span>` : ""}
+                ${selectedSpanishTranslations !== "all" ? `<span class="attribute-box">${translateSpanishTranslations(site.spanishtranslations)}</span>` : ""}
+                ${selectedLuggageStorage !== "all" ? `<span class="attribute-box">${translateLuggageStorage(site.luggagestorage)}</span>` : ""}
+                ${selectedPublicAccess !== "all" ? `<span class="attribute-box">${translatePublicAccess(site.publicaccess)}</span>` : ""}
+            </div>
+        </div>
+    </div>
+
+    <p class="site-description">${site.description}</p>
+    <div class="site-actions">
+        <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
+        <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
+    </div>
+`;
+
+
+            
+            // Now attach event listeners (this is the critical fix!)
+            
+            resultsContainer.appendChild(siteCard);
+
+            
+            // Function to translate category names to their proper display format
+            function translateCategory(category) {
+                const categoryMap = {
+                    "artsandculture": "Arts and Culture",
+                    "foodanddrink": "Food and Drink",
+                    "generalhistory": "General History",
+                    "historichomes": "Historic Homes",
+                    "naturalhistory": "Natural History",
+                    "religiousandspiritual": "Religious and Spiritual",
+                    "technologyandtransportation": "Technology and Transportation",
+                    "other": "Other"
+                };
+                return categoryMap[category.toLowerCase()] || formatText(category);
+            }
+            
+            // Function to translate time periods
+            function translateTimePeriod(timeperiod) {
+                const timePeriodMap = {
+                    "prehistoric": "Prehistoric",
+                    "indigenous": "Indigenous & Native History",
+                    "colonial": "Colonial & Early Settlements",
+                    "nineteenthcentury": "19th Century - Civil War & Westward Expansion",
+                    "industrialrevolution": "20th Century - Industrial Revolution, World Wars",
+                    "modernhistory": "Modern History or Civil Rights",
+                    "other": "Other"
+                };
+                return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
+            }
+            function translateSightType(type) {
+                if (!type) return "Unknown";
+                
+                const typeMap = {
+                    "museums": "Museums & Exhibits",
+                    "archeological": "Archaeological Sites",
+                    "landmark": "Landmarks & Monuments",
+                    "historichome": "Historic Homes & Estates",
+                    "cemetery": "Cemeteries & Burial Sites"
+                };
+            
+                return typeMap[type.toLowerCase()] || "Other"; // ✅ Move return outside
             }
 
-            heatLayer = L.heatLayer(cityCoords, {
-                radius: 75,
-                blur: 25,
-                maxOpacity: 0.8,
-                gradient: { 0.3: "blue", 0.5: "lime", 0.7: "yellow", 1.0: "red" }
-            }).addTo(map);
+            
+            // Function to properly format cost
+            function translateCost(cost) {
+                return cost.charAt(0).toUpperCase() + cost.slice(1);
+            }
+            
+            // Function to properly format type
+            function translateType(type) {
+                return type.charAt(0).toUpperCase() + type.slice(1);
+            }
+            
+            function translateLocalOrNational(value) {
+                if (!value) return "Unknown";  // Prevents error if value is undefined or null
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+
+            
+            // Generic function to add spaces between camelCase words & capitalize
+            function formatText(text) {
+                return text.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/\b[a-z]/g, char => char.toUpperCase());
+            }
+
+            
+            // Function to format text properly (capitalize and add spaces)
+            function formatText(text) {
+                return text.replace(/([a-z])([A-Z])/g, "$1 $2") // Adds space between camelCase words
+                           .replace(/\b[a-z]/g, char => char.toUpperCase()); // Capitalizes first letter
+            }
+
+
+
+
+            siteCard.onclick = () => {
+                map.setView([site.lat, site.lng], 14);
+                marker.openPopup();
+            };
+            resultsContainer.appendChild(siteCard);
         }
+    });
+}
 
-        applyFilters(); // Run on page load
+        
+        
+                    window.onload = function() {
+                        getUserLocation(); // Gets user's location when the page loads
+                    };
+        
+            function toggleAdditionalFilters() {
+                var filters = document.getElementById("additionalFilters");
+                if (filters.style.display === "none" || filters.style.display === "") {
+                    filters.style.display = "block";
+                } else {
+                    filters.style.display = "none";
+                }
+            }
+                // Store user preferences in sets
+            
+            
+             function toggleFavorite(siteId, element) {
+                let favorites = JSON.parse(localStorage.getItem('myPlaces')) || [];
+                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+                let site = siteData.find(s => s.id === siteId);
+                if (!site) return;
+            
+                let index = favorites.findIndex(s => s.id === siteId);
+                if (index > -1) {
+                    favorites.splice(index, 1);
+                    element.textContent = "☆";
+                } else {
+                    favorites.push(site);
+                    element.textContent = "⭐";
+                    
+                    // Remove from 'Not Interested' if present
+                    notInterested = notInterested.filter(s => s.id !== siteId);
+                    document.getElementById(`x-${siteId}`).textContent = "✖";
+                }
+            
+                localStorage.setItem('myPlaces', JSON.stringify(favorites));
+                localStorage.setItem('notInterested', JSON.stringify(notInterested));
+            }
+            
+               function toggleNotInterested(siteId, element) {
+                console.log(`Toggling Not Interested for site ID: ${siteId}`);
+            
+                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+            
+                let site = siteData.find(s => s.id === siteId);
+                if (!site) {
+                    console.error(`Site with ID ${siteId} not found.`);
+                    return;
+                }
+            
+                let index = notInterested.findIndex(s => s.id === siteId);
+            
+                if (index > -1) {
+                    notInterested.splice(index, 1);
+                    element.textContent = "✖";
+                    element.classList.remove("active");
+                } else {
+                    notInterested.push(site);
+                    element.textContent = "❌";
+                    element.classList.add("active");
+            
+                    let myIndex = myPlaces.findIndex(s => s.id === siteId);
+                    if (myIndex > -1) {
+                        myPlaces.splice(myIndex, 1);
+                        let starIcon = document.getElementById(`star-${siteId}`);
+                        if (starIcon) {
+                            starIcon.textContent = "☆";
+                            starIcon.classList.remove("active");
+                        }
+                    }
+                }
+            
+                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+                localStorage.setItem('notInterested', JSON.stringify(notInterested));
+            
+                console.log("Updated Not Interested:", notInterested);
+            }
 
-    </script>
+        
 
+
+
+</script>
 </body>
 </html>
