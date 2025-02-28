@@ -1046,7 +1046,7 @@ siteCard.innerHTML = `
                 ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""} 
                 ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
                 ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                ${Type !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
+                ${selectedSightType !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
                 ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
                 ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
                 ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
