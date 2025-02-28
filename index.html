@@ -1185,14 +1185,16 @@ siteCard.innerHTML = `
                     window.location.href = "explore.html"; // Redirect to Explore page
                 }
             
-                window.onload = function() {
-                    getUserLocation(); // Gets user's location when the page loads
+            window.onload = function() {
+                getUserLocation(); // Only call this once
+                const savedCity = localStorage.getItem("selectedCity");
+                if (savedCity) {
+                    document.getElementById("cityFilter").value = savedCity;
+                }
             
-                    // Restore city selection from localStorage
-                    const savedCity = localStorage.getItem("selectedCity");
-                    if (savedCity) {
-                        document.getElementById("cityFilter").value = savedCity;
-                    }
+                loadLocations(); // Ensure this runs after setting filters
+            };
+
             
                     // Load locations and filters after restoring the city selection
                     loadLocations();
