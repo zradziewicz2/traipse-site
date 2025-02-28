@@ -660,6 +660,7 @@
                     <option value="landmark">Landmarks & Monuments</option>
                     <option value="historichome">Historic Homes & Estates</option>
                     <option value="cemetery">Cemeteries & Burial Sites</option>
+                    <option value="other">Other</option>
                 </select>
             </div>
 
@@ -952,7 +953,7 @@ function applyFilters() {
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
-    let selectedSightType = document.getElementById("sightTypeFilter").value;
+    let Type = document.getElementById("sightTypeFilter").value;
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
@@ -1045,7 +1046,7 @@ siteCard.innerHTML = `
                 ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""} 
                 ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
                 ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                ${selectedSightType !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
+                ${Type !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
                 ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
                 ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
                 ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
@@ -1109,7 +1110,9 @@ siteCard.innerHTML = `
                     "archeological": "Archaeological Sites",
                     "landmark": "Landmarks & Monuments",
                     "historichome": "Historic Homes & Estates",
-                    "cemetery": "Cemeteries & Burial Sites"
+                    "cemetery": "Cemeteries & Burial Sites",
+                    return typeMap[type.toLowerCase()] || "Other";
+
                 };
                 return typeMap[type.toLowerCase()] || "Other";
             }
