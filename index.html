@@ -843,6 +843,7 @@
         var allMarkers = [];
         var siteData = [];
 
+// Define function before window.onload
 function getUserLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -864,6 +865,18 @@ function getUserLocation() {
         loadLocations();
     }
 }
+
+window.onload = function() {
+    getUserLocation();
+    
+    const savedCity = localStorage.getItem("selectedCity");
+    if (savedCity) {
+        document.getElementById("cityFilter").value = savedCity;
+    }
+
+    loadLocations(); // Load sites after setting the filter
+};
+
 
 function getDistance(lat1, lon1, lat2, lon2) {
     const R = 3958.8; // Radius of Earth in miles
@@ -1193,16 +1206,7 @@ function renderSiteCard(site) {
         }
 
 
-        window.onload = function() {
-            getUserLocation();
-            
-            const savedCity = localStorage.getItem("selectedCity");
-            if (savedCity) {
-                document.getElementById("cityFilter").value = savedCity;
-            }
-        
-            loadLocations(); // Load sites after setting the filter
-        };
+
 
 
     function toggleAdditionalFilters() {
