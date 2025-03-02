@@ -1050,7 +1050,6 @@ function renderSiteCard(site, distance) {
     let siteCard = document.createElement("div"); // Declare siteCard properly
     siteCard.className = "site-card";
 
-
     siteCard.innerHTML = `
         <div class="site-content">
             <div class="site-image-container">
@@ -1065,12 +1064,15 @@ function renderSiteCard(site, distance) {
         </div>
     `;
 
-    resultsContainer.appendChild(siteCard);
+    return siteCard; // ✅ RETURN siteCard
 }
 
+
 matches.forEach(item => {
-    renderSiteCard(item.site, getDistance(userLocation?.lat, userLocation?.lng, item.site.lat, item.site.lng));
+    let siteCard = renderSiteCard(item.site, getDistance(userLocation?.lat, userLocation?.lng, item.site.lat, item.site.lng));
+    resultsContainer.appendChild(siteCard); // ✅ Append the created siteCard
 });
+
 
 if (recommendations.length > 0) {
     let recommendationHeader = document.createElement("h2");
