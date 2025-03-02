@@ -866,16 +866,14 @@ function getUserLocation() {
     }
 }
 
-window.onload = function() {
+window.addEventListener("load", function() {
     getUserLocation();
-    
     const savedCity = localStorage.getItem("selectedCity");
     if (savedCity) {
         document.getElementById("cityFilter").value = savedCity;
     }
-
-    loadLocations(); // Load sites after setting the filter
-};
+    loadLocations();
+});
 
 
 function getDistance(lat1, lon1, lat2, lon2) {
@@ -1060,6 +1058,7 @@ function applyFilters() {
 }
 
 // ✅ **Restores Original Card Display**
+// ✅ **Restores Original Card Display**
 function renderSiteCard(site) {
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
@@ -1101,15 +1100,20 @@ function renderSiteCard(site) {
         </div>
     `;
 
-    return siteCard;
+    return siteCard; // ✅ Ensure we return the card instead of appending twice
 }
 
+// ❌ REMOVE THIS: resultsContainer.appendChild(siteCard); (it's causing the issue)
 
+// ✅ Now apply filters correctly without extra closing brackets
+function applyFilters() {
+    resultsContainer.innerHTML = "";
 
-            
-            // Now attach event listeners (this is the critical fix!)
-            
-            resultsContainer.appendChild(siteCard);
+    siteData.forEach(site => {
+        let siteCard = renderSiteCard(site);
+        resultsContainer.appendChild(siteCard);
+    });
+}
 
             
             // Function to translate category names to their proper display format
