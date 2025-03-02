@@ -883,13 +883,18 @@ function getDistance(lat1, lon1, lat2, lon2) {
 // Existing function
 function loadLocations() {
     fetch('locations.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             siteData = data;
             applyFilters();
         })
         .catch(error => console.error("Error loading JSON:", error));
-}
+
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
@@ -1041,8 +1046,9 @@ matches.sort((a, b) => b.matchCount - a.matchCount);
 recommendations.sort((a, b) => b.matchCount - a.matchCount);
 
 function renderSiteCard(site, distance) {
-    let siteCard = document.createElement("div");
+    let siteCard = document.createElement("div"); // Declare siteCard properly
     siteCard.className = "site-card";
+
 
     siteCard.innerHTML = `
         <div class="site-content">
@@ -1153,10 +1159,10 @@ recommendations.forEach(item => {
 
 
 
-    siteCard.onclick = () => {
-        map.setView([site.lat, site.lng], 14);
-        marker.openPopup();
-    };
+siteCard.addEventListener("click", () => {
+    map.setView([site.lat, site.lng], 14);
+});
+
     
     resultsContainer.appendChild(siteCard);
 } // Ensure this correctly closes the applyFilters() function
