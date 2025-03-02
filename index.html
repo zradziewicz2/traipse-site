@@ -1063,6 +1063,10 @@ function renderSiteCard(site) {
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
 
+function renderSiteCard(site) {
+    let siteCard = document.createElement("div");
+    siteCard.className = "site-card";
+
     siteCard.innerHTML = `
         <div class="site-content">
             <div class="site-image-container">
@@ -1073,7 +1077,7 @@ function renderSiteCard(site) {
                 <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                 <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
                 <p class="site-distance">${userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng).toFixed(1) + " miles away" : "Distance unavailable"}</p>
-
+                
                 <div class="site-attributes">
                     <span class="attribute-box">${translateCost(site.cost)}</span>
                     <span class="attribute-box">${translateType(site.type)}</span>
@@ -1101,7 +1105,8 @@ function renderSiteCard(site) {
     `;
 
     return siteCard; // ✅ Ensure we return the card instead of appending twice
-}
+} // ✅ Properly closes renderSiteCard()
+
 
 // ❌ REMOVE THIS: resultsContainer.appendChild(siteCard); (it's causing the issue)
 
@@ -1113,7 +1118,8 @@ function applyFilters() {
         let siteCard = renderSiteCard(site);
         resultsContainer.appendChild(siteCard);
     });
-}
+} // ✅ Ensure this properly closes applyFilters()
+
 
             
             // Function to translate category names to their proper display format
