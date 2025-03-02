@@ -1053,48 +1053,78 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-siteCard.innerHTML = `
-    <div class="site-content">
-        <div class="site-image-container">
-            <img src="${site.image}" alt="${site.name}" class="site-image">
-        </div>
-        <div class="site-details">
-            <h3 class="site-title">${site.name}</h3>
-            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-            <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+// Create an array to store filtered sites with match counts
+let filteredSites = [];
 
-            <div class="site-attributes">
-                ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""} 
-                ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
-                ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                ${selectedSightType !== "all" ? `<span class="attribute-box">${translateSightType(site.sighttype)}</span>` : ""}
-                ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
-                ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
-                ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
-                ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
-                ${selectedGiftshop !== "all" ? `<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>` : ""}
-                ${selectedDiningOnsite !== "all" ? `<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>` : ""}
-                ${selectedFeatured !== "all" ? `<span class="attribute-box">${translateFeatured(site.featured)}</span>` : ""}
-                ${selectedSpanishTranslations !== "all" ? `<span class="attribute-box">${translateSpanishTranslations(site.spanishtranslations)}</span>` : ""}
-                ${selectedLuggageStorage !== "all" ? `<span class="attribute-box">${translateLuggageStorage(site.luggagestorage)}</span>` : ""}
-                ${selectedPublicAccess !== "all" ? `<span class="attribute-box">${translatePublicAccess(site.publicaccess)}</span>` : ""}
-            </div>
-        </div>
-    </div>
+siteData.forEach(site => {
+    let matchCount = 0;
 
-    <p class="site-description">${site.description}</p>
-    <div class="site-actions">
-        <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
-        <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
-    </div>
-`;
+    // Check for matching filters and count matches
+    if (selectedCost !== "all" && site.cost.toLowerCase() === selectedCost) matchCount++;
+    if (selectedType !== "all" && site.type.toLowerCase() === selectedType) matchCount++;
+    if (selectedFamily !== "all" && String(site.family_friendly).toLowerCase() === selectedFamily) matchCount++;
+    if (selectedThematicCategory !== "all" && site.thematiccategory.toLowerCase() === selectedThematicCategory) matchCount++;
+    if (selectedSightType !== "all" && site.sighttype.toLowerCase() === selectedSightType) matchCount++;
+    if (selectedLocalOrNational !== "all" && site.localornational.toLowerCase() === selectedLocalOrNational) matchCount++;
+    if (selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime) matchCount++;
+    if (selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations) matchCount++;
+    if (selectedTours !== "all" && site.tours.includes(selectedTours)) matchCount++;
+    if (selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit) matchCount++;
+    if (selectedGiftshop !== "all" && (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) matchCount++;
+    if (selectedDiningOnsite !== "all" && (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) matchCount++;
+    if (selectedFeatured !== "all" && (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) matchCount++;
+    if (selectedSpanishTranslations !== "all" && (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) matchCount++;
+    if (selectedLuggageStorage !== "all" && (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) matchCount++;
+    if (selectedPublicAccess !== "all" && (site.publicaccess && site.publicaccess.toString().toLowerCase() === selectedPublicAccess)) matchCount++;
 
+    let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
+    let matchesTimePeriod = selectedTimePeriods.length === 0 || site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
-            
-            // Now attach event listeners (this is the critical fix!)
-            
+    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+    let matchesDistance = selectedDistance === "all" || 
+        (distance !== null &&
+        ((selectedDistance === "1" && distance < 1) ||
+        (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+        (selectedDistance === "10" && distance > 10)));
+
+    if (matchesCity && matchesTimePeriod && matchesDistance) {
+        filteredSites.push({ site, matchCount });
+    }
+});
+
+// Sort sites by match count (highest matches first)
+filteredSites.sort((a, b) => b.matchCount - a.matchCount);
+
+        // Display sorted sites
+        filteredSites.forEach(({ site }) => {
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            marker.addTo(map);
+            allMarkers.push(marker);
+        
+            let siteCard = document.createElement("div");
+            siteCard.className = "site-card";
+        
+            siteCard.innerHTML = `
+                <div class="site-content">
+                    <div class="site-image-container">
+                        <img src="${site.image}" alt="${site.name}" class="site-image">
+                    </div>
+                    <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                    </div>
+                </div>
+                <p class="site-description">${site.description}</p>
+                <div class="site-actions">
+                    <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
+                    <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
+                </div>
+            `;
+        
             resultsContainer.appendChild(siteCard);
+        });
 
             
             // Function to translate category names to their proper display format
