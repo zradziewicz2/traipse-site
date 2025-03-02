@@ -894,6 +894,7 @@ function loadLocations() {
             applyFilters();
         })
         .catch(error => console.error("Error loading JSON:", error));
+} 
 
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
