@@ -617,7 +617,7 @@
             <h2>Filters</h2>
                 <div class="filter-group">
                 <label>Featured Site:</label>
-                <select id="featuredFilter">
+                <select id="featuredFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -627,7 +627,7 @@
             <label>Time Period:</label>
             <div class="timePeriod-group">
                 <label>
-                    <input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric
+                    <input type="checkbox" class="timePeriodFilter" value="prehistoric" onchange="applyFilters()"> Prehistoric
                 </label>
                 <span class="timePeriod-years">(Before 1492)</span>
         
@@ -667,7 +667,7 @@
             
             <div class="filter-group">
                 <label>Thematic Category:</label>
-                <select id="ThematicCategoryFilter">
+                <select id="ThematicCategoryFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="artsandculture">Arts and Culture</option>
                     <option value="foodanddrink">Food and Drink</option>
@@ -683,7 +683,7 @@
 
             <div class="filter-group">
                 <label>Sight Type:</label>
-                <select id="sightTypeFilter">
+                <select id="sightTypeFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="museums">Museums & Exhibits</option>
                     <option value="archeological">Archaeological Sites</option>
@@ -698,7 +698,7 @@
             <div class="filter-row">
                 <div class="filter-group">
                     <label>Cost:</label>
-                    <select id="costFilter">
+                    <select id="costFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="free">Free</option>
                         <option value="paid">Paid</option>
@@ -707,7 +707,7 @@
             
                 <div class="filter-group">
                     <label>Estimated Time:</label>
-                    <select id="estimatedTimeFilter">
+                    <select id="estimatedTimeFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="<15 minutes">Less than 15 minutes</option>
                         <option value="15-1 hour">15 minutes to 1 hour</option>
@@ -721,7 +721,7 @@
             
             <div class="filter-group">
                 <label>Distance:</label>
-                <select id="distanceFilter">
+                <select id="distanceFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="1">Less than 1 mile</option>
                     <option value="5">1-5 miles</option>
@@ -736,7 +736,7 @@
             <div class="additional-filters" id="additionalFilters" style="display: none;">
                 <div class="filter-group">
                     <label>Reservations:</label>
-                    <select id="reservationsFilter">
+                    <select id="reservationsFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="walkins_welcome">Walk-Ins Welcome</option>
                         <option value="reservationrequired">Reservation Required</option>
@@ -744,7 +744,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Tours:</label>
-                    <select id="toursFilter">
+                    <select id="toursFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="selftours">Self-Tours</option>
                         <option value="guidedtours">Guided Tours</option>
@@ -752,7 +752,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Transit Accessibility:</label>
-                    <select id="transitFilter">
+                    <select id="transitFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
                         <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
@@ -761,7 +761,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Indoors or Outdoors:</label>
-                    <select id="typeFilter">
+                    <select id="typeFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="indoor">Indoor</option>
                         <option value="outdoor">Outdoor</option>
@@ -769,7 +769,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Family Friendly:</label>
-                    <select id="familyFilter">
+                    <select id="familyFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
@@ -777,7 +777,7 @@
                 </div>
                 <div class="filter-group">
                     <label>Gift Shop:</label>
-                    <select id="giftshopFilter">
+                    <select id="giftshopFilter" onchange="applyFilters()">
                         <option value="all">All</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
@@ -785,7 +785,7 @@
                 </div>
                 <div class="filter-group">
                 <label>Dining On-Site:</label>
-                <select id="diningonsiteFilter">
+                <select id="diningonsiteFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -794,7 +794,7 @@
         
             <div class="filter-group">
                 <label>Spanish Translations:</label>
-                <select id="spanishtranslationsFilter">
+                <select id="spanishtranslationsFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -803,7 +803,7 @@
             
             <div class="filter-group">
                 <label>Luggage Storage:</label>
-                <select id="luggagestorageFilter">
+                <select id="luggagestorageFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -812,7 +812,7 @@
             
             <div class="filter-group">
                 <label>Public Access:</label>
-                <select id="publicaccessFilter">
+                <select id="publicaccessFilter" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -821,8 +821,6 @@
 
             </div>
 
-
-            <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
    
