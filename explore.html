@@ -102,15 +102,18 @@
         }
 
         .sidebar {
-            width: 35%; /* Adjust width to give more space to the map */
+            width: 35%; /* Keeps it smaller than the map */
             background: #181818;
             padding: 20px;
             color: white;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Keeps content aligned at the top */
+            justify-content: flex-start;
+            height: 100%;
+            box-sizing: border-box;
         }
+
 
         .map-container {
             width: 65%; /* Ensure the map takes up more space */
