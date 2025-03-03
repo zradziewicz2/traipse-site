@@ -1049,7 +1049,10 @@ function applyFilters() {
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            site.timeperiod.some(period => selectedTimePeriods.includes(period));
+            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase())));
+
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase())));
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
         
