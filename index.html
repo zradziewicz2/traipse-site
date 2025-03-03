@@ -998,9 +998,7 @@ function applyFilters() {
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
     allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers.length = 0; // Efficient cleanup
-
-
+    allMarkers = [];
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
@@ -1038,20 +1036,9 @@ function applyFilters() {
         
                 
 
-        // Object to track markers by coordinates (prevents duplicates)
-        let markerMap = new Map();
-        
-        // Generate a unique key for the site’s location
-        let markerKey = `${site.lat},${site.lng}`;
-        
-        // Only add marker if it doesn’t already exist in markerMap
-        if (!markerMap.has(markerKey)) {
-            let marker = L.marker([site.lat, site.lng])
-                .bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
             allMarkers.push(marker);
-            markerMap.set(markerKey, marker); // Store marker reference
-        }
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
@@ -1160,12 +1147,8 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
     marker.addTo(map);
     allMarkers.push(marker);
 
-// Check if the site card already exists before adding it
-let existingCard = document.getElementById(`site-card-${site.id}`);
-if (!existingCard) {
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
-    siteCard.id = `site-card-${site.id}`; // Unique ID to prevent duplicates
 
     siteCard.innerHTML = `
         <div class="site-content">
@@ -1188,8 +1171,6 @@ if (!existingCard) {
     `;
 
     resultsContainer.appendChild(siteCard);
-}
-
 });
 
 
