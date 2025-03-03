@@ -1047,9 +1047,6 @@ function applyFilters() {
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-    // Get selected time periods (array of checked values)
-    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
-        .map(cb => cb.value.toLowerCase());
     
     // Get selected time periods (array of checked values)
     let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
