@@ -1005,6 +1005,7 @@ function applyFilters() {
     });
     allMarkers = allMarkers.filter(marker => filteredSites.some(({ site }) => marker.siteId === site.id));
 
+    let filteredSites = [];
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
