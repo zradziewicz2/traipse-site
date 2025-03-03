@@ -1048,22 +1048,24 @@ function applyFilters() {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
     
-    // Get selected time periods (array of checked values)
-    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
-        .map(cb => cb.value.toLowerCase());
-    
-    let matchesTimePeriod = selectedTimePeriods.length === 0 || (
-        site.timeperiod && (
-            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase()))) ||
-            (typeof site.timeperiod === "string" && selectedTimePeriods.includes(site.timeperiod.toLowerCase()))
-        )
-    );
+        // Get selected time periods (array of checked values)
+        let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
+            .map(cb => cb.value.toLowerCase());
+        
+        // Function to check if a site's time period matches any selected time period
+        function matchesTimePeriod(site) {
+            if (!selectedTimePeriods.length) return true; // No filter applied, show all
+            if (!site.timeperiod || !Array.isArray(site.timeperiod)) return false; // Ensure data format is correct
+            return site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase()));
+        }
+
 
     
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
         
         if (matchesCity && // Apply city filter
+            matchesTimePeriod(site) &&
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
