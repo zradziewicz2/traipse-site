@@ -1047,10 +1047,6 @@ function applyFilters() {
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-        // Check if site has at least one of the selected time periods
-        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase())));
-
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
             (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase())));
 
