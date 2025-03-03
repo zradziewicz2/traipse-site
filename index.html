@@ -1098,7 +1098,10 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-// Create an array to store filtered sites with match counts
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+            
+            // Create an array to store filtered sites with match counts
 let filteredSites = [];
 
 siteData.forEach(site => {
