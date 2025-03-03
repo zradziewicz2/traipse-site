@@ -237,21 +237,21 @@ let heatmapData = [
 ];
 
 
-        let heatLayer = L.heatLayer(heatmapData, { 
-            radius: 75,
-            blur: 25,
-            maxZoom: 14,
-            maxOpacity: 0.8,
-            scaleRadius: false,
-            useLocalExtrema: false,
-            maxIntensity: 1.3,
-            gradient: {
-                0.3: "blue",
-                0.5: "lime",
-                0.7: "yellow",
-                1.0: "red"
-            }
-        });
+let heatLayer = L.heatLayer(heatmapData, { 
+    radius: 50,      // Smaller blobs (was 75)
+    blur: 30,        // Softer blending (was 25)
+    maxZoom: 14,     
+    maxOpacity: 0.4, // Lower max opacity (was 0.8)
+    scaleRadius: true,  // Makes smaller dots appear less intense
+    gradient: {
+        0.2: "rgba(0, 0, 255, 0.2)",   // Light blue, more transparent
+        0.4: "rgba(0, 255, 0, 0.3)",   // Light green, semi-transparent
+        0.6: "rgba(255, 255, 0, 0.35)", // Yellow, softer opacity
+        0.8: "rgba(255, 165, 0, 0.4)", // Orange, slightly more visible
+        1.0: "rgba(255, 0, 0, 0.45)"   // Red, toned down saturation
+    }
+});
+
 
         let heatmapVisible = false;
 
