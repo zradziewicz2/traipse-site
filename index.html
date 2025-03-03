@@ -327,31 +327,6 @@
             justify-content: center;
             white-space: nowrap; /* Prevents text wrapping */
         }
-                .filter-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-        
-        .reset-filters {
-            background: none;
-            border: 2px solid #03FDFC;
-            color: #03FDFC;
-            font-size: 0.9em;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        
-        .reset-filters:hover {
-            background: #03FDFC;
-            color: black;
-        }
-
 
         
             .header-btn:hover {
@@ -755,11 +730,7 @@
             </div>
 
                         <!-- Button to Show Additional Filters -->
-            <div class="filter-controls">
-    <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
-    <button class="reset-filters" onclick="resetFilters()">Reset</button>
-</div>
-
+            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
             
             <!-- Additional Filters Hidden by Default -->
             <div class="additional-filters" id="additionalFilters" style="display: none;">
@@ -994,58 +965,7 @@ function translatePublicAccess(value) {
     return String(value).toLowerCase() === "true" ? "Publicly Accessible" : "Restricted Access";
 }
 
-function resetFilters() {
-    // Reset all dropdowns to "all"
-    document.querySelectorAll("select").forEach(select => select.value = "all");
 
-    // Uncheck all checkboxes (fix applied)
-    document.querySelectorAll(".timePeriodFilter").forEach(checkbox => {
-        checkbox.checked = false;
-    });
-
-    // Reset the city filter from LocalStorage
-    localStorage.removeItem("selectedCity");
-    document.getElementById("cityFilter").value = "all";
-
-    // Reapply filters with default values
-    applyFilters();
-}
-
-function updateSiteList(sites) {
-    const resultsContainer = document.getElementById("searchResults"); 
-    if (!resultsContainer) {
-        console.error("Element with ID 'searchResults' not found!");
-        return;
-    }
-
-    resultsContainer.innerHTML = ""; // Clear previous results
-
-    if (sites.length === 0) {
-        resultsContainer.innerHTML = "<p>No results found.</p>";
-        return;
-    }
-
-    sites.forEach(site => {
-        let siteCard = document.createElement("div");
-        siteCard.className = "site-card";
-
-        siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
-                </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                </div>
-            </div>
-        `;
-
-        resultsContainer.appendChild(siteCard);
-    });
-}
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
@@ -1082,26 +1002,13 @@ function applyFilters() {
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-    
-        // Get selected time periods (array of checked values)
-        let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
-            .map(cb => cb.value.toLowerCase());
-        
-        // Function to check if a site's time period matches any selected time period
-        function matchesTimePeriod(site) {
-            if (!selectedTimePeriods.length) return true; // No filter applied, show all
-            if (!site.timeperiod || !Array.isArray(site.timeperiod)) return false; // Ensure data format is correct
-            return site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase()));
-        }
-
-
-
-    
+        // Check if site has at least one of the selected time periods
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
         
         if (matchesCity && // Apply city filter
-            matchesTimePeriod(site) &&
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
@@ -1124,12 +1031,7 @@ function applyFilters() {
               ((selectedDistance === "1" && distance < 1) ||
                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
                (selectedDistance === "10" && distance > 10)))) &&
-                matchesCity && matchesTimePeriod && matchesCost && matchesType && matchesFamily && matchesCategory && matchesSightType && matchesDistance
-    });
-
-    // 🔹 Step 3: Now call updateSiteList() with the filtered results
-    updateSiteList(filteredSites);
-}
+            matchesTimePeriod) {
         
                 
 
@@ -1151,10 +1053,7 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
-            
-            // Create an array to store filtered sites with match counts
+// Create an array to store filtered sites with match counts
 let filteredSites = [];
 
 siteData.forEach(site => {
@@ -1288,9 +1187,8 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                 return categoryMap[category.toLowerCase()] || formatText(category);
             }
             
+            // Function to translate time periods
             function translateTimePeriod(timeperiod) {
-                if (!timeperiod) return "Unknown"; // ✅ Handle missing values
-            
                 const timePeriodMap = {
                     "prehistoric": "Prehistoric",
                     "indigenous": "Indigenous & Native History",
@@ -1300,12 +1198,8 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                     "modernhistory": "Modern History or Civil Rights",
                     "other": "Other"
                 };
-            
-                return Array.isArray(timeperiod) 
-                    ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") 
-                    : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
+                return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
             }
-
             function translateSightType(type) {
                 if (!type) return "Unknown";
                 
