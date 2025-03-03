@@ -998,8 +998,10 @@ function resetFilters() {
     // Reset all dropdowns to "all"
     document.querySelectorAll("select").forEach(select => select.value = "all");
 
-    // Uncheck all checkboxes
-    document.querySelectorAll(".timePeriodFilter").forEach(checkbox => checkbox.checked = false);
+    // Uncheck all checkboxes (fix applied)
+    document.querySelectorAll(".timePeriodFilter").forEach(checkbox => {
+        checkbox.checked = false;
+    });
 
     // Reset the city filter from LocalStorage
     localStorage.removeItem("selectedCity");
