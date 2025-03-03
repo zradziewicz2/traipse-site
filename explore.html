@@ -116,16 +116,20 @@
 
 
         .map-container {
-            width: 65%; /* Ensure the map takes up more space */
+            flex-grow: 1; /* Expands naturally to fill remaining space */
             height: 100%;
             position: relative;
+            overflow: hidden;
         }
+
 
         #map {
             width: 100%;
             height: 100%;
-            border-left: 2px solid #03FDFC; /* Optional: Adds a divider between map & sidebar */
+            border-left: 2px solid #03FDFC;
+            display: block;
         }
+
 
 
         .toggle-btn {
