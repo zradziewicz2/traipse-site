@@ -327,6 +327,31 @@
             justify-content: center;
             white-space: nowrap; /* Prevents text wrapping */
         }
+                .filter-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .reset-filters {
+            background: none;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.9em;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .reset-filters:hover {
+            background: #03FDFC;
+            color: black;
+        }
+
 
         
             .header-btn:hover {
@@ -730,7 +755,11 @@
             </div>
 
                         <!-- Button to Show Additional Filters -->
-            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+            <div class="filter-controls">
+    <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+    <button class="reset-filters" onclick="resetFilters()">Reset</button>
+</div>
+
             
             <!-- Additional Filters Hidden by Default -->
             <div class="additional-filters" id="additionalFilters" style="display: none;">
@@ -965,6 +994,22 @@ function translatePublicAccess(value) {
     return String(value).toLowerCase() === "true" ? "Publicly Accessible" : "Restricted Access";
 }
 
+function resetFilters() {
+    // Reset all dropdowns to "all"
+    document.querySelectorAll("select").forEach(select => select.value = "all");
+
+    // Uncheck all checkboxes (fix applied)
+    document.querySelectorAll(".timePeriodFilter").forEach(checkbox => {
+        checkbox.checked = false;
+    });
+
+    // Reset the city filter from LocalStorage
+    localStorage.removeItem("selectedCity");
+    document.getElementById("cityFilter").value = "all";
+
+    // Reapply filters with default values
+    applyFilters();
+}
 
 
 function applyFilters() {
@@ -1035,7 +1080,7 @@ function applyFilters() {
         
                 
 
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
             marker.addTo(map);
             allMarkers.push(marker);
 
@@ -1053,7 +1098,10 @@ function applyFilters() {
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-// Create an array to store filtered sites with match counts
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+            
+            // Create an array to store filtered sites with match counts
 let filteredSites = [];
 
 siteData.forEach(site => {
@@ -1063,59 +1111,59 @@ siteData.forEach(site => {
     // Check for matching filters and count matches
     if (selectedCost !== "all" && site.cost.toLowerCase() === selectedCost) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateCost(site.cost)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateCost(site.cost)}</span>);
     }
     if (selectedType !== "all" && site.type.toLowerCase() === selectedType) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateType(site.type)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateType(site.type)}</span>);
     }
     if (selectedFamily !== "all" && String(site.family_friendly).toLowerCase() === selectedFamily) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">Family Friendly</span>`);
+        attributeBoxes.push(<span class="attribute-box">Family Friendly</span>);
     }
     if (selectedThematicCategory !== "all" && site.thematiccategory.toLowerCase() === selectedThematicCategory) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateCategory(site.thematiccategory)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateCategory(site.thematiccategory)}</span>);
     }
     if (selectedSightType !== "all" && site.sighttype.toLowerCase() === selectedSightType) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateSightType(site.sighttype)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateSightType(site.sighttype)}</span>);
     }
     if (selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>);
     }
     if (selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateReservations(site.reservations)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateReservations(site.reservations)}</span>);
     }
     if (selectedTours !== "all" && site.tours.includes(selectedTours)) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateTours(site.tours)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateTours(site.tours)}</span>);
     }
     if (selectedGiftshop !== "all" && site.giftshop.toString().toLowerCase() === selectedGiftshop) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>);
     }
     if (selectedDiningOnsite !== "all" && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>);
     }
     if (selectedFeatured !== "all" && site.featured.toString().toLowerCase() === selectedFeatured) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateFeatured(site.featured)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateFeatured(site.featured)}</span>);
     }
     if (selectedSpanishTranslations !== "all" && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateSpanishTranslations(site.spanishtranslations)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateSpanishTranslations(site.spanishtranslations)}</span>);
     }
     if (selectedLuggageStorage !== "all" && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateLuggageStorage(site.luggagestorage)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translateLuggageStorage(site.luggagestorage)}</span>);
     }
     if (selectedPublicAccess !== "all" && site.publicaccess.toString().toLowerCase() === selectedPublicAccess) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translatePublicAccess(site.publicaccess)}</span>`);
+        attributeBoxes.push(<span class="attribute-box">${translatePublicAccess(site.publicaccess)}</span>);
     }
 
     let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
@@ -1141,14 +1189,14 @@ resultsContainer.innerHTML = "";
 
 // Display sorted sites
 filteredSites.forEach(({ site, attributeBoxes }) => {
-    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+    let marker = L.marker([site.lat, site.lng]).bindPopup(<b>${site.name}</b><br>${site.description});
     marker.addTo(map);
     allMarkers.push(marker);
 
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
 
-    siteCard.innerHTML = `
+    siteCard.innerHTML = 
         <div class="site-content">
             <div class="site-image-container">
                 <img src="${site.image}" alt="${site.name}" class="site-image">
@@ -1157,7 +1205,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                 <h3 class="site-title">${site.name}</h3>
                 <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                 <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                <p class="site-distance">${distance !== null ? ${distance.toFixed(1)} miles away : "Distance unavailable"}</p>
                 <div class="site-attributes">${attributeBoxes.join(" ")}</div>
             </div>
         </div>
@@ -1166,7 +1214,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
             <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
             <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
         </div>
-    `;
+    ;
 
     resultsContainer.appendChild(siteCard);
 });
@@ -1304,7 +1352,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
 
             // Remove from 'Not Interested' if present
             notInterested = notInterested.filter(s => s.id !== siteId);
-            document.getElementById(`x-${siteId}`).textContent = "✖";
+            document.getElementById(x-${siteId}).textContent = "✖";
         }
 
         localStorage.setItem('myPlaces', JSON.stringify(favorites));
@@ -1312,14 +1360,14 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
     }
 
     function toggleNotInterested(siteId, element) {
-        console.log(`Toggling Not Interested for site ID: ${siteId}`);
+        console.log(Toggling Not Interested for site ID: ${siteId});
 
         let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
         let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
 
         let site = siteData.find(s => s.id === siteId);
         if (!site) {
-            console.error(`Site with ID ${siteId} not found.`);
+            console.error(Site with ID ${siteId} not found.);
             return;
         }
 
@@ -1337,7 +1385,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
             let myIndex = myPlaces.findIndex(s => s.id === siteId);
             if (myIndex > -1) {
                 myPlaces.splice(myIndex, 1);
-                let starIcon = document.getElementById(`star-${siteId}`);
+                let starIcon = document.getElementById(star-${siteId});
                 if (starIcon) {
                     starIcon.textContent = "☆";
                     starIcon.classList.remove("active");
