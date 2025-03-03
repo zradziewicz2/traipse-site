@@ -1266,10 +1266,15 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
 
 
 
-    siteCard.onclick = () => {
-        map.setView([site.lat, site.lng], 14);
-        marker.openPopup();
-    };
+siteCard.onclick = () => {
+    let marker = L.marker([site.lat, site.lng]) // Ensure marker is defined
+        .bindPopup(`<b>${site.name}</b><br>${site.description>`);
+
+    map.setView([site.lat, site.lng], 14);
+    marker.addTo(map); // Add the marker to the map before opening popup
+    marker.openPopup();
+};
+
     
     resultsContainer.appendChild(siteCard);
 }  // Ensure this correctly closes the function
