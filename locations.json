@@ -249,6 +249,7 @@
     },
     {
         "name": "Denver Botanic Gardens",
+        "id": "site131",
         "lat": 39.7320,
         "lng": -104.9610,
         "city": "denver",
@@ -279,6 +280,7 @@
     },
     {
         "name": "Colorado Railroad Museum",
+        "id": "site132",
         "lat": 39.7778,
         "lng": -105.1933,
         "city": "denver",
@@ -309,6 +311,7 @@
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
+        "id": "site132",
         "lat": 39.7207,
         "lng": -104.8929,
         "city": "denver",
@@ -339,6 +342,7 @@
     },
     {
         "name": "Four Mile Historic Park",
+        "id": "site133",
         "lat": 39.6938,
         "lng": -104.9247,
         "city": "denver",
@@ -369,6 +373,7 @@
     },
     {
         "name": "Black American West Museum",
+        "id": "site134",
         "lat": 39.7582,
         "lng": -104.9768,
         "city": "denver",
@@ -399,6 +404,7 @@
     },
     {
         "name": "Byers-Evans House Museum",
+        "id": "site135",
         "lat": 39.7375,
         "lng": -104.9885,
         "city": "denver",
@@ -429,6 +435,7 @@
     },
     {
         "name": "Grant-Frontier Park",
+        "id": "site136",
         "lat": 39.6683,
         "lng": -105.0136,
         "city": "denver",
@@ -459,6 +466,7 @@
     },
     {
         "name": "Vintage Aero Flying Museum",
+        "id": "site137",
         "lat": 40.1062,
         "lng": -104.6442,
         "city": "denver",
@@ -489,6 +497,7 @@
     },
     {
         "name": "Colorado Aviation Historical Society",
+        "id": "site138",
         "lat": 39.8633,
         "lng": -104.6737,
         "city": "denver",
@@ -519,6 +528,7 @@
     },
     {
         "name": "Franktown Cave",
+        "id": "site139",
         "lat": 39.3906,
         "lng": -104.7489,
         "city": "denver",
@@ -549,6 +559,7 @@
     },
     {
         "name": "History Colorado Center",
+        "id": "site140",
         "lat": 39.7377,
         "lng": -104.9866,
         "city": "denver",
