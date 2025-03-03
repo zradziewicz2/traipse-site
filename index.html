@@ -1004,7 +1004,8 @@ function applyFilters() {
             map.removeLayer(marker);
         }
     });
-    allMarkers = allMarkers.filter(marker => filteredSites.some(({ site }) => marker.siteId === site.id));
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
 
 
     siteData.forEach(site => {
@@ -1044,10 +1045,11 @@ function applyFilters() {
                 
 
             // Check if a marker for this site already exists before adding it
-            let existingMarker = allMarkers.find(m => m.siteId === site.id);
-            if (!existingMarker) {
-                let marker = L.marker([site.lat, site.lng])
-                    .bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            let marker = L.marker([site.lat, site.lng])
+                .bindPopup(`<b>${site.name}</b><br>${site.description>`);
+            allMarkers.push(marker);
+            marker.addTo(map);
+
                 marker.siteId = site.id; // Assign site ID to marker
                 marker.addTo(map);
                 allMarkers.push(marker);
