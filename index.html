@@ -327,6 +327,31 @@
             justify-content: center;
             white-space: nowrap; /* Prevents text wrapping */
         }
+                .filter-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .reset-filters {
+            background: none;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.9em;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .reset-filters:hover {
+            background: #03FDFC;
+            color: black;
+        }
+
 
         
             .header-btn:hover {
@@ -730,7 +755,11 @@
             </div>
 
                         <!-- Button to Show Additional Filters -->
-            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+            <div class="filter-controls">
+    <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+    <button class="reset-filters" onclick="resetFilters()">Reset</button>
+</div>
+
             
             <!-- Additional Filters Hidden by Default -->
             <div class="additional-filters" id="additionalFilters" style="display: none;">
@@ -965,6 +994,20 @@ function translatePublicAccess(value) {
     return String(value).toLowerCase() === "true" ? "Publicly Accessible" : "Restricted Access";
 }
 
+function resetFilters() {
+    // Reset all dropdowns to "all"
+    document.querySelectorAll("select").forEach(select => select.value = "all");
+
+    // Uncheck all checkboxes
+    document.querySelectorAll(".timePeriodFilter").forEach(checkbox => checkbox.checked = false);
+
+    // Reset the city filter from LocalStorage
+    localStorage.removeItem("selectedCity");
+    document.getElementById("cityFilter").value = "all";
+
+    // Reapply filters with default values
+    applyFilters();
+}
 
 
 function applyFilters() {
