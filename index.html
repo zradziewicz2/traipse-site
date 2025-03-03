@@ -997,8 +997,14 @@ function applyFilters() {
 
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
+    // Remove only the markers that are no longer in the filtered results
+    allMarkers.forEach(marker => {
+        if (!filteredSites.some(({ site }) => marker.siteId === site.id)) {
+            map.removeLayer(marker);
+        }
+    });
+    allMarkers = allMarkers.filter(marker => filteredSites.some(({ site }) => marker.siteId === site.id));
+
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
@@ -1036,9 +1042,16 @@ function applyFilters() {
         
                 
 
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
-            marker.addTo(map);
-            allMarkers.push(marker);
+            // Check if a marker for this site already exists before adding it
+            let existingMarker = allMarkers.find(m => m.siteId === site.id);
+            if (!existingMarker) {
+                let marker = L.marker([site.lat, site.lng])
+                    .bindPopup(`<b>${site.name}</b><br>${site.description}`);
+                marker.siteId = site.id; // Assign site ID to marker
+                marker.addTo(map);
+                allMarkers.push(marker);
+            }
+
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
