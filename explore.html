@@ -201,11 +201,17 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="sidebar">
-            <h2>Explore Historic Areas</h2>
-            <p>Use the map to find historically significant neighborhoods and landmarks.</p>
-        </div>
+<div class="sidebar">
+    <h2>Explore Historic Areas</h2>
+    <p>Use the map to find historically significant neighborhoods and landmarks.</p>
+
+    <!-- General synopsis for selected city -->
+    <h3>🔎 General History</h3>
+    <p id="denverSynopsis">
+        Select a city to see its historical significance.
+    </p>
+</div>
+
 
         <div class="map-container">
             <button class="toggle-btn" onclick="toggleHeatmap()">Toggle Heatmap</button>
@@ -349,11 +355,19 @@ function updateCitySynopsis(city) {
 }
 window.onload = function() {
     const savedCity = localStorage.getItem("selectedCity");
-    if (savedCity) {
-        document.getElementById("cityFilter").value = savedCity;
-        updateCitySynopsis(savedCity);
+    const synopsisElement = document.getElementById("denverSynopsis");
+
+    // Ensure the element exists before modifying it
+    if (synopsisElement) {
+        if (savedCity) {
+            document.getElementById("cityFilter").value = savedCity;
+            updateCitySynopsis(savedCity);
+        }
+    } else {
+        console.error("Error: denverSynopsis element not found.");
     }
 };
+
 
 
     </script>
