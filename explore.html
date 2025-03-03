@@ -103,30 +103,32 @@
 
 
 .sidebar {
-    width: 40%; /* Sidebar takes up 40% */
+    width: 40%;
     background: #181818;
     padding: 20px;
     color: white;
-    overflow-y: auto;
+    overflow-y: auto; /* Allow scrolling inside sidebar */
+    max-height: 100%; /* Prevent overflow */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100%;
     box-sizing: border-box;
 }
+
 
 
 .map-container {
-    width: 60%; /* Map takes up the right 60% */
+    width: 60%;
     height: 100%;
-    position: relative;
     box-sizing: border-box;
+    display: flex;
 }
+
 
 
 #map {
     width: 100%;
-    height: 100%;
+    height: 100vh;  /* Use full viewport height */
     display: block;
 }
 
