@@ -96,13 +96,14 @@
 
         .container {
             display: flex;
-            flex-direction: row;
-            height: calc(100vh - 65px);
-            justify-content: space-between;
+            flex-direction: row; /* Ensure it stays in row format */
+            height: calc(100vh - 65px); /* Ensure it fills available space */
+            width: 100%;
         }
 
+
         .sidebar {
-            width: 35%; /* Keeps it smaller than the map */
+            width: 40%; /* Sidebar takes up 40% */
             background: #181818;
             padding: 20px;
             color: white;
@@ -116,19 +117,18 @@
 
 
         .map-container {
-            flex-grow: 1; /* Expands naturally to fill remaining space */
+            width: 60%; /* Map takes up the right 60% */
             height: 100%;
             position: relative;
-            overflow: hidden;
         }
 
 
         #map {
             width: 100%;
             height: 100%;
-            border-left: 2px solid #03FDFC;
             display: block;
         }
+
 
 
 
