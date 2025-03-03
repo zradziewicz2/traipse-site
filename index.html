@@ -969,6 +969,7 @@ function translatePublicAccess(value) {
 
 
 function applyFilters() {
+    let filteredSites = [];
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
     let selectedFamily = document.getElementById("familyFilter").value;
@@ -1005,7 +1006,6 @@ function applyFilters() {
     });
     allMarkers = allMarkers.filter(marker => filteredSites.some(({ site }) => marker.siteId === site.id));
 
-    let filteredSites = [];
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
