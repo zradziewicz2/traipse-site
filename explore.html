@@ -215,11 +215,7 @@
     <h2>Explore Historic Areas</h2>
     <p>Use the map to find historically significant neighborhoods and landmarks.</p>
 
-    <!-- General synopsis for selected city -->
-    <h3>🔎 General History</h3>
-    <p id="denverSynopsis">
-        Select a city to see its historical significance.
-    </p>
+    
 </div>
 
 
@@ -348,34 +344,9 @@ function saveSelectedCity() {
     updateCitySynopsis(selectedCity);
 }
 
-// Updates the historical synopsis based on the city selection
-function updateCitySynopsis(city) {
-    const synopsisElement = document.getElementById("denverSynopsis");
-    
-    const cityHistory = {
-        "denver": "Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West. Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.Founded in 1858 during the Pike’s Peak Gold Rush, Denver became a hub for mining, railroads, and trade. From the historic LoDo District to Union Station, Denver's history is deeply tied to the American West.",
-        "boulder": "Boulder was established in 1859 as a supply town for gold miners. With a strong Native American heritage and home to the University of Colorado, it evolved into a cultural and intellectual hub.",
-        "golden": "Golden, once the capital of Colorado Territory, was a major gateway for settlers heading west. It played a key role in mining, railroads, and is now home to the Coors Brewery and the Colorado School of Mines.",
-        "morrison": "Morrison is known for its prehistoric history with Dinosaur Ridge, a famous fossil site, and Red Rocks Amphitheater, which has attracted visitors for over a century.",
-        "arvada": "Arvada was founded during the Gold Rush and became a thriving agricultural center. Today, it preserves its history in Olde Town Arvada with 19th-century buildings and historic landmarks.",
-        "all": "Select a city to learn about its historical significance."
-    };
-
-    synopsisElement.innerText = cityHistory[city] || "Explore the hidden historical gems of the area.";
-}
 window.onload = function() {
     const savedCity = localStorage.getItem("selectedCity");
-    const synopsisElement = document.getElementById("denverSynopsis");
-
-    // Ensure the element exists before modifying it
-    if (synopsisElement) {
-        if (savedCity) {
-            document.getElementById("cityFilter").value = savedCity;
-            updateCitySynopsis(savedCity);
-        }
-    } else {
-        console.error("Error: denverSynopsis element not found.");
-    }
+    
 };
 
 
