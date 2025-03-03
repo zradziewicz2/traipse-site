@@ -1011,6 +1011,41 @@ function resetFilters() {
     applyFilters();
 }
 
+function updateSiteList(sites) {
+    const resultsContainer = document.getElementById("searchResults"); 
+    if (!resultsContainer) {
+        console.error("Element with ID 'searchResults' not found!");
+        return;
+    }
+
+    resultsContainer.innerHTML = ""; // Clear previous results
+
+    if (sites.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+        return;
+    }
+
+    sites.forEach(site => {
+        let siteCard = document.createElement("div");
+        siteCard.className = "site-card";
+
+        siteCard.innerHTML = `
+            <div class="site-content">
+                <div class="site-image-container">
+                    <img src="${site.image}" alt="${site.name}" class="site-image">
+                </div>
+                <div class="site-details">
+                    <h3 class="site-title">${site.name}</h3>
+                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                    <p class="site-distance">${site.distance ? `${site.distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                </div>
+            </div>
+        `;
+
+        resultsContainer.appendChild(siteCard);
+    });
+}
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
@@ -1060,6 +1095,7 @@ function applyFilters() {
         }
 
 
+
     
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
@@ -1088,7 +1124,12 @@ function applyFilters() {
               ((selectedDistance === "1" && distance < 1) ||
                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
                (selectedDistance === "10" && distance > 10)))) &&
-            matchesTimePeriod) {
+                 return matchesCity && matchesTimePeriod && matchesCost && matchesType && matchesFamily && matchesCategory && matchesSightType && matchesDistance;
+    });
+
+    // 🔹 Step 3: Now call updateSiteList() with the filtered results
+    updateSiteList(filteredSites);
+}
         
                 
 
@@ -1247,8 +1288,9 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                 return categoryMap[category.toLowerCase()] || formatText(category);
             }
             
-            // Function to translate time periods
             function translateTimePeriod(timeperiod) {
+                if (!timeperiod) return "Unknown"; // ✅ Handle missing values
+            
                 const timePeriodMap = {
                     "prehistoric": "Prehistoric",
                     "indigenous": "Indigenous & Native History",
@@ -1258,8 +1300,12 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                     "modernhistory": "Modern History or Civil Rights",
                     "other": "Other"
                 };
-                return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
+            
+                return Array.isArray(timeperiod) 
+                    ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") 
+                    : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
             }
+
             function translateSightType(type) {
                 if (!type) return "Unknown";
                 
