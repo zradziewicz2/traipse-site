@@ -1046,7 +1046,7 @@ function applyFilters() {
 
             // Check if a marker for this site already exists before adding it
             let marker = L.marker([site.lat, site.lng])
-                .bindPopup(`<b>${site.name}</b><br>${site.description>`);
+            .bindPopup(`<b>${site.name}</b><br>${site.description}`);
             allMarkers.push(marker);
             marker.addTo(map);
 
