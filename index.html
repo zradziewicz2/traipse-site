@@ -998,7 +998,8 @@ function applyFilters() {
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
     allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
+    allMarkers = []; // Efficient cleanup of old markers
+
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
