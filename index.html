@@ -1052,7 +1052,9 @@ function applyFilters() {
             // Check if this site is already liked or not interested
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
-            
+               // 🛑 FIX: Remove all previous markers before adding new ones
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = []; 
 // Create an array to store filtered sites with match counts
 let filteredSites = [];
 
