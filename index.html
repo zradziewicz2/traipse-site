@@ -1036,34 +1036,7 @@ function applyFilters() {
         
                 
 
-            let iconMapping = {
-    "museums": "images/icons/museum-blue.png",
-    "other": "images/icons/other.png",
-    "landmark": "images/icons/monument-gold.png",
-    "historichome": "images/icons/house-brown.png",
-    "archeological": "images/icons/dinosaur-grey.png",
-    "cemetery": "images/icons/gravestone-black.png"
-};
-
-// Get the correct icon based on the site's thematic category
-let category = site.sighttype.toLowerCase();
-let iconUrl = iconMapping[category] || "icons/default.png"; // Fallback icon
-
-// Create custom Leaflet icon
-let customIcon = L.icon({
-    iconUrl: iconUrl,
-    iconSize: [32, 32], // Adjust the size if needed
-    iconAnchor: [16, 32], // Centers the icon properly
-    popupAnchor: [0, -32] // Adjusts popup position
-});
-
-// Create marker with the new custom icon
-let marker = L.marker([site.lat, site.lng], { icon: customIcon })
-    .bindPopup(`<b>${site.name}</b><br>${site.description}`);
-
-marker.addTo(map);
-allMarkers.push(marker);
-
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
             allMarkers.push(marker);
 
@@ -1170,10 +1143,7 @@ resultsContainer.innerHTML = "";
 
 // Display sorted sites
 filteredSites.forEach(({ site, attributeBoxes }) => {
-    let categoryIcon = getCategoryIcon(site.thematiccategory); // Get appropriate icon
-    let marker = L.marker([site.lat, site.lng], { icon: categoryIcon })
-        .bindPopup(`<b>${site.name}</b><br>${site.description}`);
-
+    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
     marker.addTo(map);
     allMarkers.push(marker);
 
