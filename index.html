@@ -1159,7 +1159,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
 
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
-
+    console.log(`Rendering site: ${site.name}, Distance: ${distance.toFixed(1)} miles`);
     siteCard.innerHTML = `
         <div class="site-content">
             <div class="site-image-container">
@@ -1280,16 +1280,20 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
         }
 
 
-        window.onload = function() {
-            getUserLocation();
-            
+    window.onload = function() {
+        getUserLocation(); // This should set userLocation first
+    
+        setTimeout(() => {
             const savedCity = localStorage.getItem("selectedCity");
             if (savedCity) {
                 document.getElementById("cityFilter").value = savedCity;
             }
-        
-            loadLocations(); // Load sites after setting the filter
-        };
+            
+            console.log("🔄 Applying filters after loading...");
+            applyFilters(); // Ensure filters are applied AFTER location is set
+        }, 2000); // Wait 2 seconds to allow geolocation to be retrieved
+    };
+
 
 
     function toggleAdditionalFilters() {
