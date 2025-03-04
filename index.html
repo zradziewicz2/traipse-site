@@ -6,13 +6,13 @@
     <title>Traipse - Discover History Around You</title>
 
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!-- Leaflet MarkerCluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-
+    
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Leaflet MarkerCluster JS -->
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
@@ -1012,34 +1012,39 @@
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
-    // Initialize the map
-    var map = L.map('map').setView([39.7392, -104.9903], 12);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-    
-    // Initialize the marker cluster group
-    var markers = L.markerClusterGroup();
-    
-    var userLocation = null;
-    var siteData = [];
+        // Initialize the map
+        var map = L.map('map').setView([39.7392, -104.9903], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Initialize the marker cluster group
+        var markers = L.markerClusterGroup();
+        
+        var userLocation = null;
+        var siteData = [];
 
-    function getUserLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                position => {
-                    userLocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    console.log("User location retrieved:", userLocation);
-                    loadLocations(); // Load locations after getting user location
-                },
-                error => {
-                    console.error("Error getting location:", error);
-                    loadLocations(); // Proceed even if location is not available
-                }
-            );
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log("User location retrieved:", userLocation);
+                loadLocations(); // Load locations after getting user location
+            },
+            error => {
+                console.error("Error getting location:", error);
+                loadLocations(); // Proceed even if location is not available
+            }
+        );
+    } else {
+        console.warn("Geolocation is not supported by this browser.");
+        loadLocations();
+    }
+}
         } else {
             console.warn("Geolocation is not supported by this browser.");
             loadLocations();
