@@ -886,11 +886,15 @@ function loadLocations() {
     fetch('locations.json')
         .then(response => response.json())
         .then(data => {
-            siteData = data;
+            siteData = data.map(site => ({
+                ...site,
+                diningonsite: "true" // ✅ Force dining on-site to true
+            }));
             applyFilters();
         })
         .catch(error => console.error("Error loading JSON:", error));
 }
+
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
@@ -984,7 +988,10 @@ function applyFilters() {
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
     let selectedGiftshop = document.getElementById("giftshopFilter").value;
-    let selectedDiningOnsite = document.getElementById("diningonsiteFilter").value;
+    let selectedDiningOnsite = document.getElementById("diningonsiteFilter") 
+    ? document.getElementById("diningonsiteFilter").value 
+    : "all"; // Default to "all" if the element is missing
+
     let selectedFeatured = document.getElementById("featuredFilter").value;
     let selectedSpanishTranslations = document.getElementById("spanishtranslationsFilter").value;
     let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
@@ -1021,7 +1028,7 @@ function applyFilters() {
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
             (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
-            (selectedDiningOnsite === "all" || (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
+            (selectedDiningOnsite === "all" || (site.diningonsite2 && site.diningonsite2.toString().toLowerCase() === selectedDiningOnsite))
             (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
             (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
