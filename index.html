@@ -845,19 +845,19 @@ function getUserLocation() {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                console.log("User location retrieved:", userLocation);
-                loadLocations(); // Load locations after getting user location
+                console.log("✅ User location retrieved:", userLocation);
+                applyFilters(); // Ensure filters update after getting location
             },
             error => {
-                console.error("Error getting location:", error);
-                loadLocations(); // Proceed even if location is not available
+                console.error("❌ Error getting location:", error);
+                alert("Unable to retrieve location. Ensure location services are enabled.");
             }
         );
     } else {
-        console.warn("Geolocation is not supported by this browser.");
-        loadLocations();
+        console.warn("⚠️ Geolocation is not supported by this browser.");
     }
 }
+
 
 function getDistance(lat1, lon1, lat2, lon2) {
     console.log(`Calculating distance between: (${lat1}, ${lon1}) and (${lat2}, ${lon2})`);
