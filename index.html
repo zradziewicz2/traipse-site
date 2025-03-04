@@ -719,6 +719,17 @@
             </div>
 
 
+            
+            <div class="filter-group">
+                <label>Distance:</label>
+                <select id="distanceFilter" onchange="applyFilters()">
+                    <option value="all">All</option>
+                    <option value="1">Less than 1 mile</option>
+                    <option value="5">1-5 miles</option>
+                    <option value="10">More than 10 miles</option>
+                </select>
+            </div>
+
                         <!-- Button to Show Additional Filters -->
             <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
             
@@ -773,7 +784,14 @@
                         <option value="false">No</option>
                     </select>
                 </div>
-
+                <div class="filter-group">
+                <label>Dining On-Site:</label>
+                <select id="diningonsiteFilter" onchange="applyFilters()">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
         
             <div class="filter-group">
                 <label>Spanish Translations:</label>
@@ -826,17 +844,49 @@
         var allMarkers = [];
         var siteData = [];
 
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log("User location retrieved:", userLocation);
+                loadLocations(); // Load locations after getting user location
+            },
+            error => {
+                console.error("Error getting location:", error);
+                loadLocations(); // Proceed even if location is not available
+            }
+        );
+    } else {
+        console.warn("Geolocation is not supported by this browser.");
+        loadLocations();
+    }
+}
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    const R = 3958.8; // Radius of Earth in miles
+    const toRad = angle => angle * (Math.PI / 180);
+
+    let dLat = toRad(lat2 - lat1);
+    let dLon = toRad(lon2 - lon1);
+
+    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
         
 // Existing function
 function loadLocations() {
     fetch('locations.json')
         .then(response => response.json())
         .then(data => {
-                    siteData = data.map(site => ({
-            ...site,
-            diningonsite: site.diningonsite ?? "true" // ✅ Default missing values to "true"
-        }));
-
+            siteData = data;
             applyFilters();
         })
         .catch(error => console.error("Error loading JSON:", error));
@@ -928,12 +978,13 @@ function applyFilters() {
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
     let selectedSightType = document.getElementById("sightTypeFilter").value;
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
+    let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
     let selectedGiftshop = document.getElementById("giftshopFilter").value;
-    let selectedDiningOnsite = "true"; // ✅ Force only sites with dining
+    let selectedDiningOnsite = document.getElementById("diningonsiteFilter").value;
     let selectedFeatured = document.getElementById("featuredFilter").value;
     let selectedSpanishTranslations = document.getElementById("spanishtranslationsFilter").value;
     let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
@@ -946,18 +997,11 @@ function applyFilters() {
 
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-    function clearMarkers() {
-        allMarkers.forEach(marker => {
-            if (map.hasLayer(marker)) {
-                map.removeLayer(marker);
-            }
-        });
-        allMarkers = [];
-    }
-    clearMarkers();
-
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
 
     siteData.forEach(site => {
+        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
@@ -977,23 +1021,24 @@ function applyFilters() {
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
             (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
-            (site.diningonsite && site.diningonsite.toString().toLowerCase() === "true") &&
+            (selectedDiningOnsite === "all" || (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
             (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
             (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
             (selectedPublicAccess === "all" || (site.publicaccess && site.publicaccess.toString().toLowerCase() === selectedPublicAccess)) &&
+
+            (selectedDistance === "all" || 
+             (distance !== null &&
+              ((selectedDistance === "1" && distance < 1) ||
+               (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+               (selectedDistance === "10" && distance > 10)))) &&
+            matchesTimePeriod) {
         
                 
 
-        console.log("Creating marker for site:", site.name, site.lat, site.lng);
-        if (site.lat && site.lng) {
             let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
             allMarkers.push(marker);
-        } else {
-            console.warn(`Skipping site ${site.name} due to missing coordinates.`);
-        }
-
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
@@ -1078,8 +1123,14 @@ siteData.forEach(site => {
     let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
     let matchesTimePeriod = selectedTimePeriods.length === 0 || site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
+    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+    let matchesDistance = selectedDistance === "all" || 
+        (distance !== null &&
+        ((selectedDistance === "1" && distance < 1) ||
+        (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+        (selectedDistance === "10" && distance > 10)));
 
-    if (matchesCity && matchesTimePeriod) {
+    if (matchesCity && matchesTimePeriod && matchesDistance) {
         filteredSites.push({ site, matchCount, attributeBoxes });
     }
 });
@@ -1098,6 +1149,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
 
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
+
     siteCard.innerHTML = `
         <div class="site-content">
             <div class="site-image-container">
@@ -1107,6 +1159,7 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                 <h3 class="site-title">${site.name}</h3>
                 <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                 <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
                 <div class="site-attributes">${attributeBoxes.join(" ")}</div>
             </div>
         </div>
@@ -1217,19 +1270,16 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
         }
 
 
-    window.onload = function() {
-    
-        setTimeout(() => {
+        window.onload = function() {
+            getUserLocation();
+            
             const savedCity = localStorage.getItem("selectedCity");
             if (savedCity) {
                 document.getElementById("cityFilter").value = savedCity;
             }
-            
-            console.log("🔄 Applying filters after loading...");
-            applyFilters(); // Ensure filters are applied AFTER location is set
-        }, 2000); // Wait 2 seconds to allow geolocation to be retrieved
-    };
-
+        
+            loadLocations(); // Load sites after setting the filter
+        };
 
 
     function toggleAdditionalFilters() {
