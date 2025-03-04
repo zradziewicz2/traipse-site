@@ -985,9 +985,15 @@ function applyFilters() {
         
                 
 
+        console.log("Creating marker for site:", site.name, site.lat, site.lng);
+        if (site.lat && site.lng) {
             let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
             allMarkers.push(marker);
+        } else {
+            console.warn(`Skipping site ${site.name} due to missing coordinates.`);
+        }
+
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
