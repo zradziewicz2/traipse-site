@@ -784,15 +784,6 @@
                         <option value="false">No</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                <label>Dining On-Site:</label>
-                <select id="diningonsiteFilter" onchange="applyFilters()">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-        
             <div class="filter-group">
                 <label>Spanish Translations:</label>
                 <select id="spanishtranslationsFilter" onchange="applyFilters()">
@@ -984,7 +975,7 @@ function applyFilters() {
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
     let selectedGiftshop = document.getElementById("giftshopFilter").value;
-    let selectedDiningOnsite = document.getElementById("diningonsiteFilter").value;
+    let selectedDiningOnsite = "true"; // Always filter for dining on-site
     let selectedFeatured = document.getElementById("featuredFilter").value;
     let selectedSpanishTranslations = document.getElementById("spanishtranslationsFilter").value;
     let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
