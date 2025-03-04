@@ -888,12 +888,13 @@ function loadLocations() {
         .then(data => {
             siteData = data.map(site => ({
                 ...site,
-                diningonsite: "true" // ✅ Force dining on-site to true
+                diningonsite: site.diningonsite2 ?? "true" // ✅ Set default to "true" if missing
             }));
             applyFilters();
         })
         .catch(error => console.error("Error loading JSON:", error));
 }
+
 
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
@@ -1004,8 +1005,19 @@ function applyFilters() {
 
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
+        // Ensure duplicate markers are not added
+        function clearMarkers() {
+            allMarkers.forEach(marker => {
+                if (map.hasLayer(marker)) {
+                    map.removeLayer(marker);
+                }
+            });
+            allMarkers = [];
+        }
+        
+        // Call this function before adding new markers
+        clearMarkers();
+
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
@@ -1028,7 +1040,7 @@ function applyFilters() {
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
             (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
-            (selectedDiningOnsite === "all" || (site.diningonsite2 && site.diningonsite2.toString().toLowerCase() === selectedDiningOnsite)) &&
+            (selectedDiningOnsite === "all" || (site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
             (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
             (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
