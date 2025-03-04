@@ -7,7 +7,12 @@
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    
+    <!-- Leaflet MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <!-- Custom Styles -->
     <style>
         body {
@@ -834,14 +839,16 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
+        // Initialize the map
         var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
-
-        var userLocation = null;
         
-        var allMarkers = [];
+        // Initialize the marker cluster group
+        var markers = L.markerClusterGroup();
+        
+        var userLocation = null;
         var siteData = [];
 
 function getUserLocation() {
@@ -990,15 +997,12 @@ function applyFilters() {
     let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
     let selectedPublicAccess = document.getElementById("publicaccessFilter").value;
 
-    
-
     // Get selected time periods (array of checked values)
     let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
 
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
+    markers.clearLayers(); // Clear existing markers from the cluster group
 
     siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
@@ -1024,9 +1028,8 @@ function applyFilters() {
             (selectedDiningOnsite === "all" || (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
             (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
-            (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
+            (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggagestorage)) &&
             (selectedPublicAccess === "all" || (site.publicaccess && site.publicaccess.toString().toLowerCase() === selectedPublicAccess)) &&
-
             (selectedDistance === "all" || 
              (distance !== null &&
               ((selectedDistance === "1" && distance < 1) ||
@@ -1034,11 +1037,8 @@ function applyFilters() {
                (selectedDistance === "10" && distance > 10)))) &&
             matchesTimePeriod) {
         
-                
-
             let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
-            marker.addTo(map);
-            allMarkers.push(marker);
+            markers.addLayer(marker); // Add marker to the cluster group
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
@@ -1053,125 +1053,39 @@ function applyFilters() {
             // Check if this site is already liked or not interested
             let isLiked = myPlaces.some(s => s.id === site.id);
             let isNotInterested = notInterested.some(s => s.id === site.id);
+
+            siteCard.innerHTML = `
+                <div class="site-content">
+                    <div class="site-image-container">
+                        <img src="${site.image}" alt="${site.name}" class="site-image">
+                    </div>
+                    <div class="site-details">
+                        <h3 class="site-title">${site.name}</h3>
+                        <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+                        <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                        <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                        <div class="site-attributes">${attributeBoxes.join(" ")}</div>
+                    </div>
+                </div>
+                <p class="site-description">${site.description}</p>
+                <div class="site-actions">
+                    <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
+                    <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
+                </div>
+            `;
+
+            siteCard.onclick = () => {
+                map.setView([site.lat, site.lng], 14);
+                marker.openPopup();
+            };
             
-// Create an array to store filtered sites with match counts
-// Create an array to store filtered sites with match counts
-let filteredSites = [];
+            resultsContainer.appendChild(siteCard);
+        }
+    });
 
-siteData.forEach(site => {
-    let matchCount = 0;
-    let attributeBoxes = [];
-
-    // Check for matching filters and count matches
-    if (selectedCost !== "all" && site.cost.toLowerCase() === selectedCost) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateCost(site.cost)}</span>`);
-    }
-    if (selectedType !== "all" && site.type.toLowerCase() === selectedType) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateType(site.type)}</span>`);
-    }
-    if (selectedFamily !== "all" && String(site.family_friendly).toLowerCase() === selectedFamily) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">Family Friendly</span>`);
-    }
-    if (selectedThematicCategory !== "all" && site.thematiccategory.toLowerCase() === selectedThematicCategory) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateCategory(site.thematiccategory)}</span>`);
-    }
-    if (selectedSightType !== "all" && site.sighttype.toLowerCase() === selectedSightType) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateSightType(site.sighttype)}</span>`);
-    }
-    if (selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>`);
-    }
-    if (selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateReservations(site.reservations)}</span>`);
-    }
-    if (selectedTours !== "all" && site.tours.includes(selectedTours)) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateTours(site.tours)}</span>`);
-    }
-    if (selectedGiftshop !== "all" && site.giftshop.toString().toLowerCase() === selectedGiftshop) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>`);
-    }
-    if (selectedDiningOnsite !== "all" && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>`);
-    }
-    if (selectedFeatured !== "all" && site.featured.toString().toLowerCase() === selectedFeatured) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateFeatured(site.featured)}</span>`);
-    }
-    if (selectedSpanishTranslations !== "all" && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateSpanishTranslations(site.spanishtranslations)}</span>`);
-    }
-    if (selectedLuggageStorage !== "all" && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateLuggageStorage(site.luggagestorage)}</span>`);
-    }
-    if (selectedPublicAccess !== "all" && site.publicaccess.toString().toLowerCase() === selectedPublicAccess) {
-        matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translatePublicAccess(site.publicaccess)}</span>`);
-    }
-
-    let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-    let matchesTimePeriod = selectedTimePeriods.length === 0 || site.timeperiod.some(period => selectedTimePeriods.includes(period));
-
-    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
-    let matchesDistance = selectedDistance === "all" || 
-        (distance !== null &&
-        ((selectedDistance === "1" && distance < 1) ||
-        (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-        (selectedDistance === "10" && distance > 10)));
-
-    if (matchesCity && matchesTimePeriod && matchesDistance) {
-        filteredSites.push({ site, matchCount, attributeBoxes });
-    }
-});
-
-// Sort sites by match count (highest matches first)
-filteredSites.sort((a, b) => b.matchCount - a.matchCount);
-
-// Clear the results container
-resultsContainer.innerHTML = "";
-
-// Display sorted sites
-filteredSites.forEach(({ site, attributeBoxes }) => {
-    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
-    marker.addTo(map);
-    allMarkers.push(marker);
-
-    let siteCard = document.createElement("div");
-    siteCard.className = "site-card";
-
-    siteCard.innerHTML = `
-        <div class="site-content">
-            <div class="site-image-container">
-                <img src="${site.image}" alt="${site.name}" class="site-image">
-            </div>
-            <div class="site-details">
-                <h3 class="site-title">${site.name}</h3>
-                <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                <div class="site-attributes">${attributeBoxes.join(" ")}</div>
-            </div>
-        </div>
-        <p class="site-description">${site.description}</p>
-        <div class="site-actions">
-            <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
-            <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
-        </div>
-    `;
-
-    resultsContainer.appendChild(siteCard);
-});
+    // Add the marker cluster group to the map
+    map.addLayer(markers);
+}
 
 
 
