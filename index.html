@@ -96,7 +96,10 @@
             display: flex;
             flex-direction: row;
             height: calc(100vh - 80px);
+            overflow: hidden;
+            width: 100%;
         }
+
 
         /* Sidebar */
         .sidebar {
@@ -191,10 +194,11 @@
         /* Content */
         .content {
             display: flex;
-            flex-direction: row;
-            width: 100%;
+            flex-grow: 1;
             height: 100%;
+            overflow: hidden;
         }
+
 
         
         .filters-above-map label {
@@ -215,16 +219,17 @@
 
 
 
-          .search-results {
-            flex: 1;
+        .search-results {
+            flex-grow: 1;
             max-width: 50%;
             min-width: 40%;
             overflow-y: auto;
-            padding: 20px; /* Adds more spacing */
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers the cards */
+            align-items: center;
         }
+
 
 
         .star-icon::before,
@@ -482,11 +487,12 @@
 
         /* Map */
         #map {
-            width: 50%;
+            flex-grow: 1;
             height: 100%;
-            border-radius: -5; /* Remove unnecessary border radius */
+            min-width: 50%;
             background: #333;
         }
+
 
         .additional-filters {
             margin-top: 10px;
