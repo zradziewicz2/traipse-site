@@ -1026,7 +1026,7 @@ function applyFilters() {
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
             (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
-            (site.diningonsite && site.diningonsite.toString().toLowerCase() === "true") // ✅ Only show sites with dining &&
+            (site.diningonsite && site.diningonsite.toString().toLowerCase() === "true") &&
             (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
             (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
