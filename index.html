@@ -768,16 +768,6 @@
                         <option value="outdoor">Outdoor</option>
                     </select>
                 </div>
-
-                <div class="filter-group">
-                <label>Dining On-Site:</label>
-                <select id="diningonsiteFilter2" onchange="applyFilters()">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-
                 <div class="filter-group">
                     <label>Family Friendly:</label>
                     <select id="familyFilter" onchange="applyFilters()">
@@ -794,6 +784,15 @@
                         <option value="false">No</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                <label>Dining On-Site:</label>
+                <select id="diningonsiteFilter" onchange="applyFilters()">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+        
             <div class="filter-group">
                 <label>Spanish Translations:</label>
                 <select id="spanishtranslationsFilter" onchange="applyFilters()">
@@ -942,7 +941,7 @@ function translateGiftshop(value) {
     return String(value).toLowerCase() === "true" ? "Has Gift Shop" : "No Gift Shop";
 }
 
-function translateDiningOnsite2(value) {
+function translateDiningOnsite(value) {
     if (!value) return "Unknown";
     return String(value).toLowerCase() === "true" ? "Dining Available" : "No Dining On-Site";
 }
@@ -985,7 +984,7 @@ function applyFilters() {
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
     let selectedGiftshop = document.getElementById("giftshopFilter").value;
-    let selectedDiningOnsite = "true"; // Always filter for dining on-site
+    let selectedDiningOnsite = document.getElementById("diningonsiteFilter").value;
     let selectedFeatured = document.getElementById("featuredFilter").value;
     let selectedSpanishTranslations = document.getElementById("spanishtranslationsFilter").value;
     let selectedLuggageStorage = document.getElementById("luggagestorageFilter").value;
@@ -1022,7 +1021,7 @@ function applyFilters() {
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
             (selectedGiftshop === "all" || (site.giftshop && site.giftshop.toString().toLowerCase() === selectedGiftshop)) &&
-            (selectedDiningOnsite2 === "all" || (site.diningonsite2 && site.diningonsite2.toString().toLowerCase() === selectedDiningOnsite2)) &&
+            (selectedDiningOnsite === "all" || (site.diningonsite && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite)) &&
             (selectedFeatured === "all" || (site.featured && site.featured.toString().toLowerCase() === selectedFeatured)) &&
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
             (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
@@ -1100,9 +1099,9 @@ siteData.forEach(site => {
         matchCount++;
         attributeBoxes.push(`<span class="attribute-box">${translateGiftshop(site.giftshop)}</span>`);
     }
-    if (selectedDiningOnsite2 !== "all" && site.diningonsite2.toString().toLowerCase() === selectedDiningOnsite2) {
+    if (selectedDiningOnsite !== "all" && site.diningonsite.toString().toLowerCase() === selectedDiningOnsite) {
         matchCount++;
-        attributeBoxes.push(`<span class="attribute-box">${translateDiningOnsite2(site.diningonsite2)}</span>`);
+        attributeBoxes.push(`<span class="attribute-box">${translateDiningOnsite(site.diningonsite)}</span>`);
     }
     if (selectedFeatured !== "all" && site.featured.toString().toLowerCase() === selectedFeatured) {
         matchCount++;
