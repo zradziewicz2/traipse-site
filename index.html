@@ -719,17 +719,6 @@
             </div>
 
 
-            
-            <div class="filter-group">
-                <label>Distance:</label>
-                <select id="distanceFilter" onchange="applyFilters()">
-                    <option value="all">All</option>
-                    <option value="1">Less than 1 mile</option>
-                    <option value="5">1-5 miles</option>
-                    <option value="10">More than 10 miles</option>
-                </select>
-            </div>
-
                         <!-- Button to Show Additional Filters -->
             <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
             
@@ -837,47 +826,6 @@
         var allMarkers = [];
         var siteData = [];
 
-function getUserLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                console.log("✅ User location retrieved:", userLocation);
-                applyFilters(); // Ensure filters update after getting location
-            },
-            error => {
-                console.error("❌ Error getting location:", error);
-                alert("Unable to retrieve location. Ensure location services are enabled.");
-            }
-        );
-    } else {
-        console.warn("⚠️ Geolocation is not supported by this browser.");
-    }
-}
-
-
-function getDistance(lat1, lon1, lat2, lon2) {
-    console.log(`Calculating distance between: (${lat1}, ${lon1}) and (${lat2}, ${lon2})`);
-    const R = 3958.8; // Radius of Earth in miles
-    const toRad = angle => angle * (Math.PI / 180);
-
-    let dLat = toRad(lat2 - lat1);
-    let dLon = toRad(lon2 - lon1);
-
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    let distance = R * c;
-
-    console.log(`Distance calculated: ${distance.toFixed(2)} miles`);
-    return distance;
-}
-
         
 // Existing function
 function loadLocations() {
@@ -980,7 +928,6 @@ function applyFilters() {
     let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
     let selectedSightType = document.getElementById("sightTypeFilter").value;
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
-    let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
@@ -1011,7 +958,6 @@ function applyFilters() {
 
 
     siteData.forEach(site => {
-        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
@@ -1036,13 +982,6 @@ function applyFilters() {
             (selectedSpanishTranslations === "all" || (site.spanishtranslations && site.spanishtranslations.toString().toLowerCase() === selectedSpanishTranslations)) &&
             (selectedLuggageStorage === "all" || (site.luggagestorage && site.luggagestorage.toString().toLowerCase() === selectedLuggageStorage)) &&
             (selectedPublicAccess === "all" || (site.publicaccess && site.publicaccess.toString().toLowerCase() === selectedPublicAccess)) &&
-
-            (selectedDistance === "all" || 
-             (distance !== null &&
-              ((selectedDistance === "1" && distance < 1) ||
-               (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-               (selectedDistance === "10" && distance > 10)))) &&
-            matchesTimePeriod) {
         
                 
 
@@ -1133,14 +1072,8 @@ siteData.forEach(site => {
     let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
     let matchesTimePeriod = selectedTimePeriods.length === 0 || site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
-    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
-    let matchesDistance = selectedDistance === "all" || 
-        (distance !== null &&
-        ((selectedDistance === "1" && distance < 1) ||
-        (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-        (selectedDistance === "10" && distance > 10)));
 
-    if (matchesCity && matchesTimePeriod && matchesDistance) {
+    if (matchesCity && matchesTimePeriod) {
         filteredSites.push({ site, matchCount, attributeBoxes });
     }
 });
@@ -1159,7 +1092,6 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
 
     let siteCard = document.createElement("div");
     siteCard.className = "site-card";
-    console.log(`Rendering site: ${site.name}, Distance: ${distance.toFixed(1)} miles`);
     siteCard.innerHTML = `
         <div class="site-content">
             <div class="site-image-container">
@@ -1169,7 +1101,6 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
                 <h3 class="site-title">${site.name}</h3>
                 <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
                 <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
                 <div class="site-attributes">${attributeBoxes.join(" ")}</div>
             </div>
         </div>
