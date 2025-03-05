@@ -1000,35 +1000,8 @@ function applyFilters() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-siteData.forEach(site => {
-    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null; // Move this inside loop
-
-    let siteCard = document.createElement("div");
-    siteCard.className = "site-card";
-
-    siteCard.innerHTML = `
-        <div class="site-content">
-            <div class="site-image-container">
-                <img src="${site.image}" alt="${site.name}" class="site-image">
-            </div>
-            <div class="site-details">
-                <h3 class="site-title">${site.name}</h3>
-                <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                <div class="site-attributes">${attributeBoxes.join(" ")}</div>
-            </div>
-        </div>
-        <p class="site-description">${site.description}</p>
-        <div class="site-actions">
-            <span class="star-icon" id="star-${site.id}" onclick="toggleFavorite('${site.id}', this)">☆</span>
-            <span class="x-icon" id="x-${site.id}" onclick="toggleNotInterested('${site.id}', this)">✖</span>
-        </div>
-    `;
-
-    resultsContainer.appendChild(siteCard);
-});
-
+    siteData.forEach(site => {
+        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
