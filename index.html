@@ -1000,23 +1000,22 @@ function applyFilters() {
                     <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
         
                 <div class="site-attributes">
-                    ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
-                    ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
-                    ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                    ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
-                    ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
-                    ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
-                    ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
-                    
-                    <!-- Gift Shop -->
-                    ${site.giftshop === true ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                    ${selectedCost !== "all" && site.cost.toLowerCase() === selectedCost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
+                    ${selectedType !== "all" && site.type.toLowerCase() === selectedType ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                    ${selectedLocalOrNational !== "all" && site.localornational.toLowerCase() === selectedLocalOrNational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                    ${selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                    ${selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                    ${selectedTours !== "all" && site.tours.includes(selectedTours) ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                    ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
                 
-                    <!-- New Filters -->
-                    ${site.spanishtranslations === true ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
-                    ${site.luggagestorage === true ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
-                    ${site.publicaccess === true ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
-                    ${site.diningonsite === true ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                    <!-- Show ONLY if the user has applied a filter for these -->
+                    ${selectedGiftShop !== "all" && String(site.giftshop) === selectedGiftShop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                    ${selectedSpanishTranslations !== "all" && String(site.spanishtranslations) === selectedSpanishTranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
+                    ${selectedLuggageStorage !== "all" && String(site.luggagestorage) === selectedLuggageStorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
+                    ${selectedPublicAccess !== "all" && String(site.publicaccess) === selectedPublicAccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
+                    ${selectedDiningOnSite !== "all" && String(site.diningonsite) === selectedDiningOnSite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
                 </div>
+
 
 
                 </div>
