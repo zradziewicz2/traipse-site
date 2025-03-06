@@ -918,32 +918,42 @@ function applyFilters() {
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
       // Ensure filters only apply when checkboxes are checked
         if (
-            (filterGiftShop !== null && site.giftshop !== filterGiftShop) ||
-            (filterSpanishTranslations !== null && site.spanishtranslations !== filterSpanishTranslations) ||
-            (filterLuggageStorage !== null && site.luggagestorage !== filterLuggageStorage) ||
-            (filterPublicAccess !== null && site.publicaccess !== filterPublicAccess) ||
-            (filterDiningOnSite !== null && site.diningonsite !== filterDiningOnSite)
+            (filterGiftShop && !site.giftshop) ||
+            (filterSpanishTranslations && !site.spanishtranslations) ||
+            (filterLuggageStorage && !site.luggagestorage) ||
+            (filterPublicAccess && !site.publicaccess) ||
+            (filterDiningOnSite && !site.diningonsite)
         ) {
-            return; // Skip this site, it doesn't match selected "Yes" features
+            return; // Skip sites that don't meet the checked criteria
         }
+            
+            let matchesGiftShop = !filterGiftShop || site.giftshop; 
+            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
+            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
+            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
+            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
 
 
-        if (matchesCity && matchesGiftShop && matchesSpanishTranslations && matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
-            (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
-            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
-            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
-            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
-            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
-            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
-            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
-            (selectedDistance === "all" ||
-                (distance !== null &&
-                ((selectedDistance === "1" && distance < 1) ||
-                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-                (selectedDistance === "10" && distance > 10)))) &&
-            matchesTimePeriod) {
+            if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
+                matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
+                (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+                (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+                (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+                (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+                (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+                (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
+                (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
+                (selectedTours === "all" || site.tours.includes(selectedTours)) &&
+                (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+                (selectedDistance === "all" || 
+                    (distance !== null &&
+                    ((selectedDistance === "1" && distance < 1) ||
+                    (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+                    (selectedDistance === "10" && distance > 10)))) &&
+                matchesTimePeriod) 
+            {
+                // ✅ Now, only matching sites will be shown
+            }
 
         
                 
@@ -991,11 +1001,12 @@ function applyFilters() {
                     ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
                 
                     <!-- Show ONLY if the user has applied a filter for these -->
-                    ${filterGiftShop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
-                    ${filterSpanishTranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
-                    ${filterLuggageStorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
-                    ${filterPublicAccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
-                    ${filterDiningOnSite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                    ${filterGiftShop && site.giftshop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                    ${filterSpanishTranslations && site.spanishtranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
+                    ${filterLuggageStorage && site.luggagestorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
+                    ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
+                    ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+
 
                 </div>
 
