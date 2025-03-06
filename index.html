@@ -1018,9 +1018,10 @@ siteCard.innerHTML = `
 
             <p class="site-distance">
                 ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-                ${site.dollaramount ? ` • $${site.dollaramount}` : ""}
-                ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-link">Website</a>` : ""}
+                ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
+                ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
             </p>
+
 
             <div class="site-attributes">
                 ${selectedCost !== "all" && site.cost.toLowerCase() === selectedCost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
