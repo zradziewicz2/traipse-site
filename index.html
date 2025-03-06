@@ -1069,45 +1069,51 @@ function applyFilters() {
                 }
             }
                 // Store user preferences in sets
-            function toggleMyPlaces(siteId, element) {
-                console.log(`Toggling My Places for site ID: ${siteId}`); // Debugging log
-            
-                let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-                let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
-                let site = siteData.find(s => s.id === siteId);
-                if (!site) {
-                    console.error(`Site with ID ${siteId} not found.`);
-                    return;
-                }
-            
-                let index = myPlaces.findIndex(s => s.id === siteId);
-            
-                if (index > -1) {
-                    myPlaces.splice(index, 1);
-                    element.textContent = "☆";
-                    element.classList.remove("active");
-                } else {
-                    myPlaces.push(site);
-                    element.textContent = "⭐";
-                    element.classList.add("active");
-            
-                    let notIndex = notInterested.findIndex(s => s.id === siteId);
-                    if (notIndex > -1) {
-                        notInterested.splice(notIndex, 1);
-                        let xIcon = document.getElementById(`x-${siteId}`);
-                        if (xIcon) {
-                            xIcon.textContent = "✖";
-                            xIcon.classList.remove("active");
-                        }
-                    }
-                }
-            
-                localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-                localStorage.setItem('notInterested', JSON.stringify(notInterested));
-            
-                console.log("Updated My Places:", myPlaces);
+function toggleMyPlaces(siteId, element) {
+    console.log(`Toggling My Places for site ID: ${siteId}`);
+
+    let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+    let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
+
+    let site = siteData.find(s => s.id === siteId);
+    if (!site) {
+        console.error(`Site with ID ${siteId} not found.`);
+        return;
+    }
+
+    let index = myPlaces.findIndex(s => s.id === siteId);
+
+    if (index > -1) {
+        // Remove from My Places
+        myPlaces.splice(index, 1);
+        element.textContent = "☆"; // Hollow star
+        element.style.color = "white";
+        element.classList.remove("active");
+    } else {
+        // Add to My Places
+        myPlaces.push(site);
+        element.textContent = "⭐"; // Filled star
+        element.style.color = "gold";
+        element.classList.add("active");
+
+        // Remove from Not Interested if it was marked
+        let notIndex = notInterested.findIndex(s => s.id === siteId);
+        if (notIndex > -1) {
+            notInterested.splice(notIndex, 1);
+            let xIcon = document.getElementById(`x-${siteId}`);
+            if (xIcon) {
+                xIcon.textContent = "✖"; // Default X
+                xIcon.classList.remove("active");
             }
+        }
+    }
+
+    localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
+    localStorage.setItem('notInterested', JSON.stringify(notInterested));
+
+    console.log("Updated My Places:", myPlaces);
+}
+
             
             
             function toggleNotInterested(siteId, element) {
