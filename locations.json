@@ -29,6 +29,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -61,6 +62,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -93,6 +95,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -125,6 +128,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -157,6 +161,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -189,6 +194,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -221,6 +227,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -253,6 +260,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -285,6 +293,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -317,6 +326,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -349,6 +359,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -381,6 +392,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -413,6 +425,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -445,6 +458,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -477,6 +491,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -509,6 +524,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -541,6 +557,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -573,6 +590,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -605,6 +623,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -635,7 +654,8 @@
         "luggagestorage": true,
         "dollaramount": "-",
         "cashorcredit": "both",
-        "publicaccess": true,
+        "publicaccess": false,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -667,6 +687,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -698,6 +719,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -729,6 +751,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -760,6 +783,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -790,6 +814,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -821,6 +846,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -852,6 +878,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -883,6 +910,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -914,6 +942,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -945,6 +974,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -976,6 +1006,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1007,6 +1038,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1038,6 +1070,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1069,6 +1102,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": false,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1100,6 +1134,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": false,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1131,6 +1166,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": false,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1162,6 +1198,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": false,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1193,6 +1230,7 @@
         "dollaramount": "-",
         "cashorcredit": "both",
         "publicaccess": false,
+        "adaaccessibility": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1224,6 +1262,7 @@
         "dollaramount": "$7 - $10",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "710 10th St, Golden, CO 80401"
     },
     {
@@ -1255,6 +1294,7 @@
         "dollaramount": "$5 - $10",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "923 10th St, Golden, CO 80401"
     },
     {
@@ -1286,6 +1326,7 @@
         "dollaramount": "$5 - $10",
         "cashorcredit": "both",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "822 12th St, Golden, CO 80401"
     },
     {
@@ -1317,6 +1358,7 @@
         "dollaramount": "-",
         "cashorcredit": "notapplicable",
         "publicaccess": false,
+        "adaaccessibility": true,
         "address": "Private Residence, Golden, CO"
     },
     {
@@ -1348,6 +1390,7 @@
         "dollaramount": "-",
         "cashorcredit": "notapplicable",
         "publicaccess": false,
+        "adaaccessibility": false,
         "address": "Private Residence, Golden, CO"
     },
     {
@@ -1379,6 +1422,7 @@
         "dollaramount": "free",
         "cashorcredit": "notapplicable",
         "publicaccess": true,
+        "adaaccessibility": false,
         "address": "900 Colorow Rd, Golden, CO 80401"
     },
     {
@@ -1410,6 +1454,7 @@
         "dollaramount": "-",
         "cashorcredit": "notapplicable",
         "publicaccess": false,
+        "adaaccessibility": false,
         "address": "Private Property, Morrison, CO"
     },
     {
@@ -1441,6 +1486,7 @@
         "dollaramount": "free",
         "cashorcredit": "notapplicable",
         "publicaccess": true,
+        "adaaccessibility": true,
         "address": "Golden, CO"
     }
 ]
