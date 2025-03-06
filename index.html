@@ -900,7 +900,7 @@ function applyFilters() {
             site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-        let matchesGiftShop = (selectedGiftShop === "all" || String(site.giftshop) === selectedGiftShop);
+        let matchesGiftShop = (selectedGiftShop === "all" || (site.giftshop === true && selectedGiftShop === "true") || (site.giftshop === false && selectedGiftShop === "false"));
 
         if (matchesCity && matchesGiftShop && // Apply city and gift shop filters
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
