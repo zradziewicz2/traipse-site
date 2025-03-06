@@ -757,6 +757,11 @@
                 <div class="filter-group">
                     <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
                 </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="adaAccessibilityFilter"> ADA Accessible</label>
+                </div>
+
 
             </div>
 
@@ -897,6 +902,8 @@ function applyFilters() {
     let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked ? true : null;
     let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
     let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
+    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
+
 
     
 
@@ -924,28 +931,31 @@ function applyFilters() {
             let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
             let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
             let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
+            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
 
-            if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
-                matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
-                (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-                (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-                (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
-                (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
-                (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
-                (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
-                (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
-                (selectedTours === "all" || site.tours.includes(selectedTours)) &&
-                (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
-                (selectedDistance === "all" || 
-                    (distance !== null &&
-                    ((selectedDistance === "1" && distance < 1) ||
-                    (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-                    (selectedDistance === "10" && distance > 10)))) &&
-                matchesTimePeriod) 
-            {
-                // ✅ Now, only matching sites will be shown
-            }
+        if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
+            matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
+            matchesADAAccessibility &&
+            (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
+            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
+            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
+            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+            (selectedDistance === "all" || 
+                (distance !== null &&
+                ((selectedDistance === "1" && distance < 1) ||
+                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+                (selectedDistance === "10" && distance > 10)))) &&
+            matchesTimePeriod) 
+        {
+            // ✅ Matching sites will be shown
+        }
+
 
         
                 
@@ -998,6 +1008,8 @@ function applyFilters() {
                     ${filterLuggageStorage && site.luggagestorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
                     ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
                     ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                    ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
+
 
 
                 </div>
