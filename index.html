@@ -728,53 +728,8 @@
                         <option value="indoor">Indoor</option>
                         <option value="outdoor">Outdoor</option>
                     </select>
-                </div>
-
-                <div class="filter-group">
-                    <label>Gift Shop:</label>
-                    <select id="giftShopFilter">
-                        <option value="all">All</option>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                <label>Spanish Translations:</label>
-                <select id="spanishTranslationsFilter">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label>Luggage Storage:</label>
-                <select id="luggageStorageFilter">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label>Public Access:</label>
-                <select id="publicAccessFilter">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label>Dining On-Site:</label>
-                <select id="diningOnSiteFilter">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-
-
+                </div>             
+        
                 <div class="filter-group">
                     <label>Family Friendly:</label>
                     <select id="familyFilter">
@@ -783,6 +738,26 @@
                         <option value="false">No</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                <label><input type="checkbox" id="giftShopFilter"> Has Gift Shop</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="spanishTranslationsFilter"> Spanish Translations Available</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="luggageStorageFilter"> Luggage Storage</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="publicAccessFilter"> Public Access</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
+                </div>
+
             </div>
 
 
@@ -916,12 +891,13 @@ function applyFilters() {
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
-    let selectedGiftShop = document.getElementById("giftShopFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
-    let selectedSpanishTranslations = document.getElementById("spanishTranslationsFilter").value;
-    let selectedLuggageStorage = document.getElementById("luggageStorageFilter").value;
-    let selectedPublicAccess = document.getElementById("publicAccessFilter").value;
-    let selectedDiningOnSite = document.getElementById("diningOnSiteFilter").value;
+    let filterGiftShop = document.getElementById("giftShopFilter").checked ? true : null;
+    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked ? true : null;
+    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked ? true : null;
+    let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
+    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
+
     
 
     // Get selected time periods (array of checked values)
@@ -940,11 +916,17 @@ function applyFilters() {
             site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-        let matchesGiftShop = (selectedGiftShop === "all" || (site.giftshop === true && selectedGiftShop === "true") || (site.giftshop === false && selectedGiftShop === "false"));
-        let matchesSpanishTranslations = (selectedSpanishTranslations === "all" || String(site.spanishtranslations) === selectedSpanishTranslations);
-        let matchesLuggageStorage = (selectedLuggageStorage === "all" || String(site.luggagestorage) === selectedLuggageStorage);
-        let matchesPublicAccess = (selectedPublicAccess === "all" || String(site.publicaccess) === selectedPublicAccess);
-        let matchesDiningOnSite = (selectedDiningOnSite === "all" || String(site.diningonsite) === selectedDiningOnSite);
+      // Ensure filters only apply when checkboxes are checked
+        if (
+            (filterGiftShop !== null && site.giftshop !== filterGiftShop) ||
+            (filterSpanishTranslations !== null && site.spanishtranslations !== filterSpanishTranslations) ||
+            (filterLuggageStorage !== null && site.luggagestorage !== filterLuggageStorage) ||
+            (filterPublicAccess !== null && site.publicaccess !== filterPublicAccess) ||
+            (filterDiningOnSite !== null && site.diningonsite !== filterDiningOnSite)
+        ) {
+            return; // Skip this site, it doesn't match selected "Yes" features
+        }
+
 
         if (matchesCity && matchesGiftShop && matchesSpanishTranslations && matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
@@ -1009,11 +991,12 @@ function applyFilters() {
                     ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
                 
                     <!-- Show ONLY if the user has applied a filter for these -->
-                    ${selectedGiftShop !== "all" && String(site.giftshop) === selectedGiftShop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
-                    ${selectedSpanishTranslations !== "all" && String(site.spanishtranslations) === selectedSpanishTranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
-                    ${selectedLuggageStorage !== "all" && String(site.luggagestorage) === selectedLuggageStorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
-                    ${selectedPublicAccess !== "all" && String(site.publicaccess) === selectedPublicAccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
-                    ${selectedDiningOnSite !== "all" && String(site.diningonsite) === selectedDiningOnSite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                    ${filterGiftShop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                    ${filterSpanishTranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
+                    ${filterLuggageStorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
+                    ${filterPublicAccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
+                    ${filterDiningOnSite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+
                 </div>
 
 
