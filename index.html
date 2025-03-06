@@ -913,19 +913,11 @@ function applyFilters() {
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            site.timeperiod.some(period => selectedTimePeriods.includes(period));
+            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period)));
+
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
       // Ensure filters only apply when checkboxes are checked
-        if (
-            (filterGiftShop && !site.giftshop) ||
-            (filterSpanishTranslations && !site.spanishtranslations) ||
-            (filterLuggageStorage && !site.luggagestorage) ||
-            (filterPublicAccess && !site.publicaccess) ||
-            (filterDiningOnSite && !site.diningonsite)
-        ) {
-            return; // Skip sites that don't meet the checked criteria
-        }
             
             let matchesGiftShop = !filterGiftShop || site.giftshop; 
             let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
