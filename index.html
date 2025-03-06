@@ -279,6 +279,17 @@
             justify-content: flex-end; /* Moves buttons to the right */
             flex-grow: 1;
         }
+        .website-link {
+            color: #03FDFC;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .website-link:hover {
+            text-decoration: underline;
+            color: #02c9c9;
+        }
+
         
         .header-button {
             display: inline-block;
@@ -1020,7 +1031,10 @@ function applyFilters() {
             </div>
         
             <p class="site-description">${site.description}</p>
-        
+            
+                 <p><strong>Cost:</strong> ${site.dollaramount ? `$${site.dollaramount}` : "Unknown"}</p>
+            ${site.website ? `<p><a href="${site.website}" target="_blank" class="website-link">Website</a></p>` : ""}
+    
             <div class="site-actions">
                 <span id="star-${site.id}" class="star-icon ${starClass}" 
                       style="color: ${starColor};" data-tooltip="Add to My Places">${starSymbol}</span>
