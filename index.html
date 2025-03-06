@@ -993,56 +993,52 @@ function applyFilters() {
 
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
-        siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
-                </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                    <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
-                    <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-        
-                <div class="site-attributes">
-                    ${selectedCost !== "all" && site.cost.toLowerCase() === selectedCost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
-                    ${selectedType !== "all" && site.type.toLowerCase() === selectedType ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
-                    ${selectedLocalOrNational !== "all" && site.localornational.toLowerCase() === selectedLocalOrNational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                    ${selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
-                    ${selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
-                    ${selectedTours !== "all" && site.tours.includes(selectedTours) ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
-                    ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+siteCard.innerHTML = `
+    <div class="site-content">
+        <div class="site-image-container">
+            <img src="${site.image}" alt="${site.name}" class="site-image">
+        </div>
+        <div class="site-details">
+            <h3 class="site-title">${site.name}</h3>
+            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+
+            <p class="site-distance">
+                ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
+                ${site.dollaramount ? ` • $${site.dollaramount}` : ""}
+                ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-link">Website</a>` : ""}
+            </p>
+
+            <div class="site-attributes">
+                ${selectedCost !== "all" && site.cost.toLowerCase() === selectedCost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
+                ${selectedType !== "all" && site.type.toLowerCase() === selectedType ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                ${selectedLocalOrNational !== "all" && site.localornational.toLowerCase() === selectedLocalOrNational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                ${selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                ${selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                ${selectedTours !== "all" && site.tours.includes(selectedTours) ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
                 
-                    <!-- Show ONLY if the user has applied a filter for these -->
-                    ${filterGiftShop && site.giftshop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
-                    ${filterSpanishTranslations && site.spanishtranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
-                    ${filterLuggageStorage && site.luggagestorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
-                    ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
-                    ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
-                    ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
-
-
-
-                </div>
-
-
-
-                </div>
+                ${filterGiftShop && site.giftshop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                ${filterSpanishTranslations && site.spanishtranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
+                ${filterLuggageStorage && site.luggagestorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
+                ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
+                ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
             </div>
-        
-            <p class="site-description">${site.description}</p>
-            
-                 <p><strong>Cost:</strong> ${site.dollaramount ? `$${site.dollaramount}` : "Unknown"}</p>
-            ${site.website ? `<p><a href="${site.website}" target="_blank" class="website-link">Website</a></p>` : ""}
-    
-            <div class="site-actions">
-                <span id="star-${site.id}" class="star-icon ${starClass}" 
-                      style="color: ${starColor};" data-tooltip="Add to My Places">${starSymbol}</span>
+        </div>
+    </div>
 
-                <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
-                      data-tooltip="Not for me">✖</span>
-            </div>
-        `;
+    <p class="site-description">${site.description}</p>
+
+    <div class="site-actions">
+        <span id="star-${site.id}" class="star-icon ${starClass}" 
+              style="color: ${starColor};" data-tooltip="Add to My Places">${starSymbol}</span>
+
+        <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+              data-tooltip="Not for me">✖</span>
+    </div>
+`;
+
 
             
             // Now attach event listeners (this is the critical fix!)
