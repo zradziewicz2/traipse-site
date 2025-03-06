@@ -738,6 +738,42 @@
                         <option value="false">No</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                <label>Spanish Translations:</label>
+                <select id="spanishTranslationsFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Luggage Storage:</label>
+                <select id="luggageStorageFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Public Access:</label>
+                <select id="publicAccessFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Dining On-Site:</label>
+                <select id="diningOnSiteFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
 
                 <div class="filter-group">
                     <label>Family Friendly:</label>
@@ -882,6 +918,10 @@ function applyFilters() {
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedGiftShop = document.getElementById("giftShopFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
+    let selectedSpanishTranslations = document.getElementById("spanishTranslationsFilter").value;
+    let selectedLuggageStorage = document.getElementById("luggageStorageFilter").value;
+    let selectedPublicAccess = document.getElementById("publicAccessFilter").value;
+    let selectedDiningOnSite = document.getElementById("diningOnSiteFilter").value;
     
 
     // Get selected time periods (array of checked values)
@@ -901,8 +941,12 @@ function applyFilters() {
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
         let matchesGiftShop = (selectedGiftShop === "all" || (site.giftshop === true && selectedGiftShop === "true") || (site.giftshop === false && selectedGiftShop === "false"));
+        let matchesSpanishTranslations = (selectedSpanishTranslations === "all" || String(site.spanishtranslations) === selectedSpanishTranslations);
+        let matchesLuggageStorage = (selectedLuggageStorage === "all" || String(site.luggagestorage) === selectedLuggageStorage);
+        let matchesPublicAccess = (selectedPublicAccess === "all" || String(site.publicaccess) === selectedPublicAccess);
+        let matchesDiningOnSite = (selectedDiningOnSite === "all" || String(site.diningonsite) === selectedDiningOnSite);
 
-        if (matchesCity && matchesGiftShop && // Apply city and gift shop filters
+        if (matchesCity && matchesGiftShop && matchesSpanishTranslations && matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
@@ -955,16 +999,25 @@ function applyFilters() {
                     <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
                     <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
         
-                    <div class="site-attributes">
-                        ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
-                        ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
-                        ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                        ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
-                        ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
-                        ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
-                        ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
-                        ${site.giftshop === true ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
-                    </div>
+                <div class="site-attributes">
+                    ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
+                    ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                    ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                    ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                    ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                    ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                    ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+                    
+                    <!-- Gift Shop -->
+                    ${site.giftshop === true ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                
+                    <!-- New Filters -->
+                    ${site.spanishtranslations === true ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
+                    ${site.luggagestorage === true ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
+                    ${site.publicaccess === true ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
+                    ${site.diningonsite === true ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                </div>
+
 
                 </div>
             </div>
