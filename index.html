@@ -1357,47 +1357,4 @@ filteredSites.forEach(({ site, attributeBoxes }) => {
 </script>
 
 </body>
-</html><!-- Closing the script tag properly -->
-<script>
-    function toggleNotInterested(siteId, element) {
-        console.log(`Toggling Not Interested for site ID: ${siteId}`);
-
-        let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-        let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-
-        let site = siteData.find(s => s.id === siteId);
-        if (!site) {
-            console.error(`Site with ID ${siteId} not found.`);
-            return;
-        }
-
-        let index = notInterested.findIndex(s => s.id === siteId);
-
-        if (index > -1) {
-            notInterested.splice(index, 1);
-            element.textContent = "✖";
-            element.classList.remove("active");
-        } else {
-            notInterested.push(site);
-            element.textContent = "❌";
-            element.classList.add("active");
-
-            let myIndex = myPlaces.findIndex(s => s.id === siteId);
-            if (myIndex > -1) {
-                myPlaces.splice(myIndex, 1);
-                let starIcon = document.getElementById(`star-${siteId}`);
-                if (starIcon) {
-                    starIcon.textContent = "☆";
-                    starIcon.classList.remove("active");
-                }
-            }
-        }
-
-        localStorage.setItem('myPlaces', JSON.stringify(myPlaces));
-        localStorage.setItem('notInterested', JSON.stringify(notInterested));
-
-        console.log("Updated Not Interested:", notInterested);
-    }
-</script>
-</body>
 </html>
