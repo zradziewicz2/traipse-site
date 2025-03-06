@@ -729,6 +729,16 @@
                         <option value="outdoor">Outdoor</option>
                     </select>
                 </div>
+
+                <div class="filter-group">
+                    <label>Gift Shop:</label>
+                    <select id="giftShopFilter">
+                        <option value="all">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
                 <div class="filter-group">
                     <label>Family Friendly:</label>
                     <select id="familyFilter">
@@ -870,6 +880,7 @@ function applyFilters() {
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
+    let selectedGiftShop = document.getElementById("giftShopFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
     
 
@@ -889,8 +900,9 @@ function applyFilters() {
             site.timeperiod.some(period => selectedTimePeriods.includes(period));
 
         let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-        
-        if (matchesCity && // Apply city filter
+        let matchesGiftShop = (selectedGiftShop === "all" || String(site.giftshop) === selectedGiftShop);
+
+        if (matchesCity && matchesGiftShop && // Apply city and gift shop filters
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
@@ -900,12 +912,13 @@ function applyFilters() {
             (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
-            (selectedDistance === "all" || 
-             (distance !== null &&
-              ((selectedDistance === "1" && distance < 1) ||
-               (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-               (selectedDistance === "10" && distance > 10)))) &&
+            (selectedDistance === "all" ||
+                (distance !== null &&
+                ((selectedDistance === "1" && distance < 1) ||
+                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+                (selectedDistance === "10" && distance > 10)))) &&
             matchesTimePeriod) {
+
         
                 
 
