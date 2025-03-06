@@ -925,6 +925,10 @@ function applyFilters() {
             
             // Check if this site is already liked or not interested
             let isLiked = myPlaces.some(s => s.id === site.id);
+            let starClass = isLiked ? "active" : "";
+            let starSymbol = isLiked ? "⭐" : "☆";
+            let starColor = isLiked ? "gold" : "white";
+
             let isNotInterested = notInterested.some(s => s.id === site.id);
             
         siteCard.innerHTML = `
@@ -967,8 +971,9 @@ function applyFilters() {
             <p class="site-description">${site.description}</p>
         
             <div class="site-actions">
-                <span id="star-${site.id}" class="star-icon ${isLiked ? 'active' : ''}" 
-                      data-tooltip="Add to My Places">⭐</span>
+                <span id="star-${site.id}" class="star-icon ${starClass}" 
+                      style="color: ${starColor};" data-tooltip="Add to My Places">${starSymbol}</span>
+
                 <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
                       data-tooltip="Not for me">✖</span>
             </div>
