@@ -956,28 +956,16 @@ function applyFilters() {
                     <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
         
                     <div class="site-attributes">
-                        ${
-                            selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""
-                        } 
-                        ${
-                            selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""
-                        }
-                        ${
-                            selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""
-                        }
-                        ${
-                            selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""
-                        }
-                        ${
-                            selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""
-                        }
-                        ${
-                            selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""
-                        }
-                        ${
-                            selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""
-                        }
+                        ${selectedCost !== "all" ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
+                        ${selectedType !== "all" ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                        ${selectedLocalOrNational !== "all" ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                        ${selectedEstimatedTime !== "all" ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                        ${selectedReservations !== "all" ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                        ${selectedTours !== "all" ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                        ${selectedTransit !== "all" ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+                        ${site.giftshop === true ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
                     </div>
+
                 </div>
             </div>
         
