@@ -1281,8 +1281,8 @@ function clearMap() {
     allMarkers = [];
 
     // Remove any existing route paths if they exist
-if (routeControl !== null && typeof routeControl !== 'undefined') {
-    map.removeControl(routeControl);
+if (routeControl && typeof routeControl.remove === 'function') {
+    routeControl.remove();
     routeControl = null;
 }
 }
