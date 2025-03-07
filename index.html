@@ -1303,16 +1303,20 @@ function displayRoutes(routesData) {
         routeCard.innerHTML = `
             <h3 class="site-title">${route.tour_name}</h3>
             <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
-            <p class="site-description">Click a site below to view details.</p>
+            <p class="site-description">Click to zoom to this route.</p>
             <div class="route-sites"></div>
         `;
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
-
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // Add walking route using Leaflet Routing Machine
-        L.Routing.control({
+        // ✅ Ensure old route control is removed before adding a new one
+        if (window.currentRouteControl) {
+            map.removeControl(window.currentRouteControl);
+        }
+
+        // ✅ Store route control in a global variable for cleanup
+        window.currentRouteControl = L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
             createMarker: function() { return null; }, // Hide default markers
@@ -1321,7 +1325,12 @@ function displayRoutes(routesData) {
             }
         }).addTo(map);
 
-        // Add markers for sites
+        // ✅ Fit map to the route bounds
+        if (waypoints.length > 0) {
+            map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
+        }
+
+        // ✅ Add markers for sites
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
@@ -1338,6 +1347,13 @@ function displayRoutes(routesData) {
             `);
             marker.addTo(map);
             allMarkers.push(marker);
+        });
+
+        // ✅ Click event to zoom to the selected route
+        routeCard.addEventListener("click", () => {
+            if (waypoints.length > 0) {
+                map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
+            }
         });
 
         resultsContainer.appendChild(routeCard);
