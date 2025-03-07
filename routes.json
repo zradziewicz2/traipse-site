@@ -1,0 +1,98 @@
+[
+    {
+        "tour_name": "Capitol Hill Historic Homes Tour",
+        "tour_id": "capitol_hill_tour",
+        "color": "#FF5733",
+        "route": [
+            {"lat": 39.7392, "lng": -104.9847},
+            {"lat": 39.7373, "lng": -104.9807},
+            {"lat": 39.7346, "lng": -104.9812}
+        ],
+        "sites": [
+            {
+                "name": "Colorado State Capitol",
+                "id": "denver001",
+                "lat": 39.7392,
+                "lng": -104.9847,
+                "city": "denver",
+                "description": "Iconic building with a gold dome, offering historic tours and views from the Mile High step.",
+                "thematiccategory": "generalhistory",
+                "timeperiod": ["nineteenthcentury"],
+                "sighttype": "government",
+                "website": "https://leg.colorado.gov/visit-learn"
+            },
+            {
+                "name": "Molly Brown House Museum",
+                "id": "denver002",
+                "lat": 39.7373,
+                "lng": -104.9807,
+                "city": "denver",
+                "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
+                "thematiccategory": "historichomes",
+                "timeperiod": ["industrialrevolution"],
+                "sighttype": "historichome",
+                "website": "https://mollybrown.org/"
+            },
+            {
+                "name": "Byers-Evans House Museum",
+                "id": "denver003",
+                "lat": 39.7346,
+                "lng": -104.9812,
+                "city": "denver",
+                "description": "A fully restored 19th-century home highlighting Denver's early influential families.",
+                "thematiccategory": "historichomes",
+                "timeperiod": ["nineteenthcentury"],
+                "sighttype": "historichome",
+                "website": "https://www.historycolorado.org/byers-evans-house-museum"
+            }
+        ]
+    },
+    {
+        "tour_name": "Golden Triangle Museum Walk",
+        "tour_id": "golden_triangle_tour",
+        "color": "#03FDFC",
+        "route": [
+            {"lat": 39.7371, "lng": -104.9876},
+            {"lat": 39.7363, "lng": -104.9903},
+            {"lat": 39.7336, "lng": -104.9905}
+        ],
+        "sites": [
+            {
+                "name": "Denver Art Museum",
+                "id": "denver004",
+                "lat": 39.7371,
+                "lng": -104.9876,
+                "city": "denver",
+                "description": "A world-class art museum with collections spanning centuries and continents.",
+                "thematiccategory": "artsandculture",
+                "timeperiod": ["modernhistory"],
+                "sighttype": "museum",
+                "website": "https://www.denverartmuseum.org/"
+            },
+            {
+                "name": "Clyfford Still Museum",
+                "id": "denver005",
+                "lat": 39.7363,
+                "lng": -104.9903,
+                "city": "denver",
+                "description": "A museum dedicated to the abstract expressionist works of Clyfford Still.",
+                "thematiccategory": "artsandculture",
+                "timeperiod": ["modernhistory"],
+                "sighttype": "museum",
+                "website": "https://clyffordstillmuseum.org/"
+            },
+            {
+                "name": "History Colorado Center",
+                "id": "denver006",
+                "lat": 39.7336,
+                "lng": -104.9905,
+                "city": "denver",
+                "description": "An interactive museum showcasing Colorado's rich history and heritage.",
+                "thematiccategory": "generalhistory",
+                "timeperiod": ["nineteenthcentury", "industrialrevolution"],
+                "sighttype": "museum",
+                "website": "https://www.historycolorado.org/"
+            }
+        ]
+    }
+]
