@@ -1243,7 +1243,7 @@ function displayRoutes(routesData) {
     allMarkers = [];
 
     routesData.forEach(route => {
-        let timePeriodText = translateTimePeriod(route.sites.flatMap(site => site.timeperiod));
+        let timePeriodText = translateTimePeriod(route.sites.flatMap(site => site.timeperiod || []));
         
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
