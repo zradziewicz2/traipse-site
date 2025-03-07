@@ -15,7 +15,59 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #000000;
             margin: 0;
-            display: flex;
+            display: flex;function displayRoutes(routesData) {
+    let resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+
+    routesData.forEach(route => {
+        let routeCard = document.createElement("div");
+        routeCard.className = "site-card";
+        routeCard.innerHTML = `
+            <h3 class="site-title">${route.tour_name}</h3>
+            <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
+            <p class="site-description">Click a site below to view details.</p>
+            <div class="route-sites"></div>
+        `;
+
+        let routeSitesContainer = routeCard.querySelector(".route-sites");
+
+        let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
+
+        // Add walking route using Leaflet Routing Machine
+        L.Routing.control({
+            waypoints: waypoints,
+            routeWhileDragging: false,
+            createMarker: function() { return null; }, // Hide default markers
+            lineOptions: {
+                styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
+            }
+        }).addTo(map);
+
+        // Add markers for sites
+        route.sites.forEach(site => {
+            let siteElement = document.createElement("div");
+            siteElement.className = "route-site";
+            siteElement.innerHTML = `
+                <h4>${site.name}</h4>
+                <p><strong>Category:</strong> ${site.thematiccategory}</p>
+                <p><a href="${site.website}" target="_blank" class="website-link">Visit Website</a></p>
+            `;
+            routeSitesContainer.appendChild(siteElement);
+
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`
+                <b>${site.name}</b><br>${site.description}<br>
+                <a href="${site.website}" target="_blank">More Info</a>
+            `);
+            marker.addTo(map);
+            allMarkers.push(marker);
+        });
+
+        resultsContainer.appendChild(routeCard);
+    });
+}
+
             flex-direction: column;
             height: 100vh;
         }
@@ -1243,23 +1295,20 @@ function displayRoutes(routesData) {
     allMarkers = [];
 
     routesData.forEach(route => {
-        let timePeriodText = translateTimePeriod(route.sites.flatMap(site => site.timeperiod || []));
-        
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
         routeCard.innerHTML = `
             <h3 class="site-title">${route.tour_name}</h3>
-            <p><strong>Time Period:</strong> ${timePeriodText}</p>
             <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
+            <p class="site-description">Click a site below to view details.</p>
             <div class="route-sites"></div>
         `;
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
 
-        // Create waypoints for the routing path
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // 🟢 Use OSRM routing for proper walking paths
+        // Add walking route using Leaflet Routing Machine
         L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
@@ -1269,14 +1318,13 @@ function displayRoutes(routesData) {
             }
         }).addTo(map);
 
-        // Add markers for each site
+        // Add markers for sites
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
             siteElement.innerHTML = `
                 <h4>${site.name}</h4>
-                <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-                <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+                <p><strong>Category:</strong> ${site.thematiccategory}</p>
                 <p><a href="${site.website}" target="_blank" class="website-link">Visit Website</a></p>
             `;
             routeSitesContainer.appendChild(siteElement);
@@ -1292,6 +1340,7 @@ function displayRoutes(routesData) {
         resultsContainer.appendChild(routeCard);
     });
 }
+
 
 
 
