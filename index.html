@@ -1200,10 +1200,10 @@ function toggleViewMode() {
     let toggleButton = document.getElementById("toggleViewMode");
     let isRoutesMode = toggleButton.innerText === "Sites";
 
-    // Toggle text
+    // Toggle button text
     toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
 
-    // Show only the relevant filters when Routes is selected
+    // Show only relevant filters when Routes is selected
     let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
     let allFilterGroups = document.querySelectorAll(".filter-group");
 
@@ -1216,7 +1216,7 @@ function toggleViewMode() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    // Load the appropriate data source
+    // Load the appropriate dataset
     if (isRoutesMode) {
         loadRoutes();
     } else {
@@ -1243,22 +1243,23 @@ function displayRoutes(routesData) {
     allMarkers = [];
 
     routesData.forEach(route => {
-        let timePeriodText = translateTimePeriod(tour.sites.flatMap(site => site.timeperiod));
-        let tourCard = document.createElement("div");
+        let timePeriodText = translateTimePeriod(route.sites.flatMap(site => site.timeperiod));
+        
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
         routeCard.innerHTML = `
             <h3 class="site-title">${route.tour_name}</h3>
+            <p><strong>Time Period:</strong> ${timePeriodText}</p>
             <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
-            <p class="site-description">Click a site below to view details.</p>
             <div class="route-sites"></div>
         `;
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
 
+        // Create waypoints for the routing path
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // 🟢 Use OSRM routing engine for walking paths
+        // 🟢 Use OSRM routing for proper walking paths
         L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
@@ -1268,7 +1269,7 @@ function displayRoutes(routesData) {
             }
         }).addTo(map);
 
-        // Add markers for sites
+        // Add markers for each site
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
@@ -1291,6 +1292,7 @@ function displayRoutes(routesData) {
         resultsContainer.appendChild(routeCard);
     });
 }
+
 
 
 
