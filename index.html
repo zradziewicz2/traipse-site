@@ -70,80 +70,8 @@
             background: #03FDFC;
             color: black;
     }
-        .toggle-container-top {
-            width: 100%;
-            display: flex;
-            justify-content: center; /* Centers it properly */
-            max-width: 100%; /* Prevents unnecessary shrinking */
-            margin-bottom: 5px; /* Slightly reduce bottom spacing */
-        }
 
 
-        
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 25px;
-        }
-        
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .search-results-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Aligns to the left to match original layout */
-            width: auto; /* Prevents stretching */
-            max-width: 600px; /* Limits width so it doesn't expand */
-            margin-left: 20px; /* Adjust as needed to align with the sidebar */
-        }
-
-        
-        .toggle-container-top {
-            width: 100%;
-            display: flex;
-            justify-content: flex-start; /* Align with search results */
-            margin-bottom: 10px;
-            max-width: 600px; /* Match the card width */
-        }
-
-
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 25px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 19px;
-            width: 19px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .slider {
-            background-color: #03FDFC;
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
 
             .tagline {
                 font-size: 1em;
@@ -168,9 +96,7 @@
             display: flex;
             flex-direction: row;
             height: calc(100vh - 80px);
-            justify-content: space-between; /* Keeps sidebar, search results, and map spaced properly */
         }
-
 
         /* Sidebar */
         .sidebar {
@@ -269,16 +195,17 @@
 
 
 
-            .search-results-wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center; /* Center cards properly */
-                width: 50%; /* Adjusts to make sure cards are properly sized */
-                min-width: 500px; /* Prevents them from becoming too small */
-                margin-left: 0px; /* Removes unnecessary left margin */
-            }
 
-
+          .search-results {
+            flex: 1;
+            max-width: 50%;
+            min-width: 40%;
+            overflow-y: auto;
+            padding: 20px; /* Adds more spacing */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the cards */
+        }
 
             
         .site-actions {
@@ -568,13 +495,12 @@
         }
 
         /* Map */
-            #map {
-                width: 45%; /* Reduces map width so cards have more space */
-                height: 100%;
-                min-width: 550px; /* Ensures map doesn't shrink too much */
-                background: #333;
-            }
-
+        #map {
+            width: 50%;
+            height: 100%;
+            border-radius: -5; /* Remove unnecessary border radius */
+            background: #333;
+        }
 
         .additional-filters {
             margin-top: 10px;
@@ -652,15 +578,6 @@
                 color: #000;
             }
 
-        .toggle-wrapper {
-            margin-bottom: 10px; /* Adds space below toggle */
-            width: 100%;
-        }
-        .search-results {
-            margin-top: 10px; /* Pushes down the cards */
-        }
-
-
         }
 
         }
@@ -706,8 +623,6 @@
  
     <!-- Main Layout -->
     <div class="container">
-
-
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
@@ -788,17 +703,6 @@
                     <option value="more than 2 hours">More than 2 hours</option>
                 </select>
             </div>
-            
-            <div class="filter-group">
-                <label>Payment Options 💳:</label>
-                <select id="cashOrCreditFilter">
-                    <option value="all">All</option>
-                    <option value="cash">Cash Only</option>
-                    <option value="credit">Credit Only</option>
-                    <option value="both">Cash & Credit</option>
-                    <option value="na">N/A</option>
-                </select>
-            </div>
 
             
             <div class="filter-group">
@@ -877,10 +781,6 @@
                 <div class="filter-group">
                     <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
                 </div>
-
-                <div class="filter-group">
-                    <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly 🐶</label>
-                </div>
                 
                 <div class="filter-group">
                     <label><input type="checkbox" id="adaAccessibilityFilter"> ADA Accessible</label>
@@ -893,21 +793,9 @@
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
-
+   
         
-        <div class="search-results-wrapper">
-            <div class="toggle-container-top">
-                <span id="modeLabel" style="color: #03FDFC; font-weight: bold; font-size: 1.2em; margin-right: 10px;">Places</span>
-                <label class="switch">
-                    <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
-                    <span class="slider round"></span>
-                </label>
-            </div>
             <div class="search-results" id="searchResults"></div>
-        </div>
-
-
-
             <div id="map"></div>
         </div>
 
@@ -924,7 +812,6 @@
         
         var allMarkers = [];
         var siteData = [];
-        
 
 function getUserLocation() {
     if (navigator.geolocation) {
@@ -1040,8 +927,6 @@ function applyFilters() {
     let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
     let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
     let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
-    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
-    let selectedCashOrCredit = document.getElementById("cashOrCreditFilter").value;
 
 
     
@@ -1060,21 +945,22 @@ function applyFilters() {
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
             (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period)));
-        
-        let matchesCity = selectedCity === "all" || (site.city && site.city.toLowerCase() === selectedCity);
-        let matchesGiftShop = filterGiftShop === null || (site.giftshop === filterGiftShop);
-        let matchesSpanishTranslations = filterSpanishTranslations === null || (site.spanishtranslations === filterSpanishTranslations);
-        let matchesLuggageStorage = filterLuggageStorage === null || (site.luggagestorage === filterLuggageStorage);
-        let matchesPublicAccess = filterPublicAccess === null || (site.publicaccess === filterPublicAccess);
-        let matchesDiningOnSite = filterDiningOnSite === null || (site.diningonsite === filterDiningOnSite);
-        let matchesADAAccessibility = filterADAAccessibility === null || (site.adaaccessibility === filterADAAccessibility);
-        let matchesDogFriendly = filterDogFriendly === null || (site.dogfriendly === filterDogFriendly);  // ✅ ADD THIS
 
+
+        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
+      // Ensure filters only apply when checkboxes are checked
+            
+            let matchesGiftShop = !filterGiftShop || site.giftshop; 
+            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
+            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
+            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
+            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
+            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
 
         if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
             matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
-            matchesADAAccessibility && (!filterDogFriendly || site.dogfriendly) &&
+            matchesADAAccessibility &&
             (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
             (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
             (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
@@ -1084,7 +970,6 @@ function applyFilters() {
             (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
             (selectedTours === "all" || site.tours.includes(selectedTours)) &&
             (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
-            (selectedCashOrCredit === "all" || site.cashorcredit.toLowerCase() === selectedCashOrCredit) &&
             (selectedDistance === "all" || 
                 (distance !== null &&
                 ((selectedDistance === "1" && distance < 1) ||
