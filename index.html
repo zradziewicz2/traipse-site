@@ -1269,18 +1269,6 @@ function toggleViewMode() {
     loadLocations(); // Load site locations
     loadRoutes(); // Load route data
 }
-
-
-    // Clear previous map elements
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
-
-    // Load the appropriate dataset
-    if (isRoutesMode) {
-        loadRoutes();
-    } else {
-        loadLocations();
-    }
 }
 
         
