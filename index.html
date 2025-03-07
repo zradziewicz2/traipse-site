@@ -703,6 +703,17 @@
                     <option value="more than 2 hours">More than 2 hours</option>
                 </select>
             </div>
+            
+            <div class="filter-group">
+                <label>Payment Options 💳:</label>
+                <select id="cashOrCreditFilter">
+                    <option value="all">All</option>
+                    <option value="cash">Cash Only</option>
+                    <option value="credit">Credit Only</option>
+                    <option value="both">Cash & Credit</option>
+                    <option value="na">N/A</option>
+                </select>
+            </div>
 
             
             <div class="filter-group">
@@ -780,6 +791,10 @@
                 
                 <div class="filter-group">
                     <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
+                </div>
+
+                <div class="filter-group">
+                    <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly 🐶</label>
                 </div>
                 
                 <div class="filter-group">
@@ -927,6 +942,8 @@ function applyFilters() {
     let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
     let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
     let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
+    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
+    let selectedCashOrCredit = document.getElementById("cashOrCreditFilter").value;
 
 
     
@@ -958,18 +975,20 @@ function applyFilters() {
             let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
 
-        if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
-            matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
-            matchesADAAccessibility &&
-            (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
-            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
-            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
-            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
-            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
-            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
-            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+             if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
+                matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
+                matchesADAAccessibility && (!filterDogFriendly || site.dogfriendly) &&
+                (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+                (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+                (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+                (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+                (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+                (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
+                (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
+                (selectedTours === "all" || site.tours.includes(selectedTours)) &&
+                (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+                (selectedCashOrCredit === "all" || site.cashorcredit.toLowerCase() === selectedCashOrCredit))
+
             (selectedDistance === "all" || 
                 (distance !== null &&
                 ((selectedDistance === "1" && distance < 1) ||
