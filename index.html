@@ -96,20 +96,19 @@
         .search-results-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            width: 50%;
-            min-width: 500px;
-            height: calc(100vh - 100px); /* Ensure the wrapper takes the correct height */
-            overflow: hidden; /* Ensures only search results scroll */
+            align-items: flex-start; /* Aligns to the left to match original layout */
+            width: auto; /* Prevents stretching */
+            max-width: 600px; /* Limits width so it doesn't expand */
+            margin-left: 20px; /* Adjust as needed to align with the sidebar */
         }
+
         
-        /* Ensure the toggle does not interfere with scrolling */
         .toggle-container-top {
             width: 100%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: flex-start; /* Align with search results */
             margin-bottom: 10px;
-            max-width: 600px;
+            max-width: 600px; /* Match the card width */
         }
 
 
@@ -658,32 +657,8 @@
             width: 100%;
         }
         .search-results {
-            width: 100%;
-            max-height: calc(100vh - 180px); /* Adjust based on the toggle height */
-            overflow-y: auto; /* Enables vertical scrolling */
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            scrollbar-width: thin; /* Standard scrollbar width */
-            scrollbar-color: #03FDFC #222; /* Custom colors */
+            margin-top: 10px; /* Pushes down the cards */
         }
-        
-        /* Webkit (Chrome, Safari) scrollbar customization */
-        .search-results::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .search-results::-webkit-scrollbar-track {
-            background: #222; /* Dark background */
-        }
-        
-        .search-results::-webkit-scrollbar-thumb {
-            background: #03FDFC; /* Cyan scrollbar */
-            border-radius: 4px;
-        }
-
-
 
 
         }
@@ -919,10 +894,17 @@
         </div>
 
 
-            <!-- Ensure search results have their own height and scrollability -->
+        
+        <div class="search-results-wrapper">
+            <div class="toggle-container-top">
+                <span id="modeLabel" style="color: #03FDFC; font-weight: bold; font-size: 1.2em; margin-right: 10px;">Places</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <div class="search-results" id="searchResults"></div>
         </div>
-
 
 
 
