@@ -17,7 +17,6 @@
                 "city": "denver",
                 "description": "Iconic building with a gold dome, offering historic tours and views from the Mile High step.",
                 "thematiccategory": "generalhistory",
-                "timeperiod": ["nineteenthcentury"],
                 "sighttype": "government",
                 "website": "https://leg.colorado.gov/visit-learn"
             },
@@ -29,7 +28,6 @@
                 "city": "denver",
                 "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
                 "thematiccategory": "historichomes",
-                "timeperiod": ["industrialrevolution"],
                 "sighttype": "historichome",
                 "website": "https://mollybrown.org/"
             },
@@ -41,7 +39,6 @@
                 "city": "denver",
                 "description": "A fully restored 19th-century home highlighting Denver's early influential families.",
                 "thematiccategory": "historichomes",
-                "timeperiod": ["nineteenthcentury"],
                 "sighttype": "historichome",
                 "website": "https://www.historycolorado.org/byers-evans-house-museum"
             }
@@ -65,7 +62,6 @@
                 "city": "denver",
                 "description": "A world-class art museum with collections spanning centuries and continents.",
                 "thematiccategory": "artsandculture",
-                "timeperiod": ["modernhistory"],
                 "sighttype": "museum",
                 "website": "https://www.denverartmuseum.org/"
             },
@@ -77,7 +73,6 @@
                 "city": "denver",
                 "description": "A museum dedicated to the abstract expressionist works of Clyfford Still.",
                 "thematiccategory": "artsandculture",
-                "timeperiod": ["modernhistory"],
                 "sighttype": "museum",
                 "website": "https://clyffordstillmuseum.org/"
             },
@@ -89,7 +84,6 @@
                 "city": "denver",
                 "description": "An interactive museum showcasing Colorado's rich history and heritage.",
                 "thematiccategory": "generalhistory",
-                "timeperiod": ["nineteenthcentury", "industrialrevolution"],
                 "sighttype": "museum",
                 "website": "https://www.historycolorado.org/"
             }
