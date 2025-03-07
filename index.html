@@ -1281,10 +1281,10 @@ function clearMap() {
     allMarkers = [];
 
     // Remove any existing route paths if they exist
-    if (routeControl !== null) {
-        map.removeControl(routeControl);
-        routeControl = null;
-    }
+if (routeControl !== null && typeof routeControl !== 'undefined') {
+    map.removeControl(routeControl);
+    routeControl = null;
+}
 }
 
 
