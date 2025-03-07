@@ -885,6 +885,19 @@
         
         var allMarkers = [];
         var siteData = [];
+        
+function toggleViewMode() {
+    let toggle = document.getElementById("toggleMode");
+    let modeLabel = document.getElementById("modeLabel");
+
+    if (toggle.checked) {
+        modeLabel.innerText = "Routes";
+        loadRoutes();  // Call function to switch to routes
+    } else {
+        modeLabel.innerText = "Places";
+        loadLocations();  // Call function to switch back to places
+    }
+}
 
 function getUserLocation() {
     if (navigator.geolocation) {
