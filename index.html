@@ -99,19 +99,17 @@
             align-items: center;
             width: 50%;
             min-width: 500px;
-            margin-left: 0px;
-            height: calc(100vh - 100px); /* Ensure it doesn't make the page scroll */
-            overflow: hidden; /* Prevents affecting the whole page */
+            height: calc(100vh - 100px); /* Ensure the wrapper takes the correct height */
+            overflow: hidden; /* Ensures only search results scroll */
         }
-
-
         
+        /* Ensure the toggle does not interfere with scrolling */
         .toggle-container-top {
             width: 100%;
             display: flex;
-            justify-content: flex-start; /* Align with search results */
+            justify-content: flex-start;
             margin-bottom: 10px;
-            max-width: 600px; /* Match the card width */
+            max-width: 600px;
         }
 
 
@@ -662,17 +660,17 @@
         .search-results {
             flex: 1;
             width: 100%;
-            max-height: calc(100vh - 200px); /* Adjust if needed */
-            overflow-y: auto;
+            max-height: calc(100vh - 180px); /* Adjust based on the toggle height */
+            overflow-y: auto; /* Enables vertical scrolling */
             padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            scrollbar-width: thin;
-            scrollbar-color: #03FDFC #222; /* Custom scrollbar color */
+            scrollbar-width: thin; /* Standard scrollbar width */
+            scrollbar-color: #03FDFC #222; /* Custom colors */
         }
         
-        /* Make sure the scrollbar is visible on all browsers */
+        /* Webkit (Chrome, Safari) scrollbar customization */
         .search-results::-webkit-scrollbar {
             width: 8px;
         }
@@ -924,6 +922,7 @@
 
         
         <div class="search-results-wrapper">
+            <!-- Keep toggle container separate from search results -->
             <div class="toggle-container-top">
                 <span id="modeLabel" style="color: #03FDFC; font-weight: bold; font-size: 1.2em; margin-right: 10px;">Places</span>
                 <label class="switch">
@@ -931,8 +930,11 @@
                     <span class="slider round"></span>
                 </label>
             </div>
+        
+            <!-- Ensure search results have their own height and scrollability -->
             <div class="search-results" id="searchResults"></div>
         </div>
+
 
 
 
