@@ -300,7 +300,37 @@
         .inline-info:hover {
             text-decoration: underline;
             color: #03FDFC; /* Cyan hover effect */
+                }
+                /* Floating Toggle Button */
+        .floating-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #03FDFC;
+            color: black;
+            font-weight: bold;
+            font-size: 1em;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1000; /* Ensures it stays on top */
+            box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
+            transition: background 0.3s ease, transform 0.2s ease;
         }
+        
+        /* Hover effect */
+        .floating-toggle:hover {
+            background: #02c9c9;
+            transform: scale(1.1);
+        }
+        
+        /* Active state for toggle */
+        .floating-toggle.active {
+            background: #ffcc00;
+            color: black;
+        }
+
 
 
         
@@ -623,6 +653,7 @@
  
     <!-- Main Layout -->
     <div class="container">
+    <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">Toggle Mode</button>
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
@@ -1148,6 +1179,26 @@ siteCard.innerHTML = `
                 }
             }
                 // Store user preferences in sets
+function toggleViewMode() {
+    let button = document.getElementById("toggleViewMode");
+
+    // Toggle active class
+    button.classList.toggle("active");
+
+    // Example functionality: switch between grid/list views
+    let searchResults = document.getElementById("searchResults");
+
+    if (searchResults.classList.contains("grid-view")) {
+        searchResults.classList.remove("grid-view");
+        searchResults.classList.add("list-view");
+        button.textContent = "Switch to Grid";
+    } else {
+        searchResults.classList.remove("list-view");
+        searchResults.classList.add("grid-view");
+        button.textContent = "Switch to List";
+    }
+}
+
 function toggleMyPlaces(siteId, element) {
     console.log(`Toggling My Places for site ID: ${siteId}`);
 
