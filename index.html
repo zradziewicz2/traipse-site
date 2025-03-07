@@ -303,27 +303,24 @@
                 }
                 /* Floating Toggle Button */
         .floating-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
+            position: absolute;
+            top: 80px; /* Adjust as needed to fit in the red square */
+            left: 310px; /* Adjust so it aligns just inside the search results */
             background: #03FDFC;
             color: black;
+            font-size: 0.8em; /* Make it smaller */
             font-weight: bold;
-            font-size: 1em;
-            padding: 10px 15px;
+            padding: 5px 10px;
             border: none;
-            border-radius: 50px;
+            border-radius: 5px;
             cursor: pointer;
-            z-index: 1000; /* Ensures it stays on top */
-            box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
-            transition: background 0.3s ease, transform 0.2s ease;
+            z-index: 1000; /* Ensure it floats above other elements */
         }
         
-        /* Hover effect */
         .floating-toggle:hover {
             background: #02c9c9;
-            transform: scale(1.1);
         }
+
         
         /* Active state for toggle */
         .floating-toggle.active {
@@ -652,10 +649,12 @@
         </div>
  
     <!-- Main Layout -->
-    <div class="container">
-    <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">Toggle Mode</button>
-        <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="container">
+            <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">🔄</button>
+        
+            <!-- Sidebar -->
+            <div class="sidebar">
+
             <h2>Filters</h2>
         <div class="filter-group">
             <label>Time Period:</label>
