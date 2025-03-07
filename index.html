@@ -913,7 +913,6 @@
         
         var allMarkers = [];
         var siteData = [];
-var routeControl = null; // Ensure route control is globally accessible
 
 function getUserLocation() {
     if (navigator.geolocation) {
@@ -954,8 +953,6 @@ function getDistance(lat1, lon1, lat2, lon2) {
         
 // Existing function
 function loadLocations() {
-    clearMap(); // Remove Routes before loading Sites
-
     fetch('locations.json')
         .then(response => response.json())
         .then(data => {
@@ -964,7 +961,6 @@ function loadLocations() {
         })
         .catch(error => console.error("Error loading JSON:", error));
 }
-        
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
@@ -1240,14 +1236,11 @@ siteCard.innerHTML = `
     });
 }
 
-                    
-                    
-            window.onload = function() {
-                getUserLocation(); 
-                loadLocations(); // Default to showing Sites only
-            };
-
-
+        
+        
+                    window.onload = function() {
+                        getUserLocation(); // Gets user's location when the page loads
+                    };
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
@@ -1258,44 +1251,36 @@ siteCard.innerHTML = `
                 }
             }
                 // Store user preferences in sets
-let isRoutesMode = false; // Default to Sites mode
-
 function toggleViewMode() {
-    isRoutesMode = !isRoutesMode; // Toggle the mode
-
     let toggleButton = document.getElementById("toggleViewMode");
-    toggleButton.textContent = isRoutesMode ? "Sites" : "Routes"; // Toggle button text
+    let isRoutesMode = toggleButton.innerText === "Sites";
 
-    clearMap(); // Remove previous markers and routes before switching
+    // Toggle button text
+    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
 
-    if (isRoutesMode) {
-        loadRoutes(); // Show only Routes
-    } else {
-        loadLocations(); // Show only Sites
-    }
-}
+    // Show only relevant filters when Routes is selected
+    let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
+    let allFilterGroups = document.querySelectorAll(".filter-group");
 
+    allFilterGroups.forEach(group => {
+        let filterId = group.querySelector("select, input")?.id || "";
+        group.style.display = (isRoutesMode && filtersToKeep.includes(filterId)) || !isRoutesMode ? "block" : "none";
+    });
 
-function clearMap() {
+    // Clear previous map elements
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    // Remove any existing route paths if they exist
-if (routeControl) {
-    try {
-        map.removeControl(routeControl);
-    } catch (error) {
-        console.warn("Route control already removed or not initialized:", error);
+    // Load the appropriate dataset
+    if (isRoutesMode) {
+        loadRoutes();
+    } else {
+        loadLocations();
     }
-    routeControl = null;
 }
-
-
 
         
 function loadRoutes() {
-    clearMap(); // Remove Sites before loading Routes
-
     fetch('routes.json')
         .then(response => response.json())
         .then(data => {
@@ -1306,12 +1291,11 @@ function loadRoutes() {
 
 
 
-
 function displayRoutes(routesData) {
-    clearMap(); // Remove previous markers and route lines before loading new routes
-
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
 
     routesData.forEach(route => {
         let routeCard = document.createElement("div");
@@ -1324,34 +1308,20 @@ function displayRoutes(routesData) {
         `;
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
+
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // ✅ Fix: Safely remove the previous route before adding a new one
-        if (routeControl) {
-            try {
-                map.removeControl(routeControl);
-            } catch (error) {
-                console.warn("Route control already removed:", error);
-            }
-            routeControl = null;
-        }
-
-        // ✅ Fix: Create a new route and fit map bounds
-        routeControl = L.Routing.control({
+        // Add walking route using Leaflet Routing Machine
+        L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
-            createMarker: () => null, // Hide default markers
+            createMarker: function() { return null; }, // Hide default markers
             lineOptions: {
                 styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
             }
         }).addTo(map);
 
-        // ✅ Fix: Ensure map zooms to fit entire route
-        if (waypoints.length > 0) {
-            map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
-        }
-
-        // ✅ Fix: Add site markers
+        // Add markers for sites
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
@@ -1378,9 +1348,6 @@ function displayRoutes(routesData) {
 
 
 
-
-
-
         
     // Get the toggle button element
     let button = document.getElementById("toggleViewMode");
@@ -1390,6 +1357,20 @@ function displayRoutes(routesData) {
         button.classList.toggle("active");
     } else {
         console.error("Button with ID 'toggleViewMode' not found.");
+    }
+
+
+    // Example functionality: switch between grid/list views
+    let searchResults = document.getElementById("searchResults");
+
+    if (searchResults.classList.contains("grid-view")) {
+        searchResults.classList.remove("grid-view");
+        searchResults.classList.add("list-view");
+        button.textContent = "Switch to Grid";
+    } else {
+        searchResults.classList.remove("list-view");
+        searchResults.classList.add("grid-view");
+        button.textContent = "Switch to List";
     }
 
 
