@@ -305,21 +305,28 @@
         .floating-toggle {
             position: absolute;
             top: 80px; /* Adjust as needed to fit in the red square */
-            left: 310px; /* Adjust so it aligns just inside the search results */
+            left: 310px; /* Position near the search results */
             background: #03FDFC;
             color: black;
-            font-size: 0.8em; /* Make it smaller */
+            font-size: 0.7em; /* Make text smaller */
             font-weight: bold;
-            padding: 5px 10px;
+            padding: 2px 8px; /* Reduce padding to shrink size */
             border: none;
-            border-radius: 5px;
+            border-radius: 3px;
             cursor: pointer;
-            z-index: 1000; /* Ensure it floats above other elements */
+            z-index: 1000; /* Ensure it's on top */
+            width: 40px; /* Make it twice as long as its height */
+            height: 20px; /* Keep it small */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .floating-toggle:hover {
             background: #02c9c9;
         }
+
 
         
         /* Active state for toggle */
