@@ -953,6 +953,8 @@ function getDistance(lat1, lon1, lat2, lon2) {
         
 // Existing function
 function loadLocations() {
+    clearMap(); // Remove Routes before loading Sites
+
     fetch('locations.json')
         .then(response => response.json())
         .then(data => {
@@ -961,6 +963,7 @@ function loadLocations() {
         })
         .catch(error => console.error("Error loading JSON:", error));
 }
+        
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
@@ -1236,13 +1239,13 @@ siteCard.innerHTML = `
     });
 }
 
-        
-        
+                    
+                    
             window.onload = function() {
                 getUserLocation(); 
-                loadLocations(); // Load site locations
-                loadRoutes(); // Load route data
+                loadLocations(); // Default to showing Sites only
             };
+
 
         
             function toggleAdditionalFilters() {
@@ -1254,25 +1257,40 @@ siteCard.innerHTML = `
                 }
             }
                 // Store user preferences in sets
+let isRoutesMode = false; // Default to Sites mode
+
 function toggleViewMode() {
+    isRoutesMode = !isRoutesMode; // Toggle the mode
+
     let toggleButton = document.getElementById("toggleViewMode");
-    let isRoutesMode = toggleButton.innerText === "Sites";
+    toggleButton.textContent = isRoutesMode ? "Sites" : "Routes"; // Toggle button text
 
-    // Toggle text
-    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
+    clearMap(); // Remove previous markers and routes before switching
 
-    // Clear previous map elements
+    if (isRoutesMode) {
+        loadRoutes(); // Show only Routes
+    } else {
+        loadLocations(); // Show only Sites
+    }
+}
+
+function clearMap() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    // Load both sites and routes, regardless of toggle state
-    loadLocations(); // Load site locations
-    loadRoutes(); // Load route data
+    // Remove any existing route paths
+    if (routeControl) {
+        map.removeControl(routeControl);
+        routeControl = null;
+    }
 }
+
 
 
         
 function loadRoutes() {
+    clearMap(); // Remove Sites before loading Routes
+
     fetch('routes.json')
         .then(response => response.json())
         .then(data => {
@@ -1283,11 +1301,12 @@ function loadRoutes() {
 
 
 
+
 function displayRoutes(routesData) {
+    clearMap(); // Remove previous markers and route lines before loading new routes
+
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
 
     routesData.forEach(route => {
         let routeCard = document.createElement("div");
@@ -1303,8 +1322,8 @@ function displayRoutes(routesData) {
 
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // Add walking route using Leaflet Routing Machine
-        L.Routing.control({
+        // Store route control reference so it can be removed later
+        routeControl = L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
             createMarker: function() { return null; }, // Hide default markers
@@ -1313,7 +1332,7 @@ function displayRoutes(routesData) {
             }
         }).addTo(map);
 
-        // Add markers for sites
+        // Add markers for sites along the route
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
@@ -1335,6 +1354,7 @@ function displayRoutes(routesData) {
         resultsContainer.appendChild(routeCard);
     });
 }
+
 
 
 
