@@ -1190,14 +1190,63 @@ siteCard.innerHTML = `
                 // Store user preferences in sets
 function toggleViewMode() {
     let toggleButton = document.getElementById("toggleViewMode");
-    
-    if (toggleButton.innerText === "Sites") {
-        toggleButton.innerText = "Routes";
+    let isRoutesMode = toggleButton.innerText === "Sites";
+
+    // Toggle text
+    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
+
+    // Show only the relevant filters when Routes is selected
+    let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
+    let allFilterGroups = document.querySelectorAll(".filter-group");
+
+    allFilterGroups.forEach(group => {
+        let filterId = group.querySelector("select, input")?.id || "";
+        group.style.display = (isRoutesMode && filtersToKeep.includes(filterId)) || !isRoutesMode ? "block" : "none";
+    });
+
+    // Switch data source
+    if (isRoutesMode) {
+        loadRoutes();
     } else {
-        toggleButton.innerText = "Sites";
+        loadLocations();
     }
 }
 
+function loadRoutes() {
+    fetch('routes.json')
+        .then(response => response.json())
+        .then(data => {
+            displayRoutes(data);
+        })
+        .catch(error => console.error("Error loading routes.json:", error));
+}
+
+function displayRoutes(routesData) {
+    let resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+
+    routesData.forEach(route => {
+        // Create a polyline for each route
+        let polyline = L.polyline(route.coordinates, { color: "#03FDFC", weight: 4 }).addTo(map);
+        allMarkers.push(polyline);
+
+        // Create a route card
+        let routeCard = document.createElement("div");
+        routeCard.className = "site-card";
+        routeCard.innerHTML = `
+            <h3 class="site-title">${route.name}</h3>
+            <p><strong>Time Period:</strong> ${route.timePeriod}</p>
+            <p><strong>Category:</strong> ${route.category}</p>
+            <p><strong>Distance:</strong> ${route.distance} miles</p>
+            <p class="site-description">${route.description}</p>
+        `;
+
+        resultsContainer.appendChild(routeCard);
+    });
+}
+        
 
     // Toggle active class
     button.classList.toggle("active");
