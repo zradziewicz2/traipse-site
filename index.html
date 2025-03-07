@@ -963,7 +963,15 @@ function applyFilters() {
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
             (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period)));
         
-let matchesCity = selectedCity === "all" || (site.city && site.city.toLowerCase() === selectedCity);
+        let matchesCity = selectedCity === "all" || (site.city && site.city.toLowerCase() === selectedCity);
+        let matchesGiftShop = filterGiftShop === null || (site.giftshop === filterGiftShop);
+        let matchesSpanishTranslations = filterSpanishTranslations === null || (site.spanishtranslations === filterSpanishTranslations);
+        let matchesLuggageStorage = filterLuggageStorage === null || (site.luggagestorage === filterLuggageStorage);
+        let matchesPublicAccess = filterPublicAccess === null || (site.publicaccess === filterPublicAccess);
+        let matchesDiningOnSite = filterDiningOnSite === null || (site.diningonsite === filterDiningOnSite);
+        let matchesADAAccessibility = filterADAAccessibility === null || (site.adaaccessibility === filterADAAccessibility);
+        let matchesDogFriendly = filterDogFriendly === null || (site.dogfriendly === filterDogFriendly);  // ✅ ADD THIS
+
 
 
         if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
