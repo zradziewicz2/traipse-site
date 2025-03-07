@@ -1311,12 +1311,13 @@ function displayRoutes(routesData) {
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
         // ✅ Ensure old route control is removed before adding a new one
-        if (window.currentRouteControl) {
-            map.removeControl(window.currentRouteControl);
+        // Store multiple route controls instead of overwriting
+        if (!window.routeControls) {
+            window.routeControls = [];
         }
-
-        // ✅ Store route control in a global variable for cleanup
-        window.currentRouteControl = L.Routing.control({
+        
+        // Create a new route control for each route
+        let newRouteControl = L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
             createMarker: function() { return null; }, // Hide default markers
@@ -1324,6 +1325,10 @@ function displayRoutes(routesData) {
                 styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
             }
         }).addTo(map);
+        
+        // Save this route control so it persists
+        window.routeControls.push(newRouteControl);
+
 
         // ✅ Fit map to the route bounds
         if (waypoints.length > 0) {
