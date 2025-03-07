@@ -96,11 +96,14 @@
         .search-results-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Aligns to the left to match original layout */
-            width: auto; /* Prevents stretching */
-            max-width: 600px; /* Limits width so it doesn't expand */
-            margin-left: 20px; /* Adjust as needed to align with the sidebar */
+            align-items: center;
+            width: 50%;
+            min-width: 500px;
+            margin-left: 0px;
+            height: calc(100vh - 100px); /* Ensure it doesn't make the page scroll */
+            overflow: hidden; /* Prevents affecting the whole page */
         }
+
 
         
         .toggle-container-top {
