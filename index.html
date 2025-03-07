@@ -875,23 +875,6 @@
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
-   
-        
-                <!-- Dedicated Section for Places/Routes Toggle -->
-                <div class="toggle-container-top" style="
-                    width: 100%;
-                    padding: 15px 0;
-                    background: #111;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-bottom: 2px solid #03FDFC;">
-                    <span id="modeLabel" style="color: #03FDFC; font-weight: bold; font-size: 1.2em; margin-right: 10px;">Places</span>
-                    <label class="switch">
-                        <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
 
         
         <div class="search-results" id="searchResults"></div>
@@ -914,18 +897,6 @@
         var allMarkers = [];
         var siteData = [];
         
-function toggleViewMode() {
-    let toggle = document.getElementById("toggleMode");
-    let modeLabel = document.getElementById("modeLabel");
-
-    if (toggle.checked) {
-        modeLabel.innerText = "Routes";
-        loadRoutes();  // Call function to switch to routes
-    } else {
-        modeLabel.innerText = "Places";
-        loadLocations();  // Call function to switch back to places
-    }
-}
 
 function getUserLocation() {
     if (navigator.geolocation) {
