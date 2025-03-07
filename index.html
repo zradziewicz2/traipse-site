@@ -8,6 +8,7 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
+
     <!-- Custom Styles -->
     <style>
         body {
@@ -842,6 +843,7 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     <script>
         var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1230,19 +1232,11 @@ function loadRoutes() {
 
 function displayRoutes(routesData) {
     let resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = "";  // Clear previous results
-    allMarkers.forEach(marker => map.removeLayer(marker)); // Clear map markers
+    resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
     routesData.forEach(route => {
-        // Create a polyline for the route
-        let polyline = L.polyline(route.route.map(coord => [coord.lat, coord.lng]), {
-            color: route.color,
-            weight: 4
-        }).addTo(map);
-        allMarkers.push(polyline);
-
-        // Create a route card
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
         routeCard.innerHTML = `
@@ -1254,7 +1248,19 @@ function displayRoutes(routesData) {
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
 
-        // Add each site to the route card and place markers
+        let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
+
+        // 🟢 Use OSRM routing engine for walking paths
+        L.Routing.control({
+            waypoints: waypoints,
+            routeWhileDragging: false,
+            createMarker: function() { return null; }, // Hide default markers
+            lineOptions: {
+                styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
+            }
+        }).addTo(map);
+
+        // Add markers for sites
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
@@ -1266,10 +1272,8 @@ function displayRoutes(routesData) {
             `;
             routeSitesContainer.appendChild(siteElement);
 
-            // Create a marker for each site in the route
             let marker = L.marker([site.lat, site.lng]).bindPopup(`
-                <b>${site.name}</b><br>
-                ${site.description}<br>
+                <b>${site.name}</b><br>${site.description}<br>
                 <a href="${site.website}" target="_blank">More Info</a>
             `);
             marker.addTo(map);
@@ -1279,6 +1283,7 @@ function displayRoutes(routesData) {
         resultsContainer.appendChild(routeCard);
     });
 }
+
 
 
         
