@@ -99,13 +99,21 @@
         .search-results-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers the content */
-            width: 100%;
+            align-items: flex-start; /* Aligns to the left to match original layout */
+            width: auto; /* Prevents stretching */
+            max-width: 600px; /* Limits width so it doesn't expand */
+            margin-left: 20px; /* Adjust as needed to align with the sidebar */
         }
+
         
         .toggle-container-top {
-            margin-bottom: 15px; /* Moves the first card down */
+            width: 100%;
+            display: flex;
+            justify-content: flex-start; /* Align with search results */
+            margin-bottom: 10px;
+            max-width: 600px; /* Match the card width */
         }
+
 
         
         .slider {
