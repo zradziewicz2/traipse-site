@@ -30,6 +30,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": false,
+        "dogfriendly": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -63,6 +64,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -96,6 +98,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -129,6 +132,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -162,6 +166,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -195,6 +200,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": true,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -228,6 +234,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -261,6 +268,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -294,6 +302,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -327,6 +336,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -360,6 +370,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -393,6 +404,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -426,6 +438,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -459,6 +472,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -492,6 +506,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -525,6 +540,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -558,6 +574,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -591,6 +608,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -624,6 +642,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -656,6 +675,7 @@
         "cashorcredit": "both",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -688,6 +708,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -720,6 +741,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -752,6 +774,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -784,6 +807,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -815,6 +839,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -847,6 +872,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -879,6 +905,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -911,6 +938,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -943,6 +971,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -975,6 +1004,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1007,6 +1037,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1039,6 +1070,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1071,6 +1103,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": false,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1103,6 +1136,7 @@
         "cashorcredit": "both",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1135,6 +1169,7 @@
         "cashorcredit": "both",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1167,6 +1202,7 @@
         "cashorcredit": "both",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1199,6 +1235,7 @@
         "cashorcredit": "both",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1231,6 +1268,7 @@
         "cashorcredit": "both",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "123 Main Street, Denver CO"
     },
     {
@@ -1263,6 +1301,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "710 10th St, Golden, CO 80401"
     },
     {
@@ -1295,6 +1334,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "923 10th St, Golden, CO 80401"
     },
     {
@@ -1327,6 +1367,7 @@
         "cashorcredit": "both",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "822 12th St, Golden, CO 80401"
     },
     {
@@ -1359,6 +1400,7 @@
         "cashorcredit": "notapplicable",
         "publicaccess": false,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "Private Residence, Golden, CO"
     },
     {
@@ -1391,6 +1433,7 @@
         "cashorcredit": "notapplicable",
         "publicaccess": false,
         "adaaccessibility": false,
+        "dogfriendly": false,
         "address": "Private Residence, Golden, CO"
     },
     {
@@ -1423,6 +1466,7 @@
         "cashorcredit": "notapplicable",
         "publicaccess": true,
         "adaaccessibility": false,
+        "dogfriendly": false,
         "address": "900 Colorow Rd, Golden, CO 80401"
     },
     {
@@ -1455,6 +1499,7 @@
         "cashorcredit": "notapplicable",
         "publicaccess": false,
         "adaaccessibility": false,
+        "dogfriendly": false,
         "address": "Private Property, Morrison, CO"
     },
     {
@@ -1487,6 +1532,7 @@
         "cashorcredit": "notapplicable",
         "publicaccess": true,
         "adaaccessibility": true,
+        "dogfriendly": false,
         "address": "Golden, CO"
     }
 ]
