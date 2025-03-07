@@ -1324,17 +1324,10 @@ function displayRoutes(routesData) {
         `;
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
-
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // Remove previous route before adding a new one
-        if (routeControl !== null) {
-            map.removeControl(routeControl);
-            routeControl = null;
-        }
-
-        // Add walking route using Leaflet Routing Machine
-         if (routeControl) {
+        // ✅ Fix: Safely remove the previous route before adding a new one
+        if (routeControl) {
             try {
                 map.removeControl(routeControl);
             } catch (error) {
@@ -1342,24 +1335,23 @@ function displayRoutes(routesData) {
             }
             routeControl = null;
         }
-        
-        routeControl = L.Routing.control({ 
+
+        // ✅ Fix: Create a new route and fit map bounds
+        routeControl = L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
-            createMarker: function() { return null; }, // Hide default markers
+            createMarker: () => null, // Hide default markers
             lineOptions: {
                 styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
             }
         }).addTo(map);
-        
-        // Ensure the map zooms to fit the entire route
+
+        // ✅ Fix: Ensure map zooms to fit entire route
         if (waypoints.length > 0) {
             map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
         }
 
-
-
-        // Add markers for sites along the route
+        // ✅ Fix: Add site markers
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
@@ -1381,6 +1373,7 @@ function displayRoutes(routesData) {
         resultsContainer.appendChild(routeCard);
     });
 }
+
 
 
 
