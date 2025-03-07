@@ -1051,9 +1051,13 @@ function applyFilters() {
         
                 
 
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`
+                <b>${site.name}</b><br>${site.description}<br>
+                <a href="${site.website}" target="_blank">More Info</a>
+            `);
             marker.addTo(map);
             allMarkers.push(marker);
+            
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
@@ -1278,17 +1282,14 @@ function displayRoutes(routesData) {
             <div class="route-sites"></div>
         `;
 
-
         let routeSitesContainer = routeCard.querySelector(".route-sites");
         let waypoints = route.route.map(coord => L.latLng(coord.lat, coord.lng));
 
-        // ✅ Ensure old route control is removed before adding a new one
-        // Store multiple route controls instead of overwriting
+        // Remove existing route controls before adding a new one
         if (!window.routeControls) {
             window.routeControls = [];
         }
         
-        // Create a new route control for each route
         let newRouteControl = L.Routing.control({
             waypoints: waypoints,
             routeWhileDragging: false,
@@ -1298,30 +1299,33 @@ function displayRoutes(routesData) {
             }
         }).addTo(map);
         
-        // Save this route control so it persists
         window.routeControls.push(newRouteControl);
 
-
-        // ✅ Fit map to the route bounds
         if (waypoints.length > 0) {
             map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
         }
 
-        // ✅ Add markers for sites
+        // ✅ Add colored dots for each site
         route.sites.forEach(site => {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
             siteElement.innerHTML = `
-                <div class="route-site-content">
-                    <h4>${site.name}</h4>
-                    ${site.website ? `<a href="${site.website}" target="_blank" class="website-link">Website</a>` : ""}
-                </div>
+                <h4>${site.name} <a href="${site.website}" target="_blank" class="website-link">Website</a></h4>
             `;
             routeSitesContainer.appendChild(siteElement);
+
+            // Add a circle marker with route-matching color
+            let circleMarker = L.circleMarker([site.lat, site.lng], {
+                radius: 6,
+                color: route.color,
+                fillColor: route.color,
+                fillOpacity: 1
+            }).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+            
+            circleMarker.addTo(map);
+            allMarkers.push(circleMarker);
         });
 
-
-        // ✅ Click event to zoom to the selected route
         routeCard.addEventListener("click", () => {
             if (waypoints.length > 0) {
                 map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
@@ -1331,6 +1335,7 @@ function displayRoutes(routesData) {
         resultsContainer.appendChild(routeCard);
     });
 }
+
 
 
 
