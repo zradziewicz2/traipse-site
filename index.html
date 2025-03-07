@@ -1127,18 +1127,20 @@ siteCard.innerHTML = `
             }
             
             // Function to translate time periods
-            function translateTimePeriod(timeperiod) {
-                const timePeriodMap = {
-                    "prehistoric": "Prehistoric",
-                    "indigenous": "Indigenous & Native History",
-                    "colonial": "Colonial & Early Settlements",
-                    "nineteenthcentury": "19th Century - Civil War & Westward Expansion",
-                    "industrialrevolution": "20th Century - Industrial Revolution, World Wars",
-                    "modernhistory": "Modern History or Civil Rights",
-                    "other": "Other"
-                };
-                return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
-            }
+                function translateTimePeriod(timeperiod) {
+                    if (!timeperiod || !Array.isArray(timeperiod)) return "Unknown"; // Handle missing values
+                    const timePeriodMap = {
+                        "prehistoric": "Prehistoric",
+                        "indigenous": "Indigenous & Native History",
+                        "colonial": "Colonial & Early Settlements",
+                        "nineteenthcentury": "19th Century - Civil War & Westward Expansion",
+                        "industrialrevolution": "20th Century - Industrial Revolution, World Wars",
+                        "modernhistory": "Modern History or Civil Rights",
+                        "other": "Other"
+                    };
+                    return timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || tp).join(", ");
+                }
+
             
             // Function to properly format cost
             function translateCost(cost) {
@@ -1241,6 +1243,8 @@ function displayRoutes(routesData) {
     allMarkers = [];
 
     routesData.forEach(route => {
+        let timePeriodText = translateTimePeriod(tour.sites.flatMap(site => site.timeperiod));
+        let tourCard = document.createElement("div");
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
         routeCard.innerHTML = `
