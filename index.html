@@ -1238,9 +1238,12 @@ siteCard.innerHTML = `
 
         
         
-                    window.onload = function() {
-                        getUserLocation(); // Gets user's location when the page loads
-                    };
+            window.onload = function() {
+                getUserLocation(); 
+                loadLocations(); // Load site locations
+                loadRoutes(); // Load route data
+            };
+
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
@@ -1255,17 +1258,18 @@ function toggleViewMode() {
     let toggleButton = document.getElementById("toggleViewMode");
     let isRoutesMode = toggleButton.innerText === "Sites";
 
-    // Toggle button text
+    // Toggle text
     toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
 
-    // Show only relevant filters when Routes is selected
-    let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
-    let allFilterGroups = document.querySelectorAll(".filter-group");
+    // Clear previous map elements
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
 
-    allFilterGroups.forEach(group => {
-        let filterId = group.querySelector("select, input")?.id || "";
-        group.style.display = (isRoutesMode && filtersToKeep.includes(filterId)) || !isRoutesMode ? "block" : "none";
-    });
+    // Load both sites and routes, regardless of toggle state
+    loadLocations(); // Load site locations
+    loadRoutes(); // Load route data
+}
+
 
     // Clear previous map elements
     allMarkers.forEach(marker => map.removeLayer(marker));
@@ -1357,20 +1361,6 @@ function displayRoutes(routesData) {
         button.classList.toggle("active");
     } else {
         console.error("Button with ID 'toggleViewMode' not found.");
-    }
-
-
-    // Example functionality: switch between grid/list views
-    let searchResults = document.getElementById("searchResults");
-
-    if (searchResults.classList.contains("grid-view")) {
-        searchResults.classList.remove("grid-view");
-        searchResults.classList.add("list-view");
-        button.textContent = "Switch to Grid";
-    } else {
-        searchResults.classList.remove("list-view");
-        searchResults.classList.add("grid-view");
-        button.textContent = "Switch to List";
     }
 
 
