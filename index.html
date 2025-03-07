@@ -304,28 +304,30 @@
                 /* Floating Toggle Button */
         .floating-toggle {
             position: absolute;
-            top: 80px; /* Adjust as needed to fit in the red square */
+            top: 80px; /* Adjust as needed */
             left: 310px; /* Position near the search results */
             background: #03FDFC;
             color: black;
-            font-size: 0.7em; /* Make text smaller */
+            font-size: 0.8em; /* Slightly larger text */
             font-weight: bold;
-            padding: 2px 8px; /* Reduce padding to shrink size */
+            padding: 3px 12px; /* Make it slightly longer */
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
-            z-index: 1000; /* Ensure it's on top */
-            width: 40px; /* Make it twice as long as its height */
-            height: 20px; /* Keep it small */
+            z-index: 1000; /* Ensure it stays on top */
+            width: 60px; /* Slightly longer */
+            height: 25px; /* Maintain good proportions */
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.2s ease-in-out;
         }
         
         .floating-toggle:hover {
             background: #02c9c9;
         }
+
 
 
         
@@ -657,10 +659,11 @@
  
     <!-- Main Layout -->
         <div class="container">
-            <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">🔄</button>
+            <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">Sites</button>
         
             <!-- Sidebar -->
             <div class="sidebar">
+
 
             <h2>Filters</h2>
         <div class="filter-group">
@@ -1186,7 +1189,15 @@ siteCard.innerHTML = `
             }
                 // Store user preferences in sets
 function toggleViewMode() {
-    let button = document.getElementById("toggleViewMode");
+    let toggleButton = document.getElementById("toggleViewMode");
+    
+    if (toggleButton.innerText === "Sites") {
+        toggleButton.innerText = "Routes";
+    } else {
+        toggleButton.innerText = "Sites";
+    }
+}
+
 
     // Toggle active class
     button.classList.toggle("active");
