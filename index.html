@@ -1297,9 +1297,16 @@ function displayRoutes(routesData) {
 
 
         
+    // Get the toggle button element
+    let button = document.getElementById("toggleViewMode");
+    
+    // Ensure the button exists before attempting to toggle
+    if (button) {
+        button.classList.toggle("active");
+    } else {
+        console.error("Button with ID 'toggleViewMode' not found.");
+    }
 
-    // Toggle active class
-    button.classList.toggle("active");
 
     // Example functionality: switch between grid/list views
     let searchResults = document.getElementById("searchResults");
