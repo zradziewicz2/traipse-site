@@ -962,6 +962,8 @@ function applyFilters() {
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
             (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period)));
+        
+let matchesCity = selectedCity === "all" || (site.city && site.city.toLowerCase() === selectedCity);
 
 
         if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
