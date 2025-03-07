@@ -627,6 +627,15 @@
                 color: #000;
             }
 
+        .toggle-wrapper {
+            margin-bottom: 10px; /* Adds space below toggle */
+            width: 100%;
+        }
+        .search-results {
+            margin-top: 10px; /* Pushes down the cards */
+        }
+
+
         }
 
         }
@@ -868,16 +877,19 @@
 
    
         
-        <!-- Toggle Button for Places/Routes -->
-        <div class="toggle-container" style="text-align: center; margin: 10px 0;">
-            <label class="switch">
-                <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
-                <span class="slider round"></span>
-            </label>
-            <span id="modeLabel" style="color: #03FDFC; font-weight: bold; margin-left: 8px;">Places</span>
+        <!-- Toggle Button for Places/Routes - Moved to Top -->
+        <div class="toggle-wrapper" style="display: flex; justify-content: center; align-items: center; padding: 15px 0; background: #181818;">
+            <div class="toggle-container" style="display: flex; align-items: center; gap: 10px;">
+                <span id="modeLabel" style="color: #03FDFC; font-weight: bold;">Places</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
         </div>
         
         <div class="search-results" id="searchResults"></div>
+
 
             <div id="map"></div>
         </div>
