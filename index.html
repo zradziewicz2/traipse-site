@@ -96,6 +96,18 @@
             height: 0;
         }
         
+        .search-results-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers the content */
+            width: 100%;
+        }
+        
+        .toggle-container-top {
+            margin-bottom: 15px; /* Moves the first card down */
+        }
+
+        
         .slider {
             position: absolute;
             cursor: pointer;
@@ -877,7 +889,17 @@
 
 
         
-        <div class="search-results" id="searchResults"></div>
+        <div class="search-results-wrapper">
+            <div class="toggle-container-top">
+                <span id="modeLabel" style="color: #03FDFC; font-weight: bold; font-size: 1.2em; margin-right: 10px;">Places</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
 
 
             <div id="map"></div>
