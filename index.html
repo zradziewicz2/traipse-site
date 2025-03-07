@@ -1281,10 +1281,13 @@ function clearMap() {
     allMarkers = [];
 
     // Remove any existing route paths if they exist
-if (routeControl && typeof routeControl.remove === 'function') {
-    routeControl.remove();
+if (routeControl) {
+    try {
+        map.removeControl(routeControl);
+    } catch (error) {
+        console.warn("Route control already removed or not initialized:", error);
+    }
     routeControl = null;
-}
 }
 
 
@@ -1331,7 +1334,16 @@ function displayRoutes(routesData) {
         }
 
         // Add walking route using Leaflet Routing Machine
-        routeControl = L.Routing.control({
+         if (routeControl) {
+            try {
+                map.removeControl(routeControl);
+            } catch (error) {
+                console.warn("Route control already removed:", error);
+            }
+            routeControl = null;
+        }
+        
+        routeControl = L.Routing.control({ 
             waypoints: waypoints,
             routeWhileDragging: false,
             createMarker: function() { return null; }, // Hide default markers
@@ -1339,6 +1351,13 @@ function displayRoutes(routesData) {
                 styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
             }
         }).addTo(map);
+        
+        // Ensure the map zooms to fit the entire route
+        if (waypoints.length > 0) {
+            map.fitBounds(L.latLngBounds(waypoints), { padding: [50, 50] });
+        }
+
+
 
         // Add markers for sites along the route
         route.sites.forEach(site => {
