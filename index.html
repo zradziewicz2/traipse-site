@@ -50,14 +50,16 @@
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
             siteElement.innerHTML = `
-                <div class="route-site-content">
-                    <h4>${site.name}</h4>
-                    ${site.website ? `<a href="${site.website}" target="_blank" class="website-link">Website</a>` : ""}
-                </div>
+                <h4>${site.name}</h4>
+                <p><strong>Category:</strong> ${site.thematiccategory}</p>
+                <p><a href="${site.website}" target="_blank" class="website-link">Visit Website</a></p>
             `;
             routeSitesContainer.appendChild(siteElement);
-        });
 
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`
+                <b>${site.name}</b><br>${site.description}<br>
+                <a href="${site.website}" target="_blank">More Info</a>
+            `);
             marker.addTo(map);
             allMarkers.push(marker);
         });
@@ -1362,14 +1364,16 @@ function displayRoutes(routesData) {
             let siteElement = document.createElement("div");
             siteElement.className = "route-site";
             siteElement.innerHTML = `
-                <div class="route-site-content">
-                    <h4>${site.name}</h4>
-                    ${site.website ? `<a href="${site.website}" target="_blank" class="website-link">Website</a>` : ""}
-                </div>
+                <h4>${site.name}</h4>
+                <p><strong>Category:</strong> ${site.thematiccategory}</p>
+                <p><a href="${site.website}" target="_blank" class="website-link">Visit Website</a></p>
             `;
             routeSitesContainer.appendChild(siteElement);
-        });
 
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`
+                <b>${site.name}</b><br>${site.description}<br>
+                <a href="${site.website}" target="_blank">More Info</a>
+            `);
             marker.addTo(map);
             allMarkers.push(marker);
         });
