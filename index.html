@@ -252,32 +252,6 @@
             content: '❌';
         }
 
-        .view-toggle {
-            display: flex;
-            border: 2px solid #03FDFC;
-            border-radius: 5px;
-            overflow: hidden;
-            width: 120px; /* Adjust width */
-            height: 30px;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-        
-        .toggle-option {
-            flex: 1;
-            text-align: center;
-            padding: 5px 10px;
-            background: #111;
-            color: #03FDFC;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
-        
-        .toggle-option.active {
-            background: #03FDFC;
-            color: black;
-        }
-
-
         .star-icon::before,
         .x-icon::before {
             content: attr(data-tooltip);
@@ -343,6 +317,31 @@
             color: #03FDFC; /* Cyan hover effect */
                 }
                 /* Floating Toggle Button */
+        .floating-toggle {
+            position: absolute;
+            top: 80px; /* Adjust as needed */
+            left: 310px; /* Position near the search results */
+            background: #03FDFC;
+            color: black;
+            font-size: 0.8em; /* Slightly larger text */
+            font-weight: bold;
+            padding: 3px 12px; /* Make it slightly longer */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000; /* Ensure it stays on top */
+            width: 60px; /* Slightly longer */
+            height: 25px; /* Maintain good proportions */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease-in-out;
+        }
+        
+        .floating-toggle:hover {
+            background: #02c9c9;
+        }
 
 
 
@@ -682,12 +681,9 @@
         </div>
  
     <!-- Main Layout -->
-<button id="toggleViewMode" class="floating-toggle">
-    <span id="toggleSitesText">Sites</span> | <span id="toggleRoutesText">Routes</span>
-</button>
-
-
-    
+        <div class="container">
+            <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">Sites</button>
+        
             <!-- Sidebar -->
             <div class="sidebar">
 
@@ -1240,56 +1236,33 @@ siteCard.innerHTML = `
                 }
             }
                 // Store user preferences in sets
-function toggleViewMode(mode) {
+function toggleViewMode() {
     let toggleButton = document.getElementById("toggleViewMode");
-    let sitesText = document.getElementById("toggleSitesText");
-    let routesText = document.getElementById("toggleRoutesText");
+    let isRoutesMode = toggleButton.innerText === "Sites";
+
+    // Toggle button text
+    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
+
+    // Show only relevant filters when Routes is selected
+    let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
     let allFilterGroups = document.querySelectorAll(".filter-group");
 
-    if (mode === "sites") {
-        toggleButton.classList.add("active");
-        sitesText.style.fontWeight = "bold";
-        sitesText.style.color = "black";
-        routesText.style.color = "#03FDFC";
+    allFilterGroups.forEach(group => {
+        let filterId = group.querySelector("select, input")?.id || "";
+        group.style.display = (isRoutesMode && filtersToKeep.includes(filterId)) || !isRoutesMode ? "block" : "none";
+    });
 
-        // Load locations
-        loadLocations();
+    // Clear previous map elements
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
 
-        // Show all filters except Routes filters
-        allFilterGroups.forEach(group => {
-            if (group.dataset.filterType === "routes") {
-                group.style.display = "none";
-            } else {
-                group.style.display = "block";
-            }
-        });
-
-    } else {
-        toggleButton.classList.remove("active");
-        routesText.style.fontWeight = "bold";
-        routesText.style.color = "black";
-        sitesText.style.color = "#03FDFC";
-
-        // Load routes
+    // Load the appropriate dataset
+    if (isRoutesMode) {
         loadRoutes();
-
-        // Hide site filters, show Routes filters
-        allFilterGroups.forEach(group => {
-            if (group.dataset.filterType === "routes") {
-                group.style.display = "block";
-            } else {
-                group.style.display = "none";
-            }
-        });
+    } else {
+        loadLocations();
     }
 }
-
-// Default view to "Sites"
-window.onload = function() {
-    toggleViewMode("sites");
-};
-
-
 
         
 function loadRoutes() {
