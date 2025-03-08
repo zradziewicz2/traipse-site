@@ -252,6 +252,32 @@
             content: '❌';
         }
 
+        .view-toggle {
+            display: flex;
+            border: 2px solid #03FDFC;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 120px; /* Adjust width */
+            height: 30px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+        
+        .toggle-option {
+            flex: 1;
+            text-align: center;
+            padding: 5px 10px;
+            background: #111;
+            color: #03FDFC;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .toggle-option.active {
+            background: #03FDFC;
+            color: black;
+        }
+
+
         .star-icon::before,
         .x-icon::before {
             content: attr(data-tooltip);
@@ -682,8 +708,12 @@
  
     <!-- Main Layout -->
         <div class="container">
-            <button class="floating-toggle" id="toggleViewMode" onclick="toggleViewMode()">Sites</button>
-        
+                    <div class="view-toggle">
+            <div id="toggleSites" class="toggle-option active" onclick="toggleViewMode('sites')">Sites</div>
+            <div id="toggleRoutes" class="toggle-option" onclick="toggleViewMode('routes')">Routes</div>
+        </div>
+
+    
             <!-- Sidebar -->
             <div class="sidebar">
 
@@ -1236,33 +1266,26 @@ siteCard.innerHTML = `
                 }
             }
                 // Store user preferences in sets
-function toggleViewMode() {
-    let toggleButton = document.getElementById("toggleViewMode");
-    let isRoutesMode = toggleButton.innerText === "Sites";
+function toggleViewMode(mode) {
+    let sitesButton = document.getElementById("toggleSites");
+    let routesButton = document.getElementById("toggleRoutes");
 
-    // Toggle button text
-    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
-
-    // Show only relevant filters when Routes is selected
-    let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
-    let allFilterGroups = document.querySelectorAll(".filter-group");
-
-    allFilterGroups.forEach(group => {
-        let filterId = group.querySelector("select, input")?.id || "";
-        group.style.display = (isRoutesMode && filtersToKeep.includes(filterId)) || !isRoutesMode ? "block" : "none";
-    });
-
-    // Clear previous map elements
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
-
-    // Load the appropriate dataset
-    if (isRoutesMode) {
-        loadRoutes();
+    if (mode === "sites") {
+        sitesButton.classList.add("active");
+        routesButton.classList.remove("active");
+        loadLocations(); // Load site locations
     } else {
-        loadLocations();
+        routesButton.classList.add("active");
+        sitesButton.classList.remove("active");
+        loadRoutes(); // Load routes
     }
 }
+
+// Set default view to "Sites"
+window.onload = function() {
+    toggleViewMode("sites"); 
+};
+
 
         
 function loadRoutes() {
