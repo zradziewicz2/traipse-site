@@ -53,24 +53,18 @@
             display: block; /* Ensures it stays inside the header */
         }
         .attribute-box {
-            display: inline-block;
-            background: transparent;
-            border: 2px solid #03FDFC;
-            color: #03FDFC;
-            font-size: 0.8em;
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            margin: 2px;
-            text-align: center;
-            white-space: nowrap;
+            padding: 2px 6px; /* Less padding inside */
+            font-size: 0.7em; /* Smaller text */
+            border: 1.5px solid #03FDFC; /* Make borders slightly thinner */
+            border-radius: 4px; /* Slightly less rounded */
+            white-space: nowrap; /* Prevent wrapping */
+            line-height: 1.2; /* Adjust for better height */
         }
     
         .attribute-box:hover {
             background: #03FDFC;
             color: black;
-    }
+        }
 
 
 
@@ -475,9 +469,10 @@
         }
         
         .site-attributes {
-            margin-top: 5px;
-            font-size: 0.9em;
-            color: #D0D0D0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px; /* Reduce spacing between tiles */
+            margin-top: 4px; /* Less space between details and attributes */
         }
         
         .site-distance {
@@ -1101,8 +1096,9 @@ siteCard.innerHTML = `
         </div>
         <div class="site-details">
             <h3 class="site-title">${site.name}</h3>
-            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
-            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+            <p>${translateTimePeriod(site.timeperiod)}</p>
+            <p><em>${translateCategory(site.thematiccategory)}</em></p>
+
 
             <p class="site-distance">
                 ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
