@@ -153,6 +153,58 @@
             border: none;
         }
 
+                /* Accordion Style */
+        .accordion {
+            background-color: #111;
+            color: #03FDFC;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: 0.3s;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        
+        /* Hover effect */
+        .accordion:hover {
+            background-color: #222;
+        }
+        
+        /* Active accordion button */
+        .accordion.active {
+            background-color: #03FDFC;
+            color: black;
+        }
+        
+        /* Panel under each accordion */
+        .panel {
+            display: none;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        /* Route cards inside panels */
+        .route-card {
+            background: #333;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        
+        .route-card:hover {
+            background: #444;
+        }
+
+
 
         button {
             background-color: #03FDFC;
@@ -861,7 +913,45 @@
 
    
         
-            <div class="search-results" id="searchResults"></div>
+            <!-- Accordion for Grouping Routes -->
+            <div class="accordion-container">
+            
+                <!-- Historic Homes Section -->
+                <button class="accordion">🏛 Historic Homes</button>
+                <div class="panel">
+                    <div class="route-card" onclick="zoomToRoute('capitol_hill_tour')">
+                        <h3>Capitol Hill Historic Homes Tour</h3>
+                    </div>
+                </div>
+            
+                <!-- Arts & Culture Section -->
+                <button class="accordion">🎭 Arts & Culture</button>
+                <div class="panel">
+                    <div class="route-card" onclick="zoomToRoute('golden_triangle_tour')">
+                        <h3>Golden Triangle Museum Walk</h3>
+                    </div>
+                    <div class="route-card" onclick="zoomToRoute('five_points_tour')">
+                        <h3>Five Points Jazz & Cultural Tour</h3>
+                    </div>
+                </div>
+            
+                <!-- Railroads & Transportation Section -->
+                <button class="accordion">🚂 Railroads & Transportation</button>
+                <div class="panel">
+                    <div class="route-card" onclick="zoomToRoute('golden_mining_tour')">
+                        <h3>Golden Mining & Railroad Tour</h3>
+                    </div>
+                </div>
+            
+                <!-- Ghost & Mystery Section -->
+                <button class="accordion">👻 Ghost & Mystery</button>
+                <div class="panel">
+                    <div class="route-card" onclick="zoomToRoute('cheesman_park_tour')">
+                        <h3>Cheesman Park Ghost Tour</h3>
+                    </div>
+                </div>
+            </div>
+
             <div id="map"></div>
         </div>
 
@@ -989,6 +1079,21 @@ function translateTours(tours) {
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
 
+// Enable accordion toggle
+var acc = document.getElementsByClassName("accordion");
+for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+}
+
+// Function to zoom to the selected route on the map
+function zoomToRoute(routeId) {
+    console.log(`Zooming to route: ${routeId}`);
+    // Use this function to zoom the map to the selected route
+}
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
