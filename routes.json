@@ -4,6 +4,10 @@
         "image": "colfax-avenue-capitol-hill-denver-colorado.jpg",
         "tour_id": "capitol_hill_tour",
         "color": "#FF5733",
+        "number_of_sites": "3",
+        "Distance": "1.2 mies",
+        "thematiccategory": "historichomes",
+        "Cost": "Free and Paid Options"
         "route": [
             {"lat": 39.7392, "lng": -104.9847},
             {"lat": 39.7373, "lng": -104.9807},
@@ -50,6 +54,10 @@
         "tour_id": "golden_triangle_tour",
         "image": "thumb.jpg",
         "color": "#03FDFC",
+        "number_of_sites": "3",
+        "Distance": "1.2 mies",
+        "thematiccategory": "historichomes",
+        "Cost": "Free and Paid Options"
         "route": [
             {"lat": 39.7371, "lng": -104.9876},
             {"lat": 39.7363, "lng": -104.9903},
@@ -95,6 +103,10 @@
         "tour_name": "Five Points Jazz & Cultural Tour",
         "tour_id": "five_points_tour",
         "image": "five-points-denver.jpg",
+        "number_of_sites": "3",
+        "Distance": "1.2 mies",
+        "thematiccategory": "historichomes",
+        "Cost": "Free and Paid Options"
         "color": "#FFB833",
         "route": [
             {"lat": 39.7553, "lng": -104.9784},
@@ -142,6 +154,10 @@
         "tour_id": "lodo_tour",
         "image": "lodo-denver.jpg",
         "color": "#5A5AFF",
+        "number_of_sites": "3",
+        "Distance": "1.2 mies",
+        "thematiccategory": "historichomes",
+        "Cost": "Free and Paid Options"
         "route": [
             {"lat": 39.7524, "lng": -104.9981},
             {"lat": 39.7506, "lng": -104.9999},
@@ -188,6 +204,10 @@
         "tour_id": "cheesman_park_tour",
         "image": "cheesman-park-denver.jpg",
         "color": "#800080",
+        "number_of_sites": "3",
+        "Distance": "1.2 mies",
+        "thematiccategory": "historichomes",
+        "Cost": "Free and Paid Options"
         "route": [
             {"lat": 39.7345, "lng": -104.9691},
             {"lat": 39.7321, "lng": -104.9680},
@@ -234,6 +254,10 @@
         "tour_id": "golden_mining_tour",
         "image": "golden-colorado.jpg",
         "color": "#D4AF37",
+        "number_of_sites": "3",
+        "Distance": "1.2 mies",
+        "thematiccategory": "historichomes",
+        "Cost": "Free and Paid Options"
         "route": [
             {"lat": 39.7550, "lng": -105.2220},
             {"lat": 39.7517, "lng": -105.2242},
