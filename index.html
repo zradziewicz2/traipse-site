@@ -343,31 +343,6 @@
             color: #03FDFC; /* Cyan hover effect */
                 }
                 /* Floating Toggle Button */
-        .floating-toggle {
-            position: absolute;
-            top: 80px; /* Adjust as needed */
-            left: 310px; /* Position near the search results */
-            background: #03FDFC;
-            color: black;
-            font-size: 0.8em; /* Slightly larger text */
-            font-weight: bold;
-            padding: 3px 12px; /* Make it slightly longer */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000; /* Ensure it stays on top */
-            width: 60px; /* Slightly longer */
-            height: 25px; /* Maintain good proportions */
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease-in-out;
-        }
-        
-        .floating-toggle:hover {
-            background: #02c9c9;
-        }
 
 
 
@@ -707,11 +682,10 @@
         </div>
  
     <!-- Main Layout -->
-        <div class="container">
-                    <div class="view-toggle">
-            <div id="toggleSites" class="toggle-option active" onclick="toggleViewMode('sites')">Sites</div>
-            <div id="toggleRoutes" class="toggle-option" onclick="toggleViewMode('routes')">Routes</div>
-        </div>
+<button id="toggleViewMode" class="floating-toggle">
+    <span id="toggleSitesText">Sites</span> | <span id="toggleRoutesText">Routes</span>
+</button>
+
 
     
             <!-- Sidebar -->
@@ -1267,24 +1241,54 @@ siteCard.innerHTML = `
             }
                 // Store user preferences in sets
 function toggleViewMode(mode) {
-    let sitesButton = document.getElementById("toggleSites");
-    let routesButton = document.getElementById("toggleRoutes");
+    let toggleButton = document.getElementById("toggleViewMode");
+    let sitesText = document.getElementById("toggleSitesText");
+    let routesText = document.getElementById("toggleRoutesText");
+    let allFilterGroups = document.querySelectorAll(".filter-group");
 
     if (mode === "sites") {
-        sitesButton.classList.add("active");
-        routesButton.classList.remove("active");
-        loadLocations(); // Load site locations
+        toggleButton.classList.add("active");
+        sitesText.style.fontWeight = "bold";
+        sitesText.style.color = "black";
+        routesText.style.color = "#03FDFC";
+
+        // Load locations
+        loadLocations();
+
+        // Show all filters except Routes filters
+        allFilterGroups.forEach(group => {
+            if (group.dataset.filterType === "routes") {
+                group.style.display = "none";
+            } else {
+                group.style.display = "block";
+            }
+        });
+
     } else {
-        routesButton.classList.add("active");
-        sitesButton.classList.remove("active");
-        loadRoutes(); // Load routes
+        toggleButton.classList.remove("active");
+        routesText.style.fontWeight = "bold";
+        routesText.style.color = "black";
+        sitesText.style.color = "#03FDFC";
+
+        // Load routes
+        loadRoutes();
+
+        // Hide site filters, show Routes filters
+        allFilterGroups.forEach(group => {
+            if (group.dataset.filterType === "routes") {
+                group.style.display = "block";
+            } else {
+                group.style.display = "none";
+            }
+        });
     }
 }
 
-// Set default view to "Sites"
+// Default view to "Sites"
 window.onload = function() {
-    toggleViewMode("sites"); 
+    toggleViewMode("sites");
 };
+
 
 
         
