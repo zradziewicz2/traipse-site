@@ -90,5 +90,192 @@
                 "website": "https://www.historycolorado.org/"
             }
         ]
+    }, 
+    [
+    {
+        "tour_name": "Five Points Jazz & Cultural Tour",
+        "tour_id": "five_points_tour",
+        "image": "five-points-denver.jpg",
+        "color": "#FFB833",
+        "route": [
+            {"lat": 39.7553, "lng": -104.9784},
+            {"lat": 39.7521, "lng": -104.9771},
+            {"lat": 39.7505, "lng": -104.9765}
+        ],
+        "sites": [
+            {
+                "name": "Rossonian Hotel",
+                "id": "denver007",
+                "lat": 39.7553,
+                "lng": -104.9784,
+                "city": "denver",
+                "description": "Once a jazz hotspot hosting legends like Duke Ellington and Billie Holiday, now an iconic landmark.",
+                "thematiccategory": "artsandculture",
+                "sighttype": "historicbuilding",
+                "website": "https://www.denver.org/listing/rossonian-hotel/12345/"
+            },
+            {
+                "name": "Black American West Museum",
+                "id": "denver008",
+                "lat": 39.7521,
+                "lng": -104.9771,
+                "city": "denver",
+                "description": "A museum dedicated to African American contributions to the Old West and Colorado’s history.",
+                "thematiccategory": "generalhistory",
+                "sighttype": "museum",
+                "website": "https://bawmhc.org/"
+            },
+            {
+                "name": "Five Points Plaza",
+                "id": "denver009",
+                "lat": 39.7505,
+                "lng": -104.9765,
+                "city": "denver",
+                "description": "A cultural hub celebrating the rich history and impact of Denver's Five Points neighborhood.",
+                "thematiccategory": "artsandculture",
+                "sighttype": "culturaldistrict",
+                "website": "https://www.denver.org/neighborhoods/five-points/"
+            }
+        ]
+    },
+    {
+        "tour_name": "LoDo Historic Walking Tour",
+        "tour_id": "lodo_tour",
+        "image": "lodo-denver.jpg",
+        "color": "#5A5AFF",
+        "route": [
+            {"lat": 39.7524, "lng": -104.9981},
+            {"lat": 39.7506, "lng": -104.9999},
+            {"lat": 39.7479, "lng": -105.0009}
+        ],
+        "sites": [
+            {
+                "name": "Union Station",
+                "id": "denver010",
+                "lat": 39.7524,
+                "lng": -104.9981,
+                "city": "denver",
+                "description": "A historic transportation hub with dining, shops, and a vibrant atmosphere.",
+                "thematiccategory": "technologyandtransportation",
+                "sighttype": "trainstation",
+                "website": "https://unionstationindenver.com/"
+            },
+            {
+                "name": "Oxford Hotel",
+                "id": "denver011",
+                "lat": 39.7506,
+                "lng": -104.9999,
+                "city": "denver",
+                "description": "One of Denver’s oldest hotels, featuring vintage decor and classic Western hospitality.",
+                "thematiccategory": "historichomes",
+                "sighttype": "hotel",
+                "website": "https://www.theoxfordhotel.com/"
+            },
+            {
+                "name": "Wynkoop Brewing Company",
+                "id": "denver012",
+                "lat": 39.7479,
+                "lng": -105.0009,
+                "city": "denver",
+                "description": "Denver’s first craft brewery, founded by former Mayor John Hickenlooper in a historic warehouse.",
+                "thematiccategory": "foodanddrink",
+                "sighttype": "brewery",
+                "website": "https://www.wynkoop.com/"
+            }
+        ]
+    },
+    {
+        "tour_name": "Cheesman Park Ghost Tour",
+        "tour_id": "cheesman_park_tour",
+        "image": "cheesman-park-denver.jpg",
+        "color": "#800080",
+        "route": [
+            {"lat": 39.7345, "lng": -104.9691},
+            {"lat": 39.7321, "lng": -104.9680},
+            {"lat": 39.7308, "lng": -104.9675}
+        ],
+        "sites": [
+            {
+                "name": "Cheesman Park",
+                "id": "denver013",
+                "lat": 39.7345,
+                "lng": -104.9691,
+                "city": "denver",
+                "description": "A beautiful park with a chilling past—once a cemetery, now known for ghostly sightings.",
+                "thematiccategory": "generalhistory",
+                "sighttype": "park",
+                "website": "https://www.denver.org/things-to-do/denver-attractions/cheesman-park/"
+            },
+            {
+                "name": "Peabody-Whitehead Mansion",
+                "id": "denver014",
+                "lat": 39.7321,
+                "lng": -104.9680,
+                "city": "denver",
+                "description": "A haunted mansion with a history of eerie events and unexplained happenings.",
+                "thematiccategory": "historichomes",
+                "sighttype": "mansion",
+                "website": "https://www.onlyinyourstate.com/colorado/haunted-mansion-denver-co/"
+            },
+            {
+                "name": "Botanic Gardens (Old Cemetery Grounds)",
+                "id": "denver015",
+                "lat": 39.7308,
+                "lng": -104.9675,
+                "city": "denver",
+                "description": "Home to beautiful gardens, but built on a historic burial site with a ghostly reputation.",
+                "thematiccategory": "naturalhistory",
+                "sighttype": "garden",
+                "website": "https://www.botanicgardens.org/"
+            }
+        ]
+    },
+    {
+        "tour_name": "Golden Mining & Railroad Tour",
+        "tour_id": "golden_mining_tour",
+        "image": "golden-colorado.jpg",
+        "color": "#D4AF37",
+        "route": [
+            {"lat": 39.7550, "lng": -105.2220},
+            {"lat": 39.7517, "lng": -105.2242},
+            {"lat": 39.7485, "lng": -105.2248}
+        ],
+        "sites": [
+            {
+                "name": "Colorado Railroad Museum",
+                "id": "golden001",
+                "lat": 39.7550,
+                "lng": -105.2220,
+                "city": "golden",
+                "description": "A museum dedicated to Colorado’s rich railroad history, with historic trains and exhibits.",
+                "thematiccategory": "technologyandtransportation",
+                "sighttype": "museum",
+                "website": "https://coloradorailroadmuseum.org/"
+            },
+            {
+                "name": "Golden History Museum",
+                "id": "golden002",
+                "lat": 39.7517,
+                "lng": -105.2242,
+                "city": "golden",
+                "description": "A museum showcasing Golden’s early mining and pioneer history.",
+                "thematiccategory": "generalhistory",
+                "sighttype": "museum",
+                "website": "https://www.goldenhistory.org/"
+            },
+            {
+                "name": "Coors Brewery Tour",
+                "id": "golden003",
+                "lat": 39.7485,
+                "lng": -105.2248,
+                "city": "golden",
+                "description": "Visit one of the world’s largest breweries and learn about Coors' history and brewing process.",
+                "thematiccategory": "foodanddrink",
+                "sighttype": "brewery",
+                "website": "https://www.millercoors.com/breweries/coors-brewing-company"
+            }
+        ]
     }
+]
+
 ]
