@@ -917,7 +917,23 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
         
-// Existing function
+function getMarkerEmoji(sighttype) {
+    const emojiMap = {
+        "museum": "🏛",
+        "archaeological": "🏺",
+        "landmark": "🗿",
+        "burial": "⚰",
+        "military": "⚔",
+        "religious": "⛪",
+        "urban": "🏙",
+        "government": "🏛",
+        "transportation": "🚂",
+        "naturalhistory": "🌳",
+        "other": "❓"
+    };
+    return emojiMap[sighttype.toLowerCase()] || "❓"; // Default to ❓ if not found
+}
+
 function loadLocations() {
     fetch('locations.json')
         .then(response => response.json())
@@ -1028,15 +1044,15 @@ function applyFilters() {
         if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
             matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
             matchesADAAccessibility &&
-            (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
-            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
-            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
-            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
-            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
-            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
-            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+            (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) &&
+            (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) &&
+            (selectedFamily === "all" || (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
+            (selectedThematicCategory === "all" || (site.thematiccategory && site.thematiccategory.toLowerCase() === selectedThematicCategory)) &&
+            (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
+            (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
+            (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
+            (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) &&
+            (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
             (selectedDistance === "all" || 
                 (distance !== null &&
                 ((selectedDistance === "1" && distance < 1) ||
@@ -1046,6 +1062,7 @@ function applyFilters() {
         {
             // ✅ Matching sites will be shown
         }
+
 
 
         
