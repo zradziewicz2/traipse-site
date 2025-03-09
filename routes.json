@@ -33,7 +33,7 @@
                 "city": "denver",
                 "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
                 "thematiccategory": "historichomes",
-                "sighttype": "historichome",
+                "sitetype": "historichome",
                 "website": "https://mollybrown.org/"
             },
             {
@@ -44,7 +44,7 @@
                 "city": "denver",
                 "description": "A fully restored 19th-century home highlighting Denver's early influential families.",
                 "thematiccategory": "historichomes",
-                "sighttype": "historichome",
+                "sitetype": "historichome",
                 "website": "https://www.historycolorado.org/byers-evans-house-museum"
             }
         ]
@@ -72,7 +72,7 @@
                 "city": "denver",
                 "description": "A world-class art museum with collections spanning centuries and continents.",
                 "thematiccategory": "artsandculture",
-                "sighttype": "museum",
+                "sitetype": "museum",
                 "website": "https://www.denverartmuseum.org/"
             },
             {
@@ -83,7 +83,7 @@
                 "city": "denver",
                 "description": "A museum dedicated to the abstract expressionist works of Clyfford Still.",
                 "thematiccategory": "artsandculture",
-                "sighttype": "museum",
+                "sitetype": "museum",
                 "website": "https://clyffordstillmuseum.org/"
             },
             {
@@ -94,7 +94,7 @@
                 "city": "denver",
                 "description": "An interactive museum showcasing Colorado's rich history and heritage.",
                 "thematiccategory": "generalhistory",
-                "sighttype": "museum",
+                "sitetype": "museum",
                 "website": "https://www.historycolorado.org/"
             }
         ]
@@ -122,7 +122,7 @@
                 "city": "denver",
                 "description": "Once a jazz hotspot hosting legends like Duke Ellington and Billie Holiday, now an iconic landmark.",
                 "thematiccategory": "artsandculture",
-                "sighttype": "historicbuilding",
+                "sitetype": "historicbuilding",
                 "website": "https://www.denver.org/listing/rossonian-hotel/12345/"
             },
             {
@@ -133,7 +133,7 @@
                 "city": "denver",
                 "description": "A museum dedicated to African American contributions to the Old West and Colorado’s history.",
                 "thematiccategory": "generalhistory",
-                "sighttype": "museum",
+                "sitetype": "museum",
                 "website": "https://bawmhc.org/"
             },
             {
@@ -144,7 +144,7 @@
                 "city": "denver",
                 "description": "A cultural hub celebrating the rich history and impact of Denver's Five Points neighborhood.",
                 "thematiccategory": "artsandculture",
-                "sighttype": "culturaldistrict",
+                "sitetype": "culturaldistrict",
                 "website": "https://www.denver.org/neighborhoods/five-points/"
             }
         ]
@@ -172,7 +172,7 @@
                 "city": "denver",
                 "description": "A historic transportation hub with dining, shops, and a vibrant atmosphere.",
                 "thematiccategory": "technologyandtransportation",
-                "sighttype": "trainstation",
+                "sitetype": "trainstation",
                 "website": "https://unionstationindenver.com/"
             },
             {
@@ -183,7 +183,7 @@
                 "city": "denver",
                 "description": "One of Denver’s oldest hotels, featuring vintage decor and classic Western hospitality.",
                 "thematiccategory": "historichomes",
-                "sighttype": "hotel",
+                "sitetype": "hotel",
                 "website": "https://www.theoxfordhotel.com/"
             },
             {
@@ -194,7 +194,7 @@
                 "city": "denver",
                 "description": "Denver’s first craft brewery, founded by former Mayor John Hickenlooper in a historic warehouse.",
                 "thematiccategory": "foodanddrink",
-                "sighttype": "brewery",
+                "sitetype": "brewery",
                 "website": "https://www.wynkoop.com/"
             }
         ]
@@ -220,9 +220,9 @@
                 "lat": 39.7345,
                 "lng": -104.9691,
                 "city": "denver",
-                "description": "A beautiful park with a chilling past—once a cemetery, now known for ghostly sightings.",
+                "description": "A beautiful park with a chilling past—once a cemetery, now known for ghostly siteings.",
                 "thematiccategory": "generalhistory",
-                "sighttype": "park",
+                "sitetype": "park",
                 "website": "https://www.denver.org/things-to-do/denver-attractions/cheesman-park/"
             },
             {
@@ -233,7 +233,7 @@
                 "city": "denver",
                 "description": "A haunted mansion with a history of eerie events and unexplained happenings.",
                 "thematiccategory": "historichomes",
-                "sighttype": "mansion",
+                "sitetype": "mansion",
                 "website": "https://www.onlyinyourstate.com/colorado/haunted-mansion-denver-co/"
             },
             {
@@ -244,7 +244,7 @@
                 "city": "denver",
                 "description": "Home to beautiful gardens, but built on a historic burial site with a ghostly reputation.",
                 "thematiccategory": "naturalhistory",
-                "sighttype": "garden",
+                "sitetype": "garden",
                 "website": "https://www.botanicgardens.org/"
             }
         ]
@@ -272,7 +272,7 @@
                 "city": "golden",
                 "description": "A museum dedicated to Colorado’s rich railroad history, with historic trains and exhibits.",
                 "thematiccategory": "technologyandtransportation",
-                "sighttype": "museum",
+                "sitetype": "museum",
                 "website": "https://coloradorailroadmuseum.org/"
             },
             {
@@ -283,7 +283,7 @@
                 "city": "golden",
                 "description": "A museum showcasing Golden’s early mining and pioneer history.",
                 "thematiccategory": "generalhistory",
-                "sighttype": "museum",
+                "sitetype": "museum",
                 "website": "https://www.goldenhistory.org/"
             },
             {
@@ -294,7 +294,7 @@
                 "city": "golden",
                 "description": "Visit one of the world’s largest breweries and learn about Coors' history and brewing process.",
                 "thematiccategory": "foodanddrink",
-                "sighttype": "brewery",
+                "sitetype": "brewery",
                 "website": "https://www.millercoors.com/breweries/coors-brewing-company"
             }
         ]
