@@ -947,7 +947,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
         
-function getMarkerEmoji(sighttype) {
+function getMarkerEmoji(sitetype) {
     const emojiMap = {
         "museum": "🏛",
         "archaeological": "🏺",
@@ -961,7 +961,7 @@ function getMarkerEmoji(sighttype) {
         "naturalhistory": "🌳",
         "other": "❓"
     };
-    return emojiMap[sighttype.toLowerCase()] || "❓"; // Default to ❓ if not found
+    return emojiMap[sitetype.toLowerCase()] || "❓"; // Default to ❓ if not found
 }
 
 function loadLocations() {
@@ -1076,7 +1076,7 @@ function applyFilters() {
 
 
         if (
-            (selectedSiteType === "all" || (site.sighttype && site.sighttype.toLowerCase() === selectedSiteType)) &&
+            (selectedSiteType === "all" || (site.sitetype && site.sitetype.toLowerCase() === selectedSiteType)) &&
             (selectedPaymentMethod === "all" || (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
             (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly))
             &&
@@ -1164,7 +1164,7 @@ siteCard.innerHTML = `
                 ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
                 ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
                 ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
-                ${selectedSiteType !== "all" && site.sighttype.toLowerCase() === selectedSiteType ? `<span class="attribute-box">${translateSiteType(site.sighttype)}</span>` : ""}
+                ${selectedSiteType !== "all" && site.sitetype.toLowerCase() === selectedSiteType ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>` : ""}
                 ${selectedPaymentMethod !== "all" && site.paymentmethod.toLowerCase() === selectedPaymentMethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` : ""}
                 ${filterDogFriendly && site.dogfriendly ? `<span class="attribute-box">DOG-FRIENDLY</span>` : ""}
 
