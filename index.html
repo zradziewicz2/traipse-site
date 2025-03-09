@@ -221,7 +221,10 @@
             flex-grow: 1;
         }
 
-
+        .filter-title {
+            font-weight: bold;  /* Makes the text bold */
+            font-size: 1.2em;   /* Adjust size: 1.2em = 20% bigger than normal */
+        }
             
         .site-actions {
             display: flex;
@@ -693,7 +696,10 @@
 
                         <!-- Button to Show Additional Filters -->
            <!-- EXPERIENCE TYPE -->
-<button class="toggle-filters" onclick="toggleFilterCategory('experienceFilters')">Experience Type 🎭🏛️🎨▼</button>
+<button class="toggle-filters" onclick="toggleFilterCategory('experienceFilters')">
+    <label class="filter-title">Experience Type 🎭🏛️🎨 ▼</label>
+</button>
+
 <div class="filter-category" id="experienceFilters" style="display: none;">
     <div class="filter-group">
         <label>Site Type:</label>
