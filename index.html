@@ -836,7 +836,7 @@
 
                 <div class="filter-group">
                     <label>Payment Methods:</label>
-                    <select id="paymentMethodsFilter">
+                    <select id="paymentmethodFilter">
                         <option value="all">All</option>
                         <option value="cash">Cash</option>
                         <option value="credit">Credit</option>
@@ -1040,7 +1040,7 @@ function applyFilters() {
     let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
     let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
     let selectedSiteType = document.getElementById("siteTypeFilter").value;
-    let selectedPaymentMethod = document.getElementById("paymentMethodsFilter").value;
+    let selectedPaymentMethod = document.getElementById("paymentmethodFilter").value;
     let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
 
 
@@ -1076,7 +1076,7 @@ function applyFilters() {
 
         if (
             (selectedSiteType === "all" || (site.sighttype && site.sighttype.toLowerCase() === selectedSiteType)) &&
-            (selectedPaymentMethod === "all" || (site.paymentmethods && site.paymentmethods.toLowerCase() === selectedPaymentMethod)) &&
+            (selectedPaymentMethod === "all" || (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
             (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly))
             &&
             (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) &&
@@ -1164,7 +1164,7 @@ siteCard.innerHTML = `
                 ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
                 ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
                 ${selectedSiteType !== "all" && site.sighttype.toLowerCase() === selectedSiteType ? `<span class="attribute-box">${translateSiteType(site.sighttype)}</span>` : ""}
-                ${selectedPaymentMethod !== "all" && site.paymentmethods.toLowerCase() === selectedPaymentMethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethods)}</span>` : ""}
+                ${selectedPaymentMethod !== "all" && site.paymentmethod.toLowerCase() === selectedPaymentMethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` : ""}
                 ${filterDogFriendly && site.dogfriendly ? `<span class="attribute-box">DOG-FRIENDLY</span>` : ""}
 
             </div>
