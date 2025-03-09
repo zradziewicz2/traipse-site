@@ -796,93 +796,185 @@
             </div>
 
                         <!-- Button to Show Additional Filters -->
-            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
-            
-            <!-- Additional Filters Hidden by Default -->
-            <div class="additional-filters" id="additionalFilters" style="display: none;">
-                <div class="filter-group">
-                    <label>Reservations:</label>
-                    <select id="reservationsFilter">
-                        <option value="all">All</option>
-                        <option value="walkins_welcome">Walk-Ins Welcome</option>
-                        <option value="reservationrequired">Reservation Required</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Tours:</label>
-                    <select id="toursFilter">
-                        <option value="all">All</option>
-                        <option value="selftours">Self-Tours</option>
-                        <option value="guidedtours">Guided Tours</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Transit Accessibility:</label>
-                    <select id="transitFilter">
-                        <option value="all">All</option>
-                        <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
-                        <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
-                        <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Type:</label>
-                    <select id="typeFilter">
-                        <option value="all">All</option>
-                        <option value="indoor">Indoor</option>
-                        <option value="outdoor">Outdoor</option>
-                    </select>
-                </div>
+           <!-- EXPERIENCE TYPE -->
+<button class="toggle-filters" onclick="toggleFilterCategory('experienceFilters')">Experience Type ▼</button>
+<div class="filter-category" id="experienceFilters" style="display: none;">
+    <div class="filter-group">
+        <label>Site Type:</label>
+        <select id="siteTypeFilter">
+            <option value="all">All</option>
+            <option value="museums">Museums</option>
+            <option value="landmark">Landmark</option>
+            <option value="historichome">Historic Home</option>
+            <option value="archeological">Archeological</option>
+            <option value="burial">Burial</option>
+            <option value="religious">Religious</option>
+            <option value="urban">Urban</option>
+            <option value="political">Political</option>
+            <option value="industrial">Industrial</option>
+            <option value="outdoor">Outdoor</option>
+        </select>
+    </div>
 
-                <div class="filter-group">
-                    <label>Payment Methods:</label>
-                    <select id="paymentmethodFilter">
-                        <option value="all">All</option>
-                        <option value="cash">Cash</option>
-                        <option value="credit">Credit</option>
-                        <option value="both">Both</option>
-                        <option value="notapplicable">Not Applicable</option>
-                    </select>
-                </div>
-        
-                <div class="filter-group">
-                    <label>Family Friendly:</label>
-                    <select id="familyFilter">
-                        <option value="all">All</option>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                <label><input type="checkbox" id="giftShopFilter"> Has Gift Shop</label>
-                </div>
-                
-                <div class="filter-group">
-                    <label><input type="checkbox" id="spanishTranslationsFilter"> Spanish Translations Available</label>
-                </div>
-                
-                <div class="filter-group">
-                    <label><input type="checkbox" id="luggageStorageFilter"> Luggage Storage</label>
-                </div>
-                
-                <div class="filter-group">
-                    <label><input type="checkbox" id="publicAccessFilter"> Public Access</label>
-                </div>
-                
-                <div class="filter-group">
-                    <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
-                </div>
-                
-                <div class="filter-group">
-                    <label><input type="checkbox" id="adaAccessibilityFilter"> ADA Accessible</label>
-                </div>
-                
-                <div class="filter-group">
-                    <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly</label>
-                </div>
+    <div class="filter-group">
+        <label>Indoor/Outdoor:</label>
+        <select id="typeFilter">
+            <option value="all">All</option>
+            <option value="indoor">Indoor</option>
+            <option value="outdoor">Outdoor</option>
+        </select>
+    </div>
 
+    <div class="filter-group">
+        <label>Thematic Category:</label>
+        <select id="ThematicCategoryFilter">
+            <option value="all">All</option>
+            <option value="artsandculture">Arts and Culture</option>
+            <option value="generalhistory">General History</option>
+            <option value="historichomes">Historic Homes</option>
+            <option value="naturalhistory">Natural History</option>
+            <option value="religiousandspiritual">Religious and Spiritual</option>
+            <option value="technologyandtransportation">Technology and Transportation</option>
+        </select>
+    </div>
 
-            </div>
+    <div class="filter-group">
+        <label>Time Period:</label>
+        <div class="timePeriod-group">
+            <label><input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric</label>
+            <label><input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements</label>
+            <label><input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century</label>
+            <label><input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> 20th Century</label>
+            <label><input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History</label>
+        </div>
+    </div>
+
+    <div class="filter-group">
+        <label>Scope:</label>
+        <select id="localOrNationalFilter">
+            <option value="all">All</option>
+            <option value="local">Local</option>
+            <option value="national">National</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Tours:</label>
+        <select id="toursFilter">
+            <option value="all">All</option>
+            <option value="selftours">Self-Guided Tours</option>
+            <option value="guidedtours">Guided Tours</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Public Access:</label>
+        <select id="publicAccessFilter">
+            <option value="all">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+</div>
+
+<!-- LOGISTICS -->
+<button class="toggle-filters" onclick="toggleFilterCategory('logisticsFilters')">Logistics ▼</button>
+<div class="filter-category" id="logisticsFilters" style="display: none;">
+    <div class="filter-group">
+        <label>Estimated Time:</label>
+        <select id="estimatedTimeFilter">
+            <option value="all">All</option>
+            <option value="<15 minutes">Less than 15 minutes</option>
+            <option value="15-1 hour">15 minutes to 1 hour</option>
+            <option value="1-2 hours">1-2 hours</option>
+            <option value="more than 2 hours">More than 2 hours</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Reservations Required:</label>
+        <select id="reservationsFilter">
+            <option value="all">All</option>
+            <option value="walkins_welcome">Walk-Ins Welcome</option>
+            <option value="reservationrequired">Reservation Required</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Cost:</label>
+        <select id="costFilter">
+            <option value="all">All</option>
+            <option value="free">Free</option>
+            <option value="paid">Paid</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Payment Methods:</label>
+        <select id="paymentMethodFilter">
+            <option value="all">All</option>
+            <option value="cash">Cash</option>
+            <option value="credit">Credit</option>
+            <option value="both">Both</option>
+            <option value="notapplicable">Not Applicable</option>
+        </select>
+    </div>
+</div>
+
+<!-- LOCATION & ACCESSIBILITY -->
+<button class="toggle-filters" onclick="toggleFilterCategory('locationFilters')">Location & Accessibility ▼</button>
+<div class="filter-category" id="locationFilters" style="display: none;">
+    <div class="filter-group">
+        <label>Distance:</label>
+        <select id="distanceFilter">
+            <option value="all">All</option>
+            <option value="1">Less than 1 mile</option>
+            <option value="5">1-5 miles</option>
+            <option value="10">More than 10 miles</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Transit Accessibility:</label>
+        <select id="transitFilter">
+            <option value="all">All</option>
+            <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
+            <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
+            <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
+        </select>
+    </div>
+</div>
+
+<!-- AMENITIES -->
+<button class="toggle-filters" onclick="toggleFilterCategory('amenitiesFilters')">Amenities ▼</button>
+<div class="filter-category" id="amenitiesFilters" style="display: none;">
+    <div class="filter-group">
+        <label><input type="checkbox" id="giftShopFilter"> Has Gift Shop</label>
+    </div>
+    <div class="filter-group">
+        <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
+    </div>
+    <div class="filter-group">
+        <label><input type="checkbox" id="luggageStorageFilter"> Luggage Storage</label>
+    </div>
+    <div class="filter-group">
+        <label><input type="checkbox" id="spanishTranslationsFilter"> Spanish Translations Available</label>
+    </div>
+</div>
+
+<!-- SPECIAL CONSIDERATIONS -->
+<button class="toggle-filters" onclick="toggleFilterCategory('specialFilters')">Special Considerations ▼</button>
+<div class="filter-category" id="specialFilters" style="display: none;">
+    <div class="filter-group">
+        <label><input type="checkbox" id="familyFilter"> Family-Friendly</label>
+    </div>
+    <div class="filter-group">
+        <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly</label>
+    </div>
+    <div class="filter-group">
+        <label><input type="checkbox" id="adaAccessibilityFilter"> ADA Accessible</label>
+    </div>
+</div>
 
 
             <button onclick="applyFilters()">Apply Filters</button>
@@ -1495,8 +1587,11 @@ function translatePaymentMethod(method) {
     };
     return methodMap[method.toLowerCase()] || "Unknown";
 }
-
-            
+        
+            function toggleFilterCategory(categoryId) {
+            let category = document.getElementById(categoryId);
+            category.style.display = category.style.display === "none" ? "block" : "none";
+        }
             
             function toggleNotInterested(siteId, element) {
                 console.log(`Toggling Not Interested for site ID: ${siteId}`); // Debugging log
