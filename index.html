@@ -1074,10 +1074,11 @@ function applyFilters() {
             let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
 
-            if (selectedSiteType === "all" || (site.sighttype && site.sighttype.toLowerCase() === selectedSiteType)) &&
-        (selectedPaymentMethod === "all" || (site.paymentmethods && site.paymentmethods.toLowerCase() === selectedPaymentMethod)) &&
-        (!filterDogFriendly || site.dogfriendly)&&
-
+        if (
+            (selectedSiteType === "all" || (site.sighttype && site.sighttype.toLowerCase() === selectedSiteType)) &&
+            (selectedPaymentMethod === "all" || (site.paymentmethods && site.paymentmethods.toLowerCase() === selectedPaymentMethod)) &&
+            (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly))
+            &&
             (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) &&
             (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) &&
             (selectedFamily === "all" || (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
@@ -1087,15 +1088,16 @@ function applyFilters() {
             (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
             (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) &&
             (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
-            (selectedDistance === "all" || 
+            (selectedDistance === "all" ||
                 (distance !== null &&
-                ((selectedDistance === "1" && distance < 1) ||
-                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-                (selectedDistance === "10" && distance > 10)))) &&
-            matchesTimePeriod) 
-        {
+                    ((selectedDistance === "1" && distance < 1) ||
+                    (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+                    (selectedDistance === "10" && distance > 10)))) &&
+            matchesTimePeriod
+        ) {
             // ✅ Matching sites will be shown
         }
+
 
 
 
