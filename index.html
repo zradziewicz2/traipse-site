@@ -1472,16 +1472,16 @@ function toggleMyPlaces(siteId, element) {
 }
 function translateSiteType(type) {
     const typeMap = {
-        "archaeological": "Archaeological",
+        "archaeological": "Archaeological site",
         "historichome": "Historic Home",
-        "landmark": "Landmark",
-        "museums": "Museums",
-        "burial": "Burial",
-        "religious": "Religious",
-        "urban": "Urban",
-        "political": "Political",
-        "industrial": "Industrial",
-        "outdoor": "Outdoor",
+        "landmark": "Landmarks and Monuments",
+        "museums": "Museums and Cultural Institutions",
+        "burial": "Burial or Commemorative Site",
+        "religious": "Religious and Spiritual",
+        "urban": "Urban and Social",
+        "political": "Political and Government",
+        "industrial": "Industrial and Technology",
+        "outdoor": "Natural History or Outdoor",
         "other": "Other"
     };
     return typeMap[type.toLowerCase()] || "Other";
