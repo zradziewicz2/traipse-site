@@ -1076,7 +1076,7 @@ function applyFilters() {
 
             if (selectedSiteType === "all" || (site.sighttype && site.sighttype.toLowerCase() === selectedSiteType)) &&
         (selectedPaymentMethod === "all" || (site.paymentmethods && site.paymentmethods.toLowerCase() === selectedPaymentMethod)) &&
-        (!filterDogFriendly || site.dogfriendly)
+        (!filterDogFriendly || site.dogfriendly)&&
 
             (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) &&
             (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) &&
