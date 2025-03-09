@@ -22,7 +22,7 @@
                 "city": "denver",
                 "description": "Iconic building with a gold dome, offering historic tours and views from the Mile High step.",
                 "thematiccategory": "generalhistory",
-                "sighttype": "government",
+                "sitetype": "government",
                 "website": "https://leg.colorado.gov/visit-learn"
             },
             {
