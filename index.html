@@ -1250,20 +1250,24 @@ siteCard.innerHTML = `
                 return categoryMap[category.toLowerCase()] || formatText(category);
             }
             
-            // Function to translate time periods
-                function translateTimePeriod(timeperiod) {
-                    if (!timeperiod || !Array.isArray(timeperiod)) return "Unknown"; // Handle missing values
-                    const timePeriodMap = {
-                        "prehistoric": "Prehistoric",
-                        "indigenous": "Indigenous & Native History",
-                        "colonial": "Colonial & Early Settlements",
-                        "nineteenthcentury": "19th Century - Civil War & Westward Expansion",
-                        "industrialrevolution": "20th Century - Industrial Revolution, World Wars",
-                        "modernhistory": "Modern History or Civil Rights",
-                        "other": "Other"
-                    };
+            function translateTimePeriod(timeperiod) {
+                if (!timeperiod) return "Unknown"; 
+                const timePeriodMap = {
+                    "prehistoric": "Prehistoric",
+                    "colonial": "Colonial & Early Settlements",
+                    "nineteenthcentury": "19th Century",
+                    "industrialrevolution": "20th Century",
+                    "modernhistory": "Modern History",
+                    "other": "Other"
+                };
+            
+                if (Array.isArray(timeperiod)) {
                     return timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || tp).join(", ");
+                } else {
+                    return timePeriodMap[timeperiod.toLowerCase()] || timeperiod;
                 }
+            }
+
 
             
             // Function to properly format cost
