@@ -148,6 +148,20 @@
             border-radius: 5px;
             border: none;
         }
+        .thematicCategory-group {
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: column; /* Ensures vertical stacking */
+            gap: 5px; /* Keeps spacing consistent */
+        }
+        
+        .thematicCategory-group label {
+            display: flex;
+            align-items: center; /* Keeps checkbox and text aligned */
+            gap: 8px; /* Adjusts spacing */
+            font-family: Montserrat, sans-serif;
+        }
+
 
 
         button {
@@ -727,17 +741,18 @@
         </select>
     </div>
 
-    <div class="filter-group">
-        <label>Thematic Category:</label>
-        <div class="thematicCategory-group">
-            <label><input type="checkbox" class="thematicCategoryFilter" value="artsandculture"> Arts and Culture</label>
-            <label><input type="checkbox" class="thematicCategoryFilter" value="generalhistory"> General History</label>
-            <label><input type="checkbox" class="thematicCategoryFilter" value="historichomes"> Historic Homes</label>
-            <label><input type="checkbox" class="thematicCategoryFilter" value="naturalhistory"> Natural History</label>
-            <label><input type="checkbox" class="thematicCategoryFilter" value="religiousandspiritual"> Religious and Spiritual</label>
-            <label><input type="checkbox" class="thematicCategoryFilter" value="technologyandtransportation"> Technology and Transportation</label>
-        </div>
+<div class="filter-group">
+    <label>Thematic Category:</label>
+    <div class="thematicCategory-group">
+        <label><input type="checkbox" class="thematicCategoryFilter" value="artsandculture"> Arts and Culture</label>
+        <label><input type="checkbox" class="thematicCategoryFilter" value="generalhistory"> General History</label>
+        <label><input type="checkbox" class="thematicCategoryFilter" value="historichomes"> Historic Homes</label>
+        <label><input type="checkbox" class="thematicCategoryFilter" value="naturalhistory"> Natural History</label>
+        <label><input type="checkbox" class="thematicCategoryFilter" value="religiousandspiritual"> Religious and Spiritual</label>
+        <label><input type="checkbox" class="thematicCategoryFilter" value="technologyandtransportation"> Technology and Transportation</label>
     </div>
+</div>
+
 
 
     <div class="filter-group">
@@ -1029,6 +1044,7 @@ function applyFilters() {
     : "all";
     let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
     .map(cb => cb.value);
+
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
@@ -1103,6 +1119,7 @@ if (
     (selectedThematicCategories.length === 0 || 
         (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
             site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+
 
 
     (selectedLocalOrNational === "all" || 
@@ -1254,6 +1271,7 @@ siteCard.innerHTML = `
             return categoryMap[categories.toLowerCase()] || categories;
         }
     }
+
 
             
             function translateTimePeriod(timeperiod) {
