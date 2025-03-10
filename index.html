@@ -1207,8 +1207,26 @@ siteCard.innerHTML = `
 
 
         <div class="site-attributes">
-            ${site.thematiccategory ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("") : ""}
-            ${site.timeperiod ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") : ""}
+            ${(selectedThematicCategories.length === 0 || 
+                (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+                    site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase())))) 
+                ? (Array.isArray(site.thematiccategory) 
+                    ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("")
+                    : site.thematiccategory 
+                        ? `<span class="attribute-box">${translateCategory(site.thematiccategory)}</span>` 
+                        : "")
+                : ""}
+            
+            ${(selectedTimePeriods.length === 0 || 
+                (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected =>
+                    site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())))) 
+                ? (Array.isArray(site.timeperiod) 
+                    ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("")
+                    : site.timeperiod 
+                        ? `<span class="attribute-box">${translateTimePeriod(site.timeperiod)}</span>` 
+                        : "")
+                : ""}
+
             ${site.sitetype ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>` : ""}
             ${site.estimatedtime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
             ${site.reservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
