@@ -1061,7 +1061,9 @@ function applyFilters() {
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period.toLowerCase())));
+            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
+                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
+
 
 
 
@@ -1169,7 +1171,14 @@ siteCard.innerHTML = `
         </div>
         <div class="site-details">
             <h3 class="site-title">${site.name}</h3>
-            <p>${translateTimePeriod(site.timeperiod)}</p>
+            <div class="site-attributes">
+            ${site.timeperiod
+                .filter(period => selectedTimePeriods.includes(period.toLowerCase()))
+                .map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`)
+                .join("")
+            }
+        </div>
+
             <p><em>${translateCategory(site.thematiccategory)}</em></p>
 
 
