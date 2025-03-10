@@ -1206,26 +1206,25 @@ siteCard.innerHTML = `
             </p>
 
 
-            <div class="site-attributes">
-                ${selectedCost !== "all" && site.cost.toLowerCase() === selectedCost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
-                ${selectedType !== "all" && site.type.toLowerCase() === selectedType ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
-                ${selectedLocalOrNational !== "all" && site.localornational.toLowerCase() === selectedLocalOrNational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-                ${selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
-                ${selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
-                ${selectedTours !== "all" && site.tours.includes(selectedTours) ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
-                ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
-                
-                ${filterGiftShop && site.giftshop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
-                ${filterSpanishTranslations && site.spanishtranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
-                ${filterLuggageStorage && site.luggagestorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
-                ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
-                ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
-                ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
-                ${selectedSiteType !== "all" && site.sitetype.toLowerCase() === selectedSiteType ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>` : ""}
-                ${selectedPaymentMethod !== "all" && site.paymentmethod.toLowerCase() === selectedPaymentMethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` : ""}
-                ${filterDogFriendly && site.dogfriendly ? `<span class="attribute-box">DOG-FRIENDLY</span>` : ""}
+        <div class="site-attributes">
+            ${site.thematiccategory ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("") : ""}
+            ${site.timeperiod ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") : ""}
+            ${site.sitetype ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>` : ""}
+            ${site.estimatedtime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+            ${site.reservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+            ${site.transit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+            ${site.cost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
+            ${site.localornational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+            ${site.tours && site.tours.length > 0 ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+            ${site.paymentmethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` : ""}
+            ${site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : ""}
+            ${site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : ""}
+            ${site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : ""}
+            ${site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : ""}
+            ${site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : ""}
+            ${site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : ""}
+        </div>
 
-            </div>
         </div>
     </div>
 
