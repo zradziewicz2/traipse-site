@@ -729,16 +729,16 @@
 
     <div class="filter-group">
         <label>Thematic Category:</label>
-        <select id="ThematicCategoryFilter">
-            <option value="all">All</option>
-            <option value="artsandculture">Arts and Culture</option>
-            <option value="generalhistory">General History</option>
-            <option value="historichomes">Historic Homes</option>
-            <option value="naturalhistory">Natural History</option>
-            <option value="religiousandspiritual">Religious and Spiritual</option>
-            <option value="technologyandtransportation">Technology and Transportation</option>
-        </select>
+        <div class="thematicCategory-group">
+            <label><input type="checkbox" class="thematicCategoryFilter" value="artsandculture"> Arts and Culture</label>
+            <label><input type="checkbox" class="thematicCategoryFilter" value="generalhistory"> General History</label>
+            <label><input type="checkbox" class="thematicCategoryFilter" value="historichomes"> Historic Homes</label>
+            <label><input type="checkbox" class="thematicCategoryFilter" value="naturalhistory"> Natural History</label>
+            <label><input type="checkbox" class="thematicCategoryFilter" value="religiousandspiritual"> Religious and Spiritual</label>
+            <label><input type="checkbox" class="thematicCategoryFilter" value="technologyandtransportation"> Technology and Transportation</label>
+        </div>
     </div>
+
 
     <div class="filter-group">
         <label>Time Period:</label>
@@ -1027,7 +1027,8 @@ function applyFilters() {
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
-    let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
+    let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
+    .map(cb => cb.value);
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
@@ -1099,11 +1100,10 @@ if (
     (selectedFamily === "all" || 
         (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
 
-    (selectedThematicCategory === "all" || 
-        (site.thematiccategory &&
-            (Array.isArray(site.thematiccategory) 
-                ? site.thematiccategory.map(tc => tc.toLowerCase()).includes(selectedThematicCategory) 
-                : site.thematiccategory.toLowerCase() === selectedThematicCategory))) &&
+    (selectedThematicCategories.length === 0 || 
+        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+
 
     (selectedLocalOrNational === "all" || 
         (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
@@ -1236,19 +1236,25 @@ siteCard.innerHTML = `
 
             
             // Function to translate category names to their proper display format
-            function translateCategory(category) {
-                const categoryMap = {
-                    "artsandculture": "Arts and Culture",
-                    "foodanddrink": "Food and Drink",
-                    "generalhistory": "General History",
-                    "historichomes": "Historic Homes",
-                    "naturalhistory": "Natural History",
-                    "religiousandspiritual": "Religious and Spiritual",
-                    "technologyandtransportation": "Technology and Transportation",
-                    "other": "Other"
-                };
-                return categoryMap[category.toLowerCase()] || formatText(category);
-            }
+    function translateCategory(categories) {
+        if (!categories) return "Unknown"; 
+        const categoryMap = {
+            "artsandculture": "Arts and Culture",
+            "generalhistory": "General History",
+            "historichomes": "Historic Homes",
+            "naturalhistory": "Natural History",
+            "religiousandspiritual": "Religious and Spiritual",
+            "technologyandtransportation": "Technology and Transportation",
+            "other": "Other"
+        };
+    
+        if (Array.isArray(categories)) {
+            return categories.map(cat => categoryMap[cat.toLowerCase()] || cat).join(", ");
+        } else {
+            return categoryMap[categories.toLowerCase()] || categories;
+        }
+    }
+
             
             function translateTimePeriod(timeperiod) {
                 if (!timeperiod) return "Unknown"; 
