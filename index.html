@@ -1254,10 +1254,20 @@ siteCard.innerHTML = `
 
 
     <!-- Show Dining On-Site only if filter is selected -->
-    ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
+    ${filterDiningOnSite 
+    ? (site.diningonsite 
+        ? `<span class="attribute-box">Dining On-Site</span>` 
+        : `<span class="no-attribute-box">❌ No Dining On-Site</span>`) 
+    : ""}
+
 
     <!-- Show Gift Shop only if filter is selected -->
-    ${filterGiftShop ? (site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : "") : ""}
+    ${filterGiftShop 
+    ? (site.giftshop 
+        ? `<span class="attribute-box">Has Gift Shop</span>` 
+        : `<span class="no-attribute-box">❌ No Gift Shop</span>`) 
+    : ""}
+
 
     <!-- Luggage Storage - Show "Luggage Storage" if it matches, otherwise show "No Luggage Storage" in red -->
     ${filterLuggageStorage 
@@ -1268,10 +1278,20 @@ siteCard.innerHTML = `
 
 
     <!-- Show Spanish Translations only if filter is selected -->
-    ${filterSpanishTranslations ? (site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : "") : ""}
+    ${filterSpanishTranslations 
+    ? (site.spanishtranslations 
+        ? `<span class="attribute-box">Spanish Translations Available</span>` 
+        : `<span class="no-attribute-box">❌ No Spanish Translations</span>`) 
+    : ""}
+
 
     <!-- Show ADA Accessibility only if filter is selected -->
-    ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
+    ${filterADAAccessibility 
+        ? (site.adaaccessibility 
+            ? `<span class="attribute-box">ADA Accessible</span>` 
+            : `<span class="no-attribute-box">❌ Not ADA Accessible</span>`) 
+        : ""}
+
 
     <!-- Show Transit Accessibility only if it matches selected filter -->
     ${selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit
