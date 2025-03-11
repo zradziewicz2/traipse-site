@@ -1237,17 +1237,33 @@ siteCard.innerHTML = `
       ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") 
       : ""}
 
-    <!-- Show Dog-Friendly only if filter is selected -->
-    ${filterDogFriendly ? (site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : "") : ""}
+    <!-- Dog Friendly - Show "Dog-Friendly" if it matches, otherwise show "❌ Dog-Friendly" in red -->
+    ${filterDogFriendly 
+        ? (site.dogfriendly 
+            ? `<span class="attribute-box">Dog-Friendly</span>` 
+            : `<span class="no-attribute-box">❌ Dog-Friendly</span>`) 
+        : ""}
 
-    <!-- Show Family-Friendly only if filter is selected -->
-    ${document.getElementById("familyFilter").checked ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
+    <!-- Family-Friendly - Show "Family-Friendly" if it matches, otherwise show "❌ Family-Friendly" in red -->
+    ${filterFamilyFriendly 
+        ? (site.family_friendly 
+            ? `<span class="attribute-box">Family-Friendly</span>` 
+            : `<span class="no-attribute-box">❌ Family-Friendly</span>`) 
+        : ""}
 
-    <!-- Show Dining On-Site only if filter is selected -->
-    ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
+    <!-- Dining On-Site - Show "Dining On-Site" if it matches, otherwise show "❌ Dining On-Site" in red -->
+    ${filterDiningOnSite 
+        ? (site.diningonsite 
+            ? `<span class="attribute-box">Dining On-Site</span>` 
+            : `<span class="no-attribute-box">❌ Dining On-Site</span>`) 
+        : ""}
 
-    <!-- Show Gift Shop only if filter is selected -->
-    ${filterGiftShop ? (site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : "") : ""}
+    <!-- Gift Shop - Show "Has Gift Shop" if it matches, otherwise show "❌ Gift Shop" in red -->
+    ${filterGiftShop 
+        ? (site.giftshop 
+            ? `<span class="attribute-box">Has Gift Shop</span>` 
+            : `<span class="no-attribute-box">❌ Gift Shop</span>`) 
+        : ""}
 
     <!-- Luggage Storage - Show "Luggage Storage" if it matches, otherwise show "No Luggage Storage" in red -->
     ${filterLuggageStorage 
@@ -1257,11 +1273,19 @@ siteCard.innerHTML = `
         : ""}
 
 
-    <!-- Show Spanish Translations only if filter is selected -->
-    ${filterSpanishTranslations ? (site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : "") : ""}
+    <!-- Spanish Translations - Show "Spanish Translations" if it matches, otherwise show "❌ Spanish Translations" in red -->
+    ${filterSpanishTranslations 
+        ? (site.spanishtranslations 
+            ? `<span class="attribute-box">Spanish Translations</span>` 
+            : `<span class="no-attribute-box">❌ Spanish Translations</span>`) 
+        : ""}
 
-    <!-- Show ADA Accessibility only if filter is selected -->
-    ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
+    <!-- ADA Accessible - Show "ADA Accessible" if it matches, otherwise show "❌ ADA Accessible" in red -->
+    ${filterADAAccessibility 
+        ? (site.adaaccessibility 
+            ? `<span class="attribute-box">ADA Accessible</span>` 
+            : `<span class="no-attribute-box">❌ ADA Accessible</span>`) 
+        : ""}
 
     <!-- Show Transit Accessibility only if it matches selected filter -->
     ${selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit
