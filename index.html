@@ -1057,7 +1057,8 @@ function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
     let selectedfamily_friendly = document.getElementById("family_friendlyFilter");
-    let filterfamily_friendly = filterfamily_friendly ? filterfamily_friendly.checked : null;
+    let filterfamily_friendlyElement = document.getElementById("family_friendlyFilter");
+    let filterfamily_friendly = filterfamily_friendlyElement ? filterfamily_friendlyElement.checked : null;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
