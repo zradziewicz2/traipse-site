@@ -1233,9 +1233,39 @@ siteCard.innerHTML = `
 
     <!-- Show ADA Accessibility only if selected -->
     ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
+
+    <!-- Show Family-Friendly only if selected -->
+    ${selectedFamily !== "all" ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
+
+    <!-- Show Dining On-Site only if selected -->
+    ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
+
+    <!-- Show Transit Accessibility only if selected -->
+    ${selectedTransit !== "all" && site.transit 
+      ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` 
+      : ""}
+
+    <!-- Show Scope (Local/National) only if selected -->
+    ${selectedLocalOrNational !== "all" && site.localornational
+      ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>`
+      : ""}
+
+    <!-- Show Tours only if selected -->
+    ${selectedTours !== "all" && site.tours && site.tours.includes(selectedTours)
+      ? `<span class="attribute-box">${translateTours(site.tours)}</span>`
+      : ""}
+
+    <!-- Show Indoor/Outdoor only if selected -->
+    ${selectedType !== "all" && site.type && site.type.toLowerCase() === selectedType
+      ? `<span class="attribute-box">${translateType(site.type)}</span>`
+      : ""}
+
+    <!-- Show Site Type only if selected -->
+    ${selectedSiteType !== "all" && site.sitetype &&
+      (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)
+      ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`
+      : ""}
 </div>
-
-
 
         </div>
     </div>
