@@ -1056,7 +1056,7 @@ function translateTours(tours) {
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
-    let selectedFamily = document.getElementById("familyFilter").value;
+    let filterFamilyFriendly = document.getElementById("familyFilter").checked ? true : null;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
