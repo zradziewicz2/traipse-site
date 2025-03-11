@@ -1200,7 +1200,129 @@ if (
             let starColor = isLiked ? "gold" : "white";
 
             let isNotInterested = notInterested.some(s => s.id === site.id);
+            let matchingAttributes = [];
+            let nonMatchingAttributes = [];
             
+// 1️⃣ ✅ Define the lists BEFORE adding attributes
+let matchingAttributes = [];
+let nonMatchingAttributes = [];
+
+// 2️⃣ ✅ Build the lists based on selected filters
+
+// Thematic Category
+if (selectedThematicCategories.length > 0 && site.thematiccategory &&
+    selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
+    matchingAttributes.push(...site.thematiccategory.map(category => 
+        `<span class="attribute-box">${translateCategory(category)}</span>`));
+}
+
+// Time Period
+if (selectedTimePeriods.length > 0 && site.timeperiod &&
+    selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
+    matchingAttributes.push(...site.timeperiod.map(period => 
+        `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
+}
+
+// Dog-Friendly
+if (filterDogFriendly) {
+    site.dogfriendly 
+        ? matchingAttributes.push(`<span class="attribute-box">Dog-Friendly</span>`) 
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ Not Dog-Friendly</span>`);
+}
+
+// Family-Friendly
+if (document.getElementById("familyFilter").checked) {
+    site.family_friendly
+        ? matchingAttributes.push(`<span class="attribute-box">Family-Friendly</span>`)
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ Not Family-Friendly</span>`);
+}
+
+// Dining On-Site
+if (filterDiningOnSite) {
+    site.diningonsite
+        ? matchingAttributes.push(`<span class="attribute-box">Dining On-Site</span>`)
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Dining On-Site</span>`);
+}
+
+// Gift Shop
+if (filterGiftShop) {
+    site.giftshop
+        ? matchingAttributes.push(`<span class="attribute-box">Has Gift Shop</span>`)
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Gift Shop</span>`);
+}
+
+// Luggage Storage
+if (filterLuggageStorage) {
+    site.luggagestorage
+        ? matchingAttributes.push(`<span class="attribute-box">Luggage Storage</span>`)
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Luggage Storage</span>`);
+}
+
+// Spanish Translations
+if (filterSpanishTranslations) {
+    site.spanishtranslations
+        ? matchingAttributes.push(`<span class="attribute-box">Spanish Translations</span>`)
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Spanish Translations</span>`);
+}
+
+// ADA Accessibility
+if (filterADAAccessibility) {
+    site.adaaccessibility
+        ? matchingAttributes.push(`<span class="attribute-box">ADA Accessible</span>`)
+        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ Not ADA Accessible</span>`);
+}
+
+// Transit Accessibility
+if (selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit) {
+    matchingAttributes.push(`<span class="attribute-box">${translateTransit(site.transit)}</span>`);
+}
+
+// Local/National
+if (selectedLocalOrNational !== "all" && site.localornational) {
+    matchingAttributes.push(`<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>`);
+}
+
+// Tours
+if (selectedTours !== "all" && site.tours && site.tours.includes(selectedTours)) {
+    matchingAttributes.push(`<span class="attribute-box">${translateTours(site.tours)}</span>`);
+}
+
+// Indoor/Outdoor
+if (selectedType !== "all" && site.type && site.type.toLowerCase() === selectedType) {
+    matchingAttributes.push(`<span class="attribute-box">${translateType(site.type)}</span>`);
+}
+
+// Site Type
+if (selectedSiteType !== "all" && site.sitetype &&
+    (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)) {
+    matchingAttributes.push(`<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`);
+}
+
+// Reservations Required
+if (selectedReservations !== "all" && site.reservations && site.reservations.toLowerCase() === selectedReservations) {
+    matchingAttributes.push(`<span class="attribute-box">${translateReservations(site.reservations)}</span>`);
+}
+
+// Cost
+if (selectedCost !== "all" && site.cost && site.cost.toLowerCase() === selectedCost) {
+    matchingAttributes.push(`<span class="attribute-box">${translateCost(site.cost)}</span>`);
+}
+
+// Payment Method
+if (selectedPaymentMethod !== "all" && site.paymentmethod) {
+    matchingAttributes.push(`<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>`);
+}
+
+// 3️⃣ ✅ Insert the lists inside the site card in the correct order
+let attributesHTML = "";
+if (matchingAttributes.length > 0) {
+    attributesHTML += `<div class="matching-attributes">${matchingAttributes.join(" ")}</div>`;
+}
+if (nonMatchingAttributes.length > 0) {
+    attributesHTML += `<div class="non-matching-attributes">${nonMatchingAttributes.join(" ")}</div>`;
+}
+
+// 4️⃣ ✅ Now, put `attributesHTML` inside the `<div class="site-attributes">`
 siteCard.innerHTML = `
     <div class="site-content">
         <div class="site-image-container">
@@ -1208,150 +1330,28 @@ siteCard.innerHTML = `
         </div>
         <div class="site-details">
             <h3 class="site-title">${site.name}</h3>
+            
+            <!-- ✅ Place attributes inside the card -->
             <div class="site-attributes">
-            ${site.timeperiod
-                .filter(period => selectedTimePeriods.includes(period.toLowerCase()))
-                .map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`)
-                .join("")
-            }
-        </div>
-
-            <p><em>${translateCategory(site.thematiccategory)}</em></p>
-
+                ${attributesHTML}
+            </div>
 
             <p class="site-distance">
                 ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
                 ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
                 ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
             </p>
-
-
-<div class="site-attributes">
-    <!-- Show Thematic Category only if selected -->
-    ${selectedThematicCategories.length > 0 && site.thematiccategory &&
-      selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))
-      ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("") 
-      : ""}
-
-    <!-- Show Time Period only if selected -->
-    ${selectedTimePeriods.length > 0 && site.timeperiod &&
-      selectedTimePeriods.some(selected => site.timeperiod.includes(selected))
-      ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") 
-      : ""}
-
-    <!-- Show Dog-Friendly only if filter is selected -->
-    ${filterDogFriendly 
-    ? (site.dogfriendly 
-        ? `<span class="attribute-box">Dog-Friendly</span>` 
-        : `<span class="no-attribute-box">❌ Not Dog-Friendly</span>`) 
-    : ""}
-
-
-    <!-- Show Family-Friendly only if filter is selected -->
-    ${document.getElementById("familyFilter").checked 
-    ? (site.family_friendly 
-        ? `<span class="attribute-box">Family-Friendly</span>` 
-        : `<span class="no-attribute-box">❌ Not Family-Friendly</span>`) 
-    : ""}
-
-
-    <!-- Show Dining On-Site only if filter is selected -->
-    ${filterDiningOnSite 
-    ? (site.diningonsite 
-        ? `<span class="attribute-box">Dining On-Site</span>` 
-        : `<span class="no-attribute-box">❌ No Dining On-Site</span>`) 
-    : ""}
-
-
-    <!-- Show Gift Shop only if filter is selected -->
-    ${filterGiftShop 
-    ? (site.giftshop 
-        ? `<span class="attribute-box">Has Gift Shop</span>` 
-        : `<span class="no-attribute-box">❌ No Gift Shop</span>`) 
-    : ""}
-
-
-    <!-- Luggage Storage - Show "Luggage Storage" if it matches, otherwise show "No Luggage Storage" in red -->
-    ${filterLuggageStorage 
-        ? (site.luggagestorage 
-            ? `<span class="attribute-box">Luggage Storage</span>` 
-            : `<span class="no-attribute-box">❌ Luggage Storage</span>`) 
-        : ""}
-
-
-    <!-- Show Spanish Translations only if filter is selected -->
-    ${filterSpanishTranslations 
-    ? (site.spanishtranslations 
-        ? `<span class="attribute-box">Spanish Translations Available</span>` 
-        : `<span class="no-attribute-box">❌ No Spanish Translations</span>`) 
-    : ""}
-
-
-    <!-- Show ADA Accessibility only if filter is selected -->
-    ${filterADAAccessibility 
-        ? (site.adaaccessibility 
-            ? `<span class="attribute-box">ADA Accessible</span>` 
-            : `<span class="no-attribute-box">❌ Not ADA Accessible</span>`) 
-        : ""}
-
-
-    <!-- Show Transit Accessibility only if it matches selected filter -->
-    ${selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit
-        ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` 
-        : ""}
-
-    <!-- Show Scope (Local/National) only if selected -->
-    ${selectedLocalOrNational !== "all" && site.localornational
-      ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>`
-      : ""}
-
-    <!-- Show Tours only if selected -->
-    ${selectedTours !== "all" && site.tours && site.tours.includes(selectedTours)
-      ? `<span class="attribute-box">${translateTours(site.tours)}</span>`
-      : ""}
-
-    <!-- Show Indoor/Outdoor only if selected -->
-    ${selectedType !== "all" && site.type && site.type.toLowerCase() === selectedType
-      ? `<span class="attribute-box">${translateType(site.type)}</span>`
-      : ""}
-
-    <!-- Show Site Type only if selected -->
-    ${selectedSiteType !== "all" && site.sitetype &&
-      (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)
-      ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`
-      : ""}
-
-    <!-- Show Reservations Required only if it matches selected filter -->
-    ${selectedReservations !== "all" && site.reservations && site.reservations.toLowerCase() === selectedReservations
-        ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` 
-        : ""}
-
-    <!-- Show Cost only if it matches selected filter -->
-    ${selectedCost !== "all" && site.cost && site.cost.toLowerCase() === selectedCost
-        ? `<span class="attribute-box">${translateCost(site.cost)}</span>` 
-        : ""}
-
-    <!-- Show Payment Method only if selected -->
-    ${selectedPaymentMethod !== "all" && site.paymentmethod 
-        ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` 
-        : ""}
-
-</div>
-
-
         </div>
     </div>
 
     <p class="site-description">${site.description}</p>
 
     <div class="site-actions">
-        <span id="star-${site.id}" class="star-icon ${starClass}" 
-              style="color: ${starColor};" data-tooltip="Add to My Places">${starSymbol}</span>
-
-        <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
-              data-tooltip="Not for me">✖</span>
+        <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places">☆</span>
+        <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me">✖</span>
     </div>
 `;
+
 
 
             
