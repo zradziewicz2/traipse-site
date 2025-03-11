@@ -1206,42 +1206,37 @@ siteCard.innerHTML = `
             </p>
 
 
-        <div class="site-attributes">
-            ${(selectedThematicCategories.length === 0 || 
-                (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
-                    site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase())))) 
-                ? (Array.isArray(site.thematiccategory) 
-                    ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("")
-                    : site.thematiccategory 
-                        ? `<span class="attribute-box">${translateCategory(site.thematiccategory)}</span>` 
-                        : "")
-                : ""}
-            
-            ${(selectedTimePeriods.length === 0 || 
-                (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected =>
-                    site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())))) 
-                ? (Array.isArray(site.timeperiod) 
-                    ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("")
-                    : site.timeperiod 
-                        ? `<span class="attribute-box">${translateTimePeriod(site.timeperiod)}</span>` 
-                        : "")
-                : ""}
+    <div class="site-attributes">
+        <!-- Only show if the selected thematic category matches -->
+        ${selectedThematicCategories.length === 0 || 
+          (site.thematiccategory && selectedThematicCategories.some(selected => 
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase())))
+          ? (site.thematiccategory ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("") : "")
+          : ""}
+    
+        <!-- Only show if the selected time period matches -->
+        ${selectedTimePeriods.length === 0 || 
+          (site.timeperiod && selectedTimePeriods.some(selected => 
+            site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())))
+          ? (site.timeperiod ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") : "")
+          : ""}
+    
+        <!-- Only show if the site matches dog-friendly filter -->
+        ${filterDogFriendly === null || site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : ""}
+    
+        <!-- Only show if the site has a gift shop and the filter is selected -->
+        ${filterGiftShop === null || site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : ""}
+    
+        <!-- Only show if the site has luggage storage and the filter is selected -->
+        ${filterLuggageStorage === null || site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : ""}
+    
+        <!-- Only show if the site has Spanish translations and the filter is selected -->
+        ${filterSpanishTranslations === null || site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : ""}
+    
+        <!-- Only show if the site is ADA Accessible and the filter is selected -->
+        ${filterADAAccessibility === null || site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : ""}
+    </div>
 
-            ${site.sitetype ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>` : ""}
-            ${site.estimatedtime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
-            ${site.reservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
-            ${site.transit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
-            ${site.cost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
-            ${site.localornational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
-            ${site.tours && site.tours.length > 0 ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
-            ${site.paymentmethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` : ""}
-            ${site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : ""}
-            ${site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : ""}
-            ${site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : ""}
-            ${site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : ""}
-            ${site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : ""}
-            ${site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : ""}
-        </div>
 
         </div>
     </div>
