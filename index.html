@@ -908,7 +908,7 @@
 </button>
 <div class="filter-category" id="specialFilters" style="display: none;">
     <div class="filter-group">
-        <label><input type="checkbox" id="family_Filter"> Family-Friendly</label>
+        <label><input type="checkbox" id="familyFilter"> Family-Friendly</label>
     </div>
     <div class="filter-group">
         <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly</label>
@@ -1056,15 +1056,12 @@ function translateTours(tours) {
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
-    let selectedfamily_friendly = document.getElementById("family_friendlyFilter");
-    let filterfamily_friendlyElement = document.getElementById("family_friendlyFilter");
-    let filterfamily_friendly = filterfamily_friendlyElement ? filterfamily_friendlyElement.checked : null;
+    let selectedFamily = document.getElementById("familyFilter").value;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
     let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
-        .map(cb => cb.value) || [];
-
+    .map(cb => cb.value);
 
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
@@ -1134,17 +1131,12 @@ if (
     (selectedType === "all" || 
         (site.type && site.type.toLowerCase() === selectedType)) &&
 
-    (selectedfamily_friendly === null || 
-     (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === String(selectedfamily_friendly).toLowerCase())) &&
-
+    (selectedFamily === "all" || 
+        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
 
     (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && 
-        selectedThematicCategories.length > 0 &&
-        site.thematiccategory.some(category => 
-            selectedThematicCategories.includes(category.toLowerCase()))))
-
-
+        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
 
 
 
@@ -1245,33 +1237,17 @@ siteCard.innerHTML = `
       ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") 
       : ""}
 
-    <!-- Dog Friendly - Show "Dog-Friendly" if it matches, otherwise show "❌ Dog-Friendly" in red -->
-    ${filterDogFriendly 
-        ? (site.dogfriendly 
-            ? `<span class="attribute-box">Dog-Friendly</span>` 
-            : `<span class="no-attribute-box">❌ Dog-Friendly</span>`) 
-        : ""}
+    <!-- Show Dog-Friendly only if filter is selected -->
+    ${filterDogFriendly ? (site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : "") : ""}
 
-    <!-- Family-Friendly - Show "Family-Friendly" if it matches, otherwise show "❌ Family-Friendly" in red -->
-    ${filterfamily_friendly 
-        ? (site.family_friendly 
-            ? `<span class="attribute-box">Family-Friendly</span>` 
-            : `<span class="no-attribute-box">❌ Family-Friendly</span>`) 
-        : ""}
+    <!-- Show Family-Friendly only if filter is selected -->
+    ${document.getElementById("familyFilter").checked ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
 
-    <!-- Dining On-Site - Show "Dining On-Site" if it matches, otherwise show "❌ Dining On-Site" in red -->
-    ${filterDiningOnSite 
-        ? (site.diningonsite 
-            ? `<span class="attribute-box">Dining On-Site</span>` 
-            : `<span class="no-attribute-box">❌ Dining On-Site</span>`) 
-        : ""}
+    <!-- Show Dining On-Site only if filter is selected -->
+    ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
 
-    <!-- Gift Shop - Show "Has Gift Shop" if it matches, otherwise show "❌ Gift Shop" in red -->
-    ${filterGiftShop 
-        ? (site.giftshop 
-            ? `<span class="attribute-box">Has Gift Shop</span>` 
-            : `<span class="no-attribute-box">❌ Gift Shop</span>`) 
-        : ""}
+    <!-- Show Gift Shop only if filter is selected -->
+    ${filterGiftShop ? (site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : "") : ""}
 
     <!-- Luggage Storage - Show "Luggage Storage" if it matches, otherwise show "No Luggage Storage" in red -->
     ${filterLuggageStorage 
@@ -1281,19 +1257,11 @@ siteCard.innerHTML = `
         : ""}
 
 
-    <!-- Spanish Translations - Show "Spanish Translations" if it matches, otherwise show "❌ Spanish Translations" in red -->
-    ${filterSpanishTranslations 
-        ? (site.spanishtranslations 
-            ? `<span class="attribute-box">Spanish Translations</span>` 
-            : `<span class="no-attribute-box">❌ Spanish Translations</span>`) 
-        : ""}
+    <!-- Show Spanish Translations only if filter is selected -->
+    ${filterSpanishTranslations ? (site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : "") : ""}
 
-    <!-- ADA Accessible - Show "ADA Accessible" if it matches, otherwise show "❌ ADA Accessible" in red -->
-    ${filterADAAccessibility 
-        ? (site.adaaccessibility 
-            ? `<span class="attribute-box">ADA Accessible</span>` 
-            : `<span class="no-attribute-box">❌ ADA Accessible</span>`) 
-        : ""}
+    <!-- Show ADA Accessibility only if filter is selected -->
+    ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
 
     <!-- Show Transit Accessibility only if it matches selected filter -->
     ${selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit
