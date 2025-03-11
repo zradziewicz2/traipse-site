@@ -1219,26 +1219,26 @@ siteCard.innerHTML = `
       ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") 
       : ""}
 
-    <!-- Show Dog-Friendly only if selected -->
+    <!-- Show Dog-Friendly only if filter is selected -->
     ${filterDogFriendly ? (site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : "") : ""}
 
-    <!-- Show Gift Shop only if selected -->
+    <!-- Show Family-Friendly only if filter is selected -->
+    ${document.getElementById("familyFilter").checked ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
+
+    <!-- Show Dining On-Site only if filter is selected -->
+    ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
+
+    <!-- Show Gift Shop only if filter is selected -->
     ${filterGiftShop ? (site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : "") : ""}
 
-    <!-- Show Luggage Storage only if selected -->
+    <!-- Show Luggage Storage only if filter is selected -->
     ${filterLuggageStorage ? (site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : "") : ""}
 
-    <!-- Show Spanish Translations only if selected -->
+    <!-- Show Spanish Translations only if filter is selected -->
     ${filterSpanishTranslations ? (site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : "") : ""}
 
-    <!-- Show ADA Accessibility only if selected -->
+    <!-- Show ADA Accessibility only if filter is selected -->
     ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
-
-    <!-- Show Family-Friendly only if selected -->
-    ${selectedFamily !== "all" ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
-
-    <!-- Show Dining On-Site only if selected -->
-    ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
 
     <!-- Show Transit Accessibility only if selected -->
     ${selectedTransit !== "all" && site.transit 
@@ -1265,7 +1265,23 @@ siteCard.innerHTML = `
       (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)
       ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`
       : ""}
+
+    <!-- Show Reservations Required only if selected -->
+    ${selectedReservations !== "all" && site.reservations 
+      ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` 
+      : ""}
+
+    <!-- Show Cost only if selected -->
+    ${selectedCost !== "all" && site.cost 
+      ? `<span class="attribute-box">${translateCost(site.cost)}</span>` 
+      : ""}
+
+    <!-- Show Payment Method only if selected -->
+    ${selectedPaymentMethod !== "all" && site.paymentmethod 
+      ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` 
+      : ""}
 </div>
+
 
         </div>
     </div>
