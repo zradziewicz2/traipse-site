@@ -1210,54 +1210,58 @@ function applyFilters() {
             let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
 
-let exactMatches = [];
-let recommendedSites = [];
+if (
+    (selectedSiteType === "all" || 
+        (site.sitetype && 
+            (Array.isArray(site.sitetype) 
+                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
+                : site.sitetype.toLowerCase() === selectedSiteType))) &&
 
-siteData.forEach(site => {
-    let matchCount = 0;
-    let totalFilters = 0; // Total filters applied
+    (selectedPaymentMethod === "all" || 
+        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
 
-    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+    (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
 
-    function addMatch(condition) {
-        if (condition) matchCount++;
-        totalFilters++;
-    }
+    (selectedCost === "all" || 
+        (site.cost && site.cost.toLowerCase() === selectedCost)) &&
 
-    // Apply filter checks and count matches
-    addMatch(selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-    addMatch(selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost));
-    addMatch(selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType));
-    addMatch(selectedPaymentMethod === "all" || (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod));
-    addMatch(!filterDogFriendly || site.dogfriendly);
-    addMatch(!filterGiftShop || site.giftshop);
-    addMatch(!filterSpanishTranslations || site.spanishtranslations);
-    addMatch(!filterLuggageStorage || site.luggagestorage);
-    addMatch(!filterPublicAccess || site.publicaccess);
-    addMatch(!filterDiningOnSite || site.diningonsite);
-    addMatch(!filterADAAccessibility || site.adaaccessibility);
-    addMatch(selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime));
-    addMatch(selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations));
-    addMatch(selectedTours === "all" || (site.tours && site.tours.includes(selectedTours)));
-    addMatch(selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit));
-    addMatch(selectedDistance === "all" || 
+    (selectedType === "all" || 
+        (site.type && site.type.toLowerCase() === selectedType)) &&
+
+    (selectedFamily === "all" || 
+        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
+
+    (selectedThematicCategories.length === 0 || 
+        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+
+
+
+    (selectedLocalOrNational === "all" || 
+        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
+
+    (selectedEstimatedTime === "all" || 
+        (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
+
+    (selectedReservations === "all" || 
+        (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
+
+    (selectedTours === "all" || 
+        (site.tours && site.tours.includes(selectedTours))) &&
+
+    (selectedTransit === "all" || 
+        (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
+
+    (selectedDistance === "all" ||
         (distance !== null &&
             ((selectedDistance === "1" && distance < 1) ||
             (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-            (selectedDistance === "10" && distance > 10))));
-    addMatch(matchesTimePeriod);
+            (selectedDistance === "10" && distance > 10)))) &&
 
-    // Categorize sites based on match count
-    if (matchCount === totalFilters) {
-        exactMatches.push({ site, matchCount });
-    } else if (matchCount > 0) {
-        recommendedSites.push({ site, matchCount });
-    }
-});
-
-// Sort recommended sites by match count (higher first)
-recommendedSites.sort((a, b) => b.matchCount - a.matchCount);
-
+    matchesTimePeriod
+) {
+    // ✅ Matching sites will be shown
+}
 
 
 
@@ -1687,25 +1691,7 @@ function displayRoutes(routesData) {
 }
 
 
-let resultsContainer = document.getElementById("searchResults");
-resultsContainer.innerHTML = "";
 
-if (exactMatches.length > 0) {
-    let exactHeader = document.createElement("h2");
-    exactHeader.className = "results-header";
-    exactHeader.textContent = "Exact Matches";
-    resultsContainer.appendChild(exactHeader);
-    exactMatches.forEach(entry => resultsContainer.appendChild(createSiteCard(entry.site)));
-}
-
-// Display Recommended Sites Next
-if (recommendedSites.length > 0) {
-    let recommendedHeader = document.createElement("h2");
-    recommendedHeader.className = "results-header";
-    recommendedHeader.textContent = "Recommended Sites";
-    resultsContainer.appendChild(recommendedHeader);
-    recommendedSites.forEach(entry => resultsContainer.appendChild(createSiteCard(entry.site)));
-}
 
 
 
