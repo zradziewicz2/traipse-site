@@ -1233,6 +1233,23 @@ if (
             let isNotInterested = notInterested.some(s => s.id === site.id);
             let matchingAttributes = [];
             let nonMatchingAttributes = [];
+            let thematicCategoryMatchesFilter = selectedThematicCategories.length === 0 ||
+        (site.thematiccategory && selectedThematicCategories.some(selected =>
+            site.thematiccategory.includes(selected)));
+    
+    let timePeriodMatchesFilter = selectedTimePeriods.length === 0 ||
+        (site.timeperiod && selectedTimePeriods.some(selected =>
+            site.timeperiod.includes(selected)));
+    
+    // Show these regardless, but still filter results
+    let thematicCategoryText = site.thematiccategory
+        ? `<p class="thematic-category">${translateCategory(site.thematiccategory)}</p>`
+        : "";
+    
+    let timePeriodText = site.timeperiod 
+        ? `<p class="time-period">${translateTimePeriod(site.timeperiod)}</p>`
+        : "";
+
             
 
 // 2️⃣ ✅ Build the lists based on selected filters
@@ -1358,6 +1375,9 @@ siteCard.innerHTML = `
         </div>
         <div class="site-details">
             <h3 class="site-title">${site.name}</h3>
+            <!-- ✅ Show These Always, But Still Filter Results -->
+            ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
+            ${timePeriodMatchesFilter ? timePeriodText : ""}
             
             <!-- ✅ Place attributes inside the card -->
             <div class="site-attributes">
