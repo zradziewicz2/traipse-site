@@ -830,13 +830,14 @@
 
     <div class="filter-group">
         <label>Payment Methods:</label>
-        <select id="paymentmethodFilter">
-            <option value="all">All</option>  <!-- ✅ Added this line -->
-            <option value="cash">Cash</option>
-            <option value="card">Card</option>
-            <option value="both">Both</option>
-            <option value="notapplicable">N/A</option>
-        </select>
+            <select id="paymentmethodFilter">
+                <option value="all">All</option>
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+                <option value="both">Both</option>
+                <option value="notapplicable">N/A</option>
+            </select>
+
     </div>
 
 </div>
@@ -1242,10 +1243,10 @@ siteCard.innerHTML = `
     <!-- Show ADA Accessibility only if filter is selected -->
     ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
 
-    <!-- Show Transit Accessibility only if selected -->
-    ${selectedTransit !== "all" && site.transit 
-      ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` 
-      : ""}
+    <!-- Show Transit Accessibility only if it matches selected filter -->
+    ${selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit
+        ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` 
+        : ""}
 
     <!-- Show Scope (Local/National) only if selected -->
     ${selectedLocalOrNational !== "all" && site.localornational
@@ -1268,15 +1269,15 @@ siteCard.innerHTML = `
       ? `<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`
       : ""}
 
-    <!-- Show Reservations Required only if selected -->
-    ${selectedReservations !== "all" && site.reservations 
-      ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` 
-      : ""}
+    <!-- Show Reservations Required only if it matches selected filter -->
+    ${selectedReservations !== "all" && site.reservations && site.reservations.toLowerCase() === selectedReservations
+        ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` 
+        : ""}
 
-    <!-- Show Cost only if selected -->
-    ${selectedCost !== "all" && site.cost 
-      ? `<span class="attribute-box">${translateCost(site.cost)}</span>` 
-      : ""}
+    <!-- Show Cost only if it matches selected filter -->
+    ${selectedCost !== "all" && site.cost && site.cost.toLowerCase() === selectedCost
+        ? `<span class="attribute-box">${translateCost(site.cost)}</span>` 
+        : ""}
 
     <!-- Show Payment Method only if selected -->
     ${selectedPaymentMethod !== "all" && site.paymentmethod 
