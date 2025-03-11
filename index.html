@@ -1206,36 +1206,35 @@ siteCard.innerHTML = `
             </p>
 
 
-    <div class="site-attributes">
-        <!-- Only show if the selected thematic category matches -->
-        ${selectedThematicCategories.length === 0 || 
-          (site.thematiccategory && selectedThematicCategories.some(selected => 
-            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase())))
-          ? (site.thematiccategory ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("") : "")
-          : ""}
-    
-        <!-- Only show if the selected time period matches -->
-        ${selectedTimePeriods.length === 0 || 
-          (site.timeperiod && selectedTimePeriods.some(selected => 
-            site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())))
-          ? (site.timeperiod ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") : "")
-          : ""}
-    
-        <!-- Only show if the site matches dog-friendly filter -->
-        ${filterDogFriendly === null || site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : ""}
-    
-        <!-- Only show if the site has a gift shop and the filter is selected -->
-        ${filterGiftShop === null || site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : ""}
-    
-        <!-- Only show if the site has luggage storage and the filter is selected -->
-        ${filterLuggageStorage === null || site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : ""}
-    
-        <!-- Only show if the site has Spanish translations and the filter is selected -->
-        ${filterSpanishTranslations === null || site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : ""}
-    
-        <!-- Only show if the site is ADA Accessible and the filter is selected -->
-        ${filterADAAccessibility === null || site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : ""}
-    </div>
+<div class="site-attributes">
+    <!-- Show Thematic Category only if selected -->
+    ${selectedThematicCategories.length > 0 && site.thematiccategory &&
+      selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))
+      ? site.thematiccategory.map(category => `<span class="attribute-box">${translateCategory(category)}</span>`).join("") 
+      : ""}
+
+    <!-- Show Time Period only if selected -->
+    ${selectedTimePeriods.length > 0 && site.timeperiod &&
+      selectedTimePeriods.some(selected => site.timeperiod.includes(selected))
+      ? site.timeperiod.map(period => `<span class="attribute-box">${translateTimePeriod(period)}</span>`).join("") 
+      : ""}
+
+    <!-- Show Dog-Friendly only if selected -->
+    ${filterDogFriendly ? (site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : "") : ""}
+
+    <!-- Show Gift Shop only if selected -->
+    ${filterGiftShop ? (site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : "") : ""}
+
+    <!-- Show Luggage Storage only if selected -->
+    ${filterLuggageStorage ? (site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : "") : ""}
+
+    <!-- Show Spanish Translations only if selected -->
+    ${filterSpanishTranslations ? (site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : "") : ""}
+
+    <!-- Show ADA Accessibility only if selected -->
+    ${filterADAAccessibility ? (site.adaaccessibility ? `<span class="attribute-box">ADA Accessible</span>` : "") : ""}
+</div>
+
 
 
         </div>
