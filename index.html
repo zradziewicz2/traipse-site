@@ -828,13 +828,17 @@
         </select>
     </div>
 
-    <div class="filter-group">
-        <label>Payment Methods:</label>
-        <select id="paymentmethodFilter">
-            <option value="cash">Cash</option>
-            <option value="card">Card</option>
-            <option value="both">Both</option>
-        </select>
+<div class="filter-group">
+    <label>Payment Methods:</label>
+    <select id="paymentmethodFilter">
+        <option value="all">All</option>
+        <option value="cash">Cash</option>
+        <option value="card">Card</option>
+        <option value="both">Both</option>
+        <option value="na">N/A</option> <!-- Added "N/A" option -->
+    </select>
+</div>
+
 
     </div>
 </div>
@@ -1102,8 +1106,10 @@ if (
                 ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
                 : site.sitetype.toLowerCase() === selectedSiteType))) &&
 
-    (selectedPaymentMethod === "all" || 
-        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
+(selectedPaymentMethod === "all" || 
+    (selectedPaymentMethod === "na" && (!site.paymentmethod || site.paymentmethod.toLowerCase() === "notapplicable")) ||
+    (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod))
+
 
     (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
 
@@ -1277,10 +1283,12 @@ siteCard.innerHTML = `
       : ""}
 
     <!-- Show Payment Method only if selected -->
-    ${selectedPaymentMethod !== "all" && site.paymentmethod 
-      ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` 
-      : ""}
-</div>
+    ${selectedPaymentMethod !== "all" && (
+        (selectedPaymentMethod === "na" && (!site.paymentmethod || site.paymentmethod.toLowerCase() === "notapplicable")) 
+        ? `<span class="attribute-box">N/A</span>` 
+        : (site.paymentmethod ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` : "")
+    )}
+
 
 
         </div>
