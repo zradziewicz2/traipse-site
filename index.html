@@ -1139,9 +1139,11 @@ if (
 
 
     (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && Array.isArray(selectedThematicCategories) &&
-            selectedThematicCategories.some(selected =>
-                site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+        (Array.isArray(site.thematiccategory) && 
+        selectedThematicCategories.length > 0 &&
+        site.thematiccategory.some(category => 
+            selectedThematicCategories.includes(category.toLowerCase()))))
+
 
 
 
