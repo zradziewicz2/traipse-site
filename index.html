@@ -1131,8 +1131,9 @@ if (
     (selectedType === "all" || 
         (site.type && site.type.toLowerCase() === selectedType)) &&
 
-    (selectedfamily_friendly === "all" || 
-        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedfamily_friendly)) &&
+    (selectedfamily_friendly === null || 
+     (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === String(selectedfamily_friendly).toLowerCase())) &&
+
 
     (selectedThematicCategories.length === 0 || 
         (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
