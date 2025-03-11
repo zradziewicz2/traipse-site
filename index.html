@@ -1132,7 +1132,7 @@ if (
         (site.type && site.type.toLowerCase() === selectedType)) &&
 
     (selectedfamily_friendly === "all" || 
-        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
+        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily_friendly)) &&
 
     (selectedThematicCategories.length === 0 || 
         (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
