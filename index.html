@@ -1056,7 +1056,7 @@ function translateTours(tours) {
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
-    let filterFamilyFriendly = document.getElementById("familyFilter").checked ? true : null;
+    let filterfamily_friendly = document.getElementById("familyFilter").checked ? true : null;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
@@ -1131,7 +1131,7 @@ if (
     (selectedType === "all" || 
         (site.type && site.type.toLowerCase() === selectedType)) &&
 
-    (selectedFamilyFriendly === "all" || 
+    (selectedfamily_friendly === "all" || 
         (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
 
     (selectedThematicCategories.length === 0 || 
@@ -1245,7 +1245,7 @@ siteCard.innerHTML = `
         : ""}
 
     <!-- Family-Friendly - Show "Family-Friendly" if it matches, otherwise show "❌ Family-Friendly" in red -->
-    ${filterFamilyFriendly 
+    ${filterfamily_friendly 
         ? (site.family_friendly 
             ? `<span class="attribute-box">Family-Friendly</span>` 
             : `<span class="no-attribute-box">❌ Family-Friendly</span>`) 
