@@ -1393,16 +1393,18 @@ siteCard.innerHTML = `
             ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
             ${timePeriodMatchesFilter ? timePeriodText : ""}
             
-            <!-- ✅ Place attributes inside the card -->
-            <div class="site-attributes">
-                ${attributesHTML}
-            </div>
-
             <p class="site-distance">
                 ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
                 ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
                 ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
             </p>
+            
+            <!-- ✅ Place attributes inside the card -->
+            <div class="site-attributes">
+                ${attributesHTML}
+            </div>
+
+
         </div>
     </div>
 
