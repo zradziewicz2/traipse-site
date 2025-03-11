@@ -1238,7 +1238,12 @@ siteCard.innerHTML = `
       : ""}
 
     <!-- Show Dog-Friendly only if filter is selected -->
-    ${filterDogFriendly ? (site.dogfriendly ? `<span class="attribute-box">Dog-Friendly</span>` : "") : ""}
+    ${filterDogFriendly 
+    ? (site.dogfriendly 
+        ? `<span class="attribute-box">Dog-Friendly</span>` 
+        : `<span class="no-attribute-box">❌ Not Dog-Friendly</span>`) 
+    : ""}
+
 
     <!-- Show Family-Friendly only if filter is selected -->
     ${document.getElementById("familyFilter").checked ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
