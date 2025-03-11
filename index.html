@@ -1063,7 +1063,8 @@ function applyFilters() {
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
     let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
-    .map(cb => cb.value);
+        .map(cb => cb.value) || [];
+
 
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
@@ -1138,8 +1139,10 @@ if (
 
 
     (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
-            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+        (Array.isArray(site.thematiccategory) && Array.isArray(selectedThematicCategories) &&
+            selectedThematicCategories.some(selected =>
+                site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+
 
 
 
