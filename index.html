@@ -364,12 +364,17 @@
             text-transform: uppercase;
             padding: 2px 6px;
             font-size: 0.7em;
-            border: 1.5px solid red;
+            border: 1.5px solid red;  /* Red outline */
             border-radius: 4px;
-            color: red;
+            color: white;  /* White text */
+            background: transparent; /* Keeps background black/dark */
+            display: inline-flex; /* Ensures proper alignment */
+            align-items: center; /* Centers the X and text */
+            gap: 4px; /* Spacing between X and text */
             white-space: nowrap;
             line-height: 1.2;
         }
+
 
 
 
@@ -1249,7 +1254,7 @@ siteCard.innerHTML = `
     ${filterLuggageStorage 
         ? (site.luggagestorage 
             ? `<span class="attribute-box">Luggage Storage</span>` 
-            : `<span class="attribute-box" style="border-color: red; color: red;">No Luggage Storage</span>`) 
+            : `<span class="attribute-box" style="border-color: red; color: red;">❌ Luggage Storage</span>`) 
         : ""}
 
 
