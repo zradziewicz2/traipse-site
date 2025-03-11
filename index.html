@@ -1246,7 +1246,12 @@ siteCard.innerHTML = `
 
 
     <!-- Show Family-Friendly only if filter is selected -->
-    ${document.getElementById("familyFilter").checked ? (site.family_friendly ? `<span class="attribute-box">Family-Friendly</span>` : "") : ""}
+    ${document.getElementById("familyFilter").checked 
+    ? (site.family_friendly 
+        ? `<span class="attribute-box">Family-Friendly</span>` 
+        : `<span class="no-attribute-box">❌ Not Family-Friendly</span>`) 
+    : ""}
+
 
     <!-- Show Dining On-Site only if filter is selected -->
     ${filterDiningOnSite ? (site.diningonsite ? `<span class="attribute-box">Dining On-Site</span>` : "") : ""}
