@@ -1687,7 +1687,25 @@ function displayRoutes(routesData) {
 }
 
 
+let resultsContainer = document.getElementById("searchResults");
+resultsContainer.innerHTML = "";
 
+if (exactMatches.length > 0) {
+    let exactHeader = document.createElement("h2");
+    exactHeader.className = "results-header";
+    exactHeader.textContent = "Exact Matches";
+    resultsContainer.appendChild(exactHeader);
+    exactMatches.forEach(entry => resultsContainer.appendChild(createSiteCard(entry.site)));
+}
+
+// Display Recommended Sites Next
+if (recommendedSites.length > 0) {
+    let recommendedHeader = document.createElement("h2");
+    recommendedHeader.className = "results-header";
+    recommendedHeader.textContent = "Recommended Sites";
+    resultsContainer.appendChild(recommendedHeader);
+    recommendedSites.forEach(entry => resultsContainer.appendChild(createSiteCard(entry.site)));
+}
 
 
 
