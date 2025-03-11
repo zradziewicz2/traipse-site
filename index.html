@@ -1056,7 +1056,7 @@ function translateTours(tours) {
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
-    let filterfamily_friendly = document.getElementById("familyFilter").checked ? true : null;
+    let filterfamily_friendly = document.getElementById("family_friendlyFilter").checked ? true : null;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
@@ -1132,7 +1132,7 @@ if (
         (site.type && site.type.toLowerCase() === selectedType)) &&
 
     (selectedfamily_friendly === "all" || 
-        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily_friendly)) &&
+        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedfamily_friendly)) &&
 
     (selectedThematicCategories.length === 0 || 
         (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
