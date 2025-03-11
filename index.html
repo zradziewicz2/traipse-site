@@ -831,12 +831,14 @@
     <div class="filter-group">
         <label>Payment Methods:</label>
         <select id="paymentmethodFilter">
+            <option value="all">All</option>  <!-- ✅ Added this line -->
             <option value="cash">Cash</option>
             <option value="card">Card</option>
             <option value="both">Both</option>
+            <option value="notapplicable">N/A</option>
         </select>
-
     </div>
+
 </div>
 
 <!-- LOCATION & ACCESSIBILITY -->
@@ -1278,8 +1280,9 @@ siteCard.innerHTML = `
 
     <!-- Show Payment Method only if selected -->
     ${selectedPaymentMethod !== "all" && site.paymentmethod 
-      ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` 
-      : ""}
+        ? `<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>` 
+        : ""}
+
 </div>
 
 
