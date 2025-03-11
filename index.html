@@ -360,6 +360,17 @@
             background: #02c9c9;
         }
 
+        .no-attribute-box {
+            text-transform: uppercase;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            border: 1.5px solid red;
+            border-radius: 4px;
+            color: red;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
 
 
         
@@ -1234,8 +1245,13 @@ siteCard.innerHTML = `
     <!-- Show Gift Shop only if filter is selected -->
     ${filterGiftShop ? (site.giftshop ? `<span class="attribute-box">Has Gift Shop</span>` : "") : ""}
 
-    <!-- Show Luggage Storage only if filter is selected -->
-    ${filterLuggageStorage ? (site.luggagestorage ? `<span class="attribute-box">Luggage Storage</span>` : "") : ""}
+    <!-- Luggage Storage - Show "Luggage Storage" if it matches, otherwise show "No Luggage Storage" in red -->
+    ${filterLuggageStorage 
+        ? (site.luggagestorage 
+            ? `<span class="attribute-box">Luggage Storage</span>` 
+            : `<span class="attribute-box" style="border-color: red; color: red;">No Luggage Storage</span>`) 
+        : ""}
+
 
     <!-- Show Spanish Translations only if filter is selected -->
     ${filterSpanishTranslations ? (site.spanishtranslations ? `<span class="attribute-box">Spanish Translations</span>` : "") : ""}
