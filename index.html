@@ -1138,6 +1138,7 @@ function translateTours(tours) {
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
 
+console.log("siteData:", siteData);
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
