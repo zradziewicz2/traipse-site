@@ -1584,9 +1584,17 @@ siteCard.innerHTML = `
 
         
         
-                    window.onload = function() {
-                        getUserLocation(); // Gets user's location when the page loads
-                    };
+window.onload = async function() {
+    await getUserLocation(); // Ensures user location is retrieved
+    setTimeout(() => {
+        if (!siteData || siteData.length === 0) {
+            console.error("Site data is still empty after loading.");
+        } else {
+            applyFilters();
+        }
+    }, 1000); // Delay ensures `siteData` is available
+};
+
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
