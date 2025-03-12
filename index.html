@@ -1083,15 +1083,15 @@ function getMarkerEmoji(sitetype) {
     return emojiMap[sitetype.toLowerCase()] || "❓"; // Default to ❓ if not found
 }
 
-function loadLocations() {
-    fetch('locations.json')
-        .then(response => response.json())
-        .then(data => {
-            siteData = data;
-            applyFilters();
-        })
-        .catch(error => console.error("Error loading JSON:", error));
-}
+fetch('locations.json')
+    .then(response => response.json())
+    .then(data => {
+        console.log("Fetched siteData:", data);
+        siteData = data;
+        applyFilters(); // Ensure filters run only after loading
+    })
+    .catch(error => console.error("Error loading JSON:", error));
+
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
