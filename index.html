@@ -1264,7 +1264,7 @@ let filteredSites = siteData
     }
 
     return { ...site, matchCount, distance }; // Add matchCount to each site
-});
+};
 
 // Sort sites based on the number of matched filters (highest matches first)
 filteredSites.sort((a, b) => b.matchCount - a.matchCount);
