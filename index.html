@@ -1184,30 +1184,69 @@ function applyFilters() {
     let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
 
     let resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = "";
+    let exactMatchSection = document.createElement("div");
+exactMatchSection.innerHTML = "<h2 style='color: #03FDFC;'>Exact Matches</h2>";
+resultsContainer.appendChild(exactMatchSection);
+
+let recommendedSection = document.createElement("div");
+recommendedSection.innerHTML = "<h2 style='color: #03FDFC;'>Recommended</h2>";
+resultsContainer.appendChild(recommendedSection);
+
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    siteData.forEach(site => {
-        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+let filteredSites = siteData.map(site => {
+    let matchScore = 0;
+    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-        // Check if site has at least one of the selected time periods
-        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
-                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
+    // Check matching criteria and increase score for each match
+    if (selectedSiteType === "all" || 
+        (site.sitetype && 
+            (Array.isArray(site.sitetype) 
+                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
+                : site.sitetype.toLowerCase() === selectedSiteType))) {
+        matchScore++;
+    }
 
+    if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) {
+        matchScore++;
+    }
 
+    if (selectedThematicCategories.length === 0 || 
+        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase())))) {
+        matchScore++;
+    }
 
+    if (selectedTimePeriods.length === 0 || 
+        (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected =>
+            site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())))) {
+        matchScore++;
+    }
 
-        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-      // Ensure filters only apply when checkboxes are checked
-            
-            let matchesGiftShop = !filterGiftShop || site.giftshop; 
-            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
-            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
-            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
-            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
-            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
+    if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) {
+        matchScore++;
+    }
+
+    if (selectedLocalOrNational === "all" || 
+        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) {
+        matchScore++;
+    }
+
+    if (selectedDistance === "all" ||
+        (distance !== null &&
+            ((selectedDistance === "1" && distance < 1) ||
+            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+            (selectedDistance === "10" && distance > 10)))) {
+        matchScore++;
+    }
+
+    return { site, matchScore };
+});
+
+// Sort sites by match score (highest first)
+filteredSites.sort((a, b) => b.matchScore - a.matchScore);
+
 
 
 if (
