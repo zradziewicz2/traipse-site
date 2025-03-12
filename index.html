@@ -1086,11 +1086,18 @@ function getMarkerEmoji(sitetype) {
 fetch('locations.json')
     .then(response => response.json())
     .then(data => {
-        console.log("Fetched siteData:", data);
+        if (!Array.isArray(data) || data.length === 0) {
+            console.warn("Fetched data is empty or invalid:", data);
+            return;
+        }
         siteData = data;
-        applyFilters(); // Ensure filters run only after loading
+        console.log("Successfully loaded siteData:", siteData);
+        
+        // Apply filters ONLY after siteData is confirmed to be loaded
+        applyFilters();
     })
     .catch(error => console.error("Error loading JSON:", error));
+
 
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
