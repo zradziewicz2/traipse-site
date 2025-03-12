@@ -1267,7 +1267,13 @@ let filteredSites = siteData
 };
 
 // Sort sites based on the number of matched filters (highest matches first)
+if (!Array.isArray(filteredSites)) {
+    console.error("Error: `filteredSites` is not an array.", filteredSites);
+    filteredSites = []; // Prevent crashes by ensuring it's an empty array
+}
+
 filteredSites.sort((a, b) => b.matchCount - a.matchCount);
+
 
 // Separate exact matches from recommended matches
 resultsContainer.innerHTML = "";
