@@ -1188,80 +1188,58 @@ function applyFilters() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    siteData.forEach(site => {
-        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+let filteredSites = siteData.map(site => {
+    let matchCount = 0;
+    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-        // Check if site has at least one of the selected time periods
-        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
-                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
+    // Count how many filters this site matches
+    if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchCount++;
+    if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) matchCount++;
+    if (selectedFamily === "all" || (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) matchCount++;
+    if (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) matchCount++;
+    if (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) matchCount++;
+    if (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) matchCount++;
+    if (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) matchCount++;
+    if (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) matchCount++;
 
+    // Thematic Categories
+    if (selectedThematicCategories.length > 0 && site.thematiccategory &&
+        selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
+        matchCount++;
+    }
 
+    // Time Periods
+    if (selectedTimePeriods.length > 0 && site.timeperiod &&
+        selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
+        matchCount++;
+    }
 
+    return { ...site, matchCount, distance }; // Add matchCount to each site
+});
 
-        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-      // Ensure filters only apply when checkboxes are checked
-            
-            let matchesGiftShop = !filterGiftShop || site.giftshop; 
-            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
-            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
-            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
-            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
-            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
+// Sort sites based on the number of matched filters (highest matches first)
+filteredSites.sort((a, b) => b.matchCount - a.matchCount);
 
+// Separate exact matches from recommended matches
+let resultsContainer = document.getElementById("searchResults");
+resultsContainer.innerHTML = "";
 
-if (
-    (selectedSiteType === "all" || 
-        (site.sitetype && 
-            (Array.isArray(site.sitetype) 
-                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
-                : site.sitetype.toLowerCase() === selectedSiteType))) &&
+let totalFilters = Object.keys(selectedFilters).length;
+let exactMatches = filteredSites.filter(site => site.matchCount === totalFilters);
+let recommendedMatches = filteredSites.filter(site => site.matchCount < totalFilters);
 
-    (selectedPaymentMethod === "all" || 
-        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
-
-    (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
-
-    (selectedCost === "all" || 
-        (site.cost && site.cost.toLowerCase() === selectedCost)) &&
-
-    (selectedType === "all" || 
-        (site.type && site.type.toLowerCase() === selectedType)) &&
-
-    (selectedFamily === "all" || 
-        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
-
-    (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
-            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
-
-
-
-    (selectedLocalOrNational === "all" || 
-        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
-
-    (selectedEstimatedTime === "all" || 
-        (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
-
-    (selectedReservations === "all" || 
-        (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
-
-    (selectedTours === "all" || 
-        (site.tours && site.tours.includes(selectedTours))) &&
-
-    (selectedTransit === "all" || 
-        (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
-
-    (selectedDistance === "all" ||
-        (distance !== null &&
-            ((selectedDistance === "1" && distance < 1) ||
-            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-            (selectedDistance === "10" && distance > 10)))) &&
-
-    matchesTimePeriod
-) {
-    // ✅ Matching sites will be shown
+// Display exact matches first
+if (exactMatches.length > 0) {
+    resultsContainer.innerHTML += `<h2 style="color: #03FDFC;">Exact Matches</h2>`;
+    exactMatches.forEach(site => displaySiteCard(site, resultsContainer, true));
 }
+
+// Display recommended matches next
+if (recommendedMatches.length > 0) {
+    resultsContainer.innerHTML += `<h2 style="color: #03FDFC;">Recommended Sites</h2>`;
+    recommendedMatches.forEach(site => displaySiteCard(site, resultsContainer, false));
+}
+
 
 
 
