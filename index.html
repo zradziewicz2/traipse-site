@@ -1092,11 +1092,14 @@ fetch('locations.json')
         }
         siteData = data;
         console.log("Successfully loaded siteData:", siteData);
-        
-        // Apply filters ONLY after siteData is confirmed to be loaded
+
+        // ✅ Run applyFilters() only after data is fully loaded
         applyFilters();
     })
     .catch(error => console.error("Error loading JSON:", error));
+
+
+
 
 
 function translateEstimatedTime(time) {
