@@ -144,7 +144,7 @@
         
         .filter-group select {
             width: 100%;
-            padding: 8px;
+            : 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
@@ -420,6 +420,19 @@
             background: #02c9c9;
         }
 
+        .no-attribute-box {
+            display: inline-block;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            font-weight: bold;
+            border: 2px solid #03FDFC !important; /* ✅ Cyan border */
+            color: white !important; /* ✅ Cyan text */
+            border-radius: 4px;
+            white-space: nowrap;
+            line-height: 1.2;
+            background: transparent !important; /* Keeps background clear */
+        }
         
         .matching-attributes {
             display: flex;
@@ -688,7 +701,6 @@
             text-align: left;
             width: 100%;
             padding: 5px 0;
-        
 
             .city-filter {
                 display: flex;
@@ -707,9 +719,8 @@
                 font-weight: bold;
             }
                  select {
-                all: unset; /* Reset all browser styles */
-            }
-
+            all: unset; /* Reset all browser styles */
+        }
    
         .city-filter-dropdown {
             font-size: 2em !important; /* Force larger text */
@@ -1083,25 +1094,15 @@ function getMarkerEmoji(sitetype) {
     return emojiMap[sitetype.toLowerCase()] || "❓"; // Default to ❓ if not found
 }
 
-fetch('locations.json')
-    .then(response => response.json())
-    .then(data => {
-        if (!Array.isArray(data) || data.length === 0) {
-            console.warn("Fetched data is empty or invalid:", data);
-            return;
-        }
-        siteData = data;
-        console.log("Successfully loaded siteData:", siteData);
-
-        // ✅ Run applyFilters() only after data is fully loaded
-        applyFilters();
-    })
-    .catch(error => console.error("Error loading JSON:", error));
-
-
-
-
-
+function loadLocations() {
+    fetch('locations.json')
+        .then(response => response.json())
+        .then(data => {
+            siteData = data;
+            applyFilters();
+        })
+        .catch(error => console.error("Error loading JSON:", error));
+}
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
@@ -1148,120 +1149,119 @@ function translateTours(tours) {
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
 
-console.log("siteData:", siteData);
 
 function applyFilters() {
-    if (!Array.isArray(siteData) || siteData.length === 0) {
-        console.warn("applyFilters() aborted: siteData is empty.");
-        return;
-    }
-
-    console.log("Applying filters on:", siteData);
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
     let selectedFamily = document.getElementById("familyFilter").value;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
-        ? document.getElementById("localOrNationalFilter").value 
-        : "all";
+    ? document.getElementById("localOrNationalFilter").value 
+    : "all";
     let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
-        .map(cb => cb.value);
-    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
-        .map(cb => cb.value);
-    let selectedCity = document.getElementById("cityFilter").value.toLowerCase();
+    .map(cb => cb.value);
+
+    let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
+    let filterGiftShop = document.getElementById("giftShopFilter").checked ? true : null;
+    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked ? true : null;
+    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked ? true : null;
+    let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
+    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
+    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
     let selectedSiteType = document.getElementById("siteTypeFilter").value;
     let selectedPaymentMethod = document.getElementById("paymentmethodFilter").value;
+    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
 
-    // Checkbox filters
-    let filterGiftShop = document.getElementById("giftShopFilter").checked;
-    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked;
-    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked;
-    let filterPublicAccess = document.getElementById("publicAccessFilter").checked;
-    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked;
-    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked;
-    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked;
+
+
+    
+
+    // Get selected time periods (array of checked values)
+    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
 
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-
-    // Remove previous markers from map
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    // Create sections for matches
-    let exactMatchSection = document.createElement("div");
-    exactMatchSection.innerHTML = "<h2 style='color: #03FDFC;'>Exact Matches</h2>";
-    resultsContainer.appendChild(exactMatchSection);
-
-    let recommendedSection = document.createElement("div");
-    recommendedSection.innerHTML = "<h2 style='color: #03FDFC;'>Recommended</h2>";
-    resultsContainer.appendChild(recommendedSection);
-
-    let filteredSites = siteData.map(site => {
-        let matchScore = 0;
+    siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-        // Increase matchScore for each filter the site satisfies
-        if (selectedSiteType === "all" || (site.sitetype && site.sitetype.includes(selectedSiteType))) matchScore++;
-        if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchScore++;
-        if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) matchScore++;
-        if (selectedFamily === "all" || (site.family_friendly && String(site.family_friendly).toLowerCase() === selectedFamily)) matchScore++;
-        if (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) matchScore++;
-        if (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) matchScore++;
-        if (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) matchScore++;
-        if (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) matchScore++;
-        if (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) matchScore++;
-        if (selectedPaymentMethod === "all" || (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) matchScore++;
+        // Check if site has at least one of the selected time periods
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
+                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
 
-        // Thematic categories and time periods
-        if (selectedThematicCategories.length === 0 || (site.thematiccategory && selectedThematicCategories.some(tc => site.thematiccategory.includes(tc)))) matchScore++;
-        if (selectedTimePeriods.length === 0 || (site.timeperiod && selectedTimePeriods.some(tp => site.timeperiod.includes(tp)))) matchScore++;
 
-        // Checkbox filters (count as matches)
-        if (filterGiftShop && site.giftshop) matchScore++;
-        if (filterSpanishTranslations && site.spanishtranslations) matchScore++;
-        if (filterLuggageStorage && site.luggagestorage) matchScore++;
-        if (filterPublicAccess && site.publicaccess) matchScore++;
-        if (filterDiningOnSite && site.diningonsite) matchScore++;
-        if (filterADAAccessibility && site.adaaccessibility) matchScore++;
-        if (filterDogFriendly && site.dogfriendly) matchScore++;
 
-        return { site, matchScore, distance };
-    });
 
-    // Sort sites by match score (highest first)
-    filteredSites.sort((a, b) => b.matchScore - a.matchScore);
+        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
+      // Ensure filters only apply when checkboxes are checked
+            
+            let matchesGiftShop = !filterGiftShop || site.giftshop; 
+            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
+            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
+            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
+            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
+            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
-    // Append filtered sites into "Exact Matches" or "Recommended"
-    filteredSites.forEach(({ site, matchScore, distance }) => {
-        let siteCard = document.createElement("div");
-        siteCard.className = "site-card";
 
-        let matchCategory = matchScore >= 5 ? exactMatchSection : recommendedSection;
-        matchCategory.appendChild(siteCard);
+if (
+    (selectedSiteType === "all" || 
+        (site.sitetype && 
+            (Array.isArray(site.sitetype) 
+                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
+                : site.sitetype.toLowerCase() === selectedSiteType))) &&
 
-        siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
-                </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                </div>
-            </div>
-        `;
+    (selectedPaymentMethod === "all" || 
+        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
 
-        siteCard.onclick = () => {
-            map.setView([site.lat, site.lng], 14);
-        };
-    });
+    (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
+
+    (selectedCost === "all" || 
+        (site.cost && site.cost.toLowerCase() === selectedCost)) &&
+
+    (selectedType === "all" || 
+        (site.type && site.type.toLowerCase() === selectedType)) &&
+
+    (selectedFamily === "all" || 
+        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
+
+    (selectedThematicCategories.length === 0 || 
+        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+
+
+
+    (selectedLocalOrNational === "all" || 
+        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
+
+    (selectedEstimatedTime === "all" || 
+        (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
+
+    (selectedReservations === "all" || 
+        (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
+
+    (selectedTours === "all" || 
+        (site.tours && site.tours.includes(selectedTours))) &&
+
+    (selectedTransit === "all" || 
+        (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
+
+    (selectedDistance === "all" ||
+        (distance !== null &&
+            ((selectedDistance === "1" && distance < 1) ||
+            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+            (selectedDistance === "10" && distance > 10)))) &&
+
+    matchesTimePeriod
+) {
+    // ✅ Matching sites will be shown
 }
-
 
 
 
@@ -1552,16 +1552,13 @@ siteCard.innerHTML = `
 
 
 
-    siteCard.onclick = () => {
-        map.setView([site.lat, site.lng], 14);
-        marker.openPopup();
-    };
-
-    resultsContainer.appendChild(siteCard);
-; // This closes the forEach() loop correctly
-
- // This closes the applyFilters() function correctly
-
+            siteCard.onclick = () => {
+                map.setView([site.lat, site.lng], 14);
+                marker.openPopup();
+            };
+            resultsContainer.appendChild(siteCard);
+    });
+}
 
         
         
