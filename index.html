@@ -1096,13 +1096,22 @@ function getMarkerEmoji(sitetype) {
 
 function loadLocations() {
     fetch('locations.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to load locations: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            siteData = data;
+            siteData = data || [];  // Ensure it's an array
+            if (siteData.length === 0) {
+                console.warn("Warning: siteData is empty.");
+            }
             applyFilters();
         })
         .catch(error => console.error("Error loading JSON:", error));
 }
+
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
