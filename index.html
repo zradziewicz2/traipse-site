@@ -1221,7 +1221,6 @@ let filteredSites = siteData.map(site => {
 filteredSites.sort((a, b) => b.matchCount - a.matchCount);
 
 // Separate exact matches from recommended matches
-let resultsContainer = document.getElementById("searchResults");
 resultsContainer.innerHTML = "";
 
 let totalFilters = Object.keys(selectedFilters).length;
