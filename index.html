@@ -1151,6 +1151,40 @@ function translateTours(tours) {
 
 
 function applyFilters() {
+    let selectedFilters = {};
+        
+        // Add filters to the object if they are active
+        if (document.getElementById("costFilter").value !== "all") {
+            selectedFilters["cost"] = document.getElementById("costFilter").value;
+        }
+        if (document.getElementById("typeFilter").value !== "all") {
+            selectedFilters["type"] = document.getElementById("typeFilter").value;
+        }
+        if (document.getElementById("familyFilter").checked) {
+            selectedFilters["family_friendly"] = true;
+        }
+        if (document.getElementById("localOrNationalFilter") &&
+            document.getElementById("localOrNationalFilter").value !== "all") {
+            selectedFilters["localOrNational"] = document.getElementById("localOrNationalFilter").value;
+        }
+        if (document.getElementById("distanceFilter").value !== "all") {
+            selectedFilters["distance"] = document.getElementById("distanceFilter").value;
+        }
+        if (document.getElementById("estimatedTimeFilter").value !== "all") {
+            selectedFilters["estimatedTime"] = document.getElementById("estimatedTimeFilter").value;
+        }
+        if (document.getElementById("reservationsFilter").value !== "all") {
+            selectedFilters["reservations"] = document.getElementById("reservationsFilter").value;
+        }
+        if (document.getElementById("toursFilter").value !== "all") {
+            selectedFilters["tours"] = document.getElementById("toursFilter").value;
+        }
+        if (document.getElementById("transitFilter").value !== "all") {
+            selectedFilters["transit"] = document.getElementById("transitFilter").value;
+        }
+
+
+
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
     let selectedFamily = document.getElementById("familyFilter").value;
