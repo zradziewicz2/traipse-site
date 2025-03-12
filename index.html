@@ -1232,10 +1232,13 @@ function applyFilters() {
     allMarkers = [];
 
 let filteredSites = siteData
-    .filter(site => site) // Ensure no null values
+    .filter(site => site && site.lat && site.lng) // Ensure site exists and has valid coordinates
     .map(site => { 
         let matchCount = 0;
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+        return { ...site, matchCount, distance }; // Avoid referencing `undefined`
+    });
+
 
 
     // Count how many filters this site matches
@@ -1276,8 +1279,11 @@ let recommendedMatches = filteredSites.filter(site => site.matchCount < totalFil
 // Display exact matches first
 if (exactMatches.length > 0) {
     resultsContainer.innerHTML += `<h2 style="color: #03FDFC;">Exact Matches</h2>`;
-    exactMatches.forEach(site => displaySiteCard(site, resultsContainer, true));
+    exactMatches.forEach(site => {
+        if (site) displaySiteCard(site, resultsContainer, true);
+    });
 }
+
 
 // Display recommended matches next
 if (recommendedMatches.length > 0) {
