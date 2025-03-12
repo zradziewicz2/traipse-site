@@ -1236,35 +1236,35 @@ let filteredSites = siteData
     .map(site => { 
         let matchCount = 0;
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
-        return { ...site, matchCount, distance }; // Avoid referencing `undefined`
+
+        // Count how many filters this site matches
+        if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchCount++;
+        if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) matchCount++;
+        if (selectedFamily === "all" || (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) matchCount++;
+        if (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) matchCount++;
+        if (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) matchCount++;
+        if (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) matchCount++;
+        if (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) matchCount++;
+        if (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) matchCount++;
+
+        // Thematic Categories
+        if (selectedThematicCategories.length > 0 && site.thematiccategory &&
+            selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
+            matchCount++;
+        }
+
+        // Time Periods
+        if (selectedTimePeriods.length > 0 && site.timeperiod &&
+            selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
+            matchCount++;
+        }
+
+        return { ...site, matchCount, distance }; // Add matchCount to each site
     });
 
+// Debugging Output
+console.log("Filtered Sites:", filteredSites);
 
-
-    // Count how many filters this site matches
-    if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchCount++;
-    if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) matchCount++;
-    if (selectedFamily === "all" || (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) matchCount++;
-    if (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) matchCount++;
-    if (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) matchCount++;
-    if (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) matchCount++;
-    if (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) matchCount++;
-    if (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) matchCount++;
-
-    // Thematic Categories
-    if (selectedThematicCategories.length > 0 && site.thematiccategory &&
-        selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
-        matchCount++;
-    }
-
-    // Time Periods
-    if (selectedTimePeriods.length > 0 && site.timeperiod &&
-        selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
-        matchCount++;
-    }
-
-    return { ...site, matchCount, distance }; // Add matchCount to each site
-};
 
 // Sort sites based on the number of matched filters (highest matches first)
 if (!Array.isArray(filteredSites)) {
