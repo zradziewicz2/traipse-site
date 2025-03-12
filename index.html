@@ -1195,112 +1195,112 @@ resultsContainer.appendChild(recommendedSection);
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-let filteredSites = siteData.map(site => {
-    let matchScore = 0;
-    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+function applyFilters() {
+    let selectedCost = document.getElementById("costFilter").value;
+    let selectedType = document.getElementById("typeFilter").value;
+    let selectedFamily = document.getElementById("familyFilter").value;
+    let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
+        ? document.getElementById("localOrNationalFilter").value 
+        : "all";
+    let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
+        .map(cb => cb.value);
+    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
+        .map(cb => cb.value);
+    let selectedCity = document.getElementById("cityFilter").value.toLowerCase();
+    let selectedDistance = document.getElementById("distanceFilter").value;
+    let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
+    let selectedReservations = document.getElementById("reservationsFilter").value;
+    let selectedTours = document.getElementById("toursFilter").value;
+    let selectedTransit = document.getElementById("transitFilter").value;
+    let selectedSiteType = document.getElementById("siteTypeFilter").value;
+    let selectedPaymentMethod = document.getElementById("paymentmethodFilter").value;
 
-    // Check matching criteria and increase score for each match
-    if (selectedSiteType === "all" || 
-        (site.sitetype && 
-            (Array.isArray(site.sitetype) 
-                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
-                : site.sitetype.toLowerCase() === selectedSiteType))) {
-        matchScore++;
-    }
+    // Checkbox filters
+    let filterGiftShop = document.getElementById("giftShopFilter").checked;
+    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked;
+    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked;
+    let filterPublicAccess = document.getElementById("publicAccessFilter").checked;
+    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked;
+    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked;
+    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked;
 
-    if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) {
-        matchScore++;
-    }
+    let resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
 
-    if (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
-            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase())))) {
-        matchScore++;
-    }
+    // Remove previous markers from map
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
 
-    if (selectedTimePeriods.length === 0 || 
-        (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected =>
-            site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())))) {
-        matchScore++;
-    }
+    // Create sections for matches
+    let exactMatchSection = document.createElement("div");
+    exactMatchSection.innerHTML = "<h2 style='color: #03FDFC;'>Exact Matches</h2>";
+    resultsContainer.appendChild(exactMatchSection);
 
-    if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) {
-        matchScore++;
-    }
+    let recommendedSection = document.createElement("div");
+    recommendedSection.innerHTML = "<h2 style='color: #03FDFC;'>Recommended</h2>";
+    resultsContainer.appendChild(recommendedSection);
 
-    if (selectedLocalOrNational === "all" || 
-        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) {
-        matchScore++;
-    }
+    let filteredSites = siteData.map(site => {
+        let matchScore = 0;
+        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
-    if (selectedDistance === "all" ||
-        (distance !== null &&
-            ((selectedDistance === "1" && distance < 1) ||
-            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-            (selectedDistance === "10" && distance > 10)))) {
-        matchScore++;
-    }
+        // Increase matchScore for each filter the site satisfies
+        if (selectedSiteType === "all" || (site.sitetype && site.sitetype.includes(selectedSiteType))) matchScore++;
+        if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchScore++;
+        if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) matchScore++;
+        if (selectedFamily === "all" || (site.family_friendly && String(site.family_friendly).toLowerCase() === selectedFamily)) matchScore++;
+        if (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) matchScore++;
+        if (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) matchScore++;
+        if (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) matchScore++;
+        if (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) matchScore++;
+        if (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) matchScore++;
+        if (selectedPaymentMethod === "all" || (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) matchScore++;
 
-    return { site, matchScore };
-});
+        // Thematic categories and time periods
+        if (selectedThematicCategories.length === 0 || (site.thematiccategory && selectedThematicCategories.some(tc => site.thematiccategory.includes(tc)))) matchScore++;
+        if (selectedTimePeriods.length === 0 || (site.timeperiod && selectedTimePeriods.some(tp => site.timeperiod.includes(tp)))) matchScore++;
 
-// Sort sites by match score (highest first)
-filteredSites.sort((a, b) => b.matchScore - a.matchScore);
+        // Checkbox filters (count as matches)
+        if (filterGiftShop && site.giftshop) matchScore++;
+        if (filterSpanishTranslations && site.spanishtranslations) matchScore++;
+        if (filterLuggageStorage && site.luggagestorage) matchScore++;
+        if (filterPublicAccess && site.publicaccess) matchScore++;
+        if (filterDiningOnSite && site.diningonsite) matchScore++;
+        if (filterADAAccessibility && site.adaaccessibility) matchScore++;
+        if (filterDogFriendly && site.dogfriendly) matchScore++;
 
+        return { site, matchScore, distance };
+    });
 
+    // Sort sites by match score (highest first)
+    filteredSites.sort((a, b) => b.matchScore - a.matchScore);
 
-if (
-    (selectedSiteType === "all" || 
-        (site.sitetype && 
-            (Array.isArray(site.sitetype) 
-                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
-                : site.sitetype.toLowerCase() === selectedSiteType))) &&
+    // Append filtered sites into "Exact Matches" or "Recommended"
+    filteredSites.forEach(({ site, matchScore, distance }) => {
+        let siteCard = document.createElement("div");
+        siteCard.className = "site-card";
 
-    (selectedPaymentMethod === "all" || 
-        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
+        let matchCategory = matchScore >= 5 ? exactMatchSection : recommendedSection;
+        matchCategory.appendChild(siteCard);
 
-    (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
+        siteCard.innerHTML = `
+            <div class="site-content">
+                <div class="site-image-container">
+                    <img src="${site.image}" alt="${site.name}" class="site-image">
+                </div>
+                <div class="site-details">
+                    <h3 class="site-title">${site.name}</h3>
+                    <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
+                </div>
+            </div>
+        `;
 
-    (selectedCost === "all" || 
-        (site.cost && site.cost.toLowerCase() === selectedCost)) &&
-
-    (selectedType === "all" || 
-        (site.type && site.type.toLowerCase() === selectedType)) &&
-
-    (selectedFamily === "all" || 
-        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
-
-    (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
-            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
-
-
-
-    (selectedLocalOrNational === "all" || 
-        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
-
-    (selectedEstimatedTime === "all" || 
-        (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
-
-    (selectedReservations === "all" || 
-        (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
-
-    (selectedTours === "all" || 
-        (site.tours && site.tours.includes(selectedTours))) &&
-
-    (selectedTransit === "all" || 
-        (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
-
-    (selectedDistance === "all" ||
-        (distance !== null &&
-            ((selectedDistance === "1" && distance < 1) ||
-            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-            (selectedDistance === "10" && distance > 10)))) &&
-
-    matchesTimePeriod
-) {
-    // ✅ Matching sites will be shown
+        siteCard.onclick = () => {
+            map.setView([site.lat, site.lng], 14);
+        };
+    });
 }
+
 
 
 
