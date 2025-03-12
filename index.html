@@ -1591,13 +1591,16 @@ siteCard.innerHTML = `
 
 
 
-            siteCard.onclick = () => {
-                map.setView([site.lat, site.lng], 14);
-                marker.openPopup();
-            };
-            resultsContainer.appendChild(siteCard);
-    });
-}
+    siteCard.onclick = () => {
+        map.setView([site.lat, site.lng], 14);
+        marker.openPopup();
+    };
+
+    resultsContainer.appendChild(siteCard);
+}); // This closes the forEach() loop correctly
+
+} // This closes the applyFilters() function correctly
+
 
         
         
