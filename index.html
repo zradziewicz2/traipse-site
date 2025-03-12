@@ -1222,9 +1222,12 @@ function applyFilters() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-let filteredSites = siteData.map(site => {
-    let matchCount = 0;
-    let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+let filteredSites = siteData
+    .filter(site => site) // Ensure no null values
+    .map(site => { 
+        let matchCount = 0;
+        let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+
 
     // Count how many filters this site matches
     if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchCount++;
