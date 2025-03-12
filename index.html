@@ -1144,51 +1144,6 @@ function applyFilters() {
     let selectedType = document.getElementById("typeFilter").value;
     let selectedFamily = document.getElementById("familyFilter").value;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
-    ? document.getElementById("localOrNationalFilter").value 
-    : "all";
-    let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
-    .map(cb => cb.value);
-
-    let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
-    let selectedDistance = document.getElementById("distanceFilter").value;
-    let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
-    let selectedReservations = document.getElementById("reservationsFilter").value;
-    let selectedTours = document.getElementById("toursFilter").value;
-    let selectedTransit = document.getElementById("transitFilter").value;
-    let filterGiftShop = document.getElementById("giftShopFilter").checked ? true : null;
-    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked ? true : null;
-    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked ? true : null;
-    let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
-    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
-    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
-    let selectedSiteType = document.getElementById("siteTypeFilter").value;
-    let selectedPaymentMethod = document.getElementById("paymentmethodFilter").value;
-    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
-
-
-
-    
-
-    // Get selected time periods (array of checked values)
-    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
-
-    let resultsContainer = document.getElementById("searchResults");
-    let exactMatchSection = document.createElement("div");
-exactMatchSection.innerHTML = "<h2 style='color: #03FDFC;'>Exact Matches</h2>";
-resultsContainer.appendChild(exactMatchSection);
-
-let recommendedSection = document.createElement("div");
-recommendedSection.innerHTML = "<h2 style='color: #03FDFC;'>Recommended</h2>";
-resultsContainer.appendChild(recommendedSection);
-
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
-
-function applyFilters() {
-    let selectedCost = document.getElementById("costFilter").value;
-    let selectedType = document.getElementById("typeFilter").value;
-    let selectedFamily = document.getElementById("familyFilter").value;
-    let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
         ? document.getElementById("localOrNationalFilter").value 
         : "all";
     let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
