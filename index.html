@@ -1407,42 +1407,50 @@ if (filterADAAccessibility) {
 }
 
 // Transit Accessibility
+        let selectedTransit = document.getElementById("transitFilter")?.value || "all";
 if (selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit) {
     matchingAttributes.push(`<span class="attribute-box">${translateTransit(site.transit)}</span>`);
 }
 
 // Local/National
+        let selectedLocalOrNational = document.getElementById("localOrNationalFilter")?.value || "all";
 if (selectedLocalOrNational !== "all" && site.localornational) {
     matchingAttributes.push(`<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>`);
 }
 
 // Tours
+        let selectedTours = document.getElementById("toursFilter")?.value || "all";
 if (selectedTours !== "all" && site.tours && site.tours.includes(selectedTours)) {
     matchingAttributes.push(`<span class="attribute-box">${translateTours(site.tours)}</span>`);
 }
 
 // Indoor/Outdoor
+        let selectedType = document.getElementById("typeFilter")?.value || "all";
 if (selectedType !== "all" && site.type && site.type.toLowerCase() === selectedType) {
     matchingAttributes.push(`<span class="attribute-box">${translateType(site.type)}</span>`);
 }
 
 // Site Type
+        let selectedSiteType = document.getElementById("siteTypeFilter")?.value || "all";
 if (selectedSiteType !== "all" && site.sitetype &&
     (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)) {
     matchingAttributes.push(`<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`);
 }
 
 // Reservations Required
+        let selectedReservations = document.getElementById("reservationsFilter")?.value || "all";
 if (selectedReservations !== "all" && site.reservations && site.reservations.toLowerCase() === selectedReservations) {
     matchingAttributes.push(`<span class="attribute-box">${translateReservations(site.reservations)}</span>`);
 }
 
 // Cost
+        let selectedCost = document.getElementById("costFilter")?.value || "all";
 if (selectedCost !== "all" && site.cost && site.cost.toLowerCase() === selectedCost) {
     matchingAttributes.push(`<span class="attribute-box">${translateCost(site.cost)}</span>`);
 }
 
 // Payment Method
+        let selectedPaymentMethod = document.getElementById("paymentmethodFilter")?.value || "all";
 if (selectedPaymentMethod !== "all" && site.paymentmethod) {
     matchingAttributes.push(`<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>`);
 }
