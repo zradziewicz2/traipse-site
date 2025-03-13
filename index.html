@@ -1090,13 +1090,20 @@ fetch('locations.json')
             console.warn("Fetched data is empty or invalid:", data);
             return;
         }
-        siteData = data;
-        console.log("Successfully loaded siteData:", siteData);
 
-        // ✅ Run applyFilters() only after data is fully loaded
-        applyFilters();
+        siteData = data; // ✅ Now siteData is populated
+        console.log("✅ Successfully loaded siteData:", siteData);
+
+        // Now we can safely run isLiked because siteData is available
+        siteData.forEach(site => {
+            let isLiked = myPlaces.some(s => s.id === site.id);
+            console.log(`Checking if site is liked:`, site.name, isLiked);
+        });
+
+        applyFilters(); // ✅ Only run after siteData is ready
     })
     .catch(error => console.error("Error loading JSON:", error));
+
 
 
 
