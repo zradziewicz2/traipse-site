@@ -1246,7 +1246,7 @@ function applyFilters() {
 
     // Append filtered sites into "Exact Matches" or "Recommended"
     filteredSites.forEach(({ site, matchScore, distance }) => {
-        let siteCard = document.createElement("div");
+        ent.createElement("div");
         siteCard.className = "site-card";
 
         let matchCategory = matchScore >= 5 ? exactMatchSection : recommendedSection;
@@ -1497,7 +1497,7 @@ siteCard.innerHTML = `
         console.log("Calculated distance:", distance); // Debugging line
         
         // Now use it safely in your template
-let siteCard = `
+    siteCard = `
     <div class="site-details">
         <p class="site-distance">
             ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
