@@ -1387,7 +1387,7 @@
         "reservations": "notapplicable",
         "tours": [],
         "transit": "underhalfamilefromtransit",
-        "sitetype": "[historichomes]",
+        "sitetype": "historichomes",
         "website": "notavailable",
         "giftshop": false,
         "diningonsite": false,
