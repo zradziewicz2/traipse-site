@@ -1565,14 +1565,15 @@ siteCard.innerHTML = `
             siteCard.onclick = () => {
                 map.setView([site.lat, site.lng], 14);
                 marker.openPopup();
-                    resultsContainer.appendChild(siteCard);
-                }); // ✅ This should close forEach
-            } // ✅ This should close applyFilters
-        
-        
-                    window.onload = function() {
-                        getUserLocation(); // Gets user's location when the page loads
-                    };
+                resultsContainer.appendChild(siteCard);
+            }; // ✅ Properly closes siteCard.onclick function
+            
+            // ✅ Removed extra closing parenthesis and curly brace that were incorrectly closing the forEach loop
+            
+            window.onload = function () {
+                getUserLocation(); // Gets user's location when the page loads
+            };
+
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
