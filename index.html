@@ -1238,6 +1238,38 @@ function applyFilters() {
         matchingAttributes.push("ADA Accessible");
     }
 
+     if (selectedReservations !== "all" && site.reservations === selectedReservations) {
+        matchingAttributes.push("Reservations: " + translateReservations(site.reservations));
+    }
+
+    // Cost
+    if (selectedCost !== "all" && site.cost === selectedCost) {
+        matchingAttributes.push("Cost: " + translateCost(site.cost));
+    }
+
+    // Transit Accessibility
+    if (selectedTransit !== "all" && site.transit === selectedTransit) {
+        matchingAttributes.push("Transit: " + translateTransit(site.transit));
+    }
+
+    // Indoor/Outdoor
+    if (selectedType !== "all" && site.type === selectedType) {
+        matchingAttributes.push("Type: " + translateType(site.type));
+    }
+        
+    if (selectedLocalOrNational !== "all" && site.localornational === selectedLocalOrNational) {
+        matchingAttributes.push("Scope: " + translateLocalOrNational(site.localornational));
+    }
+        if (selectedSiteType !== "all" && site.sitetype) {
+        if (Array.isArray(site.sitetype)) {
+            if (site.sitetype.includes(selectedSiteType)) {
+                matchingAttributes.push("Site Type: " + translateSiteType(selectedSiteType));
+            }
+        } else if (site.sitetype === selectedSiteType) {
+            matchingAttributes.push("Site Type: " + translateSiteType(site.sitetype));
+        }
+    }
+
     // Store number of matches
     return {
         site,
