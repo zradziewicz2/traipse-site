@@ -1302,6 +1302,7 @@ function applyFilters() {
             
             // Get stored My Places and Not Interested lists
             let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
+            console.log("Loaded My Places:", myPlaces);
             let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
             if (typeof site === "undefined") {
     console.warn("⚠ site is undefined at line 1290. Assigning a default value.");
