@@ -1296,11 +1296,16 @@ function applyFilters() {
     console.warn("⚠ site is undefined at line 1290. Assigning a default value.");
     site = siteData.length > 0 ? siteData[0] : {}; // Assign first site or an empty object
 }
-console.log("Debug: site before line 1290:", site);
+let isLiked = false; // ✅ Declare before the loop
 
-            // Check if this site is already liked or not interested
-            siteData.forEach(site => {
-    let isLiked = myPlaces.some(s => s.id === site.id);
+siteData.forEach(site => {
+    if (myPlaces.some(s => s.id === site.id)) {
+        isLiked = true;
+    }
+});
+
+console.log("Final isLiked value:", isLiked); // ✅ Now it will work!
+
 });
             let starClass = isLiked ? "active" : "";
             let starSymbol = isLiked ? "⭐" : "☆";
