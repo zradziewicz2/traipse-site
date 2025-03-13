@@ -1359,6 +1359,7 @@ if (filterDogFriendly) {
 }
 
 // Family-Friendly
+        let filterDiningOnSite = document.getElementById("diningOnSiteFilter")?.checked || false;
 if (document.getElementById("familyFilter").checked) {
     site.family_friendly
         ? matchingAttributes.push(`<span class="attribute-box">Family-Friendly</span>`)
@@ -1366,6 +1367,7 @@ if (document.getElementById("familyFilter").checked) {
 }
 
 // Dining On-Site
+        let filterDiningOnSite = document.getElementById("diningOnSiteFilter")?.checked || false;
 if (filterDiningOnSite) {
     site.diningonsite
         ? matchingAttributes.push(`<span class="attribute-box">Dining On-Site</span>`)
@@ -1373,6 +1375,7 @@ if (filterDiningOnSite) {
 }
 
 // Gift Shop
+        let filterGiftShop = document.getElementById("giftShopFilter")?.checked || false;
 if (filterGiftShop) {
     site.giftshop
         ? matchingAttributes.push(`<span class="attribute-box">Has Gift Shop</span>`)
@@ -1380,6 +1383,7 @@ if (filterGiftShop) {
 }
 
 // Luggage Storage
+        let filterLuggageStorage = document.getElementById("luggageStorageFilter")?.checked || false;
 if (filterLuggageStorage) {
     site.luggagestorage
         ? matchingAttributes.push(`<span class="attribute-box">Luggage Storage</span>`)
@@ -1387,6 +1391,7 @@ if (filterLuggageStorage) {
 }
 
 // Spanish Translations
+        let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter")?.checked || false;
 if (filterSpanishTranslations) {
     site.spanishtranslations
         ? matchingAttributes.push(`<span class="attribute-box">Spanish Translations</span>`)
@@ -1394,6 +1399,7 @@ if (filterSpanishTranslations) {
 }
 
 // ADA Accessibility
+        let filterADAAccessibility = document.getElementById("adaAccessibilityFilter")?.checked || false;
 if (filterADAAccessibility) {
     site.adaaccessibility
         ? matchingAttributes.push(`<span class="attribute-box">ADA Accessible</span>`)
