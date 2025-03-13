@@ -1261,17 +1261,13 @@ function applyFilters() {
             map.setView([site.lat, site.lng], 14);
         };
     });
-}
+}   
 
+            console.log("siteData before creating markers:", siteData);
+            siteData.forEach(site => {
+                console.log("Processing site:", site);
+                let marker = L.marker([site.lat, site.lng]).bindPopup(`
 
-
-
-
-
-        
-                
-
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`
                 <b>${site.name}</b><br>${site.description}<br>
                 <a href="${site.website}" target="_blank">More Info</a>
             `);
