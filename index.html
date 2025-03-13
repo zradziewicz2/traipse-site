@@ -1249,7 +1249,7 @@ function applyFilters() {
 
     // Append filtered sites into "Exact Matches" or "Recommended"
     filteredSites.forEach(({ site, matchScore, distance }) => {
-        ent.createElement("div");
+        document.createElement("div");
         siteCard.className = "site-card";
 
         let matchCategory = matchScore >= 5 ? exactMatchSection : recommendedSection;
