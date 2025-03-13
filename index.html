@@ -1476,11 +1476,17 @@ siteCard.innerHTML = `
             ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
             ${timePeriodMatchesFilter ? timePeriodText : ""}
             
-            <p class="site-distance">
-                ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-                ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
-                ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
-            </p>
+        // Calculate distance before using it
+        let distance = userLocation 
+            ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) 
+            : null;
+        
+        <p class="site-distance">
+            ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
+            ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
+            ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
+        </p>
+
             
             <!-- ✅ Place attributes inside the card -->
             <div class="site-attributes">
