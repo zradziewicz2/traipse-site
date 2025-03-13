@@ -1497,7 +1497,7 @@ siteCard.innerHTML = `
         console.log("Calculated distance:", distance); // Debugging line
         
         // Now use it safely in your template
-    siteCard = `
+    siteCard.innerHTML += ` 
     <div class="site-details">
         <p class="site-distance">
             ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
