@@ -1188,7 +1188,69 @@ function applyFilters() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    siteData.forEach(site => {
+    let sortedSites = siteData.map(site => {
+    let matchingAttributes = [];
+
+    // Thematic Category
+    if (selectedThematicCategories.length > 0 && site.thematiccategory &&
+        selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
+        matchingAttributes.push(...site.thematiccategory);
+    }
+
+    // Time Period
+    if (selectedTimePeriods.length > 0 && site.timeperiod &&
+        selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
+        matchingAttributes.push(...site.timeperiod);
+    }
+
+    // Dog-Friendly
+    if (filterDogFriendly && site.dogfriendly) {
+        matchingAttributes.push("Dog-Friendly");
+    }
+
+    // Family-Friendly
+    if (document.getElementById("familyFilter").checked && site.family_friendly) {
+        matchingAttributes.push("Family-Friendly");
+    }
+
+    // Dining On-Site
+    if (filterDiningOnSite && site.diningonsite) {
+        matchingAttributes.push("Dining On-Site");
+    }
+
+    // Gift Shop
+    if (filterGiftShop && site.giftshop) {
+        matchingAttributes.push("Has Gift Shop");
+    }
+
+    // Luggage Storage
+    if (filterLuggageStorage && site.luggagestorage) {
+        matchingAttributes.push("Luggage Storage");
+    }
+
+    // Spanish Translations
+    if (filterSpanishTranslations && site.spanishtranslations) {
+        matchingAttributes.push("Spanish Translations");
+    }
+
+    // ADA Accessibility
+    if (filterADAAccessibility && site.adaaccessibility) {
+        matchingAttributes.push("ADA Accessible");
+    }
+
+    // Store number of matches
+    return {
+        site,
+        matchCount: matchingAttributes.length
+    };
+});
+
+// **Sort sites by match count in descending order**
+sortedSites.sort((a, b) => b.matchCount - a.matchCount);
+
+// Now iterate over sorted sites
+sortedSites.forEach(({ site, matchCount }) => {
+
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
