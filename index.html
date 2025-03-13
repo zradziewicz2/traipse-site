@@ -1208,10 +1208,13 @@ function applyFilters() {
     let recommendedSection = document.createElement("div");
     recommendedSection.innerHTML = "<h2 style='color: #03FDFC;'>Recommended</h2>";
     resultsContainer.appendChild(recommendedSection);
-
+    let distance = null; // ✅ Initialize outside to avoid ReferenceError
+    
     let filteredSites = siteData.map(site => {
         let matchScore = 0;
+    
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
+
 
         // Increase matchScore for each filter the site satisfies
         if (selectedSiteType === "all" || (site.sitetype && site.sitetype.includes(selectedSiteType))) matchScore++;
@@ -1490,7 +1493,7 @@ siteCard.innerHTML = `
             `;
             
         // Ensure userLocation exists before trying to calculate distance
-        let distance = null; // Initialize to null to avoid ReferenceError
+        
         
         distance = (userLocation && userLocation.lat && userLocation.lng && site.lat && site.lng)
             ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng)
