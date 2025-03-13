@@ -1537,7 +1537,11 @@ siteCard.innerHTML += `
             starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
             xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
             
-            resultsContainer.appendChild(siteCard);
+            let resultsContainer = document.getElementById("searchResults");
+            if (!resultsContainer) {
+                console.error("❌ Error: resultsContainer element not found in the DOM!");
+            }
+
 
             
             // Function to translate category names to their proper display format
