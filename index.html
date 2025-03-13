@@ -1489,6 +1489,8 @@ siteCard.innerHTML = `
             `;
             
         // Ensure userLocation exists before trying to calculate distance
+        let distance = null; // Initialize to null to avoid ReferenceError
+        
         let distance = (userLocation && userLocation.lat && userLocation.lng && site.lat && site.lng)
             ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng)
             : null;
