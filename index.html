@@ -1283,7 +1283,18 @@ function applyFilters() {
             });
             
 
-            let siteCard = document.createElement("div");
+            let siteCard = document.createElement("div"); // ✅ Create the div once
+            siteCard.className = "site-card"; // ✅ Assign class
+            
+            // ✅ Append content using innerHTML instead of redeclaring siteCard
+            siteCard.innerHTML += `
+                <div class="site-details">
+                    <p class="site-distance">
+                        ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
+                    </p>
+                </div>
+            `;
+
             siteCard.className = "site-card";
             siteCard.style.display = "flex";  
             siteCard.style.flexDirection = "column";  
