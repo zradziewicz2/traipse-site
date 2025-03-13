@@ -1188,7 +1188,12 @@ function applyFilters() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
+    siteData.sort((a, b) => b.matchCount - a.matchCount); // ✅ Sort by match count (highest first)
+
     siteData.forEach(site => {
+        // Existing logic...
+    });
+
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
@@ -1278,8 +1283,13 @@ if (
             allMarkers.push(marker);
             
 
-            let siteCard = document.createElement("div");
-            siteCard.className = "site-card";
+        let siteCard = document.createElement("div");
+        siteCard.className = "site-card";
+        
+        // Store the match count as a property of siteCard for later use
+        site.matchCount = matchingAttributes.length; // ✅ Add match count to site object
+        siteCard.dataset.matchCount = site.matchCount; // ✅ Store as HTML data attribute
+
             siteCard.style.display = "flex";  
             siteCard.style.flexDirection = "column";  
             siteCard.style.alignItems = "center"; // Center items in the card
@@ -1438,7 +1448,7 @@ siteCard.innerHTML = `
             <img src="${site.image}" alt="${site.name}" class="site-image">
         </div>
         <div class="site-details">
-            <h3 class="site-title">${site.name} <span class="match-count">(${matchingAttributes.length} matches)</span></h3>
+            <h3 class="site-title">${site.name} <span class="match-count">(${site.matchCount} matches)</span></h3>
             <!-- ✅ Show These Always, But Still Filter Results -->
             ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
             ${timePeriodMatchesFilter ? timePeriodText : ""}
