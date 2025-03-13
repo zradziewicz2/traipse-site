@@ -1475,22 +1475,25 @@ siteCard.innerHTML = `
             <!-- ✅ Show These Always, But Still Filter Results -->
             ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
             ${timePeriodMatchesFilter ? timePeriodText : ""}
+            `;
             
         // Ensure userLocation exists before trying to calculate distance
-        let distance = (userLocation && site.lat && site.lng) 
-            ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) 
+        let distance = (userLocation && userLocation.lat && userLocation.lng && site.lat && site.lng)
+            ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng)
             : null;
         
+                
         console.log("Calculated distance:", distance); // Debugging line
         
         // Now use it safely in your template
-        let siteCard = `
-            <p class="site-distance">
-                ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-                ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
-                ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
-            </p>
-        `;
+let siteCard = `
+    <p class="site-distance">
+        ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
+        ${site?.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
+        ${site?.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
+    </p>
+`;
+
 
             
             <!-- ✅ Place attributes inside the card -->
