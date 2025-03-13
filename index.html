@@ -1565,11 +1565,9 @@ siteCard.innerHTML = `
             siteCard.onclick = () => {
                 map.setView([site.lat, site.lng], 14);
                 marker.openPopup();
-            };
-            resultsContainer.appendChild(siteCard);
-    });
-}
-
+                    resultsContainer.appendChild(siteCard);
+                }); // ✅ This should close forEach
+            } // ✅ This should close applyFilters
         
         
                     window.onload = function() {
