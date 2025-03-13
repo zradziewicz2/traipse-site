@@ -144,7 +144,7 @@
         
         .filter-group select {
             width: 100%;
-            padding: 8px;
+            : 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
@@ -420,6 +420,19 @@
             background: #02c9c9;
         }
 
+        .no-attribute-box {
+            display: inline-block;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            font-weight: bold;
+            border: 2px solid #03FDFC !important; /* ✅ Cyan border */
+            color: white !important; /* ✅ Cyan text */
+            border-radius: 4px;
+            white-space: nowrap;
+            line-height: 1.2;
+            background: transparent !important; /* Keeps background clear */
+        }
         
         .matching-attributes {
             display: flex;
@@ -688,7 +701,6 @@
             text-align: left;
             width: 100%;
             padding: 5px 0;
-        
 
             .city-filter {
                 display: flex;
@@ -707,9 +719,8 @@
                 font-weight: bold;
             }
                  select {
-                all: unset; /* Reset all browser styles */
-            }
-
+            all: unset; /* Reset all browser styles */
+        }
    
         .city-filter-dropdown {
             font-size: 2em !important; /* Force larger text */
@@ -1038,16 +1049,16 @@ function getUserLocation() {
                     lng: position.coords.longitude
                 };
                 console.log("User location retrieved:", userLocation);
-                applyFilters(); // Load locations after getting user location
+                loadLocations(); // Load locations after getting user location
             },
             error => {
                 console.error("Error getting location:", error);
-                applyFilters(); // Proceed even if location is not available
+                loadLocations(); // Proceed even if location is not available
             }
         );
     } else {
         console.warn("Geolocation is not supported by this browser.");
-        applyFilters();
+        loadLocations();
     }
 }
 
@@ -1083,34 +1094,15 @@ function getMarkerEmoji(sitetype) {
     return emojiMap[sitetype.toLowerCase()] || "❓"; // Default to ❓ if not found
 }
 
-fetch('locations.json')
-    .then(response => response.json())
-    .then(data => {
-        if (!Array.isArray(data) || data.length === 0) {
-            console.warn("⚠ Fetched data is empty or invalid:", data);
-            return;
-        }
-
-        siteData = data; // ✅ Ensure `siteData` is fully assigned first
-        console.log("✅ Successfully loaded siteData:", siteData);
-
-        // Now safely process liked sites and filters
-        siteData.forEach(site => {
-            let isLiked = myPlaces.some(s => s.id === site.id);
-            console.log(`Checking if site is liked:`, site.name, isLiked);
-        });
-
-        applyFilters(); // ✅ Ensure filters run only AFTER siteData is loaded
-    })
-    .catch(error => console.error("❌ Error loading JSON:", error));
-
-
-
-
-
-
-
-
+function loadLocations() {
+    fetch('locations.json')
+        .then(response => response.json())
+        .then(data => {
+            siteData = data;
+            applyFilters();
+        })
+        .catch(error => console.error("Error loading JSON:", error));
+}
 function translateEstimatedTime(time) {
     if (!time) return "Unknown"; // Handle missing values
     const timeMap = {
@@ -1157,148 +1149,136 @@ function translateTours(tours) {
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
 
-console.log("siteData:", siteData);
 
 function applyFilters() {
-    if (!Array.isArray(siteData) || siteData.length === 0) {
-        console.warn("applyFilters() aborted: siteData is empty.");
-        return;
-    }
-
-    console.log("Applying filters on:", siteData);
     let selectedCost = document.getElementById("costFilter").value;
     let selectedType = document.getElementById("typeFilter").value;
     let selectedFamily = document.getElementById("familyFilter").value;
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
-        ? document.getElementById("localOrNationalFilter").value 
-        : "all";
+    ? document.getElementById("localOrNationalFilter").value 
+    : "all";
     let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
-        .map(cb => cb.value);
-    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked"))
-        .map(cb => cb.value);
-    let selectedCity = document.getElementById("cityFilter").value.toLowerCase();
+    .map(cb => cb.value);
+
+    let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
     let selectedReservations = document.getElementById("reservationsFilter").value;
     let selectedTours = document.getElementById("toursFilter").value;
     let selectedTransit = document.getElementById("transitFilter").value;
+    let filterGiftShop = document.getElementById("giftShopFilter").checked ? true : null;
+    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked ? true : null;
+    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked ? true : null;
+    let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
+    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
+    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
     let selectedSiteType = document.getElementById("siteTypeFilter").value;
     let selectedPaymentMethod = document.getElementById("paymentmethodFilter").value;
+    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
 
-    // Checkbox filters
-    let filterGiftShop = document.getElementById("giftShopFilter").checked;
-    let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter").checked;
-    let filterLuggageStorage = document.getElementById("luggageStorageFilter").checked;
-    let filterPublicAccess = document.getElementById("publicAccessFilter").checked;
-    let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked;
-    let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked;
-    let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked;
+
+
+    
+
+    // Get selected time periods (array of checked values)
+    let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
 
     let resultsContainer = document.getElementById("searchResults");
     resultsContainer.innerHTML = "";
-
-    // Remove previous markers from map
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    // Create sections for matches
-    let exactMatchSection = document.createElement("div");
-    exactMatchSection.innerHTML = "<h2 style='color: #03FDFC;'>Exact Matches</h2>";
-    resultsContainer.appendChild(exactMatchSection);
-
-    let recommendedSection = document.createElement("div");
-    recommendedSection.innerHTML = "<h2 style='color: #03FDFC;'>Recommended</h2>";
-    resultsContainer.appendChild(recommendedSection);
-    let distance = null; // ✅ Initialize outside to avoid ReferenceError
-    
-    let filteredSites = siteData.map(site => {
-        let matchScore = 0;
-    
+    siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
+        // Check if site has at least one of the selected time periods
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
+                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
 
-        // Increase matchScore for each filter the site satisfies
-        if (selectedSiteType === "all" || (site.sitetype && site.sitetype.includes(selectedSiteType))) matchScore++;
-        if (selectedCost === "all" || (site.cost && site.cost.toLowerCase() === selectedCost)) matchScore++;
-        if (selectedType === "all" || (site.type && site.type.toLowerCase() === selectedType)) matchScore++;
-        if (selectedFamily === "all" || (site.family_friendly && String(site.family_friendly).toLowerCase() === selectedFamily)) matchScore++;
-        if (selectedLocalOrNational === "all" || (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) matchScore++;
-        if (selectedEstimatedTime === "all" || (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) matchScore++;
-        if (selectedReservations === "all" || (site.reservations && site.reservations.toLowerCase() === selectedReservations)) matchScore++;
-        if (selectedTours === "all" || (site.tours && site.tours.includes(selectedTours))) matchScore++;
-        if (selectedTransit === "all" || (site.transit && site.transit.toLowerCase() === selectedTransit)) matchScore++;
-        if (selectedPaymentMethod === "all" || (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) matchScore++;
 
-        // Thematic categories and time periods
-        if (selectedThematicCategories.length === 0 || (site.thematiccategory && selectedThematicCategories.some(tc => site.thematiccategory.includes(tc)))) matchScore++;
-        if (selectedTimePeriods.length === 0 || (site.timeperiod && selectedTimePeriods.some(tp => site.timeperiod.includes(tp)))) matchScore++;
 
-        // Checkbox filters (count as matches)
-        if (filterGiftShop && site.giftshop) matchScore++;
-        if (filterSpanishTranslations && site.spanishtranslations) matchScore++;
-        if (filterLuggageStorage && site.luggagestorage) matchScore++;
-        if (filterPublicAccess && site.publicaccess) matchScore++;
-        if (filterDiningOnSite && site.diningonsite) matchScore++;
-        if (filterADAAccessibility && site.adaaccessibility) matchScore++;
-        if (filterDogFriendly && site.dogfriendly) matchScore++;
 
-        return { site, matchScore, distance };
-    });
+        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
+      // Ensure filters only apply when checkboxes are checked
+            
+            let matchesGiftShop = !filterGiftShop || site.giftshop; 
+            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
+            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
+            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
+            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
+            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
 
-    // Sort sites by match score (highest first)
-    filteredSites.sort((a, b) => b.matchScore - a.matchScore);
 
-    // Append filtered sites into "Exact Matches" or "Recommended"
-    filteredSites.forEach(({ site, matchScore, distance }) => {
-        document.createElement("div");
-        siteCard.className = "site-card";
+if (
+    (selectedSiteType === "all" || 
+        (site.sitetype && 
+            (Array.isArray(site.sitetype) 
+                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
+                : site.sitetype.toLowerCase() === selectedSiteType))) &&
 
-        let matchCategory = matchScore >= 5 ? exactMatchSection : recommendedSection;
-        matchCategory.appendChild(siteCard);
+    (selectedPaymentMethod === "all" || 
+        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
 
-        siteCard.innerHTML = `
-            <div class="site-content">
-                <div class="site-image-container">
-                    <img src="${site.image}" alt="${site.name}" class="site-image">
-                </div>
-                <div class="site-details">
-                    <h3 class="site-title">${site.name}</h3>
-                    <p class="site-distance">${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}</p>
-                </div>
-            </div>
-        `;
+    (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
 
-        siteCard.onclick = () => {
-            map.setView([site.lat, site.lng], 14);
-        };
-    });
-}   
+    (selectedCost === "all" || 
+        (site.cost && site.cost.toLowerCase() === selectedCost)) &&
 
-            console.log("siteData before creating markers:", siteData);
-            siteData.forEach(site => {
-                console.log("Processing site:", site);
-                let marker = L.marker([site.lat, site.lng]).bindPopup(`
+    (selectedType === "all" || 
+        (site.type && site.type.toLowerCase() === selectedType)) &&
 
+    (selectedFamily === "all" || 
+        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
+
+    (selectedThematicCategories.length === 0 || 
+        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
+            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
+
+
+
+    (selectedLocalOrNational === "all" || 
+        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
+
+    (selectedEstimatedTime === "all" || 
+        (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
+
+    (selectedReservations === "all" || 
+        (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
+
+    (selectedTours === "all" || 
+        (site.tours && site.tours.includes(selectedTours))) &&
+
+    (selectedTransit === "all" || 
+        (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
+
+    (selectedDistance === "all" ||
+        (distance !== null &&
+            ((selectedDistance === "1" && distance < 1) ||
+            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+            (selectedDistance === "10" && distance > 10)))) &&
+
+    matchesTimePeriod
+) {
+    // ✅ Matching sites will be shown
+}
+
+
+
+
+
+        
+                
+
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`
                 <b>${site.name}</b><br>${site.description}<br>
                 <a href="${site.website}" target="_blank">More Info</a>
             `);
             marker.addTo(map);
             allMarkers.push(marker);
-            });
             
 
-            let siteCard = document.createElement("div"); // ✅ Create the div once
-            siteCard.className = "site-card"; // ✅ Assign class
-            
-            // ✅ Append content using innerHTML instead of redeclaring siteCard
-            siteCard.innerHTML += `
-                <div class="site-details">
-                    <p class="site-distance">
-                        ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-                    </p>
-                </div>
-            `;
-
+            let siteCard = document.createElement("div");
             siteCard.className = "site-card";
             siteCard.style.display = "flex";  
             siteCard.style.flexDirection = "column";  
@@ -1306,22 +1286,10 @@ function applyFilters() {
             
             // Get stored My Places and Not Interested lists
             let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
-            console.log("Loaded My Places:", myPlaces);
             let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            if (typeof site === "undefined") {
-    console.warn("⚠ site is undefined at line 1290. Assigning a default value.");
-    site = siteData.length > 0 ? siteData[0] : {}; // Assign first site or an empty object
-}
-let isLiked = false; // ✅ Declare before the loop
-
-siteData.forEach(site => {
-    if (myPlaces.some(s => s.id === site.id)) {
-        isLiked = true;
-    }
-});
-
-console.log("Final isLiked value:", isLiked); // ✅ Now it will work!
-
+            
+            // Check if this site is already liked or not interested
+            let isLiked = myPlaces.some(s => s.id === site.id);
             let starClass = isLiked ? "active" : "";
             let starSymbol = isLiked ? "⭐" : "☆";
             let starColor = isLiked ? "gold" : "white";
@@ -1329,13 +1297,11 @@ console.log("Final isLiked value:", isLiked); // ✅ Now it will work!
             let isNotInterested = notInterested.some(s => s.id === site.id);
             let matchingAttributes = [];
             let nonMatchingAttributes = [];
-            let selectedThematicCategories = [];
             let thematicCategoryMatchesFilter = selectedThematicCategories.length === 0 ||
         (site.thematiccategory && selectedThematicCategories.some(selected =>
             site.thematiccategory.includes(selected)));
-   
-        let selectedTimePeriods = [];
-        let timePeriodMatchesFilter = selectedTimePeriods.length === 0 ||
+    
+    let timePeriodMatchesFilter = selectedTimePeriods.length === 0 ||
         (site.timeperiod && selectedTimePeriods.some(selected =>
             site.timeperiod.includes(selected)));
     
@@ -1367,7 +1333,6 @@ if (selectedTimePeriods.length > 0 && site.timeperiod &&
 }
 
 // Dog-Friendly
-        let filterDogFriendly = document.getElementById("dogFriendlyFilter")?.checked || false;
 if (filterDogFriendly) {
     site.dogfriendly 
         ? matchingAttributes.push(`<span class="attribute-box">Dog-Friendly</span>`) 
@@ -1375,7 +1340,6 @@ if (filterDogFriendly) {
 }
 
 // Family-Friendly
-        let filterFamilyFriendly = document.getElementById("familyFilter")?.checked || false;
 if (document.getElementById("familyFilter").checked) {
     site.family_friendly
         ? matchingAttributes.push(`<span class="attribute-box">Family-Friendly</span>`)
@@ -1383,7 +1347,6 @@ if (document.getElementById("familyFilter").checked) {
 }
 
 // Dining On-Site
-        let filterDiningOnSite = document.getElementById("diningOnSiteFilter")?.checked || false;
 if (filterDiningOnSite) {
     site.diningonsite
         ? matchingAttributes.push(`<span class="attribute-box">Dining On-Site</span>`)
@@ -1391,7 +1354,6 @@ if (filterDiningOnSite) {
 }
 
 // Gift Shop
-        let filterGiftShop = document.getElementById("giftShopFilter")?.checked || false;
 if (filterGiftShop) {
     site.giftshop
         ? matchingAttributes.push(`<span class="attribute-box">Has Gift Shop</span>`)
@@ -1399,7 +1361,6 @@ if (filterGiftShop) {
 }
 
 // Luggage Storage
-        let filterLuggageStorage = document.getElementById("luggageStorageFilter")?.checked || false;
 if (filterLuggageStorage) {
     site.luggagestorage
         ? matchingAttributes.push(`<span class="attribute-box">Luggage Storage</span>`)
@@ -1407,7 +1368,6 @@ if (filterLuggageStorage) {
 }
 
 // Spanish Translations
-        let filterSpanishTranslations = document.getElementById("spanishTranslationsFilter")?.checked || false;
 if (filterSpanishTranslations) {
     site.spanishtranslations
         ? matchingAttributes.push(`<span class="attribute-box">Spanish Translations</span>`)
@@ -1415,7 +1375,6 @@ if (filterSpanishTranslations) {
 }
 
 // ADA Accessibility
-        let filterADAAccessibility = document.getElementById("adaAccessibilityFilter")?.checked || false;
 if (filterADAAccessibility) {
     site.adaaccessibility
         ? matchingAttributes.push(`<span class="attribute-box">ADA Accessible</span>`)
@@ -1423,50 +1382,42 @@ if (filterADAAccessibility) {
 }
 
 // Transit Accessibility
-        let selectedTransit = document.getElementById("transitFilter")?.value || "all";
 if (selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit) {
     matchingAttributes.push(`<span class="attribute-box">${translateTransit(site.transit)}</span>`);
 }
 
 // Local/National
-        let selectedLocalOrNational = document.getElementById("localOrNationalFilter")?.value || "all";
 if (selectedLocalOrNational !== "all" && site.localornational) {
     matchingAttributes.push(`<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>`);
 }
 
 // Tours
-        let selectedTours = document.getElementById("toursFilter")?.value || "all";
 if (selectedTours !== "all" && site.tours && site.tours.includes(selectedTours)) {
     matchingAttributes.push(`<span class="attribute-box">${translateTours(site.tours)}</span>`);
 }
 
 // Indoor/Outdoor
-        let selectedType = document.getElementById("typeFilter")?.value || "all";
 if (selectedType !== "all" && site.type && site.type.toLowerCase() === selectedType) {
     matchingAttributes.push(`<span class="attribute-box">${translateType(site.type)}</span>`);
 }
 
 // Site Type
-        let selectedSiteType = document.getElementById("siteTypeFilter")?.value || "all";
 if (selectedSiteType !== "all" && site.sitetype &&
     (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)) {
     matchingAttributes.push(`<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`);
 }
 
 // Reservations Required
-        let selectedReservations = document.getElementById("reservationsFilter")?.value || "all";
 if (selectedReservations !== "all" && site.reservations && site.reservations.toLowerCase() === selectedReservations) {
     matchingAttributes.push(`<span class="attribute-box">${translateReservations(site.reservations)}</span>`);
 }
 
 // Cost
-        let selectedCost = document.getElementById("costFilter")?.value || "all";
 if (selectedCost !== "all" && site.cost && site.cost.toLowerCase() === selectedCost) {
     matchingAttributes.push(`<span class="attribute-box">${translateCost(site.cost)}</span>`);
 }
 
 // Payment Method
-        let selectedPaymentMethod = document.getElementById("paymentmethodFilter")?.value || "all";
 if (selectedPaymentMethod !== "all" && site.paymentmethod) {
     matchingAttributes.push(`<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>`);
 }
@@ -1491,42 +1442,29 @@ siteCard.innerHTML = `
             <!-- ✅ Show These Always, But Still Filter Results -->
             ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
             ${timePeriodMatchesFilter ? timePeriodText : ""}
-            `;
             
-        // Ensure userLocation exists before trying to calculate distance
-        
-        
-        distance = (userLocation && userLocation.lat && userLocation.lng && site.lat && site.lng)
-            ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng)
-            : null;
+            <p class="site-distance">
+                ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
+                ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
+                ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
+            </p>
+            
+            <!-- ✅ Place attributes inside the card -->
+            <div class="site-attributes">
+                ${attributesHTML}
+            </div>
 
-        
-                
-        console.log("Calculated distance:", distance); // Debugging line
-        
-        // Now use it safely in your template
-siteCard.innerHTML += `
-    <div class="site-details">
-        <p class="site-distance">
-            ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-            ${site?.dollaramount ? ` • <span class="inline-info">$$${site.dollaramount}</span>` : ""}
-            ${site?.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
-        </p>
-    </div>
-    
-    <!-- ✅ Place attributes inside the card -->
-    <div class="site-attributes">
-        ${attributesHTML || ""}  
+
+        </div>
     </div>
 
-    <p class="site-description">${site?.description || "No description available."}</p>
+    <p class="site-description">${site.description}</p>
 
     <div class="site-actions">
         <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places">☆</span>
         <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me">✖</span>
     </div>
 `;
-
 
 
 
@@ -1538,11 +1476,7 @@ siteCard.innerHTML += `
             starButton.addEventListener("click", () => toggleMyPlaces(site.id, starButton));
             xButton.addEventListener("click", () => toggleNotInterested(site.id, xButton));
             
-            let resultsContainer = document.getElementById("searchResults");
-            if (!resultsContainer) {
-                console.error("❌ Error: resultsContainer element not found in the DOM!");
-            }
-
+            resultsContainer.appendChild(siteCard);
 
             
             // Function to translate category names to their proper display format
@@ -1618,16 +1552,13 @@ siteCard.innerHTML += `
 
 
 
-    siteCard.onclick = () => {
-        map.setView([site.lat, site.lng], 14);
-        marker.openPopup();
-    };
-
-    resultsContainer.appendChild(siteCard);
-; // This closes the forEach() loop correctly
-
- // This closes the applyFilters() function correctly
-
+            siteCard.onclick = () => {
+                map.setView([site.lat, site.lng], 14);
+                marker.openPopup();
+            };
+            resultsContainer.appendChild(siteCard);
+    });
+}
 
         
         
@@ -1668,7 +1599,7 @@ function toggleViewMode() {
     if (isRoutesMode) {
         loadRoutes();
     } else {
-        applyFilters();
+        loadLocations();
     }
 }
 
@@ -1918,7 +1849,7 @@ function translatePaymentMethod(method) {
                 console.log("Updated Not Interested:", notInterested);
             }
 
-console.log("End of script reached successfully!");
+
 
 </script>
 </body>
