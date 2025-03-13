@@ -1038,16 +1038,16 @@ function getUserLocation() {
                     lng: position.coords.longitude
                 };
                 console.log("User location retrieved:", userLocation);
-                loadLocations(); // Load locations after getting user location
+                applyFilters(); // Load locations after getting user location
             },
             error => {
                 console.error("Error getting location:", error);
-                loadLocations(); // Proceed even if location is not available
+                applyFilters(); // Proceed even if location is not available
             }
         );
     } else {
         console.warn("Geolocation is not supported by this browser.");
-        loadLocations();
+        applyFilters();
     }
 }
 
@@ -1087,22 +1087,23 @@ fetch('locations.json')
     .then(response => response.json())
     .then(data => {
         if (!Array.isArray(data) || data.length === 0) {
-            console.warn("Fetched data is empty or invalid:", data);
+            console.warn("⚠ Fetched data is empty or invalid:", data);
             return;
         }
 
-        siteData = data; // ✅ Now siteData is populated
+        siteData = data; // ✅ Ensure `siteData` is fully assigned first
         console.log("✅ Successfully loaded siteData:", siteData);
 
-        // Now we can safely run isLiked because siteData is available
+        // Now safely process liked sites and filters
         siteData.forEach(site => {
             let isLiked = myPlaces.some(s => s.id === site.id);
             console.log(`Checking if site is liked:`, site.name, isLiked);
         });
 
-        applyFilters(); // ✅ Only run after siteData is ready
+        applyFilters(); // ✅ Ensure filters run only AFTER siteData is loaded
     })
-    .catch(error => console.error("Error loading JSON:", error));
+    .catch(error => console.error("❌ Error loading JSON:", error));
+
 
 
 
@@ -1667,7 +1668,7 @@ function toggleViewMode() {
     if (isRoutesMode) {
         loadRoutes();
     } else {
-        loadLocations();
+        applyFilters();
     }
 }
 
