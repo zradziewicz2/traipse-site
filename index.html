@@ -1317,8 +1317,9 @@ console.log("Final isLiked value:", isLiked); // ✅ Now it will work!
             let thematicCategoryMatchesFilter = selectedThematicCategories.length === 0 ||
         (site.thematiccategory && selectedThematicCategories.some(selected =>
             site.thematiccategory.includes(selected)));
-    
-    let timePeriodMatchesFilter = selectedTimePeriods.length === 0 ||
+   
+        let selectedTimePeriods = [];
+        let timePeriodMatchesFilter = selectedTimePeriods.length === 0 ||
         (site.timeperiod && selectedTimePeriods.some(selected =>
             site.timeperiod.includes(selected)));
     
