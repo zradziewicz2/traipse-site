@@ -1285,9 +1285,16 @@ function applyFilters() {
             // Get stored My Places and Not Interested lists
             let myPlaces = JSON.parse(localStorage.getItem('myPlaces')) || [];
             let notInterested = JSON.parse(localStorage.getItem('notInterested')) || [];
-            
+            if (typeof site === "undefined") {
+    console.warn("⚠ site is undefined at line 1290. Assigning a default value.");
+    site = siteData.length > 0 ? siteData[0] : {}; // Assign first site or an empty object
+}
+console.log("Debug: site before line 1290:", site);
+
             // Check if this site is already liked or not interested
-            let isLiked = myPlaces.some(s => s.id === site.id);
+            siteData.forEach(site => {
+    let isLiked = myPlaces.some(s => s.id === site.id);
+});
             let starClass = isLiked ? "active" : "";
             let starSymbol = isLiked ? "⭐" : "☆";
             let starColor = isLiked ? "gold" : "white";
