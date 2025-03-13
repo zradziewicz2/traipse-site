@@ -1351,6 +1351,7 @@ if (selectedTimePeriods.length > 0 && site.timeperiod &&
 }
 
 // Dog-Friendly
+        let filterDogFriendly = document.getElementById("dogFriendlyFilter")?.checked || false;
 if (filterDogFriendly) {
     site.dogfriendly 
         ? matchingAttributes.push(`<span class="attribute-box">Dog-Friendly</span>`) 
