@@ -1313,6 +1313,7 @@ console.log("Final isLiked value:", isLiked); // ✅ Now it will work!
             let isNotInterested = notInterested.some(s => s.id === site.id);
             let matchingAttributes = [];
             let nonMatchingAttributes = [];
+            let selectedThematicCategories = [];
             let thematicCategoryMatchesFilter = selectedThematicCategories.length === 0 ||
         (site.thematiccategory && selectedThematicCategories.some(selected =>
             site.thematiccategory.includes(selected)));
