@@ -341,7 +341,7 @@
     },
     {
         "name": "Wings Over the Rockies Air & Space Museum",
-        "id": "site132",
+        "id": "site141",
         "lat": 39.7207,
         "lng": -104.8929,
         "city": "denver",
@@ -647,6 +647,7 @@
     },
     {
         "name": "Kirkland Museum of Fine & Decorative Art",
+        "id": "site143",
         "lat": 39.7315,
         "lng": -104.9789,
         "city": "denver",
@@ -680,6 +681,7 @@
     },
     {
         "name": "Forney Museum of Transportation",
+        "id": "site144",
         "lat": 39.7803,
         "lng": -104.9691,
         "city": "denver",
@@ -713,6 +715,7 @@
     },
     {
         "name": "Museo de las Americas",
+        "id": "site145",
         "lat": 39.7293,
         "lng": -104.9981,
         "city": "denver",
@@ -746,6 +749,7 @@
     },
     {
         "name": "Grant-Humphreys Mansion",
+        "id": "site146",
         "lat": 39.7313,
         "lng": -104.9801,
         "city": "denver",
@@ -779,6 +783,7 @@
     },
     {
         "name": "International Church of Cannabis",
+        "id": "site147",
         "lat": 39.7054,
         "lng": -104.9773,
         "city": "denver",
@@ -812,6 +817,7 @@
     },
     {
         "name": "The Cruise Room",
+        "id": "site148",
         "lat": 39.7526,
         "lng": -104.9987,
         "city": "denver",
@@ -844,6 +850,7 @@
     },
     {
         "name": "Poet's Row",
+        "id": "site149",
         "lat": 39.7338,
         "lng": -104.9835,
         "city": "denver",
@@ -877,6 +884,7 @@
     },
     {
         "name": "Buckhorn Exchange",
+        "id": "site150",
         "lat": 39.7300,
         "lng": -105.0076,
         "city": "denver",
@@ -910,6 +918,7 @@
     },
     {
         "name": "My Brother's Bar",
+        "id": "site151",
         "lat": 39.7563,
         "lng": -105.0072,
         "city": "denver",
@@ -943,6 +952,7 @@
     },
     {
         "name": "Denver Zine Library",
+        "id": "site152",
         "lat": 39.7389,
         "lng": -104.9823,
         "city": "denver",
@@ -976,6 +986,7 @@
     },
     {
         "name": "Linger Eatuary",
+        "id": "site153",
         "lat": 39.7593,
         "lng": -105.0116,
         "city": "denver",
@@ -1009,6 +1020,7 @@
     },
     {
         "name": "Fifty-Two 80's",
+        "id": "site154",
         "lat": 39.6761,
         "lng": -104.9662,
         "city": "denver",
@@ -1042,6 +1054,7 @@
     },
     {
         "name": "National Ice Core Lab",
+        "id": "site155",
         "lat": 39.7363,
         "lng": -105.2181,
         "city": "denver",
@@ -1075,6 +1088,7 @@
     },
     {
         "name": "Big Blue Bear ('I See What You Mean')",
+        "id": "site156",
         "lat": 39.7439,
         "lng": -104.9956,
         "city": "denver",
@@ -1108,6 +1122,7 @@
     },
     {
         "name": "The Yearling Sculpture",
+        "id": "site157",
         "lat": 39.7373,
         "lng": -104.9872,
         "city": "denver",
@@ -1141,6 +1156,7 @@
     },
     {
         "name": "Mayan Theatre",
+        "id": "site158",
         "lat": 39.7189,
         "lng": -104.9835,
         "city": "denver",
@@ -1174,6 +1190,7 @@
     },
     {
         "name": "Center for Colorado Women's History",
+        "id": "site159",
         "lat": 39.7375,
         "lng": -104.9873,
         "city": "denver",
@@ -1207,6 +1224,7 @@
     },
     {
         "name": "American Museum of Western Art",
+        "id": "site160",
         "lat": 39.7432,
         "lng": -104.9902,
         "city": "denver",
@@ -1240,6 +1258,7 @@
     },
     {
         "name": "Black American West Museum",
+        "id": "site161",
         "lat": 39.7582,
         "lng": -104.9768,
         "city": "denver",
@@ -1273,6 +1292,7 @@
     },
     {
         "name": "American Mountaineering Museum",
+        "id": "site162",
         "lat": 39.7554,
         "lng": -105.2236,
         "city": "Denver",
@@ -1306,6 +1326,7 @@
     },
     {
         "name": "Golden History Museums",
+        "id": "site163",
         "lat": 39.7555,
         "lng": -105.2211,
         "city": "Denver",
@@ -1339,6 +1360,7 @@
     },
     {
         "name": "Astor House",
+        "id": "site164",
         "lat": 39.7562,
         "lng": -105.2223,
         "city": "Denver",
@@ -1372,6 +1394,7 @@
     },
     {
         "name": "Barnes–Peery House",
+        "id": "site165",
         "lat": 39.7538,
         "lng": -105.2247,
         "city": "Golden",
@@ -1405,6 +1428,7 @@
     },
     {
         "name": "Herman Coors House",
+        "id": "site166",
         "lat": 39.7581,
         "lng": -105.2245,
         "city": "Denver",
@@ -1438,6 +1462,7 @@
     },
     {
         "name": "Boettcher Mansion",
+        "id": "site167",
         "lat": 39.7326,
         "lng": -105.2454,
         "city": "Golden",
@@ -1471,6 +1496,7 @@
     },
     {
         "name": "Rooney Ranch",
+        "id": "site168",
         "lat": 39.6719,
         "lng": -105.2031,
         "city": "Denver",
@@ -1504,6 +1530,7 @@
     },
     {
         "name": "First Presbyterian Church of Golden and Unger House",
+        "id": "site169",
         "lat": 39.7558,
         "lng": -105.2229,
         "city": "Denver",
