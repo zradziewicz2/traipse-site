@@ -1497,35 +1497,28 @@ siteCard.innerHTML = `
         console.log("Calculated distance:", distance); // Debugging line
         
         // Now use it safely in your template
-    siteCard.innerHTML += ` 
+siteCard.innerHTML += `
     <div class="site-details">
         <p class="site-distance">
             ${typeof distance === "number" ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
-            ${site?.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
+            ${site?.dollaramount ? ` • <span class="inline-info">$$${site.dollaramount}</span>` : ""}
             ${site?.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
         </p>
     </div>
-`;
-
-
-
-            
-            <!-- ✅ Place attributes inside the card -->
-            <div class="site-attributes">
-                ${attributesHTML}
-            </div>
-
-
-        </div>
+    
+    <!-- ✅ Place attributes inside the card -->
+    <div class="site-attributes">
+        ${attributesHTML || ""}  
     </div>
 
-    <p class="site-description">${site.description}</p>
+    <p class="site-description">${site?.description || "No description available."}</p>
 
     <div class="site-actions">
         <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places">☆</span>
         <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me">✖</span>
     </div>
 `;
+
 
 
 
