@@ -1287,8 +1287,11 @@ sortedSites.forEach(({ site, matchCount }) => {
 
         // Check if site has at least one of the selected time periods
         let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
-                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
+            (Array.isArray(site.timeperiod) && 
+             selectedTimePeriods.length === 1 
+             ? site.timeperiod.length === 1 && site.timeperiod.includes(selectedTimePeriods[0]) 
+             : selectedTimePeriods.some(selected => site.timeperiod.includes(selected)));
+
 
 
 
