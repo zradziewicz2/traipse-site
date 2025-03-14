@@ -1286,11 +1286,13 @@ sortedSites.forEach(({ site, matchCount }) => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
-        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
-            (Array.isArray(site.timeperiod) && 
-             selectedTimePeriods.length === 1 
-             ? site.timeperiod.length === 1 && site.timeperiod.includes(selectedTimePeriods[0]) 
-             : selectedTimePeriods.some(selected => site.timeperiod.includes(selected)));
+        let matchesTimePeriod = selectedTimePeriods.length === 0 ||
+            (Array.isArray(site.timeperiod) && (
+                selectedTimePeriods.length === 1 
+                ? site.timeperiod.length === 1 && site.timeperiod[0] === selectedTimePeriods[0] 
+                : selectedTimePeriods.some(selected => site.timeperiod.includes(selected))
+            ));
+
 
 
 
@@ -1423,10 +1425,12 @@ if (selectedThematicCategories.length > 0 && site.thematiccategory &&
 }
 
 // Time Period
-if (selectedTimePeriods.length > 0 && site.timeperiod &&
-    selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
-    matchingAttributes.push(...site.timeperiod.map(period => 
-        `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
+// Ensure only selected time periods are displayed in matchingAttributes
+let timePeriodMatches = site.timeperiod.filter(tp => selectedTimePeriods.includes(tp));
+if (timePeriodMatches.length > 0) {
+    matchingAttributes.push(...timePeriodMatches.map(tp => `<span class="attribute-box">${translateTimePeriod(tp)}</span>`));
+}
+
 }
 
 // Dog-Friendly
