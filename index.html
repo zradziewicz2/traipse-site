@@ -1197,15 +1197,21 @@ function applyFilters() {
         matchingAttributes.push(...site.thematiccategory);
     }
 
-    // Time Period
-    // Time Period - Only Add Selected Matches
+    // Time Period - Only Display the Selected Ones
     if (selectedTimePeriods.length > 0 && site.timeperiod) {
         let matchedPeriods = site.timeperiod.filter(period => selectedTimePeriods.includes(period));
+        
+        // ✅ Ensure the site is included in results if it has at least one matching time period
         if (matchedPeriods.length > 0) {
             matchingAttributes.push(...matchedPeriods.map(period =>
                 `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
         }
+    } else if (selectedTimePeriods.length === 0 && site.timeperiod) {
+        // ✅ If no time period filter is selected, display all site time periods normally
+        matchingAttributes.push(...site.timeperiod.map(period =>
+            `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
     }
+
 
 
     // Dog-Friendly
