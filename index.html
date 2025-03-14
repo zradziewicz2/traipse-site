@@ -1198,10 +1198,15 @@ function applyFilters() {
     }
 
     // Time Period
-    if (selectedTimePeriods.length > 0 && site.timeperiod &&
-        selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
-        matchingAttributes.push(...site.timeperiod);
+    // Time Period - Only Add Selected Matches
+    if (selectedTimePeriods.length > 0 && site.timeperiod) {
+        let matchedPeriods = site.timeperiod.filter(period => selectedTimePeriods.includes(period));
+        if (matchedPeriods.length > 0) {
+            matchingAttributes.push(...matchedPeriods.map(period =>
+                `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
+        }
     }
+
 
     // Dog-Friendly
     if (filterDogFriendly && site.dogfriendly) {
