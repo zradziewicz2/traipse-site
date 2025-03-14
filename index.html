@@ -1286,16 +1286,9 @@ sortedSites.forEach(({ site, matchCount }) => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
-        // Time Period
-        if (Array.isArray(site.timeperiod)) {
-            let timePeriodMatches = site.timeperiod.filter(tp => selectedTimePeriods.includes(tp));
-            if (timePeriodMatches.length > 0) {
-                matchingAttributes.push(...timePeriodMatches.map(tp => `<span class="attribute-box">${translateTimePeriod(tp)}</span>`));
-            }
-        }
-
-
-
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            (Array.isArray(site.timeperiod) && selectedTimePeriods.some(selected => 
+                site.timeperiod.map(period => period.toLowerCase()).includes(selected.toLowerCase())));
 
 
 
@@ -1427,13 +1420,11 @@ if (selectedThematicCategories.length > 0 && site.thematiccategory &&
 }
 
 // Time Period
-// Ensure only selected time periods are displayed in matchingAttributes
-//let timePeriodMatches = site.timeperiod.filter(tp => selectedTimePeriods.includes(tp));
-//if (timePeriodMatches.length > 0) {
-//    matchingAttributes.push(...timePeriodMatches.map(tp => `<span class="attribute-box">${translateTimePeriod(tp)}</span>`));
-//}
-
-//}
+if (selectedTimePeriods.length > 0 && site.timeperiod &&
+    selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
+    matchingAttributes.push(...site.timeperiod.map(period => 
+        `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
+}
 
 // Dog-Friendly
 if (filterDogFriendly) {
