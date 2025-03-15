@@ -1233,11 +1233,7 @@ function applyFilters() {
 
 
 
-    console.log("Filtered sites:", sortedSites.map(s => ({
-        name: s.site.name,
-        timePeriods: s.site.timeperiod,
-        selected: selectedTimePeriods
-    })));
+
 
 
     // Get selected time periods (array of checked values)
@@ -1341,7 +1337,11 @@ function applyFilters() {
         matchCount: matchingAttributes.length
     };
 });
-
+    console.log("Filtered sites:", sortedSites.map(s => ({
+        name: s.site.name,
+        timePeriods: s.site.timeperiod,
+        selected: selectedTimePeriods
+    })));
 // **Sort sites by match count in descending order**
 sortedSites.sort((a, b) => b.matchCount - a.matchCount);
 
