@@ -1148,7 +1148,62 @@ function translateTours(tours) {
     };
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
+         // Function to translate category names to their proper display format
+    function translateCategory(categories) {
+        if (!categories) return "Unknown"; 
+        const categoryMap = {
+            "artsandculture": "Arts and Culture",
+            "generalhistory": "General History",
+            "historichomes": "Historic Homes",
+            "naturalhistory": "Natural History",
+            "religiousandspiritual": "Religious and Spiritual",
+            "technologyandtransportation": "Technology and Transportation",
+            "other": "Other"
+        };
+    
+        if (Array.isArray(categories)) {
+            return categories.map(cat => categoryMap[cat.toLowerCase()] || cat).join(", ");
+        } else {
+            return categoryMap[categories.toLowerCase()] || categories;
+        }
+    }
 
+
+            
+            function translateTimePeriod(timeperiod) {
+                if (!timeperiod) return "Unknown"; 
+                const timePeriodMap = {
+                    "prehistoric": "Prehistoric",
+                    "colonial": "Colonial & Early Settlements",
+                    "nineteenthcentury": "19th Century",
+                    "industrialrevolution": "20th Century",
+                    "modernhistory": "Modern History",
+                    "other": "Other"
+                };
+            
+                if (Array.isArray(timeperiod)) {
+                    return timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || tp).join(", ");
+                } else {
+                    return timePeriodMap[timeperiod.toLowerCase()] || timeperiod;
+                }
+            }
+
+
+            
+            // Function to properly format cost
+            function translateCost(cost) {
+                return cost.charAt(0).toUpperCase() + cost.slice(1);
+            }
+            
+            // Function to properly format type
+            function translateType(type) {
+                return type.charAt(0).toUpperCase() + type.slice(1);
+            }
+            
+            function translateLocalOrNational(value) {
+                if (!value) return "Unknown";  // Prevents error if value is undefined or null
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
@@ -1578,62 +1633,7 @@ siteCard.innerHTML = `
             resultsContainer.appendChild(siteCard);
 
             
-            // Function to translate category names to their proper display format
-    function translateCategory(categories) {
-        if (!categories) return "Unknown"; 
-        const categoryMap = {
-            "artsandculture": "Arts and Culture",
-            "generalhistory": "General History",
-            "historichomes": "Historic Homes",
-            "naturalhistory": "Natural History",
-            "religiousandspiritual": "Religious and Spiritual",
-            "technologyandtransportation": "Technology and Transportation",
-            "other": "Other"
-        };
-    
-        if (Array.isArray(categories)) {
-            return categories.map(cat => categoryMap[cat.toLowerCase()] || cat).join(", ");
-        } else {
-            return categoryMap[categories.toLowerCase()] || categories;
-        }
-    }
-
-
-            
-            function translateTimePeriod(timeperiod) {
-                if (!timeperiod) return "Unknown"; 
-                const timePeriodMap = {
-                    "prehistoric": "Prehistoric",
-                    "colonial": "Colonial & Early Settlements",
-                    "nineteenthcentury": "19th Century",
-                    "industrialrevolution": "20th Century",
-                    "modernhistory": "Modern History",
-                    "other": "Other"
-                };
-            
-                if (Array.isArray(timeperiod)) {
-                    return timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || tp).join(", ");
-                } else {
-                    return timePeriodMap[timeperiod.toLowerCase()] || timeperiod;
-                }
-            }
-
-
-            
-            // Function to properly format cost
-            function translateCost(cost) {
-                return cost.charAt(0).toUpperCase() + cost.slice(1);
-            }
-            
-            // Function to properly format type
-            function translateType(type) {
-                return type.charAt(0).toUpperCase() + type.slice(1);
-            }
-            
-            function translateLocalOrNational(value) {
-                if (!value) return "Unknown";  // Prevents error if value is undefined or null
-                return value.charAt(0).toUpperCase() + value.slice(1);
-            }
+   
 
             
             // Generic function to add spaces between camelCase words & capitalize
