@@ -161,16 +161,26 @@
         }
 
         .icon-link {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            margin-left: 4px;
+            margin-right: 0;
             transition: transform 0.2s;
         }
         
         .icon-link:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
+
+    .external-links.bottom-right-icons {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            gap: 4px;
+        }
+
+
 
 
         /* Apply Filters Button */
@@ -1794,13 +1804,13 @@ function displayRoutes(routesData) {
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
         routeCard.innerHTML = `
-          <div class="route-card-content">
+          <div class="route-card-content" style="position: relative;">
             <img class="route-image" src="images/${route.image}" alt="${route.tour_name}">
             <div class="route-info">
               <h3 class="site-title">${route.tour_name}</h3>
               <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
               <p class="site-description">Click to zoom to route.</p>
-              
+        
               <div class="external-links bottom-right-icons">
                 ${route.external_links?.tripadvisor ? `<a href="${route.external_links.tripadvisor}" target="_blank"><img src="images/tripadvisor.png" alt="TripAdvisor" class="icon-link" /></a>` : ""}
                 ${route.external_links?.getyourguide ? `<a href="${route.external_links.getyourguide}" target="_blank"><img src="images/getyourguide.png" alt="GetYourGuide" class="icon-link" /></a>` : ""}
@@ -1812,6 +1822,7 @@ function displayRoutes(routesData) {
           </div>
           <div class="route-sites"></div>
         `;
+
 
 
 
