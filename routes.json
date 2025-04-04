@@ -8,6 +8,15 @@
         "Distance": "1.2 mies",
         "thematiccategory": "historichomes",
         "Cost": "Free and Paid Options",
+        "timeofday": ["late"],
+        "duration": "1 - 2 hours",
+        "special_topic": ["architecture"],
+        "seasonal": false,
+        "cost_range": ["Free","$"],
+        "indoor_outdoor": ["indoor"],
+        "group_type": "group",
+        "reservation_required": false
+  },
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/",
             "getyourguide": "https://www.getyourguide.com/",
@@ -56,6 +65,7 @@
             }
         ]
     },
+    
     {
         "tour_name": "Golden Triangle Museum Walk",
         "tour_id": "golden_triangle_tour",
