@@ -1,7 +1,7 @@
 [
     {
         "tour_name": "Capitol Hill Historic Homes Tour",
-        "image": "images/colfax-avenue-capitol-hill-denver-colorado.jpg",
+        "image": "colfax-avenue-capitol-hill-denver-colorado.jpg",
         "tour_id": "capitol_hill_tour",
         "color": "#FF5733",
         "number_of_sites": "3",
@@ -58,7 +58,7 @@
     },
     {
         "tour_name": "Golden Triangle Museum Walk",
-        "tour_id": "images/golden_triangle_tour",
+        "tour_id": "golden_triangle_tour",
         "image": "thumb.jpg",
         "color": "#03FDFC",
         "number_of_sites": "3",
