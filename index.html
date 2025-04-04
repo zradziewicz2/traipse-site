@@ -513,6 +513,52 @@
             color: #000;
         }
 
+        .route-card-content {
+          display: flex;
+          gap: 15px;
+          position: relative;
+        }
+        
+        .route-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          position: relative;
+          padding-right: 60px; /* add space for bottom-right icons */
+        }
+        
+        .route-image {
+          width: 120px;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 6px;
+        }
+        
+        /* Bottom-right alignment for icons */
+        .bottom-right-icons {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          padding: 5px 10px;
+          display: flex;
+          gap: 6px;
+        }
+        
+        /* Clean up spacing */
+        .route-info h3 {
+          margin: 0;
+          font-size: 1.3em;
+          color: #03FDFC;
+        }
+        
+        .route-info p {
+          margin: 4px 0;
+          font-size: 0.9em;
+          color: #D0D0D0;
+        }
+
+
         .header-btn {
             background: transparent;
             border: 2px solid #03FDFC;
@@ -1748,23 +1794,26 @@ function displayRoutes(routesData) {
         let routeCard = document.createElement("div");
         routeCard.className = "site-card";
         routeCard.innerHTML = `
-            <div class="route-card-content">
-                <img class="route-image" src="images/${route.image}" alt="${route.tour_name}">
-                <div class="route-info">
-                    <h3 class="site-title">${route.tour_name}</h3>
-                    <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
-                    <p class="site-description">Click to zoom to route.</p>
-                    <div class="external-links">
-                        ${route.external_links?.tripadvisor ? `<a href="${route.external_links.tripadvisor}" target="_blank"><img src="images/tripadvisor.png" alt="TripAdvisor" class="icon-link" /></a>` : ""}
-                        ${route.external_links?.getyourguide ? `<a href="${route.external_links.getyourguide}" target="_blank"><img src="images/getyourguide.png" alt="GetYourGuide" class="icon-link" /></a>` : ""}
-                        ${route.external_links?.viator ? `<a href="${route.external_links.viator}" target="_blank"><img src="images/viator.png" alt="Viator" class="icon-link" /></a>` : ""}
-                        ${route.external_links?.airbnb ? `<a href="${route.external_links.airbnb}" target="_blank"><img src="images/airbnb.png" alt="Airbnb Experiences" class="icon-link" /></a>` : ""}
-                        ${route.external_links?.guruwalk ? `<a href="${route.external_links.guruwalk}" target="_blank"><img src="images/guruwalk.png" alt="GuruWalk" class="icon-link" /></a>` : ""}
-                    </div>
-                </div>
+          <div class="route-card-content">
+            <img class="route-image" src="images/${route.image}" alt="${route.tour_name}">
+            <div class="route-info">
+              <h3 class="site-title">${route.tour_name}</h3>
+              <p><strong>Sites in this tour:</strong> ${route.sites.length}</p>
+              <p class="site-description">Click to zoom to route.</p>
+              
+              <div class="external-links bottom-right-icons">
+                ${route.external_links?.tripadvisor ? `<a href="${route.external_links.tripadvisor}" target="_blank"><img src="images/tripadvisor.png" alt="TripAdvisor" class="icon-link" /></a>` : ""}
+                ${route.external_links?.getyourguide ? `<a href="${route.external_links.getyourguide}" target="_blank"><img src="images/getyourguide.png" alt="GetYourGuide" class="icon-link" /></a>` : ""}
+                ${route.external_links?.viator ? `<a href="${route.external_links.viator}" target="_blank"><img src="images/viator.png" alt="Viator" class="icon-link" /></a>` : ""}
+                ${route.external_links?.airbnb ? `<a href="${route.external_links.airbnb}" target="_blank"><img src="images/airbnb.png" alt="Airbnb Experiences" class="icon-link" /></a>` : ""}
+                ${route.external_links?.guruwalk ? `<a href="${route.external_links.guruwalk}" target="_blank"><img src="images/guruwalk.png" alt="GuruWalk" class="icon-link" /></a>` : ""}
+              </div>
             </div>
-            <div class="route-sites"></div>
+          </div>
+          <div class="route-sites"></div>
         `;
+
+
 
 
         let routeSitesContainer = routeCard.querySelector(".route-sites");
