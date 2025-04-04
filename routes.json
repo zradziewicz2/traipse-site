@@ -8,6 +8,13 @@
         "Distance": "1.2 mies",
         "thematiccategory": "historichomes",
         "Cost": "Free and Paid Options",
+        "external_links": {
+            "tripadvisor": "https://www.tripadvisor.com/",
+            "getyourguide": "https://www.getyourguide.com/",
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
+            "airbnb": "https://www.airbnb.com/experiences",
+            "guruwalk": "https://www.guruwalk.com/"
+        },
         "route": [
             {"lat": 39.7392, "lng": -104.9847},
             {"lat": 39.7373, "lng": -104.9807},
@@ -58,6 +65,13 @@
         "Distance": "1.2 mies",
         "thematiccategory": "historichomes",
         "Cost": "Free and Paid Options",
+        "external_links": {
+            "tripadvisor": "https://www.tripadvisor.com/",
+            "getyourguide": "https://www.getyourguide.com/",
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
+            "airbnb": "https://www.airbnb.com/experiences",
+            "guruwalk": "https://www.guruwalk.com/"
+        },
         "route": [
             {"lat": 39.7371, "lng": -104.9876},
             {"lat": 39.7363, "lng": -104.9903},
@@ -108,6 +122,13 @@
         "thematiccategory": "historichomes",
         "Cost": "Free and Paid Options",
         "color": "#FFB833",
+        "external_links": {
+            "tripadvisor": "https://www.tripadvisor.com/",
+            "getyourguide": "https://www.getyourguide.com/",
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
+            "airbnb": "https://www.airbnb.com/experiences",
+            "guruwalk": "https://www.guruwalk.com/"
+        },
         "route": [
             {"lat": 39.7553, "lng": -104.9784},
             {"lat": 39.7521, "lng": -104.9771},
@@ -158,6 +179,13 @@
         "Distance": "1.2 mies",
         "thematiccategory": "historichomes",
         "Cost": "Free and Paid Options",
+        "external_links": {
+            "tripadvisor": "https://www.tripadvisor.com/",
+            "getyourguide": "https://www.getyourguide.com/",
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
+            "airbnb": "https://www.airbnb.com/experiences",
+            "guruwalk": "https://www.guruwalk.com/"
+        },
         "route": [
             {"lat": 39.7524, "lng": -104.9981},
             {"lat": 39.7506, "lng": -104.9999},
@@ -208,6 +236,13 @@
         "Distance": "1.2 mies",
         "thematiccategory": "historichomes",
         "Cost": "Free and Paid Options",
+        "external_links": {
+            "tripadvisor": "https://www.tripadvisor.com/",
+            "getyourguide": "https://www.getyourguide.com/",
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
+            "airbnb": "https://www.airbnb.com/experiences",
+            "guruwalk": "https://www.guruwalk.com/"
+        },
         "route": [
             {"lat": 39.7345, "lng": -104.9691},
             {"lat": 39.7321, "lng": -104.9680},
