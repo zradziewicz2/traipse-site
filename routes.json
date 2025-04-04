@@ -15,8 +15,7 @@
         "cost_range": ["Free","$"],
         "indoor_outdoor": ["indoor"],
         "group_type": "group",
-        "reservation_required": false
-  },
+        "reservation_required": false,
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/",
             "getyourguide": "https://www.getyourguide.com/",
