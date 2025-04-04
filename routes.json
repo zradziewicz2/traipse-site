@@ -250,6 +250,58 @@
         ]
     },
     {
+    "tour_name": "Denver's Wild History Tour & Ballpark Museum",
+    "image": "images/denver-wild-history-tour.jpg",
+    "tour_id": "wild_history_tour",
+    "color": "#DA4167",
+    "number_of_sites": "12",
+    "Distance": "1.5 miles",
+    "thematiccategory": "generalhistory",
+    "Cost": "$$",
+    "duration": "1.5 hours",
+    "timeofday": "late",
+    "group_type": "private",
+    "reservation_required": true,
+    "school_group_only": false,
+    "seasonal": false,
+    "indoor_outdoor": "both",
+    "external_links": {
+        "tripadvisor": "https://www.tripadvisor.com/",
+        "getyourguide": "https://www.getyourguide.com/",
+        "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
+        "airbnb": "https://www.airbnb.com/experiences",
+        "guruwalk": "https://www.guruwalk.com/"
+    },
+    "route": [
+        { "lat": 39.7452, "lng": -104.9958 },
+        { "lat": 39.7551, "lng": -104.9959 }
+    ],
+    "sites": [
+        {
+            "name": "Clocktower Cabaret",
+            "id": "denver016",
+            "lat": 39.7452,
+            "lng": -104.9958,
+            "city": "denver",
+            "description": "Iconic Denver building modeled after Venice’s St. Mark's Campanile.",
+            "thematiccategory": "artsandculture",
+            "sitetype": "landmark",
+            "website": ""
+        },
+        {
+            "name": "National Ballpark Museum",
+            "id": "denver017",
+            "lat": 39.7551,
+            "lng": -104.9959,
+            "city": "denver",
+            "description": "One of the largest collections of baseball memorabilia in the U.S.",
+            "thematiccategory": "generalhistory",
+            "sitetype": "museum",
+            "website": ""
+        }
+    ]
+},
+    {
         "tour_name": "Golden Mining & Railroad Tour",
         "tour_id": "golden_mining_tour",
         "image": "golden-colorado.jpg",
