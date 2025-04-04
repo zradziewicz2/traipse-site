@@ -1862,7 +1862,9 @@ routesData.forEach(route => {
       <img class="route-image" src="images/${route.image}" alt="${route.tour_name}">
       <div class="route-info">
         <h3 class="site-title">${route.tour_name}</h3>
-        <p style="font-size: 0.8em; color: #ccc; margin: 4px 0;">
+        <p style="font-family: 'Tw Cen MT', sans-serif; font-size: 0.8em; color: #CCCCCC; margin: 4px 0;">
+  ${route.special_topic ? route.special_topic.join(", ") : ""}
+</p>
           ${route.special_topic ? route.special_topic.join(", ") : ""}
         </p>
 
