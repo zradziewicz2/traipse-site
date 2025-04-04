@@ -1887,13 +1887,12 @@ function displayRoutes(routesData) {
                   ${site.website ? `<a href="${site.website}" target="_blank" class="website-link"> Website</a>` : ""}
                 </div>
                 <div class="site-icons-line">
-                  ${route.external_links?.tripadvisor ? `<a href="${route.external_links.tripadvisor}" target="_blank"><img src="images/tripadvisor.png" class="icon-link" alt="TripAdvisor" /></a>` : ""}
-                  ${route.external_links?.getyourguide ? `<a href="${route.external_links.getyourguide}" target="_blank"><img src="images/getyourguide.png" class="icon-link" alt="GetYourGuide" /></a>` : ""}
-                  ${route.external_links?.viator ? `<a href="${route.external_links.viator}" target="_blank"><img src="images/viator.png" class="icon-link" alt="Viator" /></a>` : ""}
-                  ${route.external_links?.airbnb ? `<a href="${route.external_links.airbnb}" target="_blank"><img src="images/airbnb.png" class="icon-link" alt="Airbnb" /></a>` : ""}
-                  ${route.external_links?.guruwalk ? `<a href="${route.external_links.guruwalk}" target="_blank"><img src="images/guruwalk.png" class="icon-link" alt="GuruWalk" /></a>` : ""}
+                  ${site.external_links?.tripadvisor ? `<a href="${site.external_links.tripadvisor}" target="_blank"><img src="images/tripadvisor.png" class="icon-link" alt="TripAdvisor" /></a>` : ""}
+                  ${site.external_links?.getyourguide ? `<a href="${site.external_links.getyourguide}" target="_blank"><img src="images/getyourguide.png" class="icon-link" alt="GetYourGuide" /></a>` : ""}
+                  ${site.external_links?.viator ? `<a href="${site.external_links.viator}" target="_blank"><img src="images/viator.png" class="icon-link" alt="Viator" /></a>` : ""}
+                  ${site.external_links?.airbnb ? `<a href="${site.external_links.airbnb}" target="_blank"><img src="images/airbnb.png" class="icon-link" alt="Airbnb" /></a>` : ""}
+                  ${site.external_links?.guruwalk ? `<a href="${site.external_links.guruwalk}" target="_blank"><img src="images/guruwalk.png" class="icon-link" alt="GuruWalk" /></a>` : ""}
                 </div>
-
               </div>
             `;
 
