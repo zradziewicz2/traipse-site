@@ -1899,31 +1899,6 @@ function displayRoutes(routesData) {
 
             routeSitesContainer.appendChild(siteElement);
 
-                        // ✅ Add external platform icons only once, after the last site
-            const externalIconsDiv = document.createElement("div");
-            externalIconsDiv.className = "bottom-right-icons";
-            
-            const platforms = ["tripadvisor", "getyourguide", "viator", "airbnb", "guruwalk"];
-            platforms.forEach(platform => {
-              if (route.external_links && route.external_links[platform]) {
-                const link = document.createElement("a");
-                link.href = route.external_links[platform];
-                link.target = "_blank";
-            
-                const icon = document.createElement("img");
-                icon.src = `images/${platform}.png`;
-                icon.className = "icon-link";
-                icon.alt = platform.charAt(0).toUpperCase() + platform.slice(1);
-            
-                link.appendChild(icon);
-                externalIconsDiv.appendChild(link);
-              }
-            });
-            
-            // Append the icons only once after the last site in the list
-            routeSitesContainer.appendChild(externalIconsDiv);
-
-
             // Add a circle marker with route-matching color
             let circleMarker = L.circleMarker([site.lat, site.lng], {
                 radius: 6,
