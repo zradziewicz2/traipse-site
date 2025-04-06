@@ -2036,16 +2036,8 @@ routesData.forEach(route => {
         </p>
 
         <!-- ✅ Route attributes and site names -->
-        <table class="route-attribute-table">
-      <tr><td><strong>Theme:</strong></td><td>${translateCategory(route.thematiccategory)}</td></tr>
-      <tr><td><strong>Sites:</strong></td><td>${route.number_of_sites}</td></tr>
-      <tr><td><strong>Distance:</strong></td><td>${route.Distance}</td></tr>
-      <tr><td><strong>Cost:</strong></td><td>${route.Cost}</td></tr>
-      <tr><td><strong>Time of Day:</strong></td><td>${Array.isArray(route.timeofday) ? route.timeofday.join(", ") : route.timeofday}</td></tr>
-      <tr><td><strong>Duration:</strong></td><td>${route.duration}</td></tr>
-      <tr><td><strong>Group Type:</strong></td><td>${route.group_type}</td></tr>
-      <tr><td><strong>Reservation Required:</strong></td><td>${route.reservation_required ? "Yes" : "No"}</td></tr>
-    </table>
+<div class="matching-attributes">${generateRouteAttributes(route)}</div>
+
 
     <div class="route-sites"></div>
 
