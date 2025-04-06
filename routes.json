@@ -84,9 +84,7 @@
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/",
             "getyourguide": "https://www.getyourguide.com/",
-            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
-            "airbnb": "https://www.airbnb.com/experiences",
-            "guruwalk": "https://www.guruwalk.com/"
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757"
         },
         "route": [
             {"lat": 39.7371, "lng": -104.9876},
@@ -214,9 +212,7 @@
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/",
             "getyourguide": "https://www.getyourguide.com/",
-            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
-            "airbnb": "https://www.airbnb.com/experiences",
-            "guruwalk": "https://www.guruwalk.com/"
+            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757"
         },
         "route": [
             {"lat": 39.7524, "lng": -104.9981},
@@ -277,11 +273,7 @@
         "group_type": "group",
         "reservation_required": false,
         "external_links": {
-            "tripadvisor": "https://www.tripadvisor.com/",
-            "getyourguide": "https://www.getyourguide.com/",
-            "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
-            "airbnb": "https://www.airbnb.com/experiences",
-            "guruwalk": "https://www.guruwalk.com/"
+            "tripadvisor": "https://www.tripadvisor.com/"
         },
         "route": [
             {"lat": 39.7345, "lng": -104.9691},
@@ -342,11 +334,7 @@
     "group_type": "group",
     "reservation_required": false,
     "external_links": {
-        "tripadvisor": "https://www.tripadvisor.com/",
-        "getyourguide": "https://www.getyourguide.com/",
-        "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
-        "airbnb": "https://www.airbnb.com/experiences",
-        "guruwalk": "https://www.guruwalk.com/"
+        "tripadvisor": "https://www.tripadvisor.com/"
     },
     "route": [
         { "lat": 39.7452, "lng": -104.9958 },
