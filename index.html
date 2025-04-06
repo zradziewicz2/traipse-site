@@ -1824,7 +1824,18 @@ function toggleViewMode() {
     toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
 
     // Show only relevant filters when Routes is selected
-    let filtersToKeep = ["timePeriodFilter", "ThematicCategoryFilter", "typeFilter", "distanceFilter"];
+    let filtersToKeep = [
+  "typeFilter",
+  "distanceFilter",
+  "costFilter",
+  "thematicCategoryFilter",
+  "estimatedTimeFilter",
+  "toursFilter",
+  "reservationsFilter",
+  "localOrNationalFilter",
+  "paymentmethodFilter",
+  "publicAccessFilter"
+];
     let allFilterGroups = document.querySelectorAll(".filter-group");
 
     allFilterGroups.forEach(group => {
@@ -1877,9 +1888,9 @@ routesData.forEach(route => {
           ${route.special_topic ? route.special_topic.join(", ") : ""}
         </p>
 
-
-        <!-- ✅ Route site names go here -->
-        <div class="route-sites"></div>
+    <!-- ✅ Route attributes and site names -->
+    <div class="matching-attributes">${generateRouteAttributes(route)}</div>
+    <div class="route-sites"></div>
 
         <!-- ✅ External platform icons (bottom right) -->
         <div class="bottom-right-icons route-platform-icons"></div>
@@ -1967,6 +1978,30 @@ routesData.forEach(route => {
 
 
 
+function generateRouteAttributes(route) {
+    let attributes = [];
+
+    // Add indoor/outdoor
+    if (route.type) {
+        attributes.push(`<span class="attribute-box">${translateType(route.type)}</span>`);
+    }
+
+    // Add distance range (if available)
+    if (route.distance) {
+        attributes.push(`<span class="attribute-box">${route.distance}</span>`);
+    }
+
+    // Add thematic category (if available)
+    if (route.thematiccategory) {
+        if (Array.isArray(route.thematiccategory)) {
+            route.thematiccategory.forEach(cat => attributes.push(`<span class="attribute-box">${translateCategory(cat)}</span>`));
+        } else {
+            attributes.push(`<span class="attribute-box">${translateCategory(route.thematiccategory)}</span>`);
+        }
+    }
+
+    return attributes.join(" ");
+}
 
 
 
