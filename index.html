@@ -823,6 +823,23 @@
         .leaflet-routing-container {
             display: none !important;
         }
+        .route-attribute-table {
+            width: 100%;
+            font-size: 0.85em;
+            color: #D0D0D0;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+        
+        .route-attribute-table td {
+            padding: 4px 6px;
+            vertical-align: top;
+        }
+        
+        .route-attribute-table tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
 
         .toggle-filters {
             background: none;
@@ -1993,8 +2010,18 @@ routesData.forEach(route => {
           ${route.special_topic ? route.special_topic.join(", ") : ""}
         </p>
 
-    <!-- ✅ Route attributes and site names -->
-    <div class="matching-attributes">${generateRouteAttributes(route)}</div>
+        <!-- ✅ Route attributes and site names -->
+        <table class="route-attribute-table">
+      <tr><td><strong>Theme:</strong></td><td>${translateCategory(route.thematiccategory)}</td></tr>
+      <tr><td><strong>Sites:</strong></td><td>${route.number_of_sites}</td></tr>
+      <tr><td><strong>Distance:</strong></td><td>${route.Distance}</td></tr>
+      <tr><td><strong>Cost:</strong></td><td>${route.Cost}</td></tr>
+      <tr><td><strong>Time of Day:</strong></td><td>${Array.isArray(route.timeofday) ? route.timeofday.join(", ") : route.timeofday}</td></tr>
+      <tr><td><strong>Duration:</strong></td><td>${route.duration}</td></tr>
+      <tr><td><strong>Group Type:</strong></td><td>${route.group_type}</td></tr>
+      <tr><td><strong>Reservation Required:</strong></td><td>${route.reservation_required ? "Yes" : "No"}</td></tr>
+    </table>
+
     <div class="route-sites"></div>
 
         <!-- ✅ External platform icons (bottom right) -->
