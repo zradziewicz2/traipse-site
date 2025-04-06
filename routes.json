@@ -14,10 +14,9 @@
         "seasonal": false,
         "cost_range": ["Free","$"],
         "indoor_outdoor": ["Indoor"],
-        "group_type": "group",
+        "group_type": "private",
         "reservation_required": false,
         "external_links": {
-            "tripadvisor": "https://www.tripadvisor.com/",
             "getyourguide": "https://www.getyourguide.com/",
             "viator": "https://www.viator.com/tours/Denver/Private-Tour-Denvers-HIstory-and-Ghost-Adventure/d4837-76007P9?mcid=56757",
             "airbnb": "https://www.airbnb.com/experiences",
