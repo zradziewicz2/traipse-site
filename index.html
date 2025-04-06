@@ -764,6 +764,31 @@
             font-size: 0.9em;
             color: #D0D0D0;
         }
+        .more-info-toggle {
+            cursor: pointer;
+            color: #03FDFC;
+            font-weight: bold;
+            margin-top: 8px;
+            text-align: left;
+        }
+        
+        .route-attribute-table {
+            width: 100%;
+            font-size: 0.85em;
+            color: #D0D0D0;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }
+        
+        .route-attribute-table td {
+            padding: 4px 6px;
+            vertical-align: top;
+        }
+        
+        .route-attribute-table tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
     
         
         .site-details p {
@@ -2024,6 +2049,24 @@ routesData.forEach(route => {
 
     <div class="route-sites"></div>
 
+<!-- Collapsible More Info Section -->
+<div class="more-info-toggle" onclick="toggleMoreInfo(this)">
+  <span>More Information ▼</span>
+</div>
+<div class="route-more-info" style="display: none;">
+  <table class="route-attribute-table">
+    <tr><td><strong>Theme:</strong></td><td>${translateCategory(route.thematiccategory)}</td></tr>
+    <tr><td><strong>Sites:</strong></td><td>${route.number_of_sites}</td></tr>
+    <tr><td><strong>Distance:</strong></td><td>${route.Distance}</td></tr>
+    <tr><td><strong>Cost:</strong></td><td>${route.Cost}</td></tr>
+    <tr><td><strong>Time of Day:</strong></td><td>${Array.isArray(route.timeofday) ? route.timeofday.join(", ") : route.timeofday}</td></tr>
+    <tr><td><strong>Duration:</strong></td><td>${route.duration}</td></tr>
+    <tr><td><strong>Group Type:</strong></td><td>${route.group_type}</td></tr>
+    <tr><td><strong>Reservation Required:</strong></td><td>${route.reservation_required ? "Yes" : "No"}</td></tr>
+  </table>
+</div>
+
+
         <!-- ✅ External platform icons (bottom right) -->
         <div class="bottom-right-icons route-platform-icons"></div>
       </div>
@@ -2250,6 +2293,16 @@ function resetFilters() {
     // Reapply filters to show all sites
     applyFilters();
 }
+
+function toggleMoreInfo(element) {
+    const infoSection = element.nextElementSibling;
+    const textSpan = element.querySelector("span");
+    const isOpen = infoSection.style.display === "block";
+
+    infoSection.style.display = isOpen ? "none" : "block";
+    textSpan.innerHTML = isOpen ? "More Information ▼" : "Less Information ▲";
+}
+
 
 function translateSiteType(type) {
     const typeMap = {
