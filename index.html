@@ -956,6 +956,12 @@
         </select>
     </div>
 
+    <!-- Apply Filters Button for Routes -->
+<div id="routeFiltersActions" style="margin-top: 10px;">
+  <button class="apply-filters-btn" onclick="applyRouteFilters()">Apply Filters</button>
+</div>
+
+
     <div class="filter-group">
         <label>Number of Sites:</label>
         <select id="routeSiteCountFilter">
@@ -1921,6 +1927,9 @@ function toggleViewMode() {
 
     toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
     document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
+    document.getElementById("routeFilters").style.display = isRoutesMode ? "block" : "none";
+    document.getElementById("routeFiltersActions").style.display = isRoutesMode ? "block" : "none";
+
 
     // Toggle route vs site filters
     const routeFilterContainer = document.getElementById("routeFilters");
@@ -1955,6 +1964,39 @@ function loadRoutes() {
         .catch(error => console.error("Error loading routes.json:", error));
 }
 
+function applyRouteFilters() {
+    fetch('routes.json')
+        .then(response => response.json())
+        .then(routesData => {
+            let thematic = document.getElementById("routeThematicCategoryFilter").value;
+            let siteCount = document.getElementById("routeSiteCountFilter").value;
+            let distance = document.getElementById("routeDistanceFilter").value;
+            let cost = document.getElementById("routeCostFilter").value;
+            let timeOfDay = document.getElementById("routeTimeFilter").value;
+            let duration = document.getElementById("routeDurationFilter").value;
+            let topic = document.getElementById("routeTopicFilter").value;
+            let groupType = document.getElementById("routeGroupTypeFilter").value;
+            let reservation = document.getElementById("routeReservationFilter").value;
+
+            const filteredRoutes = routesData.filter(route => {
+                return (
+                    (thematic === "all" || route.thematiccategory?.includes(thematic)) &&
+                    (siteCount === "all" || (siteCount === "3" && route.sites.length === 3) ||
+                        (siteCount === "5" && route.sites.length >= 5)) &&
+                    (distance === "all" || route.distance === distance) &&
+                    (cost === "all" || route.cost === cost) &&
+                    (timeOfDay === "all" || route.timeofday === timeOfDay) &&
+                    (duration === "all" || route.duration === duration) &&
+                    (topic === "all" || route.special_topic?.includes(topic)) &&
+                    (groupType === "all" || route.group_type === groupType) &&
+                    (reservation === "all" || String(route.reservation_required) === reservation)
+                );
+            });
+
+            displayRoutes(filteredRoutes);
+        })
+        .catch(error => console.error("Error applying route filters:", error));
+}
 
 
 function displayRoutes(routesData) {
