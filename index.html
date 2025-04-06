@@ -942,9 +942,108 @@
         
             <!-- Sidebar -->
             <div class="sidebar">
+<!-- Route-Specific Filters -->
+<div id="routeFilters" style="display: none;">
+    <div class="filter-group">
+        <label>Route Thematic Category:</label>
+        <select id="routeThematicCategoryFilter">
+            <option value="all">All</option>
+            <option value="artsandculture">Arts and Culture</option>
+            <option value="generalhistory">General History</option>
+            <option value="historichomes">Historic Homes</option>
+            <option value="naturalhistory">Natural History</option>
+            <option value="technologyandtransportation">Technology and Transportation</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Number of Sites:</label>
+        <select id="routeSiteCountFilter">
+            <option value="all">All</option>
+            <option value="3">3 Sites</option>
+            <option value="5">5+ Sites</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Distance:</label>
+        <select id="routeDistanceFilter">
+            <option value="all">All</option>
+            <option value="<0.5">Less than 0.5 mile</option>
+            <option value="0.5-1">0.5 - 1 mile</option>
+            <option value="1-2">1 - 2 miles</option>
+            <option value=">2">More than 2 miles</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Cost:</label>
+        <select id="routeCostFilter">
+            <option value="all">All</option>
+            <option value="Free">Free</option>
+            <option value="$">$</option>
+            <option value="$$">$$</option>
+            <option value="$$$">$$$</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Time of Day:</label>
+        <select id="routeTimeFilter">
+            <option value="all">All</option>
+            <option value="Mornings">Mornings</option>
+            <option value="Afternoons">Afternoons</option>
+            <option value="Evenings">Evenings</option>
+            <option value="late">Late</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Duration:</label>
+        <select id="routeDurationFilter">
+            <option value="all">All</option>
+            <option value="<1">Less than 1 hour</option>
+            <option value="1-2">1 - 2 hours</option>
+            <option value=">2">More than 2 hours</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Special Topic:</label>
+        <select id="routeTopicFilter">
+            <option value="all">All</option>
+            <option value="Architecture">Architecture</option>
+            <option value="History">History</option>
+            <option value="Culture">Culture</option>
+            <option value="Museums">Museums</option>
+            <option value="Paranormal">Paranormal</option>
+            <option value="Sports">Sports</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Group Type:</label>
+        <select id="routeGroupTypeFilter">
+            <option value="all">All</option>
+            <option value="private">Private</option>
+            <option value="group">Group</option>
+        </select>
+    </div>
+
+    <div class="filter-group">
+        <label>Reservation Required:</label>
+        <select id="routeReservationFilter">
+            <option value="all">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+</div>
 
 
-            <h2>Filters</h2>
+
+<h2 id="filtersTitle">Filters</h2>
+
     
 
                         <!-- Button to Show Additional Filters -->
@@ -1820,40 +1919,31 @@ function toggleViewMode() {
     let toggleButton = document.getElementById("toggleViewMode");
     let isRoutesMode = toggleButton.innerText === "Sites";
 
-    // Toggle button text
     toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
+    document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
 
-    // Show only relevant filters when Routes is selected
-    let filtersToKeep = [
-  "typeFilter",
-  "distanceFilter",
-  "costFilter",
-  "thematicCategoryFilter",
-  "estimatedTimeFilter",
-  "toursFilter",
-  "reservationsFilter",
-  "localOrNationalFilter",
-  "paymentmethodFilter",
-  "publicAccessFilter"
-];
-    let allFilterGroups = document.querySelectorAll(".filter-group");
+    // Toggle route vs site filters
+    const routeFilterContainer = document.getElementById("routeFilters");
+    routeFilterContainer.style.display = isRoutesMode ? "block" : "none";
 
-    allFilterGroups.forEach(group => {
-        let filterId = group.querySelector("select, input")?.id || "";
-        group.style.display = (isRoutesMode && filtersToKeep.includes(filterId)) || !isRoutesMode ? "block" : "none";
+    // Hide or show site filters
+    const siteFilterToggles = document.querySelectorAll(".toggle-filters, .filter-category, .floating-buttons");
+    siteFilterToggles.forEach(el => {
+        el.style.display = isRoutesMode ? "none" : "block";
     });
 
-    // Clear previous map elements
+    // Clear map
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    // Load the appropriate dataset
+    // Load appropriate dataset
     if (isRoutesMode) {
         loadRoutes();
     } else {
         loadLocations();
     }
 }
+
 
         
 function loadRoutes() {
