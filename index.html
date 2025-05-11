@@ -893,7 +893,81 @@
         
         .tour-date:hover {
             background: #02c9c9;
-        }
+        }<style>
+    .calendar-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        background: #222;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .calendar-header {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #03FDFC;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        width: 100%;
+    }
+
+    .calendar-day {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 5px;
+        color: #03FDFC;
+    }
+
+    .calendar-cell {
+        background: #333;
+        padding: 10px;
+        min-height: 80px;
+        border-radius: 6px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .calendar-cell.empty {
+        background: transparent;
+        pointer-events: none;
+    }
+
+    .date-number {
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .tour-name {
+        background: #03FDFC;
+        color: black;
+        font-size: 0.8em;
+        padding: 3px;
+        border-radius: 4px;
+        margin-top: 2px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .tour-name:hover {
+        background: #02c9c9;
+        cursor: pointer;
+    }
+</style>
+
 
 
 
@@ -1336,10 +1410,11 @@
         
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
-            <div id="calendarSection" style="display: none; padding: 15px; background: #181818; color: white;">
-            <h2>Available Tour Dates</h2>
-            <div id="tourCalendar"></div>
-        </div>
+            <div id="calendarSection" style="display: block; padding: 15px; background: #181818; color: white;">
+                <h2>Available Tour Dates</h2>
+                <div id="tourCalendar" class="calendar-view"></div>
+            </div>
+
         </div>
 
 
@@ -2264,26 +2339,64 @@ function loadRouteDates(routesData) {
 
     tourCalendar.innerHTML = ""; // Clear previous dates
 
+    // Get all available dates and the corresponding tour names
     let allDates = [];
 
     routesData.forEach(route => {
         if (route.dates) {
-            allDates.push(...route.dates);
+            route.dates.forEach(date => {
+                allDates.push({ date: date, tour_name: route.tour_name });
+            });
         }
     });
 
-    // Remove duplicates and sort dates
-    const uniqueDates = [...new Set(allDates)].sort((a, b) => new Date(a) - new Date(b));
+    // Remove duplicates
+    const uniqueDates = [...new Set(allDates.map(d => d.date))].sort((a, b) => new Date(a) - new Date(b));
 
-    uniqueDates.forEach(date => {
-        const dateElement = document.createElement("div");
-        dateElement.classList.add("tour-date");
-        dateElement.textContent = date;
-        tourCalendar.appendChild(dateElement);
+    // Generate a calendar view for the current month
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    
+    let calendarHTML = `<div class="calendar-header">
+                            <span>${today.toLocaleString('default', { month: 'long' })} ${currentYear}</span>
+                        </div>`;
+    calendarHTML += `<div class="calendar-grid">`;
+
+    // Days of the week
+    const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    daysOfWeek.forEach(day => {
+        calendarHTML += `<div class="calendar-day">${day}</div>`;
     });
 
-    calendarSection.style.display = uniqueDates.length > 0 ? "block" : "none";
+    // Generate blank spaces for the start of the month
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    for (let i = 0; i < firstDay; i++) {
+        calendarHTML += `<div class="calendar-cell empty"></div>`;
+    }
+
+    // Generate days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateString = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const toursOnDate = allDates.filter(d => d.date === dateString);
+
+        calendarHTML += `<div class="calendar-cell">
+                            <div class="date-number">${day}</div>`;
+        if (toursOnDate.length > 0) {
+            toursOnDate.forEach(tour => {
+                calendarHTML += `<div class="tour-name">${tour.tour_name}</div>`;
+            });
+        }
+        calendarHTML += `</div>`;
+    }
+
+    calendarHTML += `</div>`;
+    tourCalendar.innerHTML = calendarHTML;
+
+    calendarSection.style.display = "block";
 }
+
 
 function generateRouteAttributes(route) {
     let attributes = [];
