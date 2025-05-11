@@ -913,12 +913,14 @@
 
            /* Calendar Container */
 #calendar-container {
-    color: #03FDFC; /* Cyan text color */
-    background-color: #000000; /* Black background */
+    color: #03FDFC !important; /* Cyan text color */
+    background-color: #000000 !important; /* Black background */
     padding: 15px;
     border: 2px solid #03FDFC;
     border-radius: 8px;
     max-width: 600px;
+    position: relative;
+    z-index: 1000;
 }
 
 /* Calendar Grid */
@@ -2280,6 +2282,8 @@ function displayRouteCalendar(routesData) {
             const dayElement = document.createElement("div");
             dayElement.className = "calendar-day";
             dayElement.innerText = dateObj.getDate();
+            dayElement.style.removeProperty('color'); // Ensures no inline color style
+            dayElement.style.removeProperty('background-color'); // Ensures no inline background
             daysContainer.appendChild(dayElement);
         });
 
