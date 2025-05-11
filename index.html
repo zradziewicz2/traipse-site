@@ -180,6 +180,11 @@
             transition: transform 0.2s;
         }
         
+        .hidden {
+              display: none;
+            }
+
+        
         .icon-link:hover {
             transform: scale(1.1);
         }
@@ -1796,12 +1801,6 @@ if (
 }
 
 
-
-
-
-        
-                
-
             let marker = L.marker([site.lat, site.lng]).bindPopup(`
                 <b>${site.name}</b><br>${site.description}<br>
                 <a href="${site.website}" target="_blank">More Info</a>
@@ -2040,10 +2039,6 @@ siteCard.innerHTML = `
 }
 
         
-        
-            window.onload = function() {
-                getUserLocation(); // Only load locations directly
-            };
 
         
             function toggleAdditionalFilters() {
@@ -2193,10 +2188,11 @@ function translatePaymentMethod(method) {
     return methodMap[method.toLowerCase()] || "Unknown";
 }
         
-            function toggleFilterCategory(categoryId) {
-            let category = document.getElementById(categoryId);
-            category.style.display = category.style.display === "none" ? "block" : "none";
+        function toggleFilterCategory(categoryId) {
+          let category = document.getElementById(categoryId);
+          category.classList.toggle("hidden");
         }
+
             
             function toggleNotInterested(siteId, element) {
                 console.log(`Toggling Not Interested for site ID: ${siteId}`); // Debugging log
