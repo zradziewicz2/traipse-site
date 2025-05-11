@@ -2199,7 +2199,7 @@ function applyRouteFilters() {
                         (siteCount === "5" && route.sites.length >= 5)) &&
                     (distance === "all" || route.distance === distance) &&
                     (cost === "all" || route.cost === cost) &&
-                    (selectedTimeOfDay === "all" || (route.timeofday && route.timeofday.includes(selectedTimeOfDay)))
+                    (timeOfDay === "all" || (route.timeofday && route.timeofday.includes(timeOfDay)))
                     (duration === "all" || route.duration === duration) &&
                     (topic === "all" || route.special_topic?.includes(topic)) &&
                     (groupType === "all" || route.group_type === groupType) &&
