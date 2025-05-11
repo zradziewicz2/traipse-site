@@ -2084,6 +2084,7 @@ siteCard.innerHTML = `
         
         
                     window.onload = function() {
+                        toggleViewMode("Sites");
                         getUserLocation(); // Gets user's location when the page loads
                     };
         
@@ -2097,9 +2098,9 @@ siteCard.innerHTML = `
             }
                 // Store user preferences in sets
 
-function toggleViewMode() {
+function toggleViewMode(forcedMode = null) {
     let toggleButton = document.getElementById("toggleViewMode");
-    let isRoutesMode = toggleButton.innerText === "Sites";
+    let isRoutesMode = forcedMode ? (forcedMode === "Routes") : (toggleButton.innerText === "Sites");
 
     toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
     document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
@@ -2140,7 +2141,6 @@ function toggleViewMode() {
         loadLocations();
     }
 }
-
 
 
 
