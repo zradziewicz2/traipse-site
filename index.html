@@ -2093,14 +2093,14 @@ routesData.forEach(route => {
         window.routeControls = [];
     }
 
-    let newRouteControl = L.Routing.control({
-        waypoints: waypoints,
-        routeWhileDragging: false,
-        createMarker: function () { return null; },
-        lineOptions: {
-            styles: [{ color: route.color, weight: 4, opacity: 0.8 }]
-        }
+    let newRouteControl = waypoints.forEach((point, index) => {
+    L.circleMarker(point, {
+        radius: 6,
+        color: route.color,
+        fillColor: route.color,
+        fillOpacity: 1
     }).addTo(map);
+});
 
     window.routeControls.push(newRouteControl);
 
