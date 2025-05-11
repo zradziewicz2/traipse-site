@@ -2221,7 +2221,13 @@ function applyRouteFilters() {
                     (route.timeofday && route.timeofday.includes(timeOfDay));
                 
                 // Duration
-                const durationMatch = duration === "all" || route.duration === duration;
+                const durationMatch = duration === "all" || (
+                    route.duration && (
+                        (duration === "<1" && route.duration.includes("Less than 1 hour")) ||
+                        (duration === "1-2" && (route.duration.includes("1 - 2 hours") || route.duration.includes("1 to 2 hours"))) ||
+                        (duration === ">2" && (route.duration.includes("More than 2 hours") || route.duration.includes(">2")))
+                    )
+                );
                 
                 // Special Topic
                 const topicMatch = topic === "all" || 
