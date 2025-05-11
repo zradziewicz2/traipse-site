@@ -2193,18 +2193,56 @@ function applyRouteFilters() {
             let reservation = document.getElementById("routeReservationFilter").value;
 
             const filteredRoutes = routesData.filter(route => {
-                return (
-                    (thematic === "all" || route.thematiccategory?.includes(thematic)) &&
-                    (siteCount === "all" || (siteCount === "3" && route.sites.length === 3) ||
-                        (siteCount === "5" && route.sites.length >= 5)) &&
-                    (distance === "all" || route.distance === distance) &&
-                    (cost === "all" || route.cost === cost) &&
-                    (timeOfDay === "all" || (route.timeofday && route.timeofday.includes(timeOfDay)))
-                    (duration === "all" || route.duration === duration) &&
-                    (topic === "all" || route.special_topic?.includes(topic)) &&
-                    (groupType === "all" || route.group_type === groupType) &&
-                    (reservation === "all" || String(route.reservation_required) === reservation)
+                // Thematic Category
+                const thematicMatch = thematic === "all" || (route.thematiccategory && route.thematiccategory.includes(thematic));
+                
+                // Number of Sites
+                const siteCountMatch = siteCount === "all" || 
+                    (siteCount === "3" && route.sites.length === 3) ||
+                    (siteCount === "5" && route.sites.length >= 5);
+                
+                // Distance (Parsed as numeric)
+                const distanceMatch = distance === "all" || (
+                    route.Distance && (
+                        (distance === "<0.5" && parseFloat(route.Distance) < 0.5) ||
+                        (distance === "0.5-1" && parseFloat(route.Distance) >= 0.5 && parseFloat(route.Distance) <= 1) ||
+                        (distance === "1-2" && parseFloat(route.Distance) >= 1 && parseFloat(route.Distance) <= 2) ||
+                        (distance === ">2" && parseFloat(route.Distance) > 2)
+                    )
                 );
+
+                // Cost (Matches both Cost and cost_range)
+                const costMatch = cost === "all" || 
+                    route.Cost === cost || 
+                    (route.cost_range && route.cost_range.includes(cost));
+                
+                // Time of Day
+                const timeOfDayMatch = timeOfDay === "all" || 
+                    (route.timeofday && route.timeofday.includes(timeOfDay));
+                
+                // Duration
+                const durationMatch = duration === "all" || route.duration === duration;
+                
+                // Special Topic
+                const topicMatch = topic === "all" || 
+                    (route.special_topic && route.special_topic.includes(topic));
+                
+                // Group Type
+                const groupTypeMatch = groupType === "all" || route.group_type === groupType;
+                
+                // Reservation Required (Convert boolean to string for match)
+                const reservationMatch = reservation === "all" || 
+                    String(route.reservation_required) === reservation;
+                
+                return thematicMatch &&
+                    siteCountMatch &&
+                    distanceMatch &&
+                    costMatch &&
+                    timeOfDayMatch &&
+                    durationMatch &&
+                    topicMatch &&
+                    groupTypeMatch &&
+                    reservationMatch;
             });
 
             displayRoutes(filteredRoutes);
@@ -2212,6 +2250,7 @@ function applyRouteFilters() {
         })
         .catch(error => console.error("Error applying route filters:", error));
 }
+
 // Load and Display Calendar Dates
 function loadRouteDates(routesData) {
     const calendarSection = document.getElementById("calendarSection");
