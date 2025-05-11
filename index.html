@@ -946,19 +946,19 @@
 
 /* Calendar Day Styling */
 .calendar-day {
-    background-color: #03FDFC; /* Cyan background */
-    color: #000000; /* Black text */
+    background-color: transparent; /* Transparent background */
+    color: #03FDFC; /* Cyan text for high contrast */
     font-weight: bold;
     padding: 8px;
-    border-radius: 50%;
+    border: 1px solid #03FDFC; /* Cyan border */
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 /* Hover Effect */
 .calendar-day:hover {
-    background-color: #02c9c9; /* Slightly different cyan */
+    background-color: #03FDFC; /* Cyan background */
     color: #000000; /* Black text on hover */
 }
 
@@ -969,29 +969,6 @@
     margin-bottom: 5px;
 }
 
-/* Adjust the border around the calendar */
-#calendar-container {
-    border: 2px solid #03FDFC;
-    padding: 10px;
-    background-color: #000000;
-}
-
-/* Adjust calendar day colors */
-.calendar-day {
-    background-color: #03FDFC;
-    color: #000000;
-    font-weight: bold;
-    padding: 8px;
-    border-radius: 50%;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.calendar-day:hover {
-    background-color: #02c9c9;
-    color: #000000;
-}
 
 
 
