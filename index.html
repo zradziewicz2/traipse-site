@@ -864,6 +864,37 @@
         .route-attribute-table tr:nth-child(even) {
             background-color: #2a2a2a;
         }
+        
+        #calendarSection {
+            max-width: 100%;
+            margin-top: 20px;
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+        }
+        
+        #tourCalendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        
+        .tour-date {
+            background: #03FDFC;
+            color: black;
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .tour-date:hover {
+            background: #02c9c9;
+        }
+
 
 
         .toggle-filters {
@@ -1305,6 +1336,10 @@
         
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
+            <div id="calendarSection" style="display: none; padding: 15px; background: #181818; color: white;">
+            <h2>Available Tour Dates</h2>
+            <div id="tourCalendar"></div>
+        </div>
         </div>
 
 
@@ -2173,8 +2208,36 @@ function applyRouteFilters() {
             });
 
             displayRoutes(filteredRoutes);
+            loadRouteDates(filteredRoutes);
         })
         .catch(error => console.error("Error applying route filters:", error));
+}
+// Load and Display Calendar Dates
+function loadRouteDates(routesData) {
+    const calendarSection = document.getElementById("calendarSection");
+    const tourCalendar = document.getElementById("tourCalendar");
+
+    tourCalendar.innerHTML = ""; // Clear previous dates
+
+    let allDates = [];
+
+    routesData.forEach(route => {
+        if (route.dates) {
+            allDates.push(...route.dates);
+        }
+    });
+
+    // Remove duplicates and sort dates
+    const uniqueDates = [...new Set(allDates)].sort((a, b) => new Date(a) - new Date(b));
+
+    uniqueDates.forEach(date => {
+        const dateElement = document.createElement("div");
+        dateElement.classList.add("tour-date");
+        dateElement.textContent = date;
+        tourCalendar.appendChild(dateElement);
+    });
+
+    calendarSection.style.display = uniqueDates.length > 0 ? "block" : "none";
 }
 
 function generateRouteAttributes(route) {
