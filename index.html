@@ -104,13 +104,13 @@
         }
 
         /* Sidebar */
-        .sidebar {
-            width: 300px;
-            background: #181818;
-            padding: 20px; /* Add padding */
-            color: white;
-            overflow-y: auto;
-        }
+.sidebar {
+    width: 450px; /* Increased from 300px */
+    background: #181818;
+    padding: 20px 25px; /* Increased padding for better spacing */
+    color: white;
+    overflow-y: auto;
+}
 
 
         .sidebar h2 {
@@ -832,7 +832,8 @@
 
         #map {
             width: 100%;
-            transition: height 0.3s ease; /* Smooth height transition */
+            transition: height 0.3s ease;
+            min-height: 500px/* Smooth height transition */
         }
 
 
@@ -2087,6 +2088,10 @@ siteCard.innerHTML = `
                         toggleViewMode("Sites");
                         getUserLocation(); // Gets user's location when the page loads
                     };
+                        document.querySelectorAll(".filter-category").forEach(category => {
+                    category.style.display = "none";
+                });
+            };
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
