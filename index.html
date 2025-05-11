@@ -151,6 +151,7 @@
         
         .filter-group select {
             width: 100%;
+            : 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
@@ -894,124 +895,6 @@
                  select {
             all: unset; /* Reset all browser styles */
         }
-                
-        .route-dates h4 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-        }
-        
-        .route-dates ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .route-dates li {
-            font-size: 1em;
-            margin: 4px 0;
-            color: #D0D0D0;
-        }
-
-           /* Calendar Container */
-#calendar-container {
-    color: #03FDFC !important; /* Cyan text color */
-    background-color: #000000 !important; /* Black background */
-    padding: 15px;
-    border: 2px solid #03FDFC;
-    border-radius: 8px;
-    max-width: 600px;
-    position: relative;
-    z-index: 1000;
-}
-
-/* Calendar Grid */
-.calendar-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 10px;
-}
-
-/* Month Container */
-.month-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-/* Days Container */
-.days-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-top: 10px;
-}
-
-/* Month and Year Titles */
-    .calendar-container h2, .calendar-container h3 {
-        color: #03FDFC; /* Cyan text */
-        font-size: 1.2em;
-        margin-bottom: 5px;
-    }
-    #calendar-container {
-        padding: 15px;
-        border: 2px solid #03FDFC;
-        border-radius: 8px;
-        max-width: 600px;
-        position: relative;
-        z-index: 1000;
-        background-color: #000; /* Black background */
-    }
-    
-    #calendar-container .calendar-day {
-        display: inline-block;
-        width: 35px;
-        height: 35px;
-        line-height: 35px;
-        text-align: center;
-        color: #03FDFC; /* Cyan text */
-        font-weight: bold;
-        border: 1px solid #03FDFC;
-        margin: 3px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s;
-    }
-    
-    #calendar-container .calendar-day:hover {
-        background-color: #03FDFC;
-        color: #000; /* Black text on hover */
-    }
-    
-    #calendar-container .calendar-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    #calendar-container .month-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    #calendar-container .days-container {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
-        margin-top: 10px;
-    }
-    
-    #calendar-container h2, 
-    #calendar-container h3 {
-        color: #03FDFC;
-        font-size: 1.2em;
-        margin-bottom: 5px;
-    }
-
-            
-
-
-
-
    
         .city-filter-dropdown {
             font-size: 2em !important; /* Force larger text */
@@ -1054,7 +937,7 @@
 
         }
 
-    
+        }
         </style>
         </head>
 
@@ -1422,10 +1305,6 @@
         
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
-            <div id="calendar-container" class="calendar-container" style="display: none;">
-    <h2>Tour Calendar</h2>
-    <div id="tourCalendar"></div>
-    </div>
         </div>
 
 
@@ -2261,75 +2140,6 @@ routesData.forEach(route => {
 
     resultsContainer.appendChild(routeCard);
 });
-    displayRouteCalendar(routesData);
-}
-function displayRouteCalendar(routesData) {
-    const calendarContainer = document.getElementById("calendar-container");
-    const calendarElement = document.getElementById("tourCalendar");
-    calendarElement.innerHTML = ""; // Clear any existing calendar
-
-    // Collect all unique dates from the routes
-    const allDates = [];
-    routesData.forEach(route => {
-        if (route.dates) {
-            route.dates.forEach(date => {
-                if (!allDates.includes(date)) {
-                    allDates.push(date);
-                }
-            });
-        }
-    });
-
-    if (allDates.length === 0) {
-        calendarContainer.style.display = "none";
-        return;
-    }
-
-    calendarContainer.style.display = "block";
-
-    // Create a calendar structure
-    const calendar = document.createElement("div");
-    calendar.className = "calendar-grid";
-    const monthYear = document.createElement("h2");
-    monthYear.innerText = "Tour Calendar";
-    calendar.appendChild(monthYear);
-
-    // Get unique months and years from dates
-    const uniqueMonths = Array.from(new Set(allDates.map(date => new Date(date).toLocaleString('default', { month: 'long', year: 'numeric' }))));
-
-    uniqueMonths.forEach(monthYearText => {
-        const monthContainer = document.createElement("div");
-        monthContainer.className = "month-container";
-
-        const monthTitle = document.createElement("h3");
-        monthTitle.innerText = monthYearText;
-        monthContainer.appendChild(monthTitle);
-
-        const daysContainer = document.createElement("div");
-        daysContainer.className = "days-container";
-
-        // Get all dates for this month
-        const monthDates = allDates.filter(date => {
-            const dateObj = new Date(date);
-            return dateObj.toLocaleString('default', { month: 'long', year: 'numeric' }) === monthYearText;
-        });
-
-        // Add each date as a day on the calendar
-        monthDates.forEach(date => {
-            const dateObj = new Date(date);
-            const dayElement = document.createElement("div");
-            dayElement.className = "calendar-day";
-            dayElement.innerText = dateObj.getDate();
-            dayElement.style.removeProperty('color'); // Ensures no inline color style
-            dayElement.style.removeProperty('background-color'); // Ensures no inline background
-            daysContainer.appendChild(dayElement);
-        });
-
-        monthContainer.appendChild(daysContainer);
-        calendar.appendChild(monthContainer);
-    });
-
-    calendarElement.appendChild(calendar);
 }
 
 
