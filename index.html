@@ -151,7 +151,6 @@
         
         .filter-group select {
             width: 100%;
-            : 8px;
             font-size: 1em;
             border-radius: 5px;
             border: none;
@@ -895,62 +894,7 @@
                  select {
             all: unset; /* Reset all browser styles */
         }
-                .calendar-container {
-            background-color: #0000000;
-            color: #03FDFC;
-            padding: 15px;
-            border: 2px solid #03FDFC;
-            border-radius: 8px;
-            margin-top: 10px;
-            max-width: 600px;
-        }
-        
-        .calendar-container h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        
-        .route-dates {
-            margin-bottom: 15px;
-        }
-
-        .calendar-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 10px;
-        }
-        
-        .month-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        
-        .days-container {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            margin-top: 10px;
-        }
-        
-        .calendar-day {
-            background-color: #E3F2FD;
-            color: #1976D2;
-            font-weight: bold;
-            padding: 8px;
-            border-radius: 50%;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .calendar-day:hover {
-            background-color: #1976D2;
-            color: #FFFFFF;
-        }
-
-        
+                
         .route-dates h4 {
             font-size: 1.2em;
             margin-bottom: 5px;
@@ -974,29 +918,6 @@
     padding: 10px;
 }
 
-/* Calendar Date Styles */
-#tourCalendar .flatpickr-day {
-    color: #03FDFC !important; /* Cyan date text */
-    background-color: #000000 !important; /* Black background */
-    border: none; /* No border around dates */
-}
-
-#tourCalendar .flatpickr-day.today {
-    background-color: #02c9c9 !important; /* Slightly lighter cyan for today */
-    color: #000000 !important; /* Black text on cyan for contrast */
-}
-
-#tourCalendar .flatpickr-day.selected,
-#tourCalendar .flatpickr-day.startRange,
-#tourCalendar .flatpickr-day.endRange {
-    background-color: #03FDFC !important; /* Cyan background for selected dates */
-    color: #000000 !important; /* Black text for contrast */
-}
-
-#tourCalendar .flatpickr-day:hover {
-    background-color: #02c9c9 !important; /* Lighter cyan on hover */
-    color: #000000 !important; /* Black text on hover */
-}
 
 /* Calendar Month and Year */
 .flatpickr-month {
@@ -1063,7 +984,7 @@
 
         }
 
-        }
+    
         </style>
         </head>
 
