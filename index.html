@@ -2132,7 +2132,8 @@ function toggleViewMode(forcedMode = null) {
         calendarSection.style.display = "block"; // Show calendar in Routes
     } else {
         mapElement.style.height = "100vh"; // Full height in Sites
-        calendarSection.style.display = "none"; // Hide calendar in Sites
+        calendarSection.style.display = "none";
+        collapseSiteFilters(); // ✅ Collapse site filters when switching to Sites
     }
 
     // Clear map markers
@@ -2642,6 +2643,16 @@ document.addEventListener("DOMContentLoaded", function() {
         filterGroup.style.display = "none";
     });
 });
+
+function collapseSiteFilters() {
+    document.querySelectorAll(".toggle-filters").forEach(button => {
+        let categoryId = button.getAttribute("onclick").match(/'([^']+)'/)[1];
+        let category = document.getElementById(categoryId);
+        if (category) {
+            category.style.display = "none";
+        }
+    });
+}
 
 
 </script>
