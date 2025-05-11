@@ -832,11 +832,12 @@
 
         /* Map */
         #map {
-            width: 50%;
-            height: 100%;
-            border-radius: -5; /* Remove unnecessary border radius */
+            width: 100%;
+            height: 500px; /* Adjust to your preferred height */
             background: #333;
+            margin-bottom: 10px; /* Space below map for the calendar */
         }
+
 
         .additional-filters {
             margin-top: 10px;
@@ -867,13 +868,14 @@
         
         #calendarSection {
             width: 100%;
-            height: 50%;
+            height: auto; /* Adjust height to fit the content */
             background: #222;
             padding: 15px;
             border-radius: 8px;
             color: white;
             display: none; /* Hidden by default */
             overflow-y: auto;
+            margin-top: 10px; /* Add spacing below the map */
         }
 
         /* Full map height for Sites view */
@@ -1420,11 +1422,13 @@
             <div class="search-results" id="searchResults"></div>
 <div class="content">
     <div id="map" class="full-height"></div>
-    <div id="calendarSection">
-        <h2>Available Tour Dates</h2>
-        <div id="tourCalendar" class="calendar-view"></div>
-    </div>
 </div>
+
+<div id="calendarSection">
+    <h2>Available Tour Dates</h2>
+    <div id="tourCalendar" class="calendar-view"></div>
+</div>
+
 
 
 
