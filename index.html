@@ -1049,10 +1049,9 @@
             font-size: 1.8em !important;
             padding: 15px !important;
         }
+
+
             
-        .filter-group {
-            display: none !important;
-        }            
             /* Add hover effect to make it interactive */
             .city-filter-dropdown:hover {
                 background: #03FDFC;
@@ -2631,12 +2630,11 @@ function translatePaymentMethod(method) {
             }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Explicitly hide all filter categories
-    document.querySelectorAll(".filter-group").forEach(filterGroup => {
+    // Hide all filter categories by default
+    document.querySelectorAll(".filter-category").forEach(filterGroup => {
         filterGroup.style.display = "none";
     });
 });
-
 
 </script>
 </body>
