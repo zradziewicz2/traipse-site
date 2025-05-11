@@ -2629,7 +2629,12 @@ function translatePaymentMethod(method) {
                 console.log("Updated Not Interested:", notInterested);
             }
 
-
+document.addEventListener("DOMContentLoaded", function() {
+    // Hide all filter categories by default
+    document.querySelectorAll(".filter-category").forEach(filterGroup => {
+        filterGroup.style.display = "none";
+    });
+});
 
 </script>
 </body>
