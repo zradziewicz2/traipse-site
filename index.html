@@ -911,35 +911,88 @@
             color: #D0D0D0;
         }
 
-            /* Calendar Container */
+           /* Calendar Container */
 #calendar-container {
     color: #03FDFC; /* Cyan text color */
     background-color: #000000; /* Black background */
+    padding: 15px;
+    border: 2px solid #03FDFC;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 10px;
 }
 
-
-/* Calendar Month and Year */
-.flatpickr-month {
-    color: #03FDFC !important; /* Cyan month and year text */
-    background-color: #000000 !important; /* Black background */
-    border: none; /* No border around header */
+/* Month Container */
+.month-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.flatpickr-months .flatpickr-prev-month,
-.flatpickr-months .flatpickr-next-month {
-    color: #03FDFC !important; /* Cyan arrow icons */
+/* Days Container */
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
 }
 
-/* Calendar Weekday Labels */
-.flatpickr-weekdays {
-    background-color: #000000 !important; /* Black background */
-    color: #03FDFC !important; /* Cyan text for weekdays */
+/* Calendar Day Styling */
+.calendar-day {
+    background-color: #03FDFC; /* Cyan background */
+    color: #000000; /* Black text */
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.flatpickr-weekday {
-    color: #03FDFC !important; /* Cyan text for weekday labels */
+/* Hover Effect */
+.calendar-day:hover {
+    background-color: #02c9c9; /* Slightly different cyan */
+    color: #000000; /* Black text on hover */
 }
+
+/* Month and Year Titles */
+.calendar-container h2, .calendar-container h3 {
+    color: #03FDFC; /* Cyan text */
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+/* Adjust the border around the calendar */
+#calendar-container {
+    border: 2px solid #03FDFC;
+    padding: 10px;
+    background-color: #000000;
+}
+
+/* Adjust calendar day colors */
+.calendar-day {
+    background-color: #03FDFC;
+    color: #000000;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calendar-day:hover {
+    background-color: #02c9c9;
+    color: #000000;
+}
+
 
 
    
