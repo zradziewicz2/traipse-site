@@ -8,16 +8,8 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 
-
     <!-- Custom Styles -->
     <style>
-        @font-face {
-        font-family: 'Tw Cen MT';
-        src: local('Tw Cen MT'), local('TwCenMT'), local('TwCenMT-Regular');
-        font-weight: normal;
-        font-style: normal;
-    }
-
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #000000;
@@ -60,23 +52,98 @@
             display: block; /* Ensures it stays inside the header */
         }
         .attribute-box {
-            text-transform: uppercase; /* Forces all text to be capitalized */
-            padding: 2px 6px; /* Smaller padding */
-            font-size: 0.7em; /* Slightly smaller text */
-            border: 1.5px solid #03FDFC; /* Thin border */
+            display: inline-block;
+            background: transparent;
+            border: 2px solid #03FDFC;
+            color: #03FDFC;
+            font-size: 0.8em;
             font-weight: bold;
-            border-radius: 4px; /* Slightly rounded corners */
-            white-space: nowrap; /* Prevent text from wrapping */
-            line-height: 1.2; /* Adjusts text height */
+            padding: 4px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin: 2px;
+            text-align: center;
+            white-space: nowrap;
         }
-
     
         .attribute-box:hover {
             background: #03FDFC;
             color: black;
+    }
+        .toggle-container-top {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Centers it properly */
+            max-width: 100%; /* Prevents unnecessary shrinking */
+            margin-bottom: 5px; /* Slightly reduce bottom spacing */
         }
 
 
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .search-results-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Aligns to the left to match original layout */
+            width: auto; /* Prevents stretching */
+            max-width: 600px; /* Limits width so it doesn't expand */
+            margin-left: 20px; /* Adjust as needed to align with the sidebar */
+        }
+
+        
+        .toggle-container-top {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start; /* Align with search results */
+            margin-bottom: 10px;
+            max-width: 600px; /* Match the card width */
+        }
+
+
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 25px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 19px;
+            width: 19px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #03FDFC;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
 
             .tagline {
                 font-size: 1em;
@@ -101,11 +168,13 @@
             display: flex;
             flex-direction: row;
             height: calc(100vh - 80px);
+            justify-content: space-between; /* Keeps sidebar, search results, and map spaced properly */
         }
+
 
         /* Sidebar */
         .sidebar {
-            width: 500px;
+            width: 300px;
             background: #181818;
             padding: 20px; /* Add padding */
             color: white;
@@ -124,11 +193,6 @@
             border-radius: 5px; /* Slight rounding */
             background: #222; /* Optional: Give a subtle background */
         }
-        /* Ensure all filter categories are collapsed by default */
-        .filter-category {
-            display: none; /* Hidden by default */
-        }
-
 
         
         .timePeriod-group {
@@ -161,93 +225,6 @@
             border-radius: 5px;
             border: none;
         }
-
-        /* Floating Buttons - Stick to Bottom Left */
-        .floating-buttons {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            display: flex;
-            gap: 10px; /* Space between buttons */
-            z-index: 1000; /* Ensure it's always on top */
-        }
-
-        .icon-link {
-            width: 20px;
-            height: 20px;
-            margin-left: 4px;
-            margin-right: 0;
-            transition: transform 0.2s;
-        }
-        
-        .hidden {
-              display: none;
-            }
-
-        
-        .icon-link:hover {
-            transform: scale(1.1);
-        }
-
-    .external-links.bottom-right-icons {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            display: flex;
-            gap: 4px;
-        }
-
-
-
-
-        /* Apply Filters Button */
-        .apply-filters-btn {
-            background-color: #03FDFC;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.2s ease-in-out;
-        }
-        
-        .apply-filters-btn:hover {
-            background-color: #02c9c9;
-        }
-        
-        /* Reset Filters Button */
-        .reset-filters-btn {
-            background: black; /* Black background */
-            color: #03FDFC; /* Cyan text */
-            font-weight: bold;
-            padding: 10px 15px;
-            border: 2px solid #03FDFC; /* Cyan border */
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
-        }
-        
-        .reset-filters-btn:hover {
-            background: #03FDFC; /* Cyan background on hover */
-            color: black; /* Black text on hover */
-        }
-        .thematicCategory-group {
-            font-size: 0.9em;
-            display: flex;
-            flex-direction: column; /* Ensures vertical stacking */
-            gap: 5px; /* Keeps spacing consistent */
-        }
-        
-        .thematicCategory-group label {
-            display: flex;
-            align-items: center; /* Keeps checkbox and text aligned */
-            gap: 8px; /* Adjusts spacing */
-            font-family: Montserrat, sans-serif;
-        }
-
 
 
         button {
@@ -289,57 +266,20 @@
             color: white;
             cursor: pointer;
         }
-        .thematic-category {
-            font-size: 1.3em;  /* 1.3x bigger */
-            font-weight: bold;
-            color: #03FDFC;  /* Cyan color for emphasis */
-            margin-top: 2px;
-        }
-        
-        .time-period {
-            font-style: italic;  /* Italicize */
-            font-size: 1em;  /* Normal size */
-            color: #D0D0D0;  /* Light gray for contrast */
-            margin-bottom: 4px;
-        }
-        
-        .site-title-line {
-          font-weight: bold;
-          font-size: 1em;
-          color: white;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        
-        .site-icons-line {
-          display: flex;
-          justify-content: flex-end;
-          gap: 6px;
-          margin-top: 2px;
-        }
 
 
 
+            .search-results-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* Center cards properly */
+                width: 50%; /* Adjusts to make sure cards are properly sized */
+                min-width: 500px; /* Prevents them from becoming too small */
+                margin-left: 0px; /* Removes unnecessary left margin */
+            }
 
 
 
-          .search-results {
-            flex: 1;
-            max-width: 50%;
-            min-width: 40%;
-            overflow-y: auto;
-            padding: 20px; /* Adds more spacing */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centers the cards */
-        }
-
-
-        .filter-title {
-            font-weight: bold;  /* Makes the text bold */
-            font-size: 1.2em;   /* Adjust size: 1.2em = 20% bigger than normal */
-        }
             
         .site-actions {
             display: flex;
@@ -433,94 +373,7 @@
         .inline-info:hover {
             text-decoration: underline;
             color: #03FDFC; /* Cyan hover effect */
-                }
-                /* Floating Toggle Button */
-        .floating-toggle {
-            position: absolute;
-            top: 80px; /* Adjust as needed */
-            left: 310px; /* Position near the search results */
-            background: #03FDFC;
-            color: black;
-            font-size: 0.8em; /* Slightly larger text */
-            font-weight: bold;
-            padding: 3px 12px; /* Make it slightly longer */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000; /* Ensure it stays on top */
-            width: 60px; /* Slightly longer */
-            height: 25px; /* Maintain good proportions */
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease-in-out;
         }
-        
-        .floating-toggle:hover {
-            background: #02c9c9;
-        }
-
-        .no-attribute-box {
-            display: inline-block;
-            text-transform: uppercase;
-            padding: 2px 6px;
-            font-size: 0.7em;
-            font-weight: bold;
-            border: 2px solid #03FDFC !important; /* ✅ Cyan border */
-            color: white !important; /* ✅ Cyan text */
-            border-radius: 4px;
-            white-space: nowrap;
-            line-height: 1.2;
-            background: transparent !important; /* Keeps background clear */
-        }
-
-        
-        .matching-attributes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 6px;
-        }
-        
-        .non-matching-attributes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 4px;
-            padding-top: 4px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2); /* ✅ Subtle separator */
-        }
-        
-        .no-attribute-box {
-            display: inline-block;
-            text-transform: uppercase;
-            padding: 2px 6px;
-            font-size: 0.7em;
-            font-weight: bold;
-            border: 2px solid #03FDFC; /* ✅ Cyan border */
-            color: white; /* ✅ White text */
-            border-radius: 4px;
-            white-space: nowrap;
-            line-height: 1.2;
-            background: transparent; /* Keeps background clear */
-        }
-
-
-
-
-
-
-        
-        /* Active state for toggle */
-        /* Active state for toggle */
-        .floating-toggle.active {
-            background: #03FDFC; /* Cyan Blue */
-            color: black;
-        }
-
-
-
 
 
         
@@ -541,52 +394,6 @@
             background: #03FDFC;
             color: #000;
         }
-
-        .route-card-content {
-          display: flex;
-          gap: 15px;
-          position: relative;
-        }
-        
-        .route-info {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          position: relative;
-          padding-right: 60px; /* add space for bottom-right icons */
-        }
-        
-        .route-image {
-          width: 120px;
-          height: 120px;
-          object-fit: cover;
-          border-radius: 6px;
-        }
-        
-        /* Bottom-right alignment for icons */
-        .bottom-right-icons {
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          padding: 5px 10px;
-          display: flex;
-          gap: 6px;
-        }
-        
-        /* Clean up spacing */
-        .route-info h3 {
-          margin: 0;
-          font-size: 1.2em;
-          color: #03FDFC;
-        }
-        
-        .route-info p {
-          margin: 4px 0;
-          font-size: 0.9em;
-          color: #D0D0D0;
-        }
-
 
         .header-btn {
             background: transparent;
@@ -626,9 +433,6 @@
             cursor: pointer;
             max-width: 600px;
             width: 100%;
-            font-family: 'Tw Cen MT', sans-serif !important;
-            font-size: 1.2em !important;
-            
         }
 
         .site-title {
@@ -649,8 +453,6 @@
             color: white;
             cursor: pointer;
             width: 100%;
-            font-family: 'Tw Cen MT', sans-serif !important;
-            font-size: 1.2em !important;
         }
         
         .site-content {
@@ -688,10 +490,9 @@
         }
         
         .site-attributes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px; /* Reduce spacing between tiles */
-            margin-top: 4px; /* Less space between details and attributes */
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #D0D0D0;
         }
         
         .site-distance {
@@ -728,31 +529,6 @@
             font-size: 0.9em;
             color: #D0D0D0;
         }
-        .more-info-toggle {
-            cursor: pointer;
-            color: #03FDFC;
-            font-weight: bold;
-            margin-top: 8px;
-            text-align: left;
-        }
-        
-        .route-attribute-table {
-            width: 100%;
-            font-size: 0.85em;
-            color: #D0D0D0;
-            border-collapse: collapse;
-            margin-top: 6px;
-        }
-        
-        .route-attribute-table td {
-            padding: 4px 6px;
-            vertical-align: top;
-        }
-        
-        .route-attribute-table tr:nth-child(even) {
-            background-color: #2a2a2a;
-        }
-
     
         
         .site-details p {
@@ -789,15 +565,15 @@
         .site-card h3 {
             margin: 0;
             color: #03FDFC;
-            font-family: 'Tw Cen MT', sans-serif !important;
-            font-size: 1.2em !important;
         }
 
-
-        #map {
-            width: 100%;
-            transition: height 0.3s ease; /* Smooth height transition */
-        }
+        /* Map */
+            #map {
+                width: 45%; /* Reduces map width so cards have more space */
+                height: 100%;
+                min-width: 550px; /* Ensures map doesn't shrink too much */
+                background: #333;
+            }
 
 
         .additional-filters {
@@ -807,147 +583,6 @@
             display: none;
         }
         
-        .leaflet-routing-container {
-            display: none !important;
-        }
-        .route-attribute-table {
-            width: 100%;
-            font-size: 0.85em;
-            color: #D0D0D0;
-            border-collapse: collapse;
-            margin-top: 8px;
-        }
-        
-        .route-attribute-table td {
-            padding: 4px 6px;
-            vertical-align: top;
-        }
-        
-        .route-attribute-table tr:nth-child(even) {
-            background-color: #2a2a2a;
-        }
-        
-        #calendarSection {
-            width: 100%;
-            background: #222;
-            padding: 15px;
-            border-radius: 8px;
-            color: white;
-            display: none;
-        }
-
-        #mapAndCalendarContainer {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: auto;
-            gap: 10px;
-        }
-
-        /* Full map height for Sites view */
-        #map.full-height {
-            height: 500px;
-        }
-        
-        /* Half map height for Routes view */
-        #map.half-height {
-            height: 250px;
-        }
-
-        
-        #tourCalendar {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-        }
-        
-        .tour-date {
-            background: #03FDFC;
-            color: black;
-            padding: 8px;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .tour-date:hover {
-            background: #02c9c9;
-        }
-    .calendar-view {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: white;
-        background: #222;
-        padding: 10px;
-        border-radius: 8px;
-    }
-
-    .calendar-header {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-        color: #03FDFC;
-    }
-
-    .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 5px;
-        width: 100%;
-    }
-
-    .calendar-day {
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 5px;
-        color: #03FDFC;
-    }
-
-    .calendar-cell {
-        background: #333;
-        padding: 10px;
-        min-height: 80px;
-        border-radius: 6px;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .calendar-cell.empty {
-        background: transparent;
-        pointer-events: none;
-    }
-
-    .date-number {
-        font-size: 1em;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .tour-name {
-        background: #03FDFC;
-        color: black;
-        font-size: 0.8em;
-        padding: 3px;
-        border-radius: 4px;
-        margin-top: 2px;
-        text-align: center;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    .tour-name:hover {
-        background: #02c9c9;
-        cursor: pointer;
-    }
-
         .toggle-filters {
             background: none;
             border: none;
@@ -1017,6 +652,15 @@
                 color: #000;
             }
 
+        .toggle-wrapper {
+            margin-bottom: 10px; /* Adds space below toggle */
+            width: 100%;
+        }
+        .search-results {
+            margin-top: 10px; /* Pushes down the cards */
+        }
+
+
         }
 
         }
@@ -1027,7 +671,7 @@
 
                <!-- Header -->
             <div class="header">
-                <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
+                <img id="logo" src="traipse_logo_turquoise2.png" alt="Traipse Logo">
             
                 <div class="website-title">TRAIPSE</div>
             
@@ -1061,349 +705,215 @@
         </div>
  
     <!-- Main Layout -->
-        <div class="container">
+    <div class="container">
+
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Filters</h2>
+        <div class="filter-group">
+            <label>Time Period:</label>
+            <div class="timePeriod-group">
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric
+                </label>
+                <span class="timePeriod-years">(Before 1492)</span>
         
-            <!-- Sidebar -->
-            <div class="sidebar">
-<!-- Route-Specific Filters -->
-<div id="routeFilters" style="display: none;">
-    <div class="filter-group">
-        <label>Route Thematic Category:</label>
-        <select id="routeThematicCategoryFilter">
-            <option value="all">All</option>
-            <option value="artsandculture">Arts and Culture</option>
-            <option value="generalhistory">General History</option>
-            <option value="historichomes">Historic Homes</option>
-            <option value="naturalhistory">Natural History</option>
-            <option value="technologyandtransportation">Technology and Transportation</option>
-        </select>
-    </div>
-
-    <!-- Apply Filters Button for Routes -->
-<div id="routeFiltersActions" style="margin-top: 10px;">
-  <button class="apply-filters-btn" onclick="applyRouteFilters()">Apply Filters</button>
-</div>
-
-
-    <div class="filter-group">
-        <label>Number of Sites:</label>
-        <select id="routeSiteCountFilter">
-            <option value="all">All</option>
-            <option value="3">3 Sites</option>
-            <option value="5">5+ Sites</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Distance:</label>
-        <select id="routeDistanceFilter">
-            <option value="all">All</option>
-            <option value="<0.5">Less than 0.5 mile</option>
-            <option value="0.5-1">0.5 - 1 mile</option>
-            <option value="1-2">1 - 2 miles</option>
-            <option value=">2">More than 2 miles</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Cost:</label>
-        <select id="routeCostFilter">
-            <option value="all">All</option>
-            <option value="Free">Free</option>
-            <option value="$">$</option>
-            <option value="$$">$$</option>
-            <option value="$$$">$$$</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Time of Day:</label>
-        <select id="routeTimeFilter">
-            <option value="all">All</option>
-            <option value="Mornings">Mornings</option>
-            <option value="Afternoons">Afternoons</option>
-            <option value="Evenings">Evenings</option>
-            <option value="late">Late</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Duration:</label>
-        <select id="routeDurationFilter">
-            <option value="all">All</option>
-            <option value="<1">Less than 1 hour</option>
-            <option value="1-2">1 - 2 hours</option>
-            <option value=">2">More than 2 hours</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Special Topic:</label>
-        <select id="routeTopicFilter">
-            <option value="all">All</option>
-            <option value="Architecture">Architecture</option>
-            <option value="History">History</option>
-            <option value="Culture">Culture</option>
-            <option value="Museums">Museums</option>
-            <option value="Paranormal">Paranormal</option>
-            <option value="Sports">Sports</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Group Type:</label>
-        <select id="routeGroupTypeFilter">
-            <option value="all">All</option>
-            <option value="private">Private</option>
-            <option value="group">Group</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Reservation Required:</label>
-        <select id="routeReservationFilter">
-            <option value="all">All</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-        </select>
-    </div>
-        <div class="floating-buttons">
-        <button class="apply-filters-btn" onclick="applyRouteFilters()">Apply Filters</button>
-    </div>
-</div>
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="indigenous"> Indigenous & Native History
+                </label>
+                <span class="timePeriod-years">(Before 1492 – Present)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements
+                </label>
+                <span class="timePeriod-years">(1492 – 1800)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century - Civil War, Westward Expansion
+                </label>
+                <span class="timePeriod-years">(1800 – 1899)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> 20th Century - Industrial Revolution, World Wars
+                </label>
+                <span class="timePeriod-years">(1900 – 1950s)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History or Civil Rights
+                </label>
+                <span class="timePeriod-years">(1950s – Present)</span>
+        
+                <label>
+                    <input type="checkbox" class="timePeriodFilter" value="other"> Other
+                </label>
+            </div>
+        </div>
 
 
 
-<h2 id="filtersTitle">Filters</h2>
+            
+            <div class="filter-group">
+                <label>Thematic Category:</label>
+                <select id="ThematicCategoryFilter">
+                    <option value="all">All</option>
+                    <option value="artsandculture">Arts and Culture</option>
+                    <option value="foodanddrink">Food and Drink</option>
+                    <option value="generalhistory">General History</option>
+                    <option value="historichomes">Historic Homes</option>
+                    <option value="naturalhistory">Natural History</option>
+                    <option value="religiousandspiritual">Religious and Spiritual</option>
+                    <option value="technologyandtransportation">Technology and Transportation</option>
+                    <option value="other">Other</option>
 
-    
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Cost:</label>
+                <select id="costFilter">
+                    <option value="all">All</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Estimated Time:</label>
+                <select id="estimatedTimeFilter">
+                    <option value="all">All</option>
+                    <option value="<15 minutes">Less than 15 minutes</option>
+                    <option value="15-1 hour">15 minutes to 1 hour</option>
+                    <option value="1-2 hours">1-2 hours</option>
+                    <option value="more than 2 hours">More than 2 hours</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Payment Options 💳:</label>
+                <select id="cashOrCreditFilter">
+                    <option value="all">All</option>
+                    <option value="cash">Cash Only</option>
+                    <option value="credit">Credit Only</option>
+                    <option value="both">Cash & Credit</option>
+                    <option value="na">N/A</option>
+                </select>
+            </div>
+
+            
+            <div class="filter-group">
+                <label>Distance:</label>
+                <select id="distanceFilter">
+                    <option value="all">All</option>
+                    <option value="1">Less than 1 mile</option>
+                    <option value="5">1-5 miles</option>
+                    <option value="10">More than 10 miles</option>
+                </select>
+            </div>
 
                         <!-- Button to Show Additional Filters -->
-           <!-- EXPERIENCE TYPE -->
-<button class="toggle-filters" onclick="toggleFilterCategory('experienceFilters')">
-    <label class="filter-title">Experience Type ▼</label>
-</button>
-
-<div class="filter-category" id="experienceFilters" style="display: none;">
-    <div class="filter-group">
-        <label>Site Type:</label>
-        <select id="siteTypeFilter">
-            <option value="all">All</option>
-            <option value="museums">Museums</option>
-            <option value="landmark">Landmark</option>
-            <option value="historichome">Historic Home</option>
-            <option value="archeological">Archeological</option>
-            <option value="burial">Burial</option>
-            <option value="religious">Religious</option>
-            <option value="urban">Urban</option>
-            <option value="political">Political</option>
-            <option value="industrial">Industrial</option>
-            <option value="outdoor">Outdoor</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Indoor/Outdoor:</label>
-        <select id="typeFilter">
-            <option value="all">All</option>
-            <option value="indoor">Indoor</option>
-            <option value="outdoor">Outdoor</option>
-        </select>
-    </div>
-
-<div class="filter-group">
-    <label>Thematic Category:</label>
-    <div class="thematicCategory-group">
-        <label><input type="checkbox" class="thematicCategoryFilter" value="artsandculture"> Arts and Culture</label>
-        <label><input type="checkbox" class="thematicCategoryFilter" value="generalhistory"> General History</label>
-        <label><input type="checkbox" class="thematicCategoryFilter" value="historichomes"> Historic Homes</label>
-        <label><input type="checkbox" class="thematicCategoryFilter" value="naturalhistory"> Natural History</label>
-        <label><input type="checkbox" class="thematicCategoryFilter" value="religiousandspiritual"> Religious and Spiritual</label>
-        <label><input type="checkbox" class="thematicCategoryFilter" value="technologyandtransportation"> Technology and Transportation</label>
-    </div>
-</div>
-
-
-
-    <div class="filter-group">
-        <label>Time Period:</label>
-        <div class="timePeriod-group">
-            <label><input type="checkbox" class="timePeriodFilter" value="prehistoric"> Prehistoric</label>
-            <label><input type="checkbox" class="timePeriodFilter" value="colonial"> Colonial & Early Settlements</label>
-            <label><input type="checkbox" class="timePeriodFilter" value="nineteenthcentury"> 19th Century</label>
-            <label><input type="checkbox" class="timePeriodFilter" value="industrialrevolution"> 20th Century</label>
-            <label><input type="checkbox" class="timePeriodFilter" value="modernhistory"> Modern History</label>
-        </div>
-    </div>
-
-    <div class="filter-group">
-        <label>Scope:</label>
-        <select id="localOrNationalFilter">
-            <option value="all">All</option>
-            <option value="local">Local</option>
-            <option value="national">National</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Tours:</label>
-        <select id="toursFilter">
-            <option value="all">All</option>
-            <option value="selftours">Self-Guided Tours</option>
-            <option value="guidedtours">Guided Tours</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Public Access:</label>
-        <select id="publicAccessFilter">
-            <option value="all">All</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-        </select>
-    </div>
-</div>
-
-<!-- LOGISTICS -->
-<button class="toggle-filters" onclick="toggleFilterCategory('logisticsFilters')">
-    <label class="filter-title">Logistics ▼</label>
-</button>
-<div class="filter-category" id="logisticsFilters" style="display: none;">
-    <div class="filter-group">
-        <label>Estimated Time:</label>
-        <select id="estimatedTimeFilter">
-            <option value="all">All</option>
-            <option value="<15 minutes">Less than 15 minutes</option>
-            <option value="15-1 hour">15 minutes to 1 hour</option>
-            <option value="1-2 hours">1-2 hours</option>
-            <option value="more than 2 hours">More than 2 hours</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Reservations Required:</label>
-        <select id="reservationsFilter">
-            <option value="all">All</option>
-            <option value="walkins_welcome">Walk-Ins Welcome</option>
-            <option value="reservationrequired">Reservation Required</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Cost:</label>
-        <select id="costFilter">
-            <option value="all">All</option>
-            <option value="free">Free</option>
-            <option value="paid">Paid</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Payment Methods:</label>
-            <select id="paymentmethodFilter">
-                <option value="all">All</option>
-                <option value="cash">Cash</option>
-                <option value="card">Card</option>
-                <option value="both">Both</option>
-                <option value="notapplicable">N/A</option>
-            </select>
-
-    </div>
-
-</div>
-
-<!-- LOCATION & ACCESSIBILITY -->
-<button class="toggle-filters" onclick="toggleFilterCategory('locationFilters')">
-    <label class="filter-title">Location & Accessibility ▼</label>
-</button>
-<div class="filter-category" id="locationFilters" style="display: none;">
-    <div class="filter-group">
-        <label>Distance:</label>
-        <select id="distanceFilter">
-            <option value="all">All</option>
-            <option value="1">Less than 1 mile</option>
-            <option value="5">1-5 miles</option>
-            <option value="10">More than 10 miles</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label>Transit Accessibility:</label>
-        <select id="transitFilter">
-            <option value="all">All</option>
-            <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
-            <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
-            <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
-        </select>
-    </div>
-</div>
-
-<!-- AMENITIES -->
-<button class="toggle-filters" onclick="toggleFilterCategory('amenitiesFilters')">
-    <label class="filter-title">Amenities ▼</label>
-</button>
-<div class="filter-category" id="amenitiesFilters" style="display: none;">
-    <div class="filter-group">
-        <label><input type="checkbox" id="giftShopFilter"> Has Gift Shop</label>
-    </div>
-    <div class="filter-group">
-        <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
-    </div>
-    <div class="filter-group">
-        <label><input type="checkbox" id="luggageStorageFilter"> Luggage Storage</label>
-    </div>
-    <div class="filter-group">
-        <label><input type="checkbox" id="spanishTranslationsFilter"> Spanish Translations Available</label>
-    </div>
-</div>
-
-<!-- SPECIAL CONSIDERATIONS -->
-<button class="toggle-filters" onclick="toggleFilterCategory('specialFilters')">
-    <label class="filter-title">Special Considerations ▼</label>
-</button>
-<div class="filter-category" id="specialFilters" style="display: none;">
-    <div class="filter-group">
-        <label><input type="checkbox" id="familyFilter"> Family-Friendly</label>
-    </div>
-    <div class="filter-group">
-        <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly</label>
-    </div>
-    <div class="filter-group">
-        <label><input type="checkbox" id="adaAccessibilityFilter"> ADA Accessible</label>
-    </div>
-</div>
-
-
-<!-- Floating Buttons in Bottom-Left Corner -->
-<div class="floating-buttons">
-    <button class="apply-filters-btn" onclick="applyFilters()">Apply Filters</button>
-    <button class="reset-filters-btn" onclick="resetFilters()">Reset</button>
-</div>
-
-        </div>
-
-   
+            <button class="toggle-filters" onclick="toggleAdditionalFilters()">Additional Filters ▼</button>
+            
+            <!-- Additional Filters Hidden by Default -->
+            <div class="additional-filters" id="additionalFilters" style="display: none;">
+                <div class="filter-group">
+                    <label>Reservations:</label>
+                    <select id="reservationsFilter">
+                        <option value="all">All</option>
+                        <option value="walkins_welcome">Walk-Ins Welcome</option>
+                        <option value="reservationrequired">Reservation Required</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Tours:</label>
+                    <select id="toursFilter">
+                        <option value="all">All</option>
+                        <option value="selftours">Self-Tours</option>
+                        <option value="guidedtours">Guided Tours</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Transit Accessibility:</label>
+                    <select id="transitFilter">
+                        <option value="all">All</option>
+                        <option value="underhalfamilefromtransit">Under Half Mile from Transit</option>
+                        <option value="halfamiletotenmilesfromtransit">Half Mile to 10 Miles from Transit</option>
+                        <option value="overtenmilesfromtransit">Over 10 Miles from Transit</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Type:</label>
+                    <select id="typeFilter">
+                        <option value="all">All</option>
+                        <option value="indoor">Indoor</option>
+                        <option value="outdoor">Outdoor</option>
+                    </select>
+                </div>             
         
+                <div class="filter-group">
+                    <label>Family Friendly:</label>
+                    <select id="familyFilter">
+                        <option value="all">All</option>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                <label><input type="checkbox" id="giftShopFilter"> Has Gift Shop</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="spanishTranslationsFilter"> Spanish Translations Available</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="luggageStorageFilter"> Luggage Storage</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="publicAccessFilter"> Public Access</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="diningOnSiteFilter"> Dining On-Site</label>
+                </div>
+
+                <div class="filter-group">
+                    <label><input type="checkbox" id="dogFriendlyFilter"> Dog-Friendly 🐶</label>
+                </div>
+                
+                <div class="filter-group">
+                    <label><input type="checkbox" id="adaAccessibilityFilter"> ADA Accessible</label>
+                </div>
+
+
+            </div>
+
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+
+        
+        <div class="search-results-wrapper">
+            <div class="toggle-container-top">
+                <span id="modeLabel" style="color: #03FDFC; font-weight: bold; font-size: 1.2em; margin-right: 10px;">Places</span>
+                <label class="switch">
+                    <input type="checkbox" id="toggleMode" onchange="toggleViewMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <div class="search-results" id="searchResults"></div>
-<div id="mapAndCalendarContainer" style="display: flex; flex-direction: column; gap: 10px;">
-    <div id="map" class="full-height"></div>
-    <div id="calendarSection" style="display: none;">
-        <h2>Available Tour Dates</h2>
-        <div id="tourCalendar" class="calendar-view"></div>
-    </div>
-</div>
+        </div>
 
 
 
-
-
-
+            <div id="map"></div>
         </div>
 
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
     <script>
         var map = L.map('map').setView([39.7392, -104.9903], 12);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -1414,6 +924,7 @@
         
         var allMarkers = [];
         var siteData = [];
+        
 
 function getUserLocation() {
     if (navigator.geolocation) {
@@ -1452,23 +963,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * c;
 }
         
-function getMarkerEmoji(sitetype) {
-    const emojiMap = {
-        "museum": "🏛",
-        "archaeological": "🏺",
-        "landmark": "🗿",
-        "burial": "⚰",
-        "military": "⚔",
-        "religious": "⛪",
-        "urban": "🏙",
-        "government": "🏛",
-        "transportation": "🚂",
-        "naturalhistory": "🌳",
-        "other": "❓"
-    };
-    return emojiMap[sitetype.toLowerCase()] || "❓"; // Default to ❓ if not found
-}
-
+// Existing function
 function loadLocations() {
     fetch('locations.json')
         .then(response => response.json())
@@ -1523,62 +1018,7 @@ function translateTours(tours) {
     };
     return tours.map(tour => tourMap[tour.toLowerCase()] || formatText(tour)).join(", ");
 }
-         // Function to translate category names to their proper display format
-    function translateCategory(categories) {
-        if (!categories) return "Unknown"; 
-        const categoryMap = {
-            "artsandculture": "Arts and Culture",
-            "generalhistory": "General History",
-            "historichomes": "Historic Homes",
-            "naturalhistory": "Natural History",
-            "religiousandspiritual": "Religious and Spiritual",
-            "technologyandtransportation": "Technology and Transportation",
-            "other": "Other"
-        };
-    
-        if (Array.isArray(categories)) {
-            return categories.map(cat => categoryMap[cat.toLowerCase()] || cat).join(", ");
-        } else {
-            return categoryMap[categories.toLowerCase()] || categories;
-        }
-    }
 
-
-            
-            function translateTimePeriod(timeperiod) {
-                if (!timeperiod) return "Unknown"; 
-                const timePeriodMap = {
-                    "prehistoric": "Prehistoric",
-                    "colonial": "Colonial & Early Settlements",
-                    "nineteenthcentury": "19th Century",
-                    "industrialrevolution": "20th Century",
-                    "modernhistory": "Modern History",
-                    "other": "Other"
-                };
-            
-                if (Array.isArray(timeperiod)) {
-                    return timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || tp).join(", ");
-                } else {
-                    return timePeriodMap[timeperiod.toLowerCase()] || timeperiod;
-                }
-            }
-
-
-            
-            // Function to properly format cost
-            function translateCost(cost) {
-                return cost.charAt(0).toUpperCase() + cost.slice(1);
-            }
-            
-            // Function to properly format type
-            function translateType(type) {
-                return type.charAt(0).toUpperCase() + type.slice(1);
-            }
-            
-            function translateLocalOrNational(value) {
-                if (!value) return "Unknown";  // Prevents error if value is undefined or null
-                return value.charAt(0).toUpperCase() + value.slice(1);
-            }
 
 function applyFilters() {
     let selectedCost = document.getElementById("costFilter").value;
@@ -1587,9 +1027,7 @@ function applyFilters() {
     let selectedLocalOrNational = document.getElementById("localOrNationalFilter") 
     ? document.getElementById("localOrNationalFilter").value 
     : "all";
-    let selectedThematicCategories = Array.from(document.querySelectorAll(".thematicCategoryFilter:checked"))
-    .map(cb => cb.value);
-
+    let selectedThematicCategory = document.getElementById("ThematicCategoryFilter").value;
     let selectedCity = document.getElementById("cityFilter").value.toLowerCase(); // Get selected city
     let selectedDistance = document.getElementById("distanceFilter").value;
     let selectedEstimatedTime = document.getElementById("estimatedTimeFilter").value;
@@ -1602,14 +1040,11 @@ function applyFilters() {
     let filterPublicAccess = document.getElementById("publicAccessFilter").checked ? true : null;
     let filterDiningOnSite = document.getElementById("diningOnSiteFilter").checked ? true : null;
     let filterADAAccessibility = document.getElementById("adaAccessibilityFilter").checked ? true : null;
-    let selectedSiteType = document.getElementById("siteTypeFilter").value;
-    let selectedPaymentMethod = document.getElementById("paymentmethodFilter").value;
     let filterDogFriendly = document.getElementById("dogFriendlyFilter").checked ? true : null;
+    let selectedCashOrCredit = document.getElementById("cashOrCreditFilter").value;
 
 
-
-
-
+    
 
     // Get selected time periods (array of checked values)
     let selectedTimePeriods = Array.from(document.querySelectorAll(".timePeriodFilter:checked")).map(cb => cb.value);
@@ -1619,195 +1054,54 @@ function applyFilters() {
     allMarkers.forEach(marker => map.removeLayer(marker));
     allMarkers = [];
 
-    let sortedSites = siteData.map(site => {
-    let matchingAttributes = [];
-
-    // Thematic Category
-    if (selectedThematicCategories.length > 0 && site.thematiccategory &&
-        selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
-        matchingAttributes.push(...site.thematiccategory);
-    }
-
-    // Time Period
-    if (Array.isArray(site.timeperiod) && selectedTimePeriods.length > 0) {
-        let matchedPeriods = site.timeperiod.filter(tp => selectedTimePeriods.includes(tp));
-    
-        if (matchedPeriods.length > 0) {
-            matchingAttributes.push(...matchedPeriods.map(tp => 
-                `<span class="attribute-box">${translateTimePeriod(tp)}</span>`));
-        }
-    }
-
-
-    // Dog-Friendly
-    if (filterDogFriendly && site.dogfriendly) {
-        matchingAttributes.push("Dog-Friendly");
-    }
-
-    // Family-Friendly
-    if (document.getElementById("familyFilter").checked && site.family_friendly) {
-        matchingAttributes.push("Family-Friendly");
-    }
-
-    // Dining On-Site
-    if (filterDiningOnSite && site.diningonsite) {
-        matchingAttributes.push("Dining On-Site");
-    }
-
-    // Gift Shop
-    if (filterGiftShop && site.giftshop) {
-        matchingAttributes.push("Has Gift Shop");
-    }
-
-    // Luggage Storage
-    if (filterLuggageStorage && site.luggagestorage) {
-        matchingAttributes.push("Luggage Storage");
-    }
-
-    // Spanish Translations
-    if (filterSpanishTranslations && site.spanishtranslations) {
-        matchingAttributes.push("Spanish Translations");
-    }
-
-    // ADA Accessibility
-    if (filterADAAccessibility && site.adaaccessibility) {
-        matchingAttributes.push("ADA Accessible");
-    }
-
-     if (selectedReservations !== "all" && site.reservations === selectedReservations) {
-        matchingAttributes.push("Reservations: " + translateReservations(site.reservations));
-    }
-
-    // Cost
-    if (selectedCost !== "all" && site.cost === selectedCost) {
-        matchingAttributes.push("Cost: " + translateCost(site.cost));
-    }
-
-    // Transit Accessibility
-    if (selectedTransit !== "all" && site.transit === selectedTransit) {
-        matchingAttributes.push("Transit: " + translateTransit(site.transit));
-    }
-
-    // Indoor/Outdoor
-    if (selectedType !== "all" && site.type === selectedType) {
-        matchingAttributes.push("Type: " + translateType(site.type));
-    }
-        
-    if (selectedLocalOrNational !== "all" && site.localornational === selectedLocalOrNational) {
-        matchingAttributes.push("Scope: " + translateLocalOrNational(site.localornational));
-    }
-        if (selectedSiteType !== "all" && site.sitetype) {
-        if (Array.isArray(site.sitetype)) {
-            if (site.sitetype.includes(selectedSiteType)) {
-                matchingAttributes.push("Site Type: " + translateSiteType(selectedSiteType));
-            }
-        } else if (site.sitetype === selectedSiteType) {
-            matchingAttributes.push("Site Type: " + translateSiteType(site.sitetype));
-        }
-    }
-
-    // Store number of matches
-    return {
-        site,
-        matchCount: matchingAttributes.length
-    };
-});
-    console.log("Filtered sites:", sortedSites.map(s => ({
-        name: s.site.name,
-        timePeriods: s.site.timeperiod,
-        selected: selectedTimePeriods
-    })));
-// **Sort sites by match count in descending order**
-sortedSites.sort((a, b) => b.matchCount - a.matchCount);
-
-// Now iterate over sorted sites
-sortedSites.forEach(({ site, matchCount }) => {
-
+    siteData.forEach(site => {
         let distance = userLocation ? getDistance(userLocation.lat, userLocation.lng, site.lat, site.lng) : null;
 
         // Check if site has at least one of the selected time periods
-        let matchesTimePeriod = selectedTimePeriods.length === 0 ||
-            (Array.isArray(site.timeperiod) &&
-                site.timeperiod.every(period => selectedTimePeriods.includes(period.toLowerCase())) &&
-                selectedTimePeriods.every(selected => site.timeperiod.includes(selected))
-            );
+        let matchesTimePeriod = selectedTimePeriods.length === 0 || 
+            (Array.isArray(site.timeperiod) && site.timeperiod.some(period => selectedTimePeriods.includes(period)));
+        
+        let matchesCity = selectedCity === "all" || (site.city && site.city.toLowerCase() === selectedCity);
+        let matchesGiftShop = filterGiftShop === null || (site.giftshop === filterGiftShop);
+        let matchesSpanishTranslations = filterSpanishTranslations === null || (site.spanishtranslations === filterSpanishTranslations);
+        let matchesLuggageStorage = filterLuggageStorage === null || (site.luggagestorage === filterLuggageStorage);
+        let matchesPublicAccess = filterPublicAccess === null || (site.publicaccess === filterPublicAccess);
+        let matchesDiningOnSite = filterDiningOnSite === null || (site.diningonsite === filterDiningOnSite);
+        let matchesADAAccessibility = filterADAAccessibility === null || (site.adaaccessibility === filterADAAccessibility);
+        let matchesDogFriendly = filterDogFriendly === null || (site.dogfriendly === filterDogFriendly);  // ✅ ADD THIS
 
 
 
+        if (matchesCity && matchesGiftShop && matchesSpanishTranslations &&
+            matchesLuggageStorage && matchesPublicAccess && matchesDiningOnSite &&
+            matchesADAAccessibility && (!filterDogFriendly || site.dogfriendly) &&
+            (selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+            (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+            (selectedFamily === "all" || String(site.family_friendly).toLowerCase() === selectedFamily) &&
+            (selectedThematicCategory === "all" || site.thematiccategory.toLowerCase() === selectedThematicCategory) &&
+            (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational) &&
+            (selectedEstimatedTime === "all" || site.estimatedtime.toLowerCase() === selectedEstimatedTime) &&
+            (selectedReservations === "all" || site.reservations.toLowerCase() === selectedReservations) &&
+            (selectedTours === "all" || site.tours.includes(selectedTours)) &&
+            (selectedTransit === "all" || site.transit.toLowerCase() === selectedTransit) &&
+            (selectedCashOrCredit === "all" || site.cashorcredit.toLowerCase() === selectedCashOrCredit) &&
+            (selectedDistance === "all" || 
+                (distance !== null &&
+                ((selectedDistance === "1" && distance < 1) ||
+                (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
+                (selectedDistance === "10" && distance > 10)))) &&
+            matchesTimePeriod) 
+        {
+            // ✅ Matching sites will be shown
+        }
 
 
-        let matchesCity = (selectedCity === "all" || site.city.toLowerCase() === selectedCity);
-      // Ensure filters only apply when checkboxes are checked
-            
-            let matchesGiftShop = !filterGiftShop || site.giftshop; 
-            let matchesSpanishTranslations = !filterSpanishTranslations || site.spanishtranslations;
-            let matchesLuggageStorage = !filterLuggageStorage || site.luggagestorage;
-            let matchesPublicAccess = !filterPublicAccess || site.publicaccess;
-            let matchesDiningOnSite = !filterDiningOnSite || site.diningonsite;
-            let matchesADAAccessibility = !filterADAAccessibility || site.adaaccessibility;
+        
+                
 
-
-if (
-    (selectedSiteType === "all" || 
-        (site.sitetype && 
-            (Array.isArray(site.sitetype) 
-                ? site.sitetype.map(type => type.toLowerCase()).includes(selectedSiteType) 
-                : site.sitetype.toLowerCase() === selectedSiteType))) &&
-
-    (selectedPaymentMethod === "all" || 
-        (site.paymentmethod && site.paymentmethod.toLowerCase() === selectedPaymentMethod)) &&
-
-    (!filterDogFriendly || (site.dogfriendly !== undefined && site.dogfriendly)) &&
-
-    (selectedCost === "all" || 
-        (site.cost && site.cost.toLowerCase() === selectedCost)) &&
-
-    (selectedType === "all" || 
-        (site.type && site.type.toLowerCase() === selectedType)) &&
-
-    (selectedFamily === "all" || 
-        (site.family_friendly !== undefined && String(site.family_friendly).toLowerCase() === selectedFamily)) &&
-
-    (selectedThematicCategories.length === 0 || 
-        (Array.isArray(site.thematiccategory) && selectedThematicCategories.some(selected =>
-            site.thematiccategory.map(category => category.toLowerCase()).includes(selected.toLowerCase()))))
-
-
-
-    (selectedLocalOrNational === "all" || 
-        (site.localornational && site.localornational.toLowerCase() === selectedLocalOrNational)) &&
-
-    (selectedEstimatedTime === "all" || 
-        (site.estimatedtime && site.estimatedtime.toLowerCase() === selectedEstimatedTime)) &&
-
-    (selectedReservations === "all" || 
-        (site.reservations && site.reservations.toLowerCase() === selectedReservations)) &&
-
-    (selectedTours === "all" || 
-        (site.tours && site.tours.includes(selectedTours))) &&
-
-    (selectedTransit === "all" || 
-        (site.transit && site.transit.toLowerCase() === selectedTransit)) &&
-
-    (selectedDistance === "all" ||
-        (distance !== null &&
-            ((selectedDistance === "1" && distance < 1) ||
-            (selectedDistance === "5" && distance >= 1 && distance <= 5) ||
-            (selectedDistance === "10" && distance > 10)))) &&
-
-    matchesTimePeriod
-) {
-    // ✅ Matching sites will be shown
-}
-
-
-            let marker = L.marker([site.lat, site.lng]).bindPopup(`
-                <b>${site.name}</b><br>${site.description}<br>
-                <a href="${site.website}" target="_blank">More Info</a>
-            `);
+            let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
             marker.addTo(map);
             allMarkers.push(marker);
-            
 
             let siteCard = document.createElement("div");
             siteCard.className = "site-card";
@@ -1826,179 +1120,53 @@ if (
             let starColor = isLiked ? "gold" : "white";
 
             let isNotInterested = notInterested.some(s => s.id === site.id);
-            let matchingAttributes = [];
-            let nonMatchingAttributes = [];
-            let thematicCategoryMatchesFilter = selectedThematicCategories.length === 0 ||
-        (site.thematiccategory && selectedThematicCategories.some(selected =>
-            site.thematiccategory.includes(selected)));
-    
-    let timePeriodMatchesFilter = selectedTimePeriods.length === 0 ||
-        (site.timeperiod && selectedTimePeriods.some(selected =>
-            site.timeperiod.includes(selected)));
-    
-    // Show these regardless, but still filter results
-    let thematicCategoryText = site.thematiccategory
-        ? `<p class="thematic-category">${translateCategory(site.thematiccategory)}</p>`
-        : "";
-    
-    let timePeriodText = site.timeperiod 
-        ? `<p class="time-period">${translateTimePeriod(site.timeperiod)}</p>`
-        : "";
-
             
-
-// 2️⃣ ✅ Build the lists based on selected filters
-
-// Thematic Category
-if (selectedThematicCategories.length > 0 && site.thematiccategory &&
-    selectedThematicCategories.some(selected => site.thematiccategory.includes(selected))) {
-    matchingAttributes.push(...site.timeperiod
-    .filter(tp => selectedTimePeriods.includes(tp.toLowerCase()))
-    .map(tp => `<span class="attribute-box">${translateTimePeriod(tp)}</span>`));
-
-}
-
-// Time Period
-if (selectedTimePeriods.length > 0 && site.timeperiod &&
-    selectedTimePeriods.some(selected => site.timeperiod.includes(selected))) {
-    matchingAttributes.push(...site.timeperiod.map(period => 
-        `<span class="attribute-box">${translateTimePeriod(period)}</span>`));
-}
-
-// Dog-Friendly
-if (filterDogFriendly) {
-    site.dogfriendly 
-        ? matchingAttributes.push(`<span class="attribute-box">Dog-Friendly</span>`) 
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ Not Dog-Friendly</span>`);
-}
-
-// Family-Friendly
-if (document.getElementById("familyFilter").checked) {
-    site.family_friendly
-        ? matchingAttributes.push(`<span class="attribute-box">Family-Friendly</span>`)
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ Not Family-Friendly</span>`);
-}
-
-// Dining On-Site
-if (filterDiningOnSite) {
-    site.diningonsite
-        ? matchingAttributes.push(`<span class="attribute-box">Dining On-Site</span>`)
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Dining On-Site</span>`);
-}
-
-// Gift Shop
-if (filterGiftShop) {
-    site.giftshop
-        ? matchingAttributes.push(`<span class="attribute-box">Has Gift Shop</span>`)
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Gift Shop</span>`);
-}
-
-// Luggage Storage
-if (filterLuggageStorage) {
-    site.luggagestorage
-        ? matchingAttributes.push(`<span class="attribute-box">Luggage Storage</span>`)
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Luggage Storage</span>`);
-}
-
-// Spanish Translations
-if (filterSpanishTranslations) {
-    site.spanishtranslations
-        ? matchingAttributes.push(`<span class="attribute-box">Spanish Translations</span>`)
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ No Spanish Translations</span>`);
-}
-
-// ADA Accessibility
-if (filterADAAccessibility) {
-    site.adaaccessibility
-        ? matchingAttributes.push(`<span class="attribute-box">ADA Accessible</span>`)
-        : nonMatchingAttributes.push(`<span class="no-attribute-box">❌ Not ADA Accessible</span>`);
-}
-
-// Transit Accessibility
-if (selectedTransit !== "all" && site.transit && site.transit.toLowerCase() === selectedTransit) {
-    matchingAttributes.push(`<span class="attribute-box">${translateTransit(site.transit)}</span>`);
-}
-
-// Local/National
-if (selectedLocalOrNational !== "all" && site.localornational) {
-    matchingAttributes.push(`<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>`);
-}
-
-// Tours
-if (selectedTours !== "all" && site.tours && site.tours.includes(selectedTours)) {
-    matchingAttributes.push(`<span class="attribute-box">${translateTours(site.tours)}</span>`);
-}
-
-// Indoor/Outdoor
-if (selectedType !== "all" && site.type && site.type.toLowerCase() === selectedType) {
-    matchingAttributes.push(`<span class="attribute-box">${translateType(site.type)}</span>`);
-}
-
-// Site Type
-if (selectedSiteType !== "all" && site.sitetype &&
-    (Array.isArray(site.sitetype) ? site.sitetype.includes(selectedSiteType) : site.sitetype === selectedSiteType)) {
-    matchingAttributes.push(`<span class="attribute-box">${translateSiteType(site.sitetype)}</span>`);
-}
-
-// Reservations Required
-if (selectedReservations !== "all" && site.reservations && site.reservations.toLowerCase() === selectedReservations) {
-    matchingAttributes.push(`<span class="attribute-box">${translateReservations(site.reservations)}</span>`);
-}
-
-// Cost
-if (selectedCost !== "all" && site.cost && site.cost.toLowerCase() === selectedCost) {
-    matchingAttributes.push(`<span class="attribute-box">${translateCost(site.cost)}</span>`);
-}
-
-// Payment Method
-if (selectedPaymentMethod !== "all" && site.paymentmethod) {
-    matchingAttributes.push(`<span class="attribute-box">${translatePaymentMethod(site.paymentmethod)}</span>`);
-}
-
-// 3️⃣ ✅ Insert the lists inside the site card in the correct order
-let attributesHTML = "";
-if (matchingAttributes.length > 0) {
-    attributesHTML += `<div class="matching-attributes">${matchingAttributes.join(" ")}</div>`;
-}
-if (nonMatchingAttributes.length > 0) {
-    attributesHTML += `<div class="non-matching-attributes">${nonMatchingAttributes.join(" ")}</div>`;
-}
-
-// 4️⃣ ✅ Now, put `attributesHTML` inside the `<div class="site-attributes">`
 siteCard.innerHTML = `
     <div class="site-content">
         <div class="site-image-container">
             <img src="${site.image}" alt="${site.name}" class="site-image">
         </div>
         <div class="site-details">
-            <h3 class="site-title">${site.name} <span class="match-count">(${matchingAttributes.length} matches)</span></h3>
-            <!-- ✅ Show These Always, But Still Filter Results -->
-            ${thematicCategoryMatchesFilter ? thematicCategoryText : ""}
-            ${timePeriodMatchesFilter ? timePeriodText : ""}
-            
+            <h3 class="site-title">${site.name}</h3>
+            <p><strong>Time Period:</strong> ${translateTimePeriod(site.timeperiod)}</p>
+            <p><strong>Category:</strong> ${translateCategory(site.thematiccategory)}</p>
+
             <p class="site-distance">
                 ${distance !== null ? `${distance.toFixed(1)} miles away` : "Distance unavailable"}
                 ${site.dollaramount ? ` • <span class="inline-info">$${site.dollaramount}</span>` : ""}
                 ${site.website ? ` • <a href="${site.website}" target="_blank" class="inline-info">Website</a>` : ""}
             </p>
-            
-            <!-- ✅ Place attributes inside the card -->
+
+
             <div class="site-attributes">
-                ${attributesHTML}
+                ${selectedCost !== "all" && site.cost.toLowerCase() === selectedCost ? `<span class="attribute-box">${translateCost(site.cost)}</span>` : ""}
+                ${selectedType !== "all" && site.type.toLowerCase() === selectedType ? `<span class="attribute-box">${translateType(site.type)}</span>` : ""}
+                ${selectedLocalOrNational !== "all" && site.localornational.toLowerCase() === selectedLocalOrNational ? `<span class="attribute-box">${translateLocalOrNational(site.localornational)}</span>` : ""}
+                ${selectedEstimatedTime !== "all" && site.estimatedtime.toLowerCase() === selectedEstimatedTime ? `<span class="attribute-box">${translateEstimatedTime(site.estimatedtime)}</span>` : ""}
+                ${selectedReservations !== "all" && site.reservations.toLowerCase() === selectedReservations ? `<span class="attribute-box">${translateReservations(site.reservations)}</span>` : ""}
+                ${selectedTours !== "all" && site.tours.includes(selectedTours) ? `<span class="attribute-box">${translateTours(site.tours)}</span>` : ""}
+                ${selectedTransit !== "all" && site.transit.toLowerCase() === selectedTransit ? `<span class="attribute-box">${translateTransit(site.transit)}</span>` : ""}
+                
+                ${filterGiftShop && site.giftshop ? `<span class="attribute-box">HAS GIFT SHOP</span>` : ""}
+                ${filterSpanishTranslations && site.spanishtranslations ? `<span class="attribute-box">SPANISH TRANSLATIONS</span>` : ""}
+                ${filterLuggageStorage && site.luggagestorage ? `<span class="attribute-box">LUGGAGE STORAGE</span>` : ""}
+                ${filterPublicAccess && site.publicaccess ? `<span class="attribute-box">PUBLIC ACCESS</span>` : ""}
+                ${filterDiningOnSite && site.diningonsite ? `<span class="attribute-box">DINING ON-SITE</span>` : ""}
+                ${filterADAAccessibility && site.adaaccessibility ? `<span class="attribute-box">ADA ACCESSIBLE</span>` : ""}
             </div>
-
-
         </div>
     </div>
 
     <p class="site-description">${site.description}</p>
 
     <div class="site-actions">
-        <span id="star-${site.id}" class="star-icon" data-tooltip="Add to My Places">☆</span>
-        <span id="x-${site.id}" class="x-icon" data-tooltip="Not for me">✖</span>
+        <span id="star-${site.id}" class="star-icon ${starClass}" 
+              style="color: ${starColor};" data-tooltip="Add to My Places">${starSymbol}</span>
+
+        <span id="x-${site.id}" class="x-icon ${isNotInterested ? 'active' : ''}" 
+              data-tooltip="Not for me">✖</span>
     </div>
 `;
-
 
 
             
@@ -2012,7 +1180,49 @@ siteCard.innerHTML = `
             resultsContainer.appendChild(siteCard);
 
             
-   
+            // Function to translate category names to their proper display format
+            function translateCategory(category) {
+                const categoryMap = {
+                    "artsandculture": "Arts and Culture",
+                    "foodanddrink": "Food and Drink",
+                    "generalhistory": "General History",
+                    "historichomes": "Historic Homes",
+                    "naturalhistory": "Natural History",
+                    "religiousandspiritual": "Religious and Spiritual",
+                    "technologyandtransportation": "Technology and Transportation",
+                    "other": "Other"
+                };
+                return categoryMap[category.toLowerCase()] || formatText(category);
+            }
+            
+            // Function to translate time periods
+            function translateTimePeriod(timeperiod) {
+                const timePeriodMap = {
+                    "prehistoric": "Prehistoric",
+                    "indigenous": "Indigenous & Native History",
+                    "colonial": "Colonial & Early Settlements",
+                    "nineteenthcentury": "19th Century - Civil War & Westward Expansion",
+                    "industrialrevolution": "20th Century - Industrial Revolution, World Wars",
+                    "modernhistory": "Modern History or Civil Rights",
+                    "other": "Other"
+                };
+                return Array.isArray(timeperiod) ? timeperiod.map(tp => timePeriodMap[tp.toLowerCase()] || formatText(tp)).join(", ") : timePeriodMap[timeperiod.toLowerCase()] || formatText(timeperiod);
+            }
+            
+            // Function to properly format cost
+            function translateCost(cost) {
+                return cost.charAt(0).toUpperCase() + cost.slice(1);
+            }
+            
+            // Function to properly format type
+            function translateType(type) {
+                return type.charAt(0).toUpperCase() + type.slice(1);
+            }
+            
+            function translateLocalOrNational(value) {
+                if (!value) return "Unknown";  // Prevents error if value is undefined or null
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
 
             
             // Generic function to add spaces between camelCase words & capitalize
@@ -2039,7 +1249,10 @@ siteCard.innerHTML = `
 }
 
         
-
+        
+                    window.onload = function() {
+                        getUserLocation(); // Gets user's location when the page loads
+                    };
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
@@ -2050,51 +1263,6 @@ siteCard.innerHTML = `
                 }
             }
                 // Store user preferences in sets
-
-function toggleViewMode(forcedMode = null) {
-    let toggleButton = document.getElementById("toggleViewMode");
-    let isRoutesMode = forcedMode ? (forcedMode === "Routes") : (toggleButton.innerText === "Sites");
-
-    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
-    document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
-    document.getElementById("routeFilters").style.display = isRoutesMode ? "block" : "none";
-    document.getElementById("routeFiltersActions").style.display = isRoutesMode ? "block" : "none";
-    document.querySelector("#routeFilters .floating-buttons").style.display = isRoutesMode ? "flex" : "none";
-
-    // Toggle route vs site filters
-    const routeFilterContainer = document.getElementById("routeFilters");
-    routeFilterContainer.style.display = isRoutesMode ? "block" : "none";
-
-    // Hide or show site filters
-    const siteFilterToggles = document.querySelectorAll(".toggle-filters, .filter-category, .floating-buttons");
-    siteFilterToggles.forEach(el => {
-        el.style.display = isRoutesMode ? "none" : "block";
-    });
-
-    // Adjust Map and Calendar Display
-    const mapElement = document.getElementById("map");
-    const calendarSection = document.getElementById("calendarSection");
-
-    if (isRoutesMode) {
-        mapElement.style.height = "50vh"; // Half height in Routes
-        calendarSection.style.display = "block"; // Show calendar in Routes
-    } else {
-        mapElement.style.height = "100vh"; // Full height in Sites
-        calendarSection.style.display = "none"; // Hide calendar in Sites
-    }
-
-    // Clear map markers
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
-
-    // Load appropriate dataset
-    if (isRoutesMode) {
-        loadRoutes();
-    } else {
-        loadLocations();
-    }
-}
-
 function toggleMyPlaces(siteId, element) {
     console.log(`Toggling My Places for site ID: ${siteId}`);
 
@@ -2140,59 +1308,7 @@ function toggleMyPlaces(siteId, element) {
     console.log("Updated My Places:", myPlaces);
 }
 
-function resetFilters() {
-    // Reset all dropdowns to "all"
-    document.querySelectorAll("select").forEach(select => select.value = "all");
-
-    // Uncheck all checkboxes
-    document.querySelectorAll("input[type='checkbox']").forEach(checkbox => checkbox.checked = false);
-
-    // Reapply filters to show all sites
-    applyFilters();
-}
-
-function toggleMoreInfo(element) {
-    const infoSection = element.nextElementSibling;
-    const textSpan = element.querySelector("span");
-    const isOpen = infoSection.style.display === "block";
-
-    infoSection.style.display = isOpen ? "none" : "block";
-    textSpan.innerHTML = isOpen ? "More Information ▼" : "Less Information ▲";
-}
-
-
-function translateSiteType(type) {
-    const typeMap = {
-        "archaeological": "Archaeological site",
-        "historichome": "Historic Home",
-        "landmark": "Landmarks and Monuments",
-        "museums": "Museums and Cultural Institutions",
-        "burial": "Burial or Commemorative Site",
-        "religious": "Religious and Spiritual",
-        "urban": "Urban and Social",
-        "political": "Political and Government",
-        "industrial": "Industrial and Technology",
-        "outdoor": "Natural History or Outdoor",
-        "other": "Other"
-    };
-    return typeMap[type.toLowerCase()] || "Other";
-}
-
-function translatePaymentMethod(method) {
-    const methodMap = {
-        "cash": "Cash",
-        "credit": "Credit",
-        "both": "Cash & Credit",
-        "notapplicable": "Not Applicable"
-    };
-    return methodMap[method.toLowerCase()] || "Unknown";
-}
-        
-        function toggleFilterCategory(categoryId) {
-          let category = document.getElementById(categoryId);
-          category.classList.toggle("hidden");
-        }
-
+            
             
             function toggleNotInterested(siteId, element) {
                 console.log(`Toggling Not Interested for site ID: ${siteId}`); // Debugging log
@@ -2234,10 +1350,7 @@ function translatePaymentMethod(method) {
                 console.log("Updated Not Interested:", notInterested);
             }
 
-document.addEventListener("DOMContentLoaded", function() {
-    getUserLocation(); // This should trigger loadLocations()
-});
-});
+
 
 </script>
 </body>
