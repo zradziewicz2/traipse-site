@@ -872,6 +872,7 @@
             padding: 15px;
             border-radius: 8px;
             color: white;
+            display: none;
         }
         
         #tourCalendar {
@@ -1406,10 +1407,12 @@
         
             <div class="search-results" id="searchResults"></div>
             <div id="map"></div>
-            <div id="calendarSection" style="display: block; padding: 15px; background: #181818; color: white;">
+            <!-- Calendar Section - Only Visible in Routes Mode -->
+            <div id="calendarSection" style="display: none; padding: 15px; background: #181818; color: white;">
                 <h2>Available Tour Dates</h2>
                 <div id="tourCalendar" class="calendar-view"></div>
             </div>
+
 
         </div>
 
@@ -2390,7 +2393,8 @@ function loadRouteDates(routesData) {
     calendarHTML += `</div>`;
     tourCalendar.innerHTML = calendarHTML;
 
-    calendarSection.style.display = "block";
+    document.getElementById("calendarSection").style.display = isRoutesMode ? "block" : "none";
+
 }
 
 
