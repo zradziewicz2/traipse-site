@@ -15,6 +15,7 @@
         "cost_range": ["Free","$"],
         "indoor_outdoor": ["Indoor"],
         "group_type": "private",
+        "dates": ["2025-05-20", "2025-05-22", "2025-05-25"],
         "reservation_required": false,
         "external_links": {
             "getyourguide": "https://www.getyourguide.com/",
@@ -80,6 +81,7 @@
         "cost_range": ["$$$"],
         "indoor_outdoor": ["Indoor"],
         "group_type": "group",
+        "dates": ["2025-05-24", "2025-05-29", "2025-05-30"],
         "reservation_required": false,
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/",
@@ -142,6 +144,7 @@
         "cost_range": ["Free","$"],
         "indoor_outdoor": ["indoor"],
         "group_type": "group",
+        "dates": ["2025-06-02", "2025-05-22", "2025-06-04"],
         "reservation_required": false,
         "color": "#FFB833",
         "external_links": {
@@ -209,6 +212,7 @@
         "indoor_outdoor": ["Indoor"],
         "group_type": "group",
         "reservation_required": false,
+        "dates": ["2025-05-23", "2025-05-25", "2025-05-26"],
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/",
             "getyourguide": "https://www.getyourguide.com/",
@@ -271,6 +275,7 @@
         "cost_range": ["Free","$"],
         "indoor_outdoor": ["indoor"],
         "group_type": "group",
+        "dates": ["2025-06-01", "2025-06-11", "2025-06-13"],
         "reservation_required": false,
         "external_links": {
             "tripadvisor": "https://www.tripadvisor.com/"
@@ -381,6 +386,7 @@
         "cost_range": ["Free","$"],
         "indoor_outdoor": ["indoor"],
         "group_type": "group",
+        "dates": ["2025-06-04", "2025-06-09", "2025-06-18"],
         "reservation_required": false,
         "route": [
             {"lat": 39.7550, "lng": -105.2220},
