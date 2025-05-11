@@ -105,7 +105,7 @@
 
         /* Sidebar */
         .sidebar {
-            width: 490px;
+            width: 300px;
             background: #181818;
             padding: 20px; /* Add padding */
             color: white;
@@ -2100,9 +2100,9 @@ siteCard.innerHTML = `
 
 function toggleViewMode(forcedMode = null) {
     let toggleButton = document.getElementById("toggleViewMode");
-    let isRoutesMode = forcedMode ? (forcedMode === "Sites") : (toggleButton.innerText === "Routes");
+    let isRoutesMode = forcedMode ? (forcedMode === "Routes") : (toggleButton.innerText === "Sites");
 
-    toggleButton.innerText = isRoutesMode ? "Sites" : "Routes";
+    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
     document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
     document.getElementById("routeFilters").style.display = isRoutesMode ? "block" : "none";
     document.getElementById("routeFiltersActions").style.display = isRoutesMode ? "block" : "none";
