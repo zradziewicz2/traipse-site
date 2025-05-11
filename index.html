@@ -946,30 +946,68 @@
     margin-top: 10px;
 }
 
-/* Calendar Day Styling */
-.calendar-day {
-    background-color: transparent; /* Transparent background */
-    color: #03FDFC; /* Cyan text for high contrast */
-    font-weight: bold;
-    padding: 8px;
-    border: 1px solid #03FDFC; /* Cyan border */
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-/* Hover Effect */
-.calendar-day:hover {
-    background-color: #03FDFC; /* Cyan background */
-    color: #000000; /* Black text on hover */
-}
-
 /* Month and Year Titles */
-.calendar-container h2, .calendar-container h3 {
-    color: #03FDFC; /* Cyan text */
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
+    .calendar-container h2, .calendar-container h3 {
+        color: #03FDFC; /* Cyan text */
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+    #calendar-container {
+        padding: 15px;
+        border: 2px solid #03FDFC;
+        border-radius: 8px;
+        max-width: 600px;
+        position: relative;
+        z-index: 1000;
+        background-color: #000; /* Black background */
+    }
+    
+    #calendar-container .calendar-day {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        color: #03FDFC; /* Cyan text */
+        font-weight: bold;
+        border: 1px solid #03FDFC;
+        margin: 3px;
+        cursor: pointer;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    
+    #calendar-container .calendar-day:hover {
+        background-color: #03FDFC;
+        color: #000; /* Black text on hover */
+    }
+    
+    #calendar-container .calendar-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #calendar-container .month-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    #calendar-container .days-container {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin-top: 10px;
+    }
+    
+    #calendar-container h2, 
+    #calendar-container h3 {
+        color: #03FDFC;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+            
 
 
 
