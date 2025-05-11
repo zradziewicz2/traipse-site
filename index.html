@@ -2100,7 +2100,7 @@ siteCard.innerHTML = `
 
 function toggleViewMode(forcedMode = null) {
     let toggleButton = document.getElementById("toggleViewMode");
-    let isRoutesMode = forcedMode ? (forcedMode === "Routes") : (toggleButton.innerText === "Sites");
+    let isRoutesMode = forcedMode ? (forcedMode === "Sites") : (toggleButton.innerText === "Routes");
 
     toggleButton.innerText = isRoutesMode ? "Sites" : "Routes";
     document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
