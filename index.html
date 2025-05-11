@@ -2636,6 +2636,14 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+        document.addEventListener("DOMContentLoaded", function() {
+    // Collapse all filter categories in the Sites tab by default on page load
+    document.querySelectorAll(".filter-category").forEach(filterGroup => {
+        filterGroup.style.display = "none";
+    });
+});
+
+
 </script>
 </body>
 </html>
