@@ -2041,10 +2041,10 @@ siteCard.innerHTML = `
 
         
         
-                    window.onload = function() {
-                        toggleViewMode("Sites");
-                        getUserLocation(); // Gets user's location when the page loads
-                    };
+            window.onload = function() {
+                getUserLocation(); // Only load locations directly
+            };
+
         
             function toggleAdditionalFilters() {
                 var filters = document.getElementById("additionalFilters");
@@ -2239,10 +2239,8 @@ function translatePaymentMethod(method) {
             }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Hide all filter categories by default
-    document.querySelectorAll(".filter-category").forEach(filterGroup => {
-        filterGroup.style.display = "none";
-    });
+    getUserLocation(); // This should trigger loadLocations()
+});
 });
 
 </script>
