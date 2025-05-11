@@ -937,9 +937,11 @@
 /* Calendar Grid - Updated to be more horizontal */
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for the week */
     gap: 8px; /* Increased gap slightly for better spacing */
-    width: 100%;
+    width: 90%; /* Stretches more to the right */
+    max-width: 800px; /* Sets a maximum width for larger screens */
+    margin: 0 auto; /* Centers the calendar */
 }
 
 /* Calendar Day Labels */
@@ -954,7 +956,7 @@
   .calendar-cell {
     background: #333;
     padding: 10px;
-    height: 40px; /* Ensures square-like shape */
+    height: 50px; /* Ensures square-like shape */
     border-radius: 6px;
     text-align: center;
     display: flex;
@@ -963,6 +965,7 @@
     justify-content: center;
     overflow: hidden;
     transition: background 0.3s;
+    width: 100%;
 }
 
     .calendar-cell.empty {
