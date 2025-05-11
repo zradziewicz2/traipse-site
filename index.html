@@ -806,50 +806,6 @@
             max-width: 90%;
         }
 
-                #map-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        #map {
-            height: 50%; /* Reduced map height */
-        }
-        
-        .calendar-container {
-            background: #222;
-            padding: 10px;
-            color: white;
-            border-radius: 8px;
-            overflow-y: auto;
-        }
-        
-        .calendar-date {
-            display: inline-block;
-            width: 28px;
-            height: 28px;
-            line-height: 28px;
-            margin: 4px;
-            text-align: center;
-            cursor: pointer;
-            background: #333;
-            color: #03FDFC;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        
-        .calendar-date:hover {
-            background: #03FDFC;
-            color: #000;
-        }
-        
-        .calendar-date.active {
-            background: #03FDFC;
-            color: #000;
-            font-weight: bold;
-        }
-
-
 
         .site-info {
             display: flex;
@@ -1348,14 +1304,7 @@
    
         
             <div class="search-results" id="searchResults"></div>
-            <div id="map-container">
-    <div id="map" style="height: 50%;"></div>
-    <div id="calendar-container" class="calendar-container">
-        <h2>Tour Calendar</h2>
-        <div id="tourCalendar"></div>
-    </div>
-</div>
-
+            <div id="map"></div>
         </div>
 
 
@@ -2063,66 +2012,7 @@ function loadRoutes() {
 }
 
 
-function loadTourCalendar() {
-    const calendarContainer = document.getElementById("tourCalendar");
-    calendarContainer.innerHTML = ""; // Clear previous content
 
-    // Collect all unique tour dates from the JSON data
-    const allDates = siteData.flatMap(tour => tour.dates || []);
-    const uniqueDates = [...new Set(allDates)].sort();
-
-    uniqueDates.forEach(date => {
-        const dateElement = document.createElement("div");
-        dateElement.className = "calendar-date";
-        dateElement.textContent = new Date(date).toLocaleDateString(); // Display the full date
-        dateElement.dataset.date = date;
-
-        dateElement.addEventListener("click", () => {
-            highlightDate(date);
-            filterToursByDate(date);
-        });
-
-        calendarContainer.appendChild(dateElement);
-    });
-}
-
-function highlightDate(selectedDate) {
-    const allDateElements = document.querySelectorAll(".calendar-date");
-    allDateElements.forEach(el => el.classList.remove("active"));
-
-    const selectedElement = document.querySelector(`.calendar-date[data-date='${selectedDate}']`);
-    if (selectedElement) {
-        selectedElement.classList.add("active");
-    }
-}
-
-function filterToursByDate(date) {
-    const resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = ""; // Clear previous results
-
-    const filteredTours = siteData.filter(tour => tour.dates && tour.dates.includes(date));
-    
-    filteredTours.forEach(tour => {
-        const tourCard = document.createElement("div");
-        tourCard.className = "site-card";
-        tourCard.innerHTML = `
-            <h3>${tour.tour_name}</h3>
-            <p>${tour.duration} - ${tour.Cost}</p>
-            <p>Time of Day: ${tour.timeofday.join(", ")}</p>
-        `;
-        resultsContainer.appendChild(tourCard);
-    });
-
-    if (filteredTours.length === 0) {
-        resultsContainer.innerHTML = "<p>No tours available on this date.</p>";
-    }
-}
-
-// Load the calendar when the page loads
-window.onload = function() {
-    getUserLocation(); // Gets user's location when the page loads
-    loadTourCalendar(); // Load the calendar
-};
 
 function displayRoutes(routesData) {
     let resultsContainer = document.getElementById("searchResults");
