@@ -830,11 +830,9 @@
         }
 
 
-        /* Map */
-          #map {
-            height: 500px; /* Adjusted for better view in Routes mode */
-            background: #333;
+        #map {
             width: 100%;
+            transition: height 0.3s ease; /* Smooth height transition */
         }
 
 
@@ -871,7 +869,7 @@
             padding: 15px;
             border-radius: 8px;
             color: white;
-            display: none; /* Hidden by default */
+            display: none;
         }
 
         #mapAndCalendarContainer {
@@ -2124,15 +2122,11 @@ function toggleViewMode() {
     const calendarSection = document.getElementById("calendarSection");
 
     if (isRoutesMode) {
-        mapElement.style.display = "block";
-        mapElement.classList.remove("full-height");
-        mapElement.classList.add("half-height");
-        calendarSection.style.display = "block";
+        mapElement.style.height = "50vh"; // Half height in Routes
+        calendarSection.style.display = "block"; // Show calendar in Routes
     } else {
-        mapElement.style.display = "block";
-        mapElement.classList.remove("half-height");
-        mapElement.classList.add("full-height");
-        calendarSection.style.display = "none";
+        mapElement.style.height = "100vh"; // Full height in Sites
+        calendarSection.style.display = "none"; // Hide calendar in Sites
     }
 
     // Clear map markers
