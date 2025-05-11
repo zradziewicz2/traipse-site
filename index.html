@@ -2102,7 +2102,7 @@ function toggleViewMode(forcedMode = null) {
     let toggleButton = document.getElementById("toggleViewMode");
     let isRoutesMode = forcedMode ? (forcedMode === "Routes") : (toggleButton.innerText === "Sites");
 
-    toggleButton.innerText = isRoutesMode ? "Routes" : "Sites";
+    toggleButton.innerText = isRoutesMode ? "Sites" : "Routes";
     document.getElementById("filtersTitle").style.display = isRoutesMode ? "none" : "block";
     document.getElementById("routeFilters").style.display = isRoutesMode ? "block" : "none";
     document.getElementById("routeFiltersActions").style.display = isRoutesMode ? "block" : "none";
