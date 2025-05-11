@@ -895,6 +895,41 @@
                  select {
             all: unset; /* Reset all browser styles */
         }
+                .calendar-container {
+            background-color: #111;
+            color: #03FDFC;
+            padding: 15px;
+            border: 2px solid #03FDFC;
+            border-radius: 8px;
+            margin-top: 10px;
+            max-width: 600px;
+        }
+        
+        .calendar-container h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .route-dates {
+            margin-bottom: 15px;
+        }
+        
+        .route-dates h4 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .route-dates ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .route-dates li {
+            font-size: 1em;
+            margin: 4px 0;
+            color: #D0D0D0;
+        }
+
    
         .city-filter-dropdown {
             font-size: 2em !important; /* Force larger text */
@@ -2144,6 +2179,29 @@ routesData.forEach(route => {
 
     resultsContainer.appendChild(routeCard);
 });
+    displayRouteCalendar(routesData);
+}
+function displayRouteCalendar(routesData) {
+    let calendarContainer = document.getElementById("calendar-container");
+    let tourCalendar = document.getElementById("tourCalendar");
+    tourCalendar.innerHTML = ""; // Clear previous calendar content
+
+    routesData.forEach(route => {
+        if (route.dates && route.dates.length > 0) {
+            let routeDates = document.createElement("div");
+            routeDates.className = "route-dates";
+            routeDates.innerHTML = `
+                <h4>${route.tour_name} Dates:</h4>
+                <ul>
+                    ${route.dates.map(date => `<li>${new Date(date).toDateString()}</li>`).join("")}
+                </ul>
+            `;
+            tourCalendar.appendChild(routeDates);
+        }
+    });
+
+    // Show the calendar only if at least one route has dates
+    calendarContainer.style.display = tourCalendar.innerHTML.trim() !== "" ? "block" : "none";
 }
 
 
