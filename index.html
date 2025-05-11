@@ -2085,8 +2085,6 @@ function toggleViewMode() {
     document.getElementById("routeFiltersActions").style.display = isRoutesMode ? "block" : "none";
     document.querySelector("#routeFilters .floating-buttons").style.display = isRoutesMode ? "flex" : "none";
 
-
-
     // Toggle route vs site filters
     const routeFilterContainer = document.getElementById("routeFilters");
     routeFilterContainer.style.display = isRoutesMode ? "block" : "none";
@@ -2096,6 +2094,10 @@ function toggleViewMode() {
     siteFilterToggles.forEach(el => {
         el.style.display = isRoutesMode ? "none" : "block";
     });
+
+    // Show/Hide Calendar Section based on mode
+    const calendarSection = document.getElementById("calendarSection");
+    calendarSection.style.display = isRoutesMode ? "block" : "none";
 
     // Clear map
     allMarkers.forEach(marker => map.removeLayer(marker));
@@ -2108,6 +2110,7 @@ function toggleViewMode() {
         loadLocations();
     }
 }
+
 
 
         
