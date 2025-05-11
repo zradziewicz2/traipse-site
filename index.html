@@ -913,6 +913,43 @@
         .route-dates {
             margin-bottom: 15px;
         }
+
+        .calendar-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 10px;
+        }
+        
+        .month-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .calendar-day {
+            background-color: #E3F2FD;
+            color: #1976D2;
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .calendar-day:hover {
+            background-color: #1976D2;
+            color: #FFFFFF;
+        }
+
         
         .route-dates h4 {
             font-size: 1.2em;
@@ -2182,26 +2219,70 @@ routesData.forEach(route => {
     displayRouteCalendar(routesData);
 }
 function displayRouteCalendar(routesData) {
-    let calendarContainer = document.getElementById("calendar-container");
-    let tourCalendar = document.getElementById("tourCalendar");
-    tourCalendar.innerHTML = ""; // Clear previous calendar content
+    const calendarContainer = document.getElementById("calendar-container");
+    const calendarElement = document.getElementById("tourCalendar");
+    calendarElement.innerHTML = ""; // Clear any existing calendar
 
+    // Collect all unique dates from the routes
+    const allDates = [];
     routesData.forEach(route => {
-        if (route.dates && route.dates.length > 0) {
-            let routeDates = document.createElement("div");
-            routeDates.className = "route-dates";
-            routeDates.innerHTML = `
-                <h4>${route.tour_name} Dates:</h4>
-                <ul>
-                    ${route.dates.map(date => `<li>${new Date(date).toDateString()}</li>`).join("")}
-                </ul>
-            `;
-            tourCalendar.appendChild(routeDates);
+        if (route.dates) {
+            route.dates.forEach(date => {
+                if (!allDates.includes(date)) {
+                    allDates.push(date);
+                }
+            });
         }
     });
 
-    // Show the calendar only if at least one route has dates
-    calendarContainer.style.display = tourCalendar.innerHTML.trim() !== "" ? "block" : "none";
+    if (allDates.length === 0) {
+        calendarContainer.style.display = "none";
+        return;
+    }
+
+    calendarContainer.style.display = "block";
+
+    // Create a calendar structure
+    const calendar = document.createElement("div");
+    calendar.className = "calendar-grid";
+    const monthYear = document.createElement("h2");
+    monthYear.innerText = "Tour Calendar";
+    calendar.appendChild(monthYear);
+
+    // Get unique months and years from dates
+    const uniqueMonths = Array.from(new Set(allDates.map(date => new Date(date).toLocaleString('default', { month: 'long', year: 'numeric' }))));
+
+    uniqueMonths.forEach(monthYearText => {
+        const monthContainer = document.createElement("div");
+        monthContainer.className = "month-container";
+
+        const monthTitle = document.createElement("h3");
+        monthTitle.innerText = monthYearText;
+        monthContainer.appendChild(monthTitle);
+
+        const daysContainer = document.createElement("div");
+        daysContainer.className = "days-container";
+
+        // Get all dates for this month
+        const monthDates = allDates.filter(date => {
+            const dateObj = new Date(date);
+            return dateObj.toLocaleString('default', { month: 'long', year: 'numeric' }) === monthYearText;
+        });
+
+        // Add each date as a day on the calendar
+        monthDates.forEach(date => {
+            const dateObj = new Date(date);
+            const dayElement = document.createElement("div");
+            dayElement.className = "calendar-day";
+            dayElement.innerText = dateObj.getDate();
+            daysContainer.appendChild(dayElement);
+        });
+
+        monthContainer.appendChild(daysContainer);
+        calendar.appendChild(monthContainer);
+    });
+
+    calendarElement.appendChild(calendar);
 }
 
 
