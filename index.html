@@ -867,12 +867,11 @@
         
         #calendarSection {
             width: 100%;
-            height: auto;
             background: #222;
             padding: 15px;
             border-radius: 8px;
             color: white;
-            display: none;
+            display: none; /* Hidden by default */
         }
 
         #mapAndCalendarContainer {
@@ -885,12 +884,12 @@
 
         /* Full map height for Sites view */
         #map.full-height {
-            height: 100%;
+            height: 500px;
         }
         
         /* Half map height for Routes view */
         #map.half-height {
-            height: 50%;
+            height: 250px;
         }
 
         
@@ -1425,13 +1424,14 @@
    
         
             <div class="search-results" id="searchResults"></div>
-<div class="content" id="mapAndCalendarContainer" style="display: none;">
-    <div id="map" class="full-height" style="display: none;"></div>
+<div id="mapAndCalendarContainer" style="display: flex; flex-direction: column; gap: 10px;">
+    <div id="map" class="full-height"></div>
     <div id="calendarSection" style="display: none;">
         <h2>Available Tour Dates</h2>
         <div id="tourCalendar" class="calendar-view"></div>
     </div>
 </div>
+
 
 
 
@@ -2122,17 +2122,16 @@ function toggleViewMode() {
     // Adjust Map and Calendar Display
     const mapElement = document.getElementById("map");
     const calendarSection = document.getElementById("calendarSection");
-    const mapAndCalendarContainer = document.getElementById("mapAndCalendarContainer");
 
     if (isRoutesMode) {
-        mapAndCalendarContainer.style.display = "flex";
         mapElement.style.display = "block";
         mapElement.classList.remove("full-height");
         mapElement.classList.add("half-height");
         calendarSection.style.display = "block";
     } else {
-        mapAndCalendarContainer.style.display = "none";
-        mapElement.style.display = "none";
+        mapElement.style.display = "block";
+        mapElement.classList.remove("half-height");
+        mapElement.classList.add("full-height");
         calendarSection.style.display = "none";
     }
 
