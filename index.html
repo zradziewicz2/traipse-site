@@ -959,16 +959,18 @@
 
 .calendar-cell {
     background: #333;
-    height: 60px; /* Square-like shape */
+    height: 80px; /* Increased height */
+    width: 60px;  /* Fixed width for cells */
     border-radius: 6px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    cursor: pointer;
     transition: background 0.3s;
-    min-width: 120px; /* Minimum width for good visibility */
+    overflow: hidden; /* Prevent overflow of text */
+    position: relative;
 }
 
     .calendar-cell.empty {
@@ -986,18 +988,19 @@
         margin-bottom: 5px;
     }
 
-    .tour-name {
-        background: #03FDFC;
-        color: black;
-        font-size: 0.8em;
-        padding: 3px;
-        border-radius: 4px;
-        margin-top: 2px;
-        text-align: center;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
+.tour-name {
+    background: #03FDFC;
+    color: black;
+    font-size: 0.7em;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-top: 2px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 90%; /* Prevents overflow */
+}
 
     .tour-name:hover {
         background: #02c9c9;
