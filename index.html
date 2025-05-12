@@ -921,15 +921,18 @@
         .tour-date:hover {
             background: #02c9c9;
         }
-    .calendar-view {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: white;
-        background: #222;
-        padding: 10px;
-        border-radius: 8px;
-    }
+ /* Modern Calendar Styles */
+.calendar-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
 .calendar-header {
     font-size: 1.5em;
@@ -939,13 +942,13 @@
     width: 100%;
 }
 
-/* Calendar Grid - Updated to be more horizontal */
+/* Calendar Grid - Clean and Aligned */
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -956,38 +959,113 @@
     color: #03FDFC;
 }
 
-
+/* Calendar Cell Styles */
 .calendar-cell {
     background: #333;
-    height: 80px; /* Increased height */
-    width: 60px;  /* Fixed width for cells */
+    height: 80px;
+    width: 100%;
+    max-width: 80px; /* Fixed width for each day cell */
     border-radius: 6px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     cursor: pointer;
     transition: background 0.3s;
-    overflow: hidden; /* Prevent overflow of text */
+    overflow: hidden;
     position: relative;
 }
 
-    .calendar-cell.empty {
-        background: transparent;
-        pointer-events: none;
-    }
-        .calendar-cell:hover {
+.calendar-cell:hover {
     background: #03FDFC;
     color: black;
 }
 
-    .date-number {
-        font-size: 1em;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
+.calendar-cell.empty {
+    background: transparent;
+    pointer-events: none;
+}
 
+.date-number {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+/* Modern Calendar Styles */
+.calendar-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calendar-header {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #03FDFC;
+    text-align: center;
+    width: 100%;
+}
+
+/* Calendar Grid - Clean and Aligned */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Calendar Day Labels */
+.calendar-day {
+    font-weight: bold;
+    text-align: center;
+    color: #03FDFC;
+}
+
+/* Calendar Cell Styles */
+.calendar-cell {
+    background: #333;
+    height: 80px;
+    width: 100%;
+    max-width: 80px; /* Fixed width for each day cell */
+    border-radius: 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    transition: background 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.calendar-cell:hover {
+    background: #03FDFC;
+    color: black;
+}
+
+.calendar-cell.empty {
+    background: transparent;
+    pointer-events: none;
+}
+
+.date-number {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+/* Tour Names Styling */
 .tour-name {
     background: #03FDFC;
     color: black;
@@ -1000,12 +1078,14 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 90%; /* Prevents overflow */
+    display: inline-block;
 }
 
-    .tour-name:hover {
-        background: #02c9c9;
-        cursor: pointer;
-    }
+.tour-name:hover {
+    background: #02c9c9;
+    cursor: pointer;
+}
+
 
         .toggle-filters {
             background: none;
