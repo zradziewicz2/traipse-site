@@ -1444,9 +1444,9 @@
             <div class="search-results" id="searchResults"></div>
 <div id="mapAndCalendarContainer" style="display: flex; flex-direction: column; gap: 10px;">
     <div id="map" class="full-height"></div>
-    <div id="calendarSection" style="display: none;">
-        <h2>Available Tour Dates</h2>
-        <div id="tourCalendar" class="calendar-view"></div>
+    <div id="calendarSection" style="display: block; flex-grow: 1; width: 100%;">
+        <h2 class="calendar-header">Available Tour Dates</h2>
+        <div id="tourCalendar" class="calendar-grid"></div>
     </div>
 </div>
 
@@ -2436,8 +2436,11 @@ function loadRouteDates(routesData) {
         const dateString = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const toursOnDate = allDates.filter(d => d.date === dateString);
 
-        calendarHTML += `<div class="calendar-cell">
-                            <div class="date-number">${day}</div>`;
+        let dateCell = document.createElement("div");
+        dateCell.classList.add("calendar-cell");
+        
+        dateCell.innerHTML = `<div class="date-number">${day}</div>`;
+        
         if (toursOnDate.length > 0) {
             toursOnDate.forEach(tour => {
                 calendarHTML += `<div class="tour-name">${tour.tour_name}</div>`;
