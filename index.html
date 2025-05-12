@@ -942,9 +942,10 @@
 /* Calendar Grid - Updated to be more horizontal */
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Automatically adjusts */
-    gap: 8px;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
     width: 100%;
+    max-width: 500px;
     margin: 0 auto;
 }
 
@@ -952,7 +953,6 @@
 .calendar-day {
     font-weight: bold;
     text-align: center;
-    margin-bottom: 5px;
     color: #03FDFC;
 }
 
